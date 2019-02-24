@@ -4,13 +4,13 @@
     "contactInfo": {
         "address": {
             "street": "Bolesława Krzywoustego 25",
-            "postcode": "80-376",
+            "postcode": "80-376"
         },
         "phone": 585574994,
-        "website": "rogata.gda.pl",
+        "website": "rogata.gda.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 2,
@@ -18,13 +18,13 @@
     "contactInfo": {
         "address": {
             "street": "Pilotów 3",
-            "postcode": "80-460",
+            "postcode": "80-460"
         },
         "phone": 585592158,
-        "website": "",
+        "website": ""
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 3,
@@ -32,13 +32,13 @@
     "contactInfo": {
         "address": {
             "street": "aleja Grunwaldzka 211",
-            "postcode": "80-266",
+            "postcode": "80-266"
         },
         "phone": 786070809,
-        "website": "tuttisanti.pl",
+        "website": "tuttisanti.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 4,
@@ -46,13 +46,13 @@
     "contactInfo": {
         "address": {
             "street": "Cystersów 11",
-            "postcode": "80-330",
+            "postcode": "80-330"
         },
         "phone": 585523716,
-        "website": "margherita.com.pl",
+        "website": "margherita.com.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 5,
@@ -60,13 +60,13 @@
     "contactInfo": {
         "address": {
             "street": "aleja Grunwaldzka 471",
-            "postcode": "80-309",
+            "postcode": "80-309"
         },
         "phone": 587614918,
-        "website": "pepepizzaoliwa.pl",
+        "website": "pepepizzaoliwa.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 6,
@@ -74,13 +74,13 @@
     "contactInfo": {
         "address": {
             "street": "Startowa 30",
-            "postcode": "80-461",
+            "postcode": "80-461"
         },
         "phone": 887887414,
-        "website": "labocca.pl",
+        "website": "labocca.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 7,
@@ -88,13 +88,13 @@
     "contactInfo": {
         "address": {
             "street": "Kołobrzeska 41c",
-            "postcode": "80-391",
+            "postcode": "80-391"
         },
         "phone": 887887414,
-        "website": "pizzadominium.pl",
+        "website": "pizzadominium.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 8,
@@ -102,13 +102,13 @@
     "contactInfo": {
         "address": {
             "street": "Bernarda Chrzanowskiego 58",
-            "postcode": "80-278",
+            "postcode": "80-278"
         },
         "phone": 515236776,
-        "website": "tonipepperoni.com.pl",
+        "website": "tonipepperoni.com.pl"
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 9,
@@ -116,13 +116,13 @@
     "contactInfo": {
         "address": {
             "street": "Abrahama 7",
-            "postcode": "80-307",
+            "postcode": "80-307"
         },
         "phone": 576685385,
-        "website": "",
+        "website": ""
     },
     "description": "string",
-    "availableIngredients": [],
+    "availableIngredients": []
 },
 {
     "id": 10,
@@ -130,12 +130,12 @@
     "contactInfo": {
         "address": {
             "street": "Piastowska 99",
-            "postcode": "80-352",
+            "postcode": "80-352"
         },
         "phone": 504916331,
-        "website": "agrasso.pl",
+        "website": "agrasso.pl"
     },
     "description": "string",
-    "availableIngredients": [],
-},
+    "availableIngredients": []
+}
 ]
