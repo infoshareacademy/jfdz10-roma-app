@@ -1,0 +1,141 @@
+[{
+    "id": 1,
+    "name": "Rogata Pizzeria",
+    "contactInfo": {
+        "address": {
+            "street": "Bolesława Krzywoustego 25",
+            "postcode": "80-376"
+        },
+        "phone": 585574994,
+        "website": "rogata.gda.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 2,
+    "name": "MAXX PIZZA",
+    "contactInfo": {
+        "address": {
+            "street": "Pilotów 3",
+            "postcode": "80-460"
+        },
+        "phone": 585592158,
+        "website": ""
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 3,
+    "name": "Tutti Santi",
+    "contactInfo": {
+        "address": {
+            "street": "aleja Grunwaldzka 211",
+            "postcode": "80-266"
+        },
+        "phone": 786070809,
+        "website": "tuttisanti.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 4,
+    "name": "Margherita s.c.",
+    "contactInfo": {
+        "address": {
+            "street": "Cystersów 11",
+            "postcode": "80-330"
+        },
+        "phone": 585523716,
+        "website": "margherita.com.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 5,
+    "name": "Pepe",
+    "contactInfo": {
+        "address": {
+            "street": "aleja Grunwaldzka 471",
+            "postcode": "80-309"
+        },
+        "phone": 587614918,
+        "website": "pepepizzaoliwa.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 6,
+    "name": "La Bocca",
+    "contactInfo": {
+        "address": {
+            "street": "Startowa 30",
+            "postcode": "80-461"
+        },
+        "phone": 887887414,
+        "website": "labocca.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 7,
+    "name": "Pizza Dominium",
+    "contactInfo": {
+        "address": {
+            "street": "Kołobrzeska 41c",
+            "postcode": "80-391"
+        },
+        "phone": 887887414,
+        "website": "pizzadominium.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 8,
+    "name": "Toni Pepperoni",
+    "contactInfo": {
+        "address": {
+            "street": "Bernarda Chrzanowskiego 58",
+            "postcode": "80-278"
+        },
+        "phone": 515236776,
+        "website": "tonipepperoni.com.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 9,
+    "name": "Zajezdnia",
+    "contactInfo": {
+        "address": {
+            "street": "Abrahama 7",
+            "postcode": "80-307"
+        },
+        "phone": 576685385,
+        "website": ""
+    },
+    "description": "string",
+    "availableIngredients": []
+},
+{
+    "id": 10,
+    "name": "Da Grasso",
+    "contactInfo": {
+        "address": {
+            "street": "Piastowska 99",
+            "postcode": "80-352"
+        },
+        "phone": 504916331,
+        "website": "agrasso.pl"
+    },
+    "description": "string",
+    "availableIngredients": []
+}
+]

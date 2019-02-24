@@ -1,0 +1,10 @@
+     {
+        "id": 1,
+        "nickname": "Ryjek",
+        "e-mail": "ryjek@vp.com",
+        "password": "ryjek111",
+        "address": {
+            "street": "Muminkow 2",
+            "postcode": "80-001"
+        }
+    }
