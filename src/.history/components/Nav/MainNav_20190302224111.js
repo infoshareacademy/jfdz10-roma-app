@@ -72,9 +72,12 @@ export class MainNav extends React.Component {
 					theme={theme}
 					onItemSelection={this.onItemSelection}
 				>
-					<Nav id="logo" style={{ background: "#303641", margin: "10px" }}>
-						<NavLink to="/dashboard" style={{ margin: "auto" }}>
-							<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
+					<Nav id="logo" style={{ background: "#303641", margin: "10px 0" }}>
+						<NavLink to="/dashboard">
+							<ReactSVG
+								src="logo.svg"
+								svgStyle={{ width: 90, height: 50, margin: auto }}
+							/>
 						</NavLink>
 					</Nav>
 					<Nav id="dashboard">
