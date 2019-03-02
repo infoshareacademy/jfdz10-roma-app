@@ -44,7 +44,6 @@ const Text = styled.div`
 	text-transform: uppercase;
 	text-align: center;
 	width: 100%;
-	margin-top: 3px;
 `;
 
 const NavLink = styled(Link)`
@@ -58,7 +57,7 @@ const NavLink = styled(Link)`
 
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
-class MainNav extends React.Component {
+export class MainNav extends React.Component {
 	state = { selectedPath: "dashboard" };
 
 	onItemSelection = arg => {
@@ -73,8 +72,8 @@ class MainNav extends React.Component {
 					theme={theme}
 					onItemSelection={this.onItemSelection}
 				>
-					<Nav id="logo" style={{ background: "#303641", margin: "10px" }}>
-						<NavLink to="/dashboard" style={{ margin: "auto" }}>
+					<Nav id="logo" style={{ background: "#303641", margin: "10px auto" }}>
+						<NavLink to="/dashboard">
 							<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
 						</NavLink>
 					</Nav>
@@ -123,5 +122,3 @@ class MainNav extends React.Component {
 		);
 	}
 }
-
-export default MainNav;

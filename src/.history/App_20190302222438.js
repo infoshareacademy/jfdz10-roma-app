@@ -1,5 +1,5 @@
 import React from "react";
-import MainNav from "./components/Nav/MainNav";
+import { MainNav } from "./components/Nav/MainNav";
 import { BrowserRouter } from "react-router-dom";
 import MainContent from "./components/Nav/MainContent";
 import styled from "styled-components";

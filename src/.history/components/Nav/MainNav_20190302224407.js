@@ -58,7 +58,7 @@ const NavLink = styled(Link)`
 
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
-class MainNav extends React.Component {
+export class MainNav extends React.Component {
 	state = { selectedPath: "dashboard" };
 
 	onItemSelection = arg => {
@@ -123,5 +123,3 @@ class MainNav extends React.Component {
 		);
 	}
 }
-
-export default MainNav;
