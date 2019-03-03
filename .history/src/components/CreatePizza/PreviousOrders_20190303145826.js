@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./PreviousOrders.css";
 import styled from "styled-components";
-import orders from "../../orders.json";
-import pizzerias from "../../pizzerias.json";
+import orders from "orders.json";
+import pizzerias from "pizzerias.json";
 import ingredients from "../../ingredients.json";
 
 const Wrapper = styled.div`
