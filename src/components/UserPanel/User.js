@@ -4,7 +4,7 @@ import Nickname from './Nickname';
 import Contact from './Contact';
 import Favourites from './Favourites';
 import AddPizzeria from './AddPizzeria';
-import UserOrders from './UserOrders';
+// import CreatePizza from '../CreatePizza/CreatePizza.js'
 
 import './user.css';
 
@@ -21,7 +21,7 @@ class User extends React.Component {
                     <AddPizzeria />
                 </div>
                 <div className="user__container__right">
-                    <UserOrders />
+                    {/* <CreatePizza /> */}
                 </div>
             </div>
         )
