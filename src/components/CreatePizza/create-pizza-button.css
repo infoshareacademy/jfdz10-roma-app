@@ -1,0 +1,27 @@
+.create-pizza-button {
+    padding: 1.4rem 2.6rem;
+    font-size: 1.5rem;
+    background: #cc3333;
+    border: none;
+    color: white;
+    text-decoration: none;
+}
+
+.create-pizza-button:hover {
+    background: #a5182e;
+    color: white;
+    text-decoration: none;
+}
+
+.create-pizza-button:active {
+    background: black
+}
+
+.create-pizza-button:visited {
+    text-decoration: none;
+}
+
+.create-pizza-button:focus {
+    text-decoration: none;
+    background: #cc3333
+}
