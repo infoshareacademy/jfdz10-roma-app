@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Wrapper } from "./containers";
 import "./ListScrollbar.css";
-import ingredients from "./ingredients.json";
+import ingredients from "../../ingredients.json";
 
 class Ingredients extends Component {
 	render() {
