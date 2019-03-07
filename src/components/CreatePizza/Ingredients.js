@@ -8,7 +8,7 @@ import ingredients from "../../ingredients.json";
 const Ingredients = props => {
 	const handleClickIngredient = ingredientId => {
 		const ingredient = ingredients.find(el => el.id === ingredientId);
-		props.chooseIngredient(ingredient);
+		props.chooseIngredient({ ...ingredient, id: Date.now() });
 	};
 
 	return (

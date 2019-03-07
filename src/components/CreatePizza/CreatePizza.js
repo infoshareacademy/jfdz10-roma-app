@@ -31,6 +31,12 @@ class CreatePizza extends Component {
 		});
 	};
 
+	clearIngredients = () => {
+		this.setState({
+			ingredients: []
+		});
+	};
+
 	render() {
 		return (
 			<Container className="h-100">
@@ -43,15 +49,16 @@ class CreatePizza extends Component {
 							<YourPizza
 								ingredients={this.state.ingredients}
 								removeIngredient={this.removeIngredient}
+								clearIngredients={this.clearIngredients}
 							/>
 						) : (
 							<Button
 								size="lg"
-								className="create-pizza-button"
+								className="custom-button create-pizza-button"
 								onClick={this.handleChangeCreatePizza}
 								variant="link"
 							>
-								Create your own pizza
+								Stwórz pizzę
 							</Button>
 						)}
 					</Col>

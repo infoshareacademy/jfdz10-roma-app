@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ListContainer = styled.div`
-	width: 400px;
-	height: 100%;
+	width: 460px;
+	max-height: 500px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -11,7 +11,7 @@ export const ListContainer = styled.div`
 
 export const ListWrapper = styled.div`
 	width: 100%;
-	height: 70%;
+	height: 500px;
 	padding: 0 2rem;
 	border-radius: 10px;
 	overflow-y: auto;
