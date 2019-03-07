@@ -11,12 +11,23 @@ import PreviousOrders from "./PreviousOrders";
 
 class CreatePizza extends Component {
 	state = {
-		isCreatePizza: false
+		isCreatePizza: false,
+		ingredients: []
 	};
 
 	handleChangeCreatePizza = () => {
 		this.setState({
 			isCreatePizza: true
+		});
+	};
+
+	chooseIngredient = ingredient => {
+		this.setState({ ingredients: [...this.state.ingredients, ingredient] });
+	};
+
+	removeIngredient = ingredientId => {
+		this.setState({
+			ingredients: this.state.ingredients.filter(el => el.id !== ingredientId)
 		});
 	};
 
@@ -29,7 +40,10 @@ class CreatePizza extends Component {
 						className="d-flex justify-content-center align-items-center"
 					>
 						{this.state.isCreatePizza ? (
-							<YourPizza />
+							<YourPizza
+								ingredients={this.state.ingredients}
+								removeIngredient={this.removeIngredient}
+							/>
 						) : (
 							<Button
 								size="lg"
@@ -42,7 +56,11 @@ class CreatePizza extends Component {
 						)}
 					</Col>
 					<Col className="d-flex justify-content-center align-items-center">
-						{this.state.isCreatePizza ? <Ingredients /> : <PreviousOrders />}
+						{this.state.isCreatePizza ? (
+							<Ingredients chooseIngredient={this.chooseIngredient} />
+						) : (
+							<PreviousOrders />
+						)}
 					</Col>
 				</Row>
 			</Container>
