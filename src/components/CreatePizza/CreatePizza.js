@@ -8,11 +8,13 @@ import Button from "react-bootstrap/Button";
 import Ingredients from "./Ingredients";
 import YourPizza from "./YourPizza";
 import PreviousOrders from "./PreviousOrders";
+import Alert from "react-bootstrap/Alert";
 
 class CreatePizza extends Component {
 	state = {
 		isCreatePizza: false,
-		ingredients: []
+		isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
+		ingredients: JSON.parse(window.localStorage.getItem("ingredients"))
 	};
 
 	handleChangeCreatePizza = () => {
@@ -37,19 +39,63 @@ class CreatePizza extends Component {
 		});
 	};
 
+	submitPizza = () => {
+		window.localStorage.setItem(
+			"ingredients",
+			JSON.stringify(this.state.ingredients)
+		);
+		window.localStorage.setItem("isPizzaSubmitted", "true");
+		this.setState({
+			isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
+			ingredients: JSON.parse(window.localStorage.getItem("ingredients"))
+		});
+	};
+
+	cancelPizza = () => {
+		const currentIngredients = JSON.parse(
+			window.localStorage.getItem("ingredients")
+		);
+		window.localStorage.setItem("isPizzaSubmitted", "false");
+		window.localStorage.setItem("ingredients", "[]");
+		this.setState({
+			isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
+			isCreatePizza: true,
+			ingredients: currentIngredients
+		});
+	};
+
 	render() {
+		const isPizzaSubmitted = JSON.parse(window.localStorage.isPizzaSubmitted);
 		return (
-			<Container className="h-100">
+			<Container className="h-100" style={{ position: "relative" }}>
+				{isPizzaSubmitted && (
+					<Alert
+						variant="success"
+						style={{
+							margin: "1rem 0",
+							position: "absolute",
+							width: "100%",
+							top: "0px",
+							left: "0px"
+						}}
+					>
+						<Alert.Heading>Potwierdziłeś wybrane składniki.</Alert.Heading>
+						Przejdź do następnego kroku i złóż zamówienie.
+					</Alert>
+				)}
 				<Row className="h-100">
 					<Col
 						lg={6}
 						className="d-flex justify-content-center align-items-center"
 					>
-						{this.state.isCreatePizza ? (
+						{this.state.isCreatePizza || isPizzaSubmitted ? (
 							<YourPizza
 								ingredients={this.state.ingredients}
 								removeIngredient={this.removeIngredient}
 								clearIngredients={this.clearIngredients}
+								submitPizza={this.submitPizza}
+								isPizzaSubmitted={isPizzaSubmitted}
+								cancelPizza={this.cancelPizza}
 							/>
 						) : (
 							<Button
@@ -63,8 +109,11 @@ class CreatePizza extends Component {
 						)}
 					</Col>
 					<Col className="d-flex justify-content-center align-items-center">
-						{this.state.isCreatePizza ? (
-							<Ingredients chooseIngredient={this.chooseIngredient} />
+						{this.state.isCreatePizza || isPizzaSubmitted ? (
+							<Ingredients
+								chooseIngredient={this.chooseIngredient}
+								isPizzaSubmitted={isPizzaSubmitted}
+							/>
 						) : (
 							<PreviousOrders />
 						)}

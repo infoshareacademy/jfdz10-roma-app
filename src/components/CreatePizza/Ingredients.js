@@ -5,22 +5,26 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { ListContainer, ListWrapper } from "./containers";
 import ingredients from "../../ingredients.json";
 
-const Ingredients = props => {
+const Ingredients = ({ chooseIngredient, isPizzaSubmitted }) => {
 	const handleClickIngredient = ingredientId => {
 		const ingredient = ingredients.find(el => el.id === ingredientId);
-		props.chooseIngredient({ ...ingredient, id: Date.now() });
+		chooseIngredient({ ...ingredient, id: Date.now() });
 	};
 
 	return (
 		<ListContainer>
-			<h3 className="list-header"> Choose ingredients:</h3>
+			<h3 className="list-header">Wybierz składniki</h3>
 			<ListWrapper className="list-scrollbar">
 				<ListGroup>
 					{ingredients.map(element => (
 						<ListGroup.Item
 							action
 							key={element.id}
-							onClick={() => handleClickIngredient(element.id)}
+							onClick={
+								!isPizzaSubmitted
+									? () => handleClickIngredient(element.id)
+									: null
+							}
 						>
 							<h5
 								className="mb-1"

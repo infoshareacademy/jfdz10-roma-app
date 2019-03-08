@@ -10,7 +10,7 @@ class PreviousOrders extends Component {
 	render() {
 		return (
 			<ListContainer>
-				<h3 className="list-header">Your previous orders</h3>
+				<h3 className="list-header">Twoje poprzednie zamówienia</h3>
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
 						{orders.map(order => {

@@ -7,13 +7,23 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { ListContainer, ListWrapper } from "./containers";
 
-const YourPizza = ({ ingredients, removeIngredient, clearIngredients }) => {
+const YourPizza = ({
+	ingredients,
+	removeIngredient,
+	clearIngredients,
+	submitPizza,
+	isPizzaSubmitted,
+	cancelPizza
+}) => {
 	return (
 		<ListContainer>
-			<h3 className="list-header"> Your ingredients:</h3>
+			<h3 className="list-header">Twoje wybrane składniki: </h3>
 			<ListWrapper className="list-scrollbar">
 				<ListGroup>
-					{ingredients.map((element, id) => (
+					{(JSON.parse(window.localStorage.ingredients).length > 0
+						? JSON.parse(window.localStorage.ingredients)
+						: ingredients
+					).map((element, id) => (
 						<ListGroup.Item action key={id}>
 							<h5
 								className="mb-1"
@@ -22,7 +32,9 @@ const YourPizza = ({ ingredients, removeIngredient, clearIngredients }) => {
 								{element.name}
 								<span
 									className="close"
-									onClick={() => removeIngredient(element.id)}
+									onClick={
+										isPizzaSubmitted ? null : () => removeIngredient(element.id)
+									}
 								>
 									&times;
 								</span>
@@ -42,14 +54,18 @@ const YourPizza = ({ ingredients, removeIngredient, clearIngredients }) => {
 				<Button
 					className="d-inline custom-button create-pizza-button"
 					variant="link"
+					onClick={isPizzaSubmitted ? null : () => submitPizza()}
+					disabled={isPizzaSubmitted ? true : false}
 				>
 					Zatwierdź pizzę
 				</Button>
 				<Button
 					className="d-inline custom-button btn-secondary"
-					onClick={() => clearIngredients()}
+					onClick={
+						isPizzaSubmitted ? () => cancelPizza() : () => clearIngredients()
+					}
 				>
-					Wyczyść
+					{isPizzaSubmitted ? "Anuluj" : "Wyczyść"}
 				</Button>
 			</div>
 		</ListContainer>
