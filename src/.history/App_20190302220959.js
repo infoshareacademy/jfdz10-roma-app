@@ -1,7 +1,7 @@
 import React from "react";
-import MainNav from "./components/Nav/MainNav";
+import { MainNav } from "./MainNav";
 import { BrowserRouter } from "react-router-dom";
-import MainContent from "./components/Nav/MainContent";
+import MainContent from "./MainContent";
 import styled from "styled-components";
 
 const AppContainer = styled.div`
@@ -10,7 +10,7 @@ const AppContainer = styled.div`
 	width: 100%;
 `;
 
-class App extends React.Component {
+export class App extends React.Component {
 	render() {
 		return (
 			<BrowserRouter>
@@ -22,5 +22,3 @@ class App extends React.Component {
 		);
 	}
 }
-
-export default App;
