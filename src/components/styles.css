@@ -15,14 +15,16 @@ body {
 .dashboard {
   background-color: rgb(224, 220, 215);
   height: 100%;
-  
+}
+
+.dashboard__description {
+  display: flex;
 }
 
 .description {
   text-align: center;
   width: 45vw;
-  display: inline-block;
-  padding: 2rem 2rem 0;
+  padding: 2rem 4rem 0;
 }
 
 .description__title {
@@ -37,15 +39,19 @@ body {
 .pizzaImage {
   width: 52vh;
   height: 52vh;
-  border-radius: 50px;
-  float: right;
-  padding: 2rem;
+  border-radius: 70px;
+  padding: 3rem;
+}
+
+.dashboard__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .totalOrders {
   text-align: right;
-  padding: 2rem;
-  margin-top: 2rem;
+  padding: 1rem;
   margin-right: 2rem;
   font-size: 1.5rem
 }
@@ -62,34 +68,28 @@ body {
   color: #cc3333;
 }
 
-.logInButton, .logOutButton {
+.logInButton, .registerButton {
   width: 150px;
   height: 150px;
   border-radius: 100%;
-  float: left;
   padding: 1rem;
-  margin-top: 4rem;
-  margin-left: 4rem;
+  margin-top: 2rem;
   border: 3px dotted #cc3333;
   background-color:#da3e3e ;
   box-shadow: 2px 2px 2px 2px #3a3737;
   color: #e0d7d7;
   font-size: 2rem;
   text-align: center;
+  text-shadow: 1px 1px 1ps rgb(189, 151, 125);
 }
 
-.logInButton:hover, .logOutButton:hover {
+.logInButton:hover, .registerButton:hover {
   box-shadow: 4px 4px #e0d7d7;
   background-color: #cc3333;
 }
 
-mark {
-  background-color:rgb(233, 187, 79);
-  letter-spacing: 0.18rem;
-  text-transform: uppercase
+.chart {
+  margin-top: 0.1rem;
 }
 
-mark:hover {
-  background-color: #da3e3e;
-}
 
