@@ -1,19 +1,43 @@
 import React, { Component } from "react";
 import "./ListScrollbar.css";
 import "./containers.css";
-import orders from "../../orders.json";
-import pizzerias from "../../pizzerias.json";
-import ingredients from "../../ingredients.json";
 import { ListContainer, ListWrapper } from "./containers";
 
+async function fetchOrders() {
+	return await fetch("orders.json").then(res => res.json());
+}
+
+async function fetchIngredients() {
+	return await fetch("ingredients.json").then(res => res.json());
+}
+
+async function fetchPizzerias() {
+	return await fetch("pizzerias.json").then(
+		res => res.json(),
+		err => console.log("err", err)
+	);
+}
+
 class PreviousOrders extends Component {
+	state = {
+		orders: [],
+		ingredients: [],
+		pizzerias: []
+	};
+
+	componentDidMount() {
+		fetchOrders().then(orders => this.setState({ orders }));
+		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
+		fetchIngredients().then(ingredients => this.setState({ ingredients }));
+	}
+
 	render() {
 		return (
 			<ListContainer>
 				<h3 className="list-header">Twoje poprzednie zamówienia</h3>
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
-						{orders.map(order => {
+						{this.state.orders.map(order => {
 							let allIngredients = "";
 							return (
 								<div
@@ -26,11 +50,11 @@ class PreviousOrders extends Component {
 								>
 									<div className="d-flex w-100 justify-content-between">
 										<h5 className="mb-1">
-											{
-												pizzerias.find(
-													pizzeria => pizzeria.id === order.pizzeriaId
-												).name
-											}
+											{this.state.pizzerias.length !== 0
+												? this.state.pizzerias.find(
+														pizzeria => pizzeria.id === order.pizzeriaId
+												  ).name
+												: "None"}
 										</h5>
 									</div>
 									<p className="mb-1">
@@ -38,9 +62,12 @@ class PreviousOrders extends Component {
 											if (allIngredients.length > 0) {
 												allIngredients += ", ";
 											}
-											allIngredients += ingredients.find(ingredient => {
-												return ingredient.id === orderIngredient;
-											}).name;
+											allIngredients +=
+												this.state.ingredients.length !== 0
+													? this.state.ingredients.find(ingredient => {
+															return ingredient.id === orderIngredient;
+													  }).name
+													: "None";
 										})}
 										{allIngredients}
 									</p>

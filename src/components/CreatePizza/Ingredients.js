@@ -3,9 +3,14 @@ import "./ListScrollbar.css";
 import "./containers.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListContainer, ListWrapper } from "./containers";
-import ingredients from "../../ingredients.json";
+
+async function fetchIngredients() {
+	const ingredients = await fetch("ingredients.json").then(res => res.json());
+	console.log(ingredients);
+}
 
 const Ingredients = ({ chooseIngredient, isPizzaSubmitted }) => {
+	const ingredients = fetchIngredients();
 	const handleClickIngredient = ingredientId => {
 		const ingredient = ingredients.find(el => el.id === ingredientId);
 		chooseIngredient({ ...ingredient, id: Date.now() });
