@@ -1,5 +1,4 @@
 import React from 'react';
-import AvatarImg from './img/avatar.png'
 
 class Avatar extends React.Component {
     state = {
