@@ -23,7 +23,6 @@
 }
 
 .user__container__left {
-    border: 1px solid red;
     flex-basis: 50%;
     display: flex;
     text-align: center;
@@ -32,7 +31,6 @@
 }
 
 .user__container__right {
-    border: 1px solid blue;
     flex-basis: 50%;
     text-align: center;
 }

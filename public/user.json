@@ -1,6 +1,6 @@
-     {
+    {
         "id": 1,
-        "nickname": "Ryjek",
+        "nickname": "Jan",
         "e-mail": "ryjek@vp.com",
         "password": "ryjek111",
         "address": {
@@ -8,3 +8,4 @@
             "postcode": "80-001"
         }
     }
+

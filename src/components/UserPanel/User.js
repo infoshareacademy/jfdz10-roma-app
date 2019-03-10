@@ -9,12 +9,19 @@ import AddPizzeria from './AddPizzeria';
 import './user.css';
 
 class User extends React.Component {
+    state = {}
+    componentDidMount(){
+        fetch('user.json')
+            .then(response => response.json())
+            .then(value => console.log(value))
+    }
+
     render (){
         return(
             <div className="user__container">
                 <div className="user__container__left">
                     <Avatar />
-                    <h1 class="sayHello">Witaj Jan!</h1>
+                    <h1 className="sayHello">Witaj Jan!</h1>
                     <Nickname />
                     <Contact />
                     <Favourites />
