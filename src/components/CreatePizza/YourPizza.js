@@ -7,6 +7,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { ListContainer, ListWrapper } from "./containers";
 
+const getFromLocalStorage = item => {
+	return JSON.parse(window.localStorage.getItem(item));
+};
+
 const YourPizza = ({
 	ingredients,
 	removeIngredient,
@@ -15,15 +19,15 @@ const YourPizza = ({
 	isPizzaSubmitted,
 	cancelPizza
 }) => {
+	const chosenIngredients = getFromLocalStorage("ingredients")
+		? getFromLocalStorage("ingredients")
+		: ingredients;
 	return (
 		<ListContainer>
 			<h3 className="list-header">Twoje wybrane składniki: </h3>
 			<ListWrapper className="list-scrollbar">
 				<ListGroup>
-					{(JSON.parse(window.localStorage.ingredients).length > 0
-						? JSON.parse(window.localStorage.ingredients)
-						: ingredients
-					).map((element, id) => (
+					{chosenIngredients.map((element, id) => (
 						<ListGroup.Item action key={id}>
 							<h5
 								className="mb-1"

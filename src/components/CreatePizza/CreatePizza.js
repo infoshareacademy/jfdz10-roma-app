@@ -10,13 +10,19 @@ import YourPizza from "./YourPizza";
 import PreviousOrders from "./PreviousOrders";
 import Alert from "react-bootstrap/Alert";
 
+const getFromLocalStorage = item => {
+	return JSON.parse(window.localStorage.getItem(item));
+};
+
 class CreatePizza extends Component {
 	state = {
 		isCreatePizza: false,
-		isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
-		ingredients:
-			window.localStorage.getItem("ingredients") &&
-			JSON.parse(window.localStorage.getItem("ingredients"))
+		isPizzaSubmitted: window.localStorage.isPizzaSubmitted
+			? JSON.parse(window.localStorage.isPizzaSubmitted)
+			: false,
+		ingredients: window.localStorage.getItem("ingredients")
+			? getFromLocalStorage("ingredients")
+			: []
 	};
 
 	handleChangeCreatePizza = () => {
@@ -48,26 +54,24 @@ class CreatePizza extends Component {
 		);
 		window.localStorage.setItem("isPizzaSubmitted", "true");
 		this.setState({
-			isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
-			ingredients: JSON.parse(window.localStorage.getItem("ingredients"))
+			isPizzaSubmitted: getFromLocalStorage("isPizzaSubmitted"),
+			ingredients: getFromLocalStorage("ingredients")
 		});
 	};
 
 	cancelPizza = () => {
-		const currentIngredients = JSON.parse(
-			window.localStorage.getItem("ingredients")
-		);
+		const currentIngredients = getFromLocalStorage("ingredients");
 		window.localStorage.setItem("isPizzaSubmitted", "false");
 		window.localStorage.setItem("ingredients", "[]");
 		this.setState({
-			isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
+			isPizzaSubmitted: getFromLocalStorage("isPizzaSubmitted"),
 			isCreatePizza: true,
 			ingredients: currentIngredients
 		});
 	};
 
 	render() {
-		const isPizzaSubmitted = JSON.parse(window.localStorage.isPizzaSubmitted);
+		const isPizzaSubmitted = this.state.isPizzaSubmitted;
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				{isPizzaSubmitted && (
