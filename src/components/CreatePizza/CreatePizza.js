@@ -14,7 +14,9 @@ class CreatePizza extends Component {
 	state = {
 		isCreatePizza: false,
 		isPizzaSubmitted: JSON.parse(window.localStorage.isPizzaSubmitted),
-		ingredients: JSON.parse(window.localStorage.getItem("ingredients"))
+		ingredients:
+			window.localStorage.getItem("ingredients") &&
+			JSON.parse(window.localStorage.getItem("ingredients"))
 	};
 
 	handleChangeCreatePizza = () => {
