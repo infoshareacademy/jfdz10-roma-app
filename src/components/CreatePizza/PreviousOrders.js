@@ -12,10 +12,7 @@ async function fetchIngredients() {
 }
 
 async function fetchPizzerias() {
-	return await fetch("pizzerias.json").then(
-		res => res.json(),
-		err => console.log("err", err)
-	);
+	return await fetch("pizzerias.json").then(res => res.json());
 }
 
 class PreviousOrders extends Component {
