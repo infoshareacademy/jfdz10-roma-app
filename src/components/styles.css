@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+
 html,
 body {
   padding: 0;
@@ -11,29 +12,84 @@ body {
   color: #333;
 }
 
-.description {
-  border: 2px solid purple;
-  text-align: center;
+.dashboard {
+  background-color: rgb(224, 220, 215);
+  height: 100%;
   
+}
+
+.description {
+  text-align: center;
+  width: 45vw;
+  display: inline-block;
+  padding: 2rem 2rem 0;
+}
+
+.description__title {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.description__paragraph {
+  font-size: 1.3rem;
 }
 
 .pizzaImage {
-  width: 30vw;
-  height: 40vh;
-  margin: 0 auto;
+  width: 52vh;
+  height: 52vh;
   border-radius: 50px;
-  padding: 1rem;
-  display: block;
+  float: right;
+  padding: 2rem;
 }
 
 .totalOrders {
-  border: 2px solid green;
-  text-align: center;
+  text-align: right;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  font-size: 1.5rem
+}
+
+.totalOrders__text1 {
+  color:rgb(241, 173, 13);
+}
+
+.totalOrders__text2 {
+  color: rgb(60, 158, 58);
+}
+
+.totalOrders__text3 {
+  color: #cc3333;
 }
 
 .logInButton, .logOutButton {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 100%;
-  
+  float: left;
+  padding: 1rem;
+  margin-top: 4rem;
+  margin-left: 4rem;
+  border: 3px dotted #cc3333;
+  background-color:#da3e3e ;
+  box-shadow: 2px 2px 2px 2px #3a3737;
+  color: #e0d7d7;
+  font-size: 2rem;
+  text-align: center;
 }
+
+.logInButton:hover, .logOutButton:hover {
+  box-shadow: 4px 4px #e0d7d7;
+  background-color: #cc3333;
+}
+
+mark {
+  background-color:rgb(233, 187, 79);
+  letter-spacing: 0.18rem;
+  text-transform: uppercase
+}
+
+mark:hover {
+  background-color: #da3e3e;
+}
+
