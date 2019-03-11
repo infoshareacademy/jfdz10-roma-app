@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Ingredients from "./Ingredients";
-import YourPizza from "./YourPizza";
+import IngredientsList from "./IngredientsList";
+import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
 import Alert from "react-bootstrap/Alert";
 
@@ -95,7 +95,7 @@ class CreatePizza extends Component {
 						className="d-flex justify-content-center align-items-center"
 					>
 						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<YourPizza
+							<YourIngredients
 								ingredients={this.state.ingredients}
 								removeIngredient={this.removeIngredient}
 								clearIngredients={this.clearIngredients}
@@ -116,7 +116,7 @@ class CreatePizza extends Component {
 					</Col>
 					<Col className="d-flex justify-content-center align-items-center">
 						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<Ingredients
+							<IngredientsList
 								chooseIngredient={this.chooseIngredient}
 								isPizzaSubmitted={isPizzaSubmitted}
 							/>

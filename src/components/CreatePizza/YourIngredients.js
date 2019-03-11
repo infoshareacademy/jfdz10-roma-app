@@ -19,9 +19,11 @@ const YourIngredients = ({
 	isPizzaSubmitted,
 	cancelPizza
 }) => {
-	const chosenIngredients = getFromLocalStorage("ingredients")
-		? getFromLocalStorage("ingredients")
-		: ingredients;
+	const chosenIngredients =
+		getFromLocalStorage("ingredients") !== null &&
+		getFromLocalStorage("ingredients").length > 0
+			? getFromLocalStorage("ingredients")
+			: ingredients;
 	return (
 		<ListContainer>
 			<h3 className="list-header">Twoje wybrane składniki: </h3>
