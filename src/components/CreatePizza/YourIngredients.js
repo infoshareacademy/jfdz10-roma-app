@@ -5,6 +5,8 @@ import "./containers.css";
 import "./create-pizza-button.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { ListContainer, ListWrapper } from "./containers";
 
 const getFromLocalStorage = item => {
@@ -57,18 +59,30 @@ const YourIngredients = ({
 					marginTop: "2rem"
 				}}
 			>
-				<Button
-					className="d-inline custom-button create-pizza-button"
-					variant="link"
-					onClick={
-						!isPizzaSubmitted && ingredients.length !== 0
-							? () => submitIngredients()
-							: null
+				<OverlayTrigger
+					placement="top"
+					overlay={
+						<Tooltip
+							style={ingredients.length > 0 ? { display: "none" } : null}
+							id={`tooltip-submitIngredients`}
+						>
+							Wybierz przynajmniej jeden składnik!
+						</Tooltip>
 					}
-					disabled={isPizzaSubmitted ? true : false}
 				>
-					Zatwierdź pizzę
-				</Button>
+					<Button
+						className="d-inline custom-button create-pizza-button"
+						variant="link"
+						onClick={
+							!isPizzaSubmitted && ingredients.length !== 0
+								? () => submitIngredients()
+								: null
+						}
+						disabled={isPizzaSubmitted ? true : false}
+					>
+						Zatwierdź pizzę
+					</Button>
+				</OverlayTrigger>
 				<Button
 					className="d-inline custom-button btn-secondary"
 					onClick={

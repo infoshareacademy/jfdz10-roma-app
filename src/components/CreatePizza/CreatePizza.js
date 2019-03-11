@@ -55,7 +55,6 @@ class CreatePizza extends Component {
 		window.localStorage.setItem("isPizzaSubmitted", "true");
 		this.setState({
 			isPizzaSubmitted: true
-			// ingredients: getFromLocalStorage("ingredients")
 		});
 	};
 
