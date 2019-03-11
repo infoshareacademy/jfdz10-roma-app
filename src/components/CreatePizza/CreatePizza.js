@@ -47,15 +47,15 @@ class CreatePizza extends Component {
 		});
 	};
 
-	submitPizza = () => {
+	submitIngredients = () => {
 		window.localStorage.setItem(
 			"ingredients",
 			JSON.stringify(this.state.ingredients)
 		);
 		window.localStorage.setItem("isPizzaSubmitted", "true");
 		this.setState({
-			isPizzaSubmitted: getFromLocalStorage("isPizzaSubmitted"),
-			ingredients: getFromLocalStorage("ingredients")
+			isPizzaSubmitted: true
+			// ingredients: getFromLocalStorage("ingredients")
 		});
 	};
 
@@ -98,7 +98,7 @@ class CreatePizza extends Component {
 								ingredients={this.state.ingredients}
 								removeIngredient={this.removeIngredient}
 								clearIngredients={this.clearIngredients}
-								submitPizza={this.submitPizza}
+								submitIngredients={this.submitIngredients}
 								isPizzaSubmitted={isPizzaSubmitted}
 								cancelIngredients={this.cancelIngredients}
 							/>

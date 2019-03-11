@@ -15,7 +15,7 @@ const YourIngredients = ({
 	ingredients,
 	removeIngredient,
 	clearIngredients,
-	submitPizza,
+	submitIngredients,
 	isPizzaSubmitted,
 	cancelIngredients
 }) => {
@@ -62,7 +62,7 @@ const YourIngredients = ({
 					variant="link"
 					onClick={
 						!isPizzaSubmitted && ingredients.length !== 0
-							? () => submitPizza()
+							? () => submitIngredients()
 							: null
 					}
 					disabled={isPizzaSubmitted ? true : false}
