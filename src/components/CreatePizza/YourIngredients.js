@@ -17,7 +17,7 @@ const YourIngredients = ({
 	clearIngredients,
 	submitPizza,
 	isPizzaSubmitted,
-	cancelPizza
+	cancelIngredients
 }) => {
 	const chosenIngredients =
 		getFromLocalStorage("ingredients") !== null &&
@@ -60,7 +60,11 @@ const YourIngredients = ({
 				<Button
 					className="d-inline custom-button create-pizza-button"
 					variant="link"
-					onClick={isPizzaSubmitted ? null : () => submitPizza()}
+					onClick={
+						!isPizzaSubmitted && ingredients.length !== 0
+							? () => submitPizza()
+							: null
+					}
 					disabled={isPizzaSubmitted ? true : false}
 				>
 					Zatwierdź pizzę
@@ -68,7 +72,9 @@ const YourIngredients = ({
 				<Button
 					className="d-inline custom-button btn-secondary"
 					onClick={
-						isPizzaSubmitted ? () => cancelPizza() : () => clearIngredients()
+						isPizzaSubmitted
+							? () => cancelIngredients()
+							: () => clearIngredients()
 					}
 				>
 					{isPizzaSubmitted ? "Anuluj" : "Wyczyść"}

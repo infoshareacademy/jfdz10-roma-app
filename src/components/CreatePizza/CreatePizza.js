@@ -59,15 +59,14 @@ class CreatePizza extends Component {
 		});
 	};
 
-	cancelPizza = () => {
-		const currentIngredients = getFromLocalStorage("ingredients");
-		window.localStorage.setItem("isPizzaSubmitted", "false");
-		window.localStorage.setItem("ingredients", "[]");
+	cancelIngredients = () => {
+		const selectedIngredients = getFromLocalStorage("ingredients");
 		this.setState({
-			isPizzaSubmitted: getFromLocalStorage("isPizzaSubmitted"),
+			isPizzaSubmitted: false,
 			isCreatePizza: true,
-			ingredients: currentIngredients
+			ingredients: selectedIngredients
 		});
+		window.localStorage.clear();
 	};
 
 	render() {
@@ -101,7 +100,7 @@ class CreatePizza extends Component {
 								clearIngredients={this.clearIngredients}
 								submitPizza={this.submitPizza}
 								isPizzaSubmitted={isPizzaSubmitted}
-								cancelPizza={this.cancelPizza}
+								cancelIngredients={this.cancelIngredients}
 							/>
 						) : (
 							<Button
