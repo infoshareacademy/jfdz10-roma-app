@@ -25,7 +25,7 @@ const IconCnt = styled.div`
 	color: #fff;
 	display: flex;
 	justify-content: center;
-	aligh-items: center;
+	align-items: center;
 `;
 
 const Nav = styled(BaseNav)`
@@ -35,7 +35,7 @@ const Nav = styled(BaseNav)`
 
 const theme = {
 	selectionColor: "#FFF",
-	hoverBgColor: "#181b20",
+	hoverBgColor: "#a5182e",
 	selectionBgColor: "#cc3333"
 };
 
@@ -54,31 +54,35 @@ const NavLink = styled(Link)`
 	width: 100%;
 	height: 100%;
 	padding: 8px 12px;
+	&:hover {
+		color: inherit;
+		text-decoration: none;
+	}
 `;
 
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
-	state = { selectedPath: "dashboard" };
+	state = { selectedPath: "" };
 
 	onItemSelection = arg => {
-		this.setState({ selectedPath: arg.path });
+		this.setState({ selectedPath: window.location.pathname });
 	};
 
 	render() {
 		return (
 			<Navigation>
 				<SideNav
-					defaultSelectedPath="dashboard"
+					defaultSelectedPath={window.location.pathname}
 					theme={theme}
 					onItemSelection={this.onItemSelection}
 				>
-					<Nav id="logo" style={{ background: "#303641", margin: "10px" }}>
+					<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
 						<NavLink to="/dashboard" style={{ margin: "auto" }}>
 							<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
 						</NavLink>
 					</Nav>
-					<Nav id="dashboard">
+					<Nav id="/dashboard">
 						<NavLink to="/dashboard">
 							<IconCnt>
 								<Icon icon={dashboard} />
@@ -86,7 +90,7 @@ class MainNav extends React.Component {
 							<Text>Dashboard</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="userPanel">
+					<Nav id="/user-panel">
 						<NavLink to="/user-panel">
 							<IconCnt>
 								<Icon icon={user} />
@@ -94,7 +98,7 @@ class MainNav extends React.Component {
 							<Text>User Panel</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="pizza">
+					<Nav id="/create-pizza">
 						<NavLink to="/create-pizza">
 							<IconCnt>
 								<Icon icon={pizza} />
@@ -102,7 +106,7 @@ class MainNav extends React.Component {
 							<Text>Create Pizza</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="order">
+					<Nav id="/make-order">
 						<NavLink to="/make-order">
 							<IconCnt>
 								<Icon icon={shoppingCart} />
@@ -110,7 +114,7 @@ class MainNav extends React.Component {
 							<Text>Make Order</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="summary">
+					<Nav id="/summary-order">
 						<NavLink to="/summary-order">
 							<IconCnt>
 								<Icon icon={creditCardAlt} />
