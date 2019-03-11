@@ -22,17 +22,12 @@
     padding-bottom: 2rem;
 }
 
-.user__container__left {
+.user__container__left, .user__container__right {
     flex-basis: 50%;
     display: flex;
     text-align: center;
     flex-direction: column;
     justify-content: center;
-}
-
-.user__container__right {
-    flex-basis: 50%;
-    text-align: center;
 }
 
 .user__avatar {
