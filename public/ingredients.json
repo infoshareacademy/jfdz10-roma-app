@@ -1,18 +1,18 @@
 [
     {
-        "name": "cheese",
+        "name": "ser",
         "id": 1
     },
     {
-        "name": "olives",
+        "name": "oliwki",
         "id": 2
     },
     {
-        "name": "ham",
+        "name": "szynka",
         "id": 3
     },
     {
-        "name": "mashroom",
+        "name": "pieczarki",
         "id": 4    
     },
     {
@@ -20,35 +20,35 @@
         "id": 5    
     },
     {
-        "name": "pepper",
+        "name": "papryka",
         "id": 6    
     },
     {
-        "name": "rocket",
+        "name": "rukola",
         "id": 7    
     },
     {
-        "name": "onion",
+        "name": "cebula",
         "id": 8    
     },
     {
-        "name": "tomatoes",
+        "name": "pomidory",
         "id": 9   
     },
     {
-        "name": "pineaple",
+        "name": "ananas",
         "id": 10   
     },
     {
-        "name": "shrimp",
+        "name": "krewetki",
         "id": 11   
     },
     {
-        "name": "shrimp",
+        "name": "gyros",
         "id": 12   
     },
     {
-        "name": "bacon",
+        "name": "bekon",
         "id": 13   
     },
     {
@@ -60,35 +60,35 @@
         "id": 15   
     },
     {
-        "name": "pepperoni",
+        "name": "kapary",
         "id": 16   
     },
     {
-        "name": "chicken",
+        "name": "kurczak",
         "id": 17   
     },
     {
-        "name": "cheddar",
+        "name": "ser cheddar",
         "id": 18   
     },
     {
-        "name": "Bleu d'Auvergne",
+        "name": "ser Bleu d'Auvergne",
         "id": 19   
     },
     {
-        "name": "artichoke",
+        "name": "karczochy",
         "id": 20  
     },
     {
-        "name": "sweetcorn",
+        "name": "kukurydza",
         "id": 21  
     },
     {
-        "name": "tuna",
+        "name": "tuńczyk",
         "id": 22  
     },
     {
-        "name": "squid",
+        "name": "kalmary",
         "id": 23  
     }
 ]
