@@ -12,6 +12,9 @@ class Chart extends React.Component {
         fetch('pizzerias.json')
             .then(response => response.json())
             .then(pizzeria => this.setState({pizzerias: pizzeria.length}))
+        fetch('ingredients.json')
+            .then(response => response.json())
+            .then(ingredient => this.setState({ingredients: ingredient.length}))
     }
     
     render() {
@@ -25,12 +28,12 @@ class Chart extends React.Component {
             label: "Pizze",
             color: "rgb(241, 173, 13)"
             },{
-            value: 127,
-            label: "Uzytkownicy",
+            value: this.state.ingredients,
+            label: "Składniki",
             color: "#cc3333",
             }
     ]
-    return <PieChart className="chart" data={chartData} width="150" height="150"/>
+    return <PieChart className="chart" data={chartData} width="150px" height="150px"/>
  }
 }
 
