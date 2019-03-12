@@ -4,6 +4,7 @@ import Nickname from './Nickname';
 import Contact from './Contact';
 import Favourites from './Favourites';
 import AddPizzeria from './AddPizzeria';
+import EditProfile from './EditProfile';
 
 import './user.css';
 
@@ -25,6 +26,7 @@ class User extends React.Component {
                     <Nickname />
                     <Contact />
                     <AddPizzeria />
+                    <EditProfile />
                 </div>
                 <div className="user__container__right">
                     <Favourites />
