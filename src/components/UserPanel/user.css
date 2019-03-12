@@ -19,7 +19,7 @@
 
 .sayHello {
     font-size: 2.5rem;
-    padding-bottom: 2rem;
+    padding: 2rem;
 }
 
 .user__container__left, .user__container__right {
@@ -34,5 +34,4 @@
     width: 30%;
     border-radius: 50%;
     margin: 0 auto;
-    padding-bottom: 5%;
 }
