@@ -15,9 +15,9 @@ class Contact extends React.Component {
         return(
             <>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
-                <h3>e-mail: {this.state.email}</h3>
-                <h3>adres: {this.state.address}</h3>
-                <h3>telefon: {this.state.phone} </h3>
+                <h4>e-mail: {this.state.email}</h4>
+                <h4>adres: {this.state.address}</h4>
+                <h4>telefon: {this.state.phone} </h4>
             </>
         )
     }

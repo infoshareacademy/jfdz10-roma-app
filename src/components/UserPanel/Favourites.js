@@ -31,9 +31,13 @@ class Favourites extends Component {
 									}}
 								>
 									<div className="d-flex w-100 justify-content-between">
-										<h5 className="mb-1">Pizzeria</h5>
+										<h5 className="mb-1">
+											Ulubiona pizzeria
+										</h5>
 									</div>
-									<p className="mb-1">Kontakt:</p>
+									<p className="mb-1">
+										Kontakt: 
+									</p>
 								</div>
 							);
 						})}
