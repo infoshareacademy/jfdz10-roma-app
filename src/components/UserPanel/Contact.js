@@ -9,7 +9,7 @@ class Contact extends React.Component {
     componentDidMount(){
         fetch('user.json')
             .then(response => response.json())
-            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode}`, phone: value.phone}))
+            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode} ${value.address.city}`, phone: value.phone}))
     }
     render (){
         return(
