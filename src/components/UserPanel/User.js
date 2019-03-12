@@ -4,7 +4,7 @@ import Nickname from './Nickname';
 import Contact from './Contact';
 import Favourites from './Favourites';
 import AddPizzeria from './AddPizzeria';
-// import CreatePizza from '../CreatePizza/CreatePizza.js'
+import EditProfile from './EditProfile';
 
 import './user.css';
 
@@ -21,15 +21,15 @@ class User extends React.Component {
         return(
             <div className="user__container">
                 <div className="user__container__left">
+                    <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.name}!</h1>
                     <Avatar />
-                    <h1 className="sayHello">Witaj {this.state.name}</h1>
                     <Nickname />
                     <Contact />
-                    <Favourites />
                     <AddPizzeria />
+                    <EditProfile />
                 </div>
                 <div className="user__container__right">
-                    {/* <CreatePizza /> */}
+                    <Favourites />
                 </div>
             </div>
         )

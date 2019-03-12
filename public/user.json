@@ -1,13 +1,16 @@
     {
         "id": 1,
-        "name": "Jan",
-        "nickname": "ryjek123",
-        "email": "ryjek@vp.com",
-        "password": "ryjek111",
+        "name": "Janek",
+        "nickname": "rudy102",
+        "email": "janek102@wp.pl",
+        "password": "kochampizze",
         "address": {
-            "street": "Muminkow 2",
-            "postcode": "80-001"
+            "street": "Serowa 2",
+            "postcode": "80-123",
+            "city": "Gdańsk"
         },
-        "avatar": "/img/avatar.png" 
+        "phone": 987654321,
+        "avatar": "/img/janek.jpg",
+        "favPizzeriasId": [1,2,3,4,5,6,7,8,9,10]
     }
 

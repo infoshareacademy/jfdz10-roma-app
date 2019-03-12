@@ -11,7 +11,7 @@ class Nickname extends React.Component {
     }
     render (){
         return(
-            <h1>Login: {this.state.nickname}</h1> 
+            <h2><span role="img" aria-label="user">👤</span> Login: {this.state.nickname}</h2> 
         )
     }
 }

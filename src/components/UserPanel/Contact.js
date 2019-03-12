@@ -4,19 +4,20 @@ class Contact extends React.Component {
     state = {
         email: "",
         address: "",
+        phone: "",
     }
     componentDidMount(){
         fetch('user.json')
             .then(response => response.json())
-            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode}`}))
+            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode} ${value.address.city}`, phone: value.phone}))
     }
     render (){
         return(
             <>
-                <h1>Kontakt: </h1>
-                <h3>e-mail: {this.state.email}</h3>
-                <h3>adres: {this.state.address}</h3>
-                <h3>telefon: </h3>
+                <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
+                <h4>e-mail: {this.state.email}</h4>
+                <h4>adres: {this.state.address}</h4>
+                <h4>telefon: {this.state.phone} </h4>
             </>
         )
     }
