@@ -1,12 +1,12 @@
     {
         "id": 1,
         "name": "Jan",
-        "nickname": "ryjek123",
-        "email": "ryjek@vp.com",
-        "password": "ryjek111",
+        "nickname": "janek102",
+        "email": "janek102@wp.pl",
+        "password": "kochampizze",
         "address": {
-            "street": "Muminkow 2",
-            "postcode": "80-001"
+            "street": "Serowa 2",
+            "postcode": "80-123"
         },
         "avatar": "/img/avatar.png" 
     }
