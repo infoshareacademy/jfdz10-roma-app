@@ -20,8 +20,8 @@ class User extends React.Component {
         return(
             <div className="user__container">
                 <div className="user__container__left">
+                    <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.name}!</h1>
                     <Avatar />
-                    <h1 className="sayHello">Witaj {this.state.name}</h1>
                     <Nickname />
                     <Contact />
                     <AddPizzeria />
