@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+
 html,
 body {
   padding: 0;
@@ -10,3 +11,87 @@ body {
   height: 100%;
   color: #333;
 }
+
+.dashboard {
+  background-color: rgb(224, 220, 215);
+  height: 100%;
+}
+
+.dashboard__description {
+  display: flex;
+  justify-content: center;
+}
+
+.description {
+  text-align: center;
+  width: 45vw;
+  padding: 2rem 4rem 0;
+}
+
+.description__title {
+  font-weight: bold;
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+
+.description__paragraph {
+  font-size: 1.3rem;
+}
+
+.pizzaImage {
+  width: 70vh;
+  height: 70vh;
+  border-radius: 1000px;
+  padding: 3rem;
+  align-self: center;
+}
+
+.dashboard__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.totalOrders {
+  text-align: right;
+  padding: 1rem;
+  margin-right: 2rem;
+  font-size: 1.5rem
+}
+
+.totalOrders__text1 {
+  color:rgb(241, 173, 13);
+}
+
+.totalOrders__text2 {
+  color: rgb(60, 158, 58);
+}
+
+.totalOrders__text3 {
+  color: #cc3333;
+}
+
+.logInButton, .registerButton {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  padding: 1rem;
+  margin-top: 2rem;
+  border: 3px dotted #cc3333;
+  background-color:#da3e3e ;
+  box-shadow: 2px 2px 2px 2px #3a3737;
+  color: #e0d7d7;
+  font-size: 2rem;
+  text-align: center;
+  text-shadow: 1px 1px 1ps rgb(189, 151, 125);
+}
+
+.logInButton:hover, .registerButton:hover {
+  box-shadow: 4px 4px #e0d7d7;
+  background-color: #cc3333;
+}
+
+.chart {
+  padding-left: 0.5rem; 
+}
+
