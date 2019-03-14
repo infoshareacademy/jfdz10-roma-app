@@ -15,7 +15,7 @@ const Content = styled.div`
 const MainContent = () => {
 	return (
 		<Content>
-			<Route path="/" component={Dashboard}/>
+			<Route path="/dashboard" component={Dashboard}/>
 			<Route path="/create-pizza" component={CreatePizza} />
 			<Route path="/user-panel" component={ User } />
 			<Route path="/make-order" component={() => <h1>Make the order</h1>} />
