@@ -19,6 +19,7 @@ body {
 
 .dashboard__description {
   display: flex;
+  justify-content: center;
 }
 
 .description {
@@ -30,6 +31,7 @@ body {
 .description__title {
   font-weight: bold;
   font-size: 3rem;
+  padding-bottom: 1rem;
 }
 
 .description__paragraph {
@@ -37,10 +39,11 @@ body {
 }
 
 .pizzaImage {
-  width: 52vh;
-  height: 52vh;
-  border-radius: 70px;
+  width: 70vh;
+  height: 70vh;
+  border-radius: 1000px;
   padding: 3rem;
+  align-self: center;
 }
 
 .dashboard__buttons {
