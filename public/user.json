@@ -11,18 +11,7 @@
         },
         "phone": 987654321,
         "avatar": "/img/janek.jpg",
-        "favPizzerias": [
-            "Rogata Pizzeria",
-            "MAXX PIZZA",
-            "Tutti Santi",
-            "Margherita s.c.",
-            "Pepe",
-            "La Bocca",
-            "Pizza Dominium",
-            "Toni Pepperoni",
-            "Zajezdnia",
-            "Da Grasso"
-        ],
+        "favPizzerias": [],
         "registered": "3 lutego 2019 r."
     }
 

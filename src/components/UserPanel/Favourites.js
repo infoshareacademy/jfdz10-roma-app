@@ -10,13 +10,9 @@ async function fetchPizzerias() {
 class Favourites extends Component {
 	state = {
 		pizzerias: [],
-        userFavPizzerias: "",
 	};
 	componentDidMount() {
 		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
-		fetch('user.json')
-			.then(response => response.json())
-			.then(value => this.setState({userFavPizzerias: value.favPizzerias}))
 	
 	}
 	render() {
@@ -25,6 +21,7 @@ class Favourites extends Component {
 				<h3 className="list-header"><span role="img" aria-label="pizzeria">🏠 </span>Twoje ulubione pizzerie:</h3><br />
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
+					{console.log(this.state.pizzerias)}	
 						{this.state.pizzerias.map((pizzeria, i) => {
 							return (
 								<div
@@ -36,13 +33,13 @@ class Favourites extends Component {
 									}}
 								>
 									<div className="d-flex w-100 justify-content-between">
-										<h5 className="mb-1">
-											<p>{this.state.userFavPizzerias[i]}</p>
+										<h5>
+											{this.state.pizzerias[i].name}
 										</h5>
 									</div>
-									<p className="mb-1">
-										Kontakt: +48 123 456 789
-									</p>
+									<span>Kontakt: {this.state.pizzerias[i].contactInfo.phone}&nbsp;
+										<a href={"http://" + this.state.pizzerias[i].contactInfo.website}>{this.state.pizzerias[i].contactInfo.website}</a>
+									</span>
 								</div>
 							);
 						})}

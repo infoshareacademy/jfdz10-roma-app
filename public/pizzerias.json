@@ -21,7 +21,7 @@
             "postcode": "80-460"
         },
         "phone": 585592158,
-        "website": "http://www.maxxpizza.pl/"
+        "website": "maxxpizza.pl"
     },
     "description": "string",
     "availableIngredients": [ 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 14, 17, 18, 20, 21, 22 ]
