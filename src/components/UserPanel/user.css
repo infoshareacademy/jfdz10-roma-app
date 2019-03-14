@@ -69,3 +69,7 @@
 .button:hover{
     background: rgb(255, 131, 94);
 }
+
+.unvisible {
+    display: none;
+}

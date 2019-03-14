@@ -1,6 +1,7 @@
 import React from 'react';
 
 class EditProfile extends React.Component {
+    editNickname = () => {}
     render (){
         return(
             <div className="buttons__container">

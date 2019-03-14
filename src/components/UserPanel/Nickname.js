@@ -14,7 +14,7 @@ class Nickname extends React.Component {
         return(
             <>
                 <span>Data dołączenia: {this.state.registered}</span>
-                <h2><span role="img" aria-label="user">👤</span> Login: {this.state.nickname}</h2> 
+                <h2><span role="img" aria-label="user">👤</span> Login: {this.state.nickname}</h2>                
             </>
 
         )
