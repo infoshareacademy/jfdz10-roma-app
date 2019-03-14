@@ -21,7 +21,6 @@ class Favourites extends Component {
 				<h3 className="list-header"><span role="img" aria-label="pizzeria">🏠 </span>Twoje ulubione pizzerie:</h3><br />
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
-					{console.log(this.state.pizzerias)}	
 						{this.state.pizzerias.map((pizzeria, i) => {
 							return (
 								<div
