@@ -6,7 +6,7 @@
             "street": "Bolesława Krzywoustego 25",
             "postcode": "80-376"
         },
-        "phone": 585574994,
+        "phone": "585-574-994",
         "website": "rogata.gda.pl"
     },
     "description": "string",
@@ -20,8 +20,8 @@
             "street": "Pilotów 3",
             "postcode": "80-460"
         },
-        "phone": 585592158,
-        "website": "http://www.maxxpizza.pl/"
+        "phone": "585-592-158",
+        "website": "maxxpizza.pl"
     },
     "description": "string",
     "availableIngredients": [ 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 14, 17, 18, 20, 21, 22 ]
@@ -34,7 +34,7 @@
             "street": "aleja Grunwaldzka 211",
             "postcode": "80-266"
         },
-        "phone": 786070809,
+        "phone": "786-070-809",
         "website": "tuttisanti.pl"
     },
     "description": "string",
@@ -48,7 +48,7 @@
             "street": "Cystersów 11",
             "postcode": "80-330"
         },
-        "phone": 585523716,
+        "phone": "585-523-716",
         "website": "margherita.com.pl"
     },
     "description": "string",
@@ -62,7 +62,7 @@
             "street": "aleja Grunwaldzka 471",
             "postcode": "80-309"
         },
-        "phone": 587614918,
+        "phone": "587-614-918",
         "website": "pepepizzaoliwa.pl"
     },
     "description": "string",
@@ -76,7 +76,7 @@
             "street": "Startowa 30",
             "postcode": "80-461"
         },
-        "phone": 887887414,
+        "phone": "887-887-414",
         "website": "labocca.pl"
     },
     "description": "string",
@@ -90,7 +90,7 @@
             "street": "Kołobrzeska 41c",
             "postcode": "80-391"
         },
-        "phone": 887887414,
+        "phone": "887-887-414",
         "website": "pizzadominium.pl"
     },
     "description": "string",
@@ -104,7 +104,7 @@
             "street": "Bernarda Chrzanowskiego 58",
             "postcode": "80-278"
         },
-        "phone": 515236776,
+        "phone": "515-236-776",
         "website": "tonipepperoni.com.pl"
     },
     "description": "string",
@@ -118,7 +118,7 @@
             "street": "Abrahama 7",
             "postcode": "80-307"
         },
-        "phone": 576685385,
+        "phone": "576-685-385",
         "website": ""
     },
     "description": "string",
@@ -132,7 +132,7 @@
             "street": "Piastowska 99",
             "postcode": "80-352"
         },
-        "phone": 504916331,
+        "phone": "504-916-331",
         "website": "agrasso.pl"
     },
     "description": "string",

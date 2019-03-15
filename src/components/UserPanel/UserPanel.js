@@ -1,10 +1,7 @@
 import React from 'react';
 import Avatar from './Avatar';
-import Nickname from './Nickname';
-import Contact from './Contact';
+import UserData from './UserData';
 import Favourites from './Favourites';
-import AddPizzeria from './AddPizzeria';
-import EditProfile from './EditProfile';
 
 import './user.css';
 
@@ -17,16 +14,14 @@ class User extends React.Component {
             .then(response => response.json())
             .then(value => this.setState({name: value.name}))
     }
+    
     render (){
         return(
             <div className="user__container">
                 <div className="user__container__left">
                     <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.name}!</h1>
                     <Avatar />
-                    <Nickname />
-                    <Contact />
-                    <AddPizzeria />
-                    <EditProfile />
+                    <UserData />
                 </div>
                 <div className="user__container__right">
                     <Favourites />
