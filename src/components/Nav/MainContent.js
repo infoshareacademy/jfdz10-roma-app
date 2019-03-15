@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Dashboard from "../Dashboard/Dashboard";
 
 import CreatePizza from "../CreatePizza/CreatePizza";
-import User from "../UserPanel/User";
+import UserPanel from "../UserPanel/UserPanel";
 
 const Content = styled.div`
 	width: 100%;
@@ -17,7 +17,7 @@ const MainContent = () => {
 		<Content>
 			<Route path="/dashboard" component={Dashboard}/>
 			<Route path="/create-pizza" component={CreatePizza} />
-			<Route path="/user-panel" component={ User } />
+			<Route path="/user-panel" component={ UserPanel } />
 			<Route path="/make-order" component={() => <h1>Make the order</h1>} />
 			<Route
 				path="/summary-order"
