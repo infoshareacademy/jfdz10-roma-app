@@ -5,6 +5,7 @@ import Dashboard from "../Dashboard/Dashboard";
 
 import CreatePizza from "../CreatePizza/CreatePizza";
 import User from "../UserPanel/User";
+import OrderComplete from "../CompleteTheOrder/OrderComplete";
 
 const Content = styled.div`
 	width: 100%;
@@ -18,7 +19,7 @@ const MainContent = () => {
 			<Route path="/dashboard" component={Dashboard}/>
 			<Route path="/create-pizza" component={CreatePizza} />
 			<Route path="/user-panel" component={ User } />
-			<Route path="/make-order" component={() => <h1>Make the order</h1>} />
+			<Route path="/make-order" component={OrderComplete} />
 			<Route
 				path="/summary-order"
 				component={() => <h1>Summary the order</h1>}
