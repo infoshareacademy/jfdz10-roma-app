@@ -36,7 +36,7 @@ class Favourites extends Component {
 											{this.state.pizzerias[i].name}
 										</h5>
 									</div>
-									<span>Kontakt: {this.state.pizzerias[i].contactInfo.phone}&nbsp;
+									<span>Kontakt: {this.state.pizzerias[i].contactInfo.phone}&nbsp;&nbsp;&nbsp;
 										<a href={"http://" + this.state.pizzerias[i].contactInfo.website}>{this.state.pizzerias[i].contactInfo.website}</a>
 									</span>
 								</div>
