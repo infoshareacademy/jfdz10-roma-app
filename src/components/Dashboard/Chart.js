@@ -20,7 +20,7 @@ class Chart extends React.Component {
                     data: [48, 57, 53, 65, 72, 70]
                 },
                 {
-                    label: "Wykreowana pizze",
+                    label: "Wykreowane pizze",
                     fillColor: "rgb(230,86,86)",
                     strokeColor: "rgb(204,51,51)",
                     pointColor: "rgb(204,51,51)",
@@ -30,7 +30,7 @@ class Chart extends React.Component {
                     data: [20, 29, 41, 48, 39, 55]
                 },
                 {
-                    label: "Zadowolenie użytkownicy",
+                    label: "Zadowoleni użytkownicy",
                     fillColor: "rgb(105,168,104)",
                     strokeColor: "rgb(80,170,78)",
                     pointColor: "rgb(80,170,78)",
