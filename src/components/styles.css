@@ -19,13 +19,14 @@ body {
 
 .dashboard__description {
   display: flex;
-  justify-content: center;
+  flex-flow: row;
 }
 
 .description {
   text-align: center;
-  width: 45vw;
-  padding: 2rem 4rem 0;
+  align-self: center;
+  padding: 1rem 0 0 1rem;
+  width: 50vw;
 }
 
 .description__title {
@@ -39,36 +40,17 @@ body {
 }
 
 .pizzaImage {
-  width: 70vh;
-  height: 70vh;
-  border-radius: 1000px;
-  padding: 3rem;
+  width: 400px;
+  height: 400px;
+  border-radius: 600px;
+  padding: 2rem;
   align-self: center;
 }
 
-.dashboard__buttons {
+.dashboard__bottom {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-}
-
-.totalOrders {
-  text-align: right;
-  padding: 1rem;
-  margin-right: 2rem;
-  font-size: 1.5rem
-}
-
-.totalOrders__text1 {
-  color:rgb(241, 173, 13);
-}
-
-.totalOrders__text2 {
-  color: rgb(60, 158, 58);
-}
-
-.totalOrders__text3 {
-  color: #cc3333;
+  justify-content: space-evenly;
 }
 
 .logInButton, .registerButton {
@@ -76,7 +58,7 @@ body {
   height: 150px;
   border-radius: 100%;
   padding: 1rem;
-  margin-top: 2rem;
+  margin: 1rem;
   border: 3px dotted #cc3333;
   background-color:#da3e3e ;
   box-shadow: 2px 2px 2px 2px #3a3737;
@@ -91,7 +73,8 @@ body {
   background-color: #cc3333;
 }
 
-.chart {
-  padding-left: 0.5rem; 
+.dashboard__buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
