@@ -4,8 +4,6 @@ import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import PizzeriaImage from '../SummaryTheOrder/PizzeriaImage'
-
 
 class PizzeriaList extends Component {  
     state = {
@@ -22,7 +20,6 @@ class PizzeriaList extends Component {
     render() {
 
         return <Tab.Container id="list-group-tabs-example list-group-tabs-pizzerias" defaultActiveKey="#link1">
-        <div class="pizzerias-list-headline">Lista obslugiwanych pizzerii </div>
         <Row>
           <Col sm={4}>
           
