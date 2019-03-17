@@ -43,39 +43,21 @@ class PizzeriaList extends Component {
               this.state.pizzerias.map(pizzeria => {
                 return (
                     <Tab.Pane key={pizzeria.id}  eventKey={`#${pizzeria.id}`}>
-                    {pizzeria.contactInfo.address.street}
-                    {pizzeria.contactInfo.address.postcode}
-                    {pizzeria.contactInfo.phone}
-                    {pizzeria.contactInfo.website}
+                    <h1>{pizzeria.name}</h1>
+                    <p>{pizzeria.contactInfo.address.street}</p>
+                    <p>{pizzeria.contactInfo.address.postcode}</p>
+                    <p>{pizzeria.contactInfo.phone}</p>
+                    <p>{pizzeria.contactInfo.website}</p>
                     </Tab.Pane>
 ) })
             }
             </Tab.Content>
           </Col>
           
-        </Row>
-            <div className="pizzeeriaImageDiv">
-                <PizzeriaImage />               
-            </div>        
+        </Row>    
       </Tab.Container>;
                
     }
 };
 
 export default PizzeriaList
-
-
-
-
-
-
-
-// {
-//     this.state.pizzerias.map(pizzeria => {
-//         return (
-//         <Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
-//             {pizzeria.contactInfo.address.street}
-//           </Tab.Pane>
-//         )
-//     })
-// }
