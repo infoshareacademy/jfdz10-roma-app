@@ -9,18 +9,19 @@ async function fetchPizzerias() {
 
 class Favourites extends Component {
 	state = {
-		pizzerias: []
+		pizzerias: [],
 	};
 	componentDidMount() {
 		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
+	
 	}
 	render() {
 		return (
 			<ListContainer>
-				<h3 className="list-header">Twoje ulubione pizzerie:</h3><br />
+				<h3 className="list-header"><span role="img" aria-label="pizzeria">🏠 </span>Twoje ulubione pizzerie:</h3><br />
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
-						{this.state.pizzerias.map(pizzeria => {
+						{this.state.pizzerias.map((pizzeria, i) => {
 							return (
 								<div
 									key={pizzeria.id}
@@ -31,13 +32,13 @@ class Favourites extends Component {
 									}}
 								>
 									<div className="d-flex w-100 justify-content-between">
-										<h5 className="mb-1">
-											Ulubiona pizzeria
+										<h5>
+											{this.state.pizzerias[i].name}
 										</h5>
 									</div>
-									<p className="mb-1">
-										Kontakt: 
-									</p>
+									<span>Kontakt: {this.state.pizzerias[i].contactInfo.phone}&nbsp;&nbsp;&nbsp;
+										<a href={"http://" + this.state.pizzerias[i].contactInfo.website}>{this.state.pizzerias[i].contactInfo.website}</a>
+									</span>
 								</div>
 							);
 						})}
