@@ -1,5 +1,5 @@
 import React, { Component }from "react";
-import { Link } from "react-router-dom";
+import "./styles.css";
 import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Col from 'react-bootstrap/Col'

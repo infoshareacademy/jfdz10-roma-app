@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
-import PizzeriaList from "../SummaryTheOrder/PizzeriaList";
+import PizzeriaList from "../CompleteTheOrder/PizzeriasList/PizzeriaList";
 
 const Content = styled.div`
 	width: 100%;
