@@ -1,9 +1,9 @@
 import React, { Component }from "react";
-import "./styles.css";
 import Tab from 'react-bootstrap/Tab'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import "./styles.css";
 
 class PizzeriaList extends Component {  
     state = {
@@ -27,7 +27,7 @@ class PizzeriaList extends Component {
             {
                 this.state.pizzerias.map(pizzeria => {
                     return (
-                    <ListGroup.Item key={pizzeria.id} action href={`#${pizzeria.id}`}>
+                    <ListGroup.Item className key={pizzeria.id} action href={`#${pizzeria.id}`}>
                         {pizzeria.name}
                     </ListGroup.Item>
                     )

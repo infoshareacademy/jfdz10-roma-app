@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
-html,
-body {
+html, body {
   padding: 0;
   margin: 0;
   font-size: 13px;
@@ -11,11 +10,10 @@ body {
   color: #333;
 }
 
-
-
 .pizzerias-list-headline {
   font-size: 20px;
-  font-family: "Roboto", sans-serif; ;
+  font-family: "Roboto", sans-serif;
+  ;
 }
 
 .pizzeeriaImageDiv {
@@ -27,21 +25,22 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 .pizzeeriaImage {
   display: flex;
   width: 350px;
   height: 350px;
   margin-bottom: 10px;
   margin-bottom: 0px;
-
-
 }
+
 /* custom styles from bootstrap */
-.list-group-item.active {
+
+/* .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #da3e3e ;
-  border-color: #da3e3e ;
+  background-color: #da3e3e;
+  border-color: #da3e3e;
   font-size: 20px;
   padding-top: 0px;
   padding-bottom: 0px;
@@ -61,7 +60,7 @@ body {
 .tab-content>.active {
   display: block;
   font-size: 20px;
-};
+} */
 
 .klWoez {
   width: 100%;
