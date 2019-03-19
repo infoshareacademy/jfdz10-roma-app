@@ -10,8 +10,7 @@
         "website": "rogata.gda.pl"
     },
     "description": "string",
-    "availableIngredients": [ 1, 2, 3, 4, 5, 6, 7, 9, 10 ,12, 14, 21, 22, 23 ],
-    "ingredients": ["ser", "szynka"]
+    "availableIngredients": [ 1, 2, 3, 4, 5, 6, 7, 9, 10 ,12, 14, 21, 22, 23 ]
 },
 {
     "id": 2,

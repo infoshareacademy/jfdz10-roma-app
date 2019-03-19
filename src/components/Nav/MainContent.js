@@ -1,11 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
+
+import PizzeriaList from "../CompleteTheOrder/PizzeriasList/PizzeriaList";
+
 import Dashboard from "../Dashboard/Dashboard";
 
 import CreatePizza from "../CreatePizza/CreatePizza";
-import OrderComplete from "../CompleteTheOrder/OrderComplete";
 import UserPanel from "../UserPanel/UserPanel";
+
 
 const Content = styled.div`
 	width: 100%;
@@ -16,10 +19,12 @@ const Content = styled.div`
 const MainContent = () => {
 	return (
 		<Content>
+
 			<Route path="/dashboard" component={Dashboard}/>
 			<Route path="/create-pizza" component={CreatePizza} />
 			<Route path="/user-panel" component={ UserPanel } />
-			<Route path="/make-order" component={OrderComplete} />
+			<Route path="/make-order" component={PizzeriaList} />
+
 			<Route
 				path="/summary-order"
 				component={() => <h1>Summary the order</h1>}
