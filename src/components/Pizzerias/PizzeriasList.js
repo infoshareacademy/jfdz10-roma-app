@@ -54,15 +54,40 @@ class PizzeriasList extends Component {
 							<Tab.Content>
 								{this.state.pizzerias.map(pizzeria => {
 									return (
-										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
-											<h1>{pizzeria.name}</h1>
-											<p>
-                                                Adres: {pizzeria.contactInfo.address.street},&nbsp;
-                                                {pizzeria.contactInfo.address.postcode}&nbsp;
-                                                {pizzeria.contactInfo.address.city}
-                                            </p>
-											<p>Kontakt: {pizzeria.contactInfo.phone}</p>
-											<a href={"http://" + pizzeria.contactInfo.website}>{pizzeria.contactInfo.website}</a>
+										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`} className="pizzeriasList__columns__container">
+                                            <div className="pizzeriasList__column__left">
+                                                <div className="pizzeriasList__data">
+                                                    <h1>{pizzeria.name}</h1>
+                                                    <p>
+                                                        Adres: {pizzeria.contactInfo.address.street},<br />
+                                                        {pizzeria.contactInfo.address.postcode}&nbsp;
+                                                        {pizzeria.contactInfo.address.city}
+                                                    </p>
+                                                    <p>Kontakt: {pizzeria.contactInfo.phone}</p>
+                                                    <a href={"http://" + pizzeria.contactInfo.website}>{pizzeria.contactInfo.website}</a>
+                                                </div>
+                                                <div className="pizzeriasList__map">
+                                                </div>
+                                            </div>
+                                            <div className="pizzeriasList__column__right">
+                                                <h1>Menu:</h1>
+                                                    <li>Margherita</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Neapolitana</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Capriciosa</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Salami</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Wegetariańska</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Sycylijska</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Bella</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                                    <li>Własna</li>
+                                                    <h6>&nbsp;&nbsp;Lista składników</h6>
+                                            </div>
 										</Tab.Pane>
 									);
 								})}
