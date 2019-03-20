@@ -31,10 +31,16 @@ class PizzeriaList extends Component {
 	}
 
 	addPizzeriaToFav = pizzeria => {
-		this.setState({
-			favPizzeria: pizzeria
-		});
-		console.log(pizzeria);
+		if (localStorage.getItem("favPizzeria") !== null) {
+			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
+				favPizzerias.push(pizzeria);
+				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
+			}
+		} else {
+			const favPizzeria = [pizzeria];
+			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
+		}
 	};
 
 	render() {
