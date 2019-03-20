@@ -14,9 +14,13 @@ const styles = {
 		borderRadius: "5px",
 		padding: "15px"
 	},
-	Icon: {
+	FavIconEnabled: {
 		float: "right",
 		color: "#cc1a37"
+	},
+	FavIconDisabled: {
+		float: "right",
+		color: "#919191"
 	}
 };
 
@@ -30,16 +34,28 @@ class PizzeriaList extends Component {
 			.then(pizzerias => this.setState({ pizzerias }));
 	}
 
-	addPizzeriaToFav = pizzeria => {
+	selectFavPizzeria = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
 			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
 				favPizzerias.push(pizzeria);
 				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
+			} else {
+				const removedFavPizzeria = favPizzerias.filter(
+					fav => fav.name !== pizzeria.name
+				);
+				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
 			}
 		} else {
 			const favPizzeria = [pizzeria];
 			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
+		}
+	};
+
+	favIconMarked = pizzeria => {
+		if (localStorage.getItem("favPizzeria") !== null) {
+			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+			return favPizzerias.some(fav => fav.name === pizzeria.name);
 		}
 	};
 
@@ -67,8 +83,12 @@ class PizzeriaList extends Component {
 										>
 											{pizzeria.name}
 											<FaHeart
-												onClick={() => this.addPizzeriaToFav(pizzeria)}
-												style={styles.Icon}
+												onClick={() => this.selectFavPizzeria(pizzeria)}
+												style={
+													this.favIconMarked(pizzeria)
+														? styles.FavIconEnabled
+														: styles.FavIconDisabled
+												}
 											/>
 										</ListGroup.Item>
 									);
