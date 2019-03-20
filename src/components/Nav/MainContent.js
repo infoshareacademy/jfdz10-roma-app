@@ -1,11 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import styled from "styled-components";
-
 import PizzeriaList from "../CompleteTheOrder/PizzeriasList/PizzeriaList";
-
 import Dashboard from "../Dashboard/Dashboard";
-
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 
