@@ -5,6 +5,7 @@ import PizzeriaList from "../CompleteTheOrder/PizzeriasList/PizzeriaList";
 import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
+import Pizzerias from "../Pizzerias/PizzeriaList";
 
 
 const Content = styled.div`
@@ -18,6 +19,7 @@ const MainContent = () => {
 		<Content>
 
 			<Route path="/dashboard" component={Dashboard}/>
+			<Route path="/pizzerias" component={Pizzerias}/>
 			<Route path="/create-pizza" component={CreatePizza} />
 			<Route path="/user-panel" component={ UserPanel } />
 			<Route path="/make-order" component={PizzeriaList} />
