@@ -2,3 +2,8 @@
     background: rgb(255, 60, 0);
     border-color: rgb(255, 60, 0);
 }
+
+.pizzerias__list__item {
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}

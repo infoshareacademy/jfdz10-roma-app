@@ -35,15 +35,14 @@ class PizzeriasList extends Component {
 					<Row
 						style={{ display: "flex", justifyContent: "center", width: "100%" }}
 					>
-						<Col sm={4}>
+						<Col sm={3}>
 							<ListGroup>
 								{this.state.pizzerias.map(pizzeria => {
 									return (
 										<ListGroup.Item
-											className
+											className="pizzerias__list__item"
 											key={pizzeria.id}
-											action
-											href={`#${pizzeria.id}`}
+											action href={`#${pizzeria.id}`}
 										>
 											{pizzeria.name}
 										</ListGroup.Item>
@@ -51,17 +50,19 @@ class PizzeriasList extends Component {
 								})}
 							</ListGroup>
 						</Col>
-						<Col sm={4} style={styles.RightPane}>
+						<Col sm={8} style={styles.RightPane}>
 							<Tab.Content>
-								{" "}
 								{this.state.pizzerias.map(pizzeria => {
 									return (
 										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
 											<h1>{pizzeria.name}</h1>
-											<p>{pizzeria.contactInfo.address.street}</p>
-											<p>{pizzeria.contactInfo.address.postcode}</p>
-											<p>{pizzeria.contactInfo.phone}</p>
-											<p>{pizzeria.contactInfo.website}</p>
+											<p>
+                                                Adres: {pizzeria.contactInfo.address.street},&nbsp;
+                                                {pizzeria.contactInfo.address.postcode}&nbsp;
+                                                {pizzeria.contactInfo.address.city}
+                                            </p>
+											<p>Kontakt: {pizzeria.contactInfo.phone}</p>
+											<a href={"http://" + pizzeria.contactInfo.website}>{pizzeria.contactInfo.website}</a>
 										</Tab.Pane>
 									);
 								})}
