@@ -93,20 +93,20 @@ class MainNav extends React.Component {
 							<Text>Dashboard</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="/pizzerias">
-						<NavLink to="/pizzerias">
-							<IconCnt>
-								<Icon icon={cutlery} />
-							</IconCnt>
-							<Text>Pizzerie</Text>
-						</NavLink>
-					</Nav>
 					<Nav id="/user-panel">
 						<NavLink to="/user-panel">
 							<IconCnt>
 								<Icon icon={user} />
 							</IconCnt>
 							<Text>User Panel</Text>
+						</NavLink>
+					</Nav>
+					<Nav id="/pizzerias">
+						<NavLink to="/pizzerias">
+							<IconCnt>
+								<Icon icon={cutlery} />
+							</IconCnt>
+							<Text>Pizzerie</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/create-pizza">
