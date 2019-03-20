@@ -29,7 +29,7 @@ const YourIngredients = ({
 	return (
 		<ListContainer>
 			<h3 className="list-header">Twoje wybrane składniki: </h3>
-			<ListWrapper className="list-scrollbar">
+			<ListWrapper className="list-scrollbar" style={{ height: "359.5px" }}>
 				<ListGroup>
 					{chosenIngredients.map((element, id) => (
 						<ListGroup.Item action key={id}>
