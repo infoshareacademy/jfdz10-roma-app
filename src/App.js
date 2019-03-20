@@ -11,12 +11,26 @@ const AppContainer = styled.div`
 `;
 
 class App extends React.Component {
+	state = {
+		isPizzaSubmitted: window.localStorage.isPizzaSubmitted
+			? JSON.parse(window.localStorage.isPizzaSubmitted)
+			: false
+	};
+
+	handleSubmitPizza = () => {
+		console.log("function submit");
+		this.setState({
+			isPizzaSubmitted: !this.state.isPizzaSubmitted
+		});
+	};
+
 	render() {
+		const { isPizzaSubmitted } = this.state;
 		return (
 			<BrowserRouter>
 				<AppContainer>
-					<MainNav />
-					<MainContent />
+					<MainNav isPizzaSubmitted={isPizzaSubmitted} />
+					<MainContent submitPizza={this.handleSubmitPizza} />
 				</AppContainer>
 			</BrowserRouter>
 		);

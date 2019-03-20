@@ -60,16 +60,34 @@ const NavLink = styled(Link)`
 	}
 `;
 
+const styles = {
+	navDisabled: {
+		backgroundColor: "#808080"
+	},
+	iconDisable: {
+		color: "#c4c4c4"
+	},
+	textDisabled: {
+		color: "#c4c4c4"
+	}
+};
+
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
 	state = { selectedPath: "" };
 
 	onItemSelection = arg => {
+		console.log(arg);
 		this.setState({ selectedPath: window.location.pathname });
 	};
 
 	render() {
+		const isPizzaSubmitted = JSON.parse(
+			localStorage.getItem("isPizzaSubmitted")
+		);
+		const { navDisabled, iconDisable, textDisabled } = styles;
+
 		return (
 			<Navigation>
 				<SideNav
@@ -106,12 +124,22 @@ class MainNav extends React.Component {
 							<Text>Create Pizza</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="/make-order">
-						<NavLink to="/make-order">
+					<Nav
+						id={isPizzaSubmitted ? "/make-order" : null}
+						style={!isPizzaSubmitted ? navDisabled : null}
+					>
+						<NavLink
+							to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						>
 							<IconCnt>
-								<Icon icon={shoppingCart} />
+								<Icon
+									icon={shoppingCart}
+									style={!isPizzaSubmitted ? iconDisable : null}
+								/>
 							</IconCnt>
-							<Text>Make Order</Text>
+							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+								Make Order
+							</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/summary-order">
