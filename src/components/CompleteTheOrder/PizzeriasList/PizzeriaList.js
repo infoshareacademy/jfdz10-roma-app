@@ -96,8 +96,8 @@ class PizzeriaList extends Component {
 		}
 	};
 
-	renderData (data) {
-		if (data && data.length > 0) {
+	renderData (pizzerias) {
+		if (pizzerias.length > 0) {
 		  return (
 		  <div>
 		  	<form style={{ display: "flex", flexFlow: "column", height: "100%", alignItems: "center", margin: "10px auto", borderRadius: "2px",}}>
@@ -116,7 +116,7 @@ class PizzeriaList extends Component {
 					>
 						<Col sm={4}>
 							<ListGroup>
-								{data.filter(searchFor(this.state.term)).map(pizzeria => {
+								{pizzerias.filter(searchFor(this.state.term)).map(pizzeria => {
 									return (
 										<ListGroup.Item
 											className
@@ -141,7 +141,7 @@ class PizzeriaList extends Component {
 						<Col sm={4} style={styles.RightPane}>
 							<Tab.Content>
 								{" "}
-								{data.map(pizzeria => {
+								{pizzerias.map(pizzeria => {
 									return (
 										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
 											<h1>{pizzeria.name}</h1>
@@ -160,7 +160,7 @@ class PizzeriaList extends Component {
 			</div>         
         )}
      else {
-        return <div>No items found</div>
+        return console.log("hi")(<h1 style={{display: "block", backgroundColor: "green"}}>Nie znaleźliśmy żadnej pizzeri :(</h1>)
       }
     }
   
