@@ -13,7 +13,6 @@ class Favourites extends Component {
 	};
 	componentDidMount() {
 		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
-	
 	}
 	render() {
 		return (
