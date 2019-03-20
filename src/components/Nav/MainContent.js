@@ -19,7 +19,7 @@ const MainContent = props => {
 	const { submitPizza } = props;
 	return (
 		<Content>
-			<Route path="/dashboard" component={Dashboard} />
+			<Route exact path="/" component={Dashboard} />
 			<Route
 				path="/create-pizza"
 				render={props => <CreatePizza submitPizza={submitPizza} />}

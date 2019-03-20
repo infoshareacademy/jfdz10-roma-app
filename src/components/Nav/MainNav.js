@@ -78,8 +78,9 @@ class MainNav extends React.Component {
 	state = { selectedPath: "" };
 
 	onItemSelection = arg => {
-		console.log(arg);
-		this.setState({ selectedPath: window.location.pathname });
+		if (arg.id !== null) {
+			this.setState({ selectedPath: window.location.pathname });
+		}
 	};
 
 	render() {
@@ -96,12 +97,12 @@ class MainNav extends React.Component {
 					onItemSelection={this.onItemSelection}
 				>
 					<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
-						<NavLink to="/dashboard" style={{ margin: "auto" }}>
+						<NavLink to="/" style={{ margin: "auto" }}>
 							<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
 						</NavLink>
 					</Nav>
 					<Nav id="/dashboard">
-						<NavLink to="/dashboard">
+						<NavLink to="">
 							<IconCnt>
 								<Icon icon={dashboard} />
 							</IconCnt>
@@ -125,7 +126,7 @@ class MainNav extends React.Component {
 						</NavLink>
 					</Nav>
 					<Nav
-						id={isPizzaSubmitted ? "/make-order" : null}
+						id={isPizzaSubmitted ? "/make-order" : false}
 						style={!isPizzaSubmitted ? navDisabled : null}
 					>
 						<NavLink
@@ -142,12 +143,24 @@ class MainNav extends React.Component {
 							</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="/summary-order">
-						<NavLink to="/summary-order">
+					<Nav
+						id={isPizzaSubmitted ? "/summary-order" : false}
+						style={!isPizzaSubmitted ? navDisabled : null}
+					>
+						<NavLink
+							to={
+								isPizzaSubmitted ? "/summary-order" : window.location.pathname
+							}
+						>
 							<IconCnt>
-								<Icon icon={creditCardAlt} />
+								<Icon
+									icon={creditCardAlt}
+									style={!isPizzaSubmitted ? iconDisable : null}
+								/>
 							</IconCnt>
-							<Text>Summary the order</Text>
+							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+								Summary the order
+							</Text>
 						</NavLink>
 					</Nav>
 				</SideNav>
