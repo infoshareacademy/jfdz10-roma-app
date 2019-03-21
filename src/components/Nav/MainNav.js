@@ -9,6 +9,9 @@ import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
+import {cutlery} from 'react-icons-kit/fa/cutlery'
+
+
 
 const Navigation = styled.div`
 	background: #303641;
@@ -96,6 +99,14 @@ class MainNav extends React.Component {
 								<Icon icon={user} />
 							</IconCnt>
 							<Text>User Panel</Text>
+						</NavLink>
+					</Nav>
+					<Nav id="/pizzerias">
+						<NavLink to="/pizzerias">
+							<IconCnt>
+								<Icon icon={cutlery} />
+							</IconCnt>
+							<Text>Pizzerie</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/create-pizza">
