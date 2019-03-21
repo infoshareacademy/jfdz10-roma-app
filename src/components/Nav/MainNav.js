@@ -65,7 +65,7 @@ const styles = {
 		backgroundColor: "#808080"
 	},
 	iconDisable: {
-		color: "#c4c4c4"
+		color: "#a0a0a0"
 	},
 	textDisabled: {
 		color: "#c4c4c4"
@@ -132,11 +132,8 @@ class MainNav extends React.Component {
 						<NavLink
 							to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
 						>
-							<IconCnt>
-								<Icon
-									icon={shoppingCart}
-									style={!isPizzaSubmitted ? iconDisable : null}
-								/>
+							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
+								<Icon icon={shoppingCart} />
 							</IconCnt>
 							<Text style={!isPizzaSubmitted ? textDisabled : null}>
 								Make Order
@@ -152,11 +149,8 @@ class MainNav extends React.Component {
 								isPizzaSubmitted ? "/summary-order" : window.location.pathname
 							}
 						>
-							<IconCnt>
-								<Icon
-									icon={creditCardAlt}
-									style={!isPizzaSubmitted ? iconDisable : null}
-								/>
+							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
+								<Icon icon={creditCardAlt} />
 							</IconCnt>
 							<Text style={!isPizzaSubmitted ? textDisabled : null}>
 								Summary the order
