@@ -5,6 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./styles.css";
+import { FaHeart } from "react-icons/fa";
 
 const styles = {
 	RightPane: {
@@ -12,6 +13,14 @@ const styles = {
 		border: "1px solid lightgray",
 		borderRadius: "5px",
 		padding: "15px"
+	},
+	FavIconEnabled: {
+		float: "right",
+		color: "#cc1a37"
+	},
+	FavIconDisabled: {
+		float: "right",
+		color: "#919191"
 	}
 };
 
@@ -24,6 +33,31 @@ class PizzeriaList extends Component {
 			.then(resp => resp.json())
 			.then(pizzerias => this.setState({ pizzerias }));
 	}
+
+	selectFavPizzeria = pizzeria => {
+		if (localStorage.getItem("favPizzeria") !== null) {
+			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
+				favPizzerias.push(pizzeria);
+				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
+			} else {
+				const removedFavPizzeria = favPizzerias.filter(
+					fav => fav.name !== pizzeria.name
+				);
+				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
+			}
+		} else {
+			const favPizzeria = [pizzeria];
+			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
+		}
+	};
+
+	favIconMarked = pizzeria => {
+		if (localStorage.getItem("favPizzeria") !== null) {
+			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+			return favPizzerias.some(fav => fav.name === pizzeria.name);
+		}
+	};
 
 	render() {
 		return (
@@ -48,6 +82,14 @@ class PizzeriaList extends Component {
 											href={`#${pizzeria.id}`}
 										>
 											{pizzeria.name}
+											<FaHeart
+												onClick={() => this.selectFavPizzeria(pizzeria)}
+												style={
+													this.favIconMarked(pizzeria)
+														? styles.FavIconEnabled
+														: styles.FavIconDisabled
+												}
+											/>
 										</ListGroup.Item>
 									);
 								})}
