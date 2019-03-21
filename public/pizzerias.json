@@ -4,7 +4,8 @@
     "contactInfo": {
         "address": {
             "street": "Bolesława Krzywoustego 25",
-            "postcode": "80-376"
+            "postcode": "80-376",
+            "city" : "Gdańsk"
         },
         "phone": "585-574-994",
         "website": "rogata.gda.pl"
@@ -18,7 +19,8 @@
     "contactInfo": {
         "address": {
             "street": "Pilotów 3",
-            "postcode": "80-460"
+            "postcode": "80-460",
+            "city" : "Gdańsk"
         },
         "phone": "585-592-158",
         "website": "maxxpizza.pl"
@@ -32,7 +34,8 @@
     "contactInfo": {
         "address": {
             "street": "aleja Grunwaldzka 211",
-            "postcode": "80-266"
+            "postcode": "80-266",
+            "city" : "Gdańsk"
         },
         "phone": "786-070-809",
         "website": "tuttisanti.pl"
@@ -46,7 +49,8 @@
     "contactInfo": {
         "address": {
             "street": "Cystersów 11",
-            "postcode": "80-330"
+            "postcode": "80-330",
+            "city" : "Gdańsk"
         },
         "phone": "585-523-716",
         "website": "margherita.com.pl"
@@ -60,7 +64,8 @@
     "contactInfo": {
         "address": {
             "street": "aleja Grunwaldzka 471",
-            "postcode": "80-309"
+            "postcode": "80-309",
+            "city" : "Gdańsk"
         },
         "phone": "587-614-918",
         "website": "pepepizzaoliwa.pl"
@@ -74,7 +79,8 @@
     "contactInfo": {
         "address": {
             "street": "Startowa 30",
-            "postcode": "80-461"
+            "postcode": "80-461",
+            "city" : "Gdańsk"
         },
         "phone": "887-887-414",
         "website": "labocca.pl"
@@ -88,7 +94,8 @@
     "contactInfo": {
         "address": {
             "street": "Kołobrzeska 41c",
-            "postcode": "80-391"
+            "postcode": "80-391",
+            "city" : "Gdańsk"
         },
         "phone": "887-887-414",
         "website": "pizzadominium.pl"
@@ -102,7 +109,8 @@
     "contactInfo": {
         "address": {
             "street": "Bernarda Chrzanowskiego 58",
-            "postcode": "80-278"
+            "postcode": "80-278",
+            "city" : "Gdańsk"
         },
         "phone": "515-236-776",
         "website": "tonipepperoni.com.pl"
@@ -116,7 +124,8 @@
     "contactInfo": {
         "address": {
             "street": "Abrahama 7",
-            "postcode": "80-307"
+            "postcode": "80-307",
+            "city" : "Gdańsk"
         },
         "phone": "576-685-385",
         "website": ""
@@ -130,7 +139,8 @@
     "contactInfo": {
         "address": {
             "street": "Piastowska 99",
-            "postcode": "80-352"
+            "postcode": "80-352",
+            "city" : "Gdańsk"
         },
         "phone": "504-916-331",
         "website": "agrasso.pl"
