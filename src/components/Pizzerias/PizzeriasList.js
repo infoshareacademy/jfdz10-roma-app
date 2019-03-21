@@ -24,15 +24,52 @@ const styles = {
 	}
 };
 
+function searchFor (term) {
+    return function(x) {
+        return x.name.toLowerCase().includes(term.toLowerCase());
+    }
+}
+
 class PizzeriasList extends Component {
-	state = {
-		pizzerias: []
-	};
-	componentDidMount() {
-		fetch("pizzerias.json")
-			.then(resp => resp.json())
-			.then(pizzerias => this.setState({ pizzerias }));
+	state = {}
+  
+    componentDidMount () {
+      fetch('pizzerias.json')
+        .then(res => res.json())
+        .then(this.onLoad);
+    }
+  
+    parseData (data) {
+        return data;
+    }
+  
+    onLoad = (data) => {
+      this.setState({
+        data: this.parseData(data)
+      });
 	}
+	
+	render () {
+		const { data } = this.state;
+	
+		return data ?
+		  this.renderData(data) :
+		  this.renderLoading()
+	  }
+	  
+	  constructor(props){
+		  super(props)
+			  this.state = {
+				  data: this.data,
+				  term: '',
+			  }
+			  this.searchHandler = this.searchHandler.bind(this);
+		  }
+	  
+	  searchHandler (event) {
+		  this.setState({term: event.target.value})
+	  }
+
 	selectFavPizzeria = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
@@ -57,9 +94,19 @@ class PizzeriasList extends Component {
 			return favPizzerias.some(fav => fav.name === pizzeria.name);
 		}
 	};
-	render() {
-		return (
-			<Container style={{ display: "flex", height: "100%", alignItems: "center" }} >
+
+	renderData (pizzerias) {
+		
+		  return (
+		  <div style={{ display: "flex", flexFlow: "column", alignItems: "center"}}>
+		  	<form style={{ display: "flex", width: "100vw", flexFlow: "column", height: "20%", margin: "10px", borderRadius: "2px",}}>
+                <label style={{fontSize: "1.7rem", textAlign: "center", padding: "7px"}}>WYSZUKAJ PIZZERIE:<br /><input style={{border: "2px dashed #cc3333"}} type= "text" onChange={this.searchHandler}></input></label>
+				<span style={{background: "#f1cd7c", width: "100%", textAlign: "center", padding: "4px"}}>Zacznij wpisywać nazwę pizzeri</span>
+            </form>
+			
+			<Container
+				style={{display: "flex", height: "80%", alignItems: "center", padding: "1rem" }}
+			>
 				<Tab.Container
 					id="list-group-tabs-example list-group-tabs-pizzerias"
 					defaultActiveKey="#link1"
@@ -69,7 +116,7 @@ class PizzeriasList extends Component {
 					>
 						<Col sm={3}>
 							<ListGroup>
-								{this.state.pizzerias.map(pizzeria => {
+								{pizzerias.filter(searchFor(this.state.term)).map(pizzeria => {
 									return (
 										<ListGroup.Item
 											className="pizzerias__list__item"
@@ -92,7 +139,7 @@ class PizzeriasList extends Component {
 						</Col>
 						<Col sm={8} style={styles.RightPane}>
 							<Tab.Content>
-								{this.state.pizzerias.map(pizzeria => {
+								{pizzerias.map(pizzeria => {
 									return (
 										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`} className="pizzeriasList__columns__container">
                                             <div className="pizzeriasList__column__left">
@@ -136,8 +183,15 @@ class PizzeriasList extends Component {
 					</Row>
 				</Tab.Container>
 			</Container>
-		);
-	}
-}
+		</div>
+		)}
+		
+		
+	  
+		renderLoading () {
+		  return <div>Loading...</div>
+		}
+	  }
+	
 
 export default PizzeriasList;
