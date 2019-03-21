@@ -3,16 +3,12 @@ import { ListContainer, ListWrapper } from "../CreatePizza/containers";
 import "../CreatePizza/ListScrollbar.css";
 import "../CreatePizza/containers.css";
 
-async function fetchPizzerias() {
-	return await fetch("pizzerias.json").then(res => res.json());
-}
-
 class Favourites extends Component {
 	state = {
-		pizzerias: [],
+		pizzerias: JSON.parse(localStorage.getItem('favPizzeria'))
 	};
 	componentDidMount() {
-		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
+		console.log(this.state.pizzerias)
 	}
 	render() {
 		return (
