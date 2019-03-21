@@ -1,0 +1,38 @@
+.list-group-item.active {
+    background: rgb(255, 60, 0);
+    border-color: rgb(255, 60, 0);
+}
+
+.pizzerias__list__item {
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+
+.pizzeriasList__columns__container {
+    width: 100%;
+    height: 70vh;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.pizzeriasList__column__left {
+    width: 50%;
+    height: 100%;
+    float: left;
+    padding-left: 2rem;
+}
+        .pizzeriasList__data{
+            margin-top: 2rem;
+        }
+        .pizzeriasList__map {
+            height: 50%;
+            background: url('http://beako.pl/wp-content/uploads/2017/04/11-1-1024x726.png');
+            background-size: cover;
+            margin-top: 2rem;
+        }
+
+.pizzeriasList__column__right {
+    width: 50%;
+    height: 100%;
+    margin-top: 2rem;
+}
