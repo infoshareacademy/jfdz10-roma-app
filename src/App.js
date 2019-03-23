@@ -18,7 +18,6 @@ class App extends React.Component {
 	};
 
 	handleSubmitPizza = () => {
-		console.log("function submit");
 		this.setState({
 			isPizzaSubmitted: !this.state.isPizzaSubmitted
 		});

@@ -9,9 +9,7 @@ import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
-import {cutlery} from 'react-icons-kit/fa/cutlery'
-
-
+import { cutlery } from "react-icons-kit/fa/cutlery";
 
 const Navigation = styled.div`
 	background: #303641;
@@ -65,7 +63,7 @@ const NavLink = styled(Link)`
 
 const styles = {
 	navDisabled: {
-		backgroundColor: "#808080"
+		backgroundColor: "#343743"
 	},
 	iconDisable: {
 		color: "#a0a0a0"
