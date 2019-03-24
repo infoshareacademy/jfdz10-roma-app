@@ -99,13 +99,14 @@ class PizzeriasList extends Component {
 		
 		  return (
 		  <div style={{ display: "flex", flexFlow: "column", alignItems: "center"}}>
-		  	<form onSubmit={e => e.preventDefault()} style={{ display: "flex", width: "100vw", flexFlow: "column", height: "20%", margin: "10px", borderRadius: "2px",}}>
-                <label style={{fontSize: "1.7rem", textAlign: "center", padding: "7px"}}>WYSZUKAJ PIZZERIĘ:<br /><input style={{border: "2px dashed #cc3333"}} type= "text" onChange={this.searchHandler}></input></label>
+		  	<form onSubmit={e => e.preventDefault()} style={{ display: "flex", width: "100vw", flexFlow: "column", height: "18vh", margin: "4px", borderRadius: "1px",}}>
+                <label style={{fontSize: "1.7rem", textAlign: "center", padding: "3px"}}>WYSZUKAJ PIZZERIĘ:<br />
+				<input className="pizzerias-filter-input" style={{}} type= "text" onChange={this.searchHandler}></input></label>
 				<span style={{background: "#f1cd7c", width: "100%", textAlign: "center", padding: "4px"}}>Zacznij wpisywać nazwę pizzerii</span>
             </form>
 			
 			<Container
-				style={{display: "flex", height: "80%", alignItems: "center", padding: "1rem" }}
+				style={{display: "flex", height: "80vh", alignItems: "center", padding: "1rem" }}
 			>
 				<Tab.Container
 					id="list-group-tabs-example list-group-tabs-pizzerias"
