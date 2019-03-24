@@ -36,14 +36,14 @@ class PizzeriasList extends Component {
     componentDidMount () {
       fetch('pizzerias.json')
         .then(res => res.json())
-        .then(this.onLoad);
-    }
+        .then(this.getData);
+	}
   
     parseData (data) {
         return data;
     }
   
-    onLoad = (data) => {
+    getData = (data) => {
       this.setState({
         data: this.parseData(data)
       });
@@ -67,7 +67,7 @@ class PizzeriasList extends Component {
 		  }
 	  
 	  searchHandler (event) {
-		  this.setState({term: event.target.value})
+		this.setState({term: event.target.value})
 	  }
 
 	selectFavPizzeria = pizzeria => {
@@ -99,9 +99,9 @@ class PizzeriasList extends Component {
 		
 		  return (
 		  <div style={{ display: "flex", flexFlow: "column", alignItems: "center"}}>
-		  	<form style={{ display: "flex", width: "100vw", flexFlow: "column", height: "20%", margin: "10px", borderRadius: "2px",}}>
-                <label style={{fontSize: "1.7rem", textAlign: "center", padding: "7px"}}>WYSZUKAJ PIZZERIE:<br /><input style={{border: "2px dashed #cc3333"}} type= "text" onChange={this.searchHandler}></input></label>
-				<span style={{background: "#f1cd7c", width: "100%", textAlign: "center", padding: "4px"}}>Zacznij wpisywać nazwę pizzeri</span>
+		  	<form onSubmit={e => e.preventDefault()} style={{ display: "flex", width: "100vw", flexFlow: "column", height: "20%", margin: "10px", borderRadius: "2px",}}>
+                <label style={{fontSize: "1.7rem", textAlign: "center", padding: "7px"}}>WYSZUKAJ PIZZERIĘ:<br /><input style={{border: "2px dashed #cc3333"}} type= "text" onChange={this.searchHandler}></input></label>
+				<span style={{background: "#f1cd7c", width: "100%", textAlign: "center", padding: "4px"}}>Zacznij wpisywać nazwę pizzerii</span>
             </form>
 			
 			<Container
