@@ -111,7 +111,7 @@ class PizzeriaList extends Component {
 									       <p>< MdHome /> {pizzeria.contactInfo.address.street}</p>
 									       <p>< MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
 									       <p>< MdPhone /> {pizzeria.contactInfo.phone}</p>
-									       <p>< MdWeb /> <a href={"http://" + pizzeria.contactInfo.website} target="_blank" > {pizzeria.contactInfo.website}</a>  </p>                                     </Tab.Pane>
+									       <p>< MdWeb /> <a href={"http://" + pizzeria.contactInfo.website} target="_blank" rel="noopener noreferrer"> {pizzeria.contactInfo.website}</a></p>                                     </Tab.Pane>
 									);
 								})}
 							</Tab.Content>
