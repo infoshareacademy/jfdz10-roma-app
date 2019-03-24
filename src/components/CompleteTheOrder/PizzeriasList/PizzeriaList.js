@@ -6,6 +6,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./styles.css";
 import { FaHeart } from "react-icons/fa";
+import { MdHome } from "react-icons/md";
+import { MdLocalPostOffice } from "react-icons/md";
+import { MdPhone } from "react-icons/md";
+import { MdWeb } from "react-icons/md";
+
 
 const styles = {
 	RightPane: {
@@ -101,12 +106,11 @@ class PizzeriaList extends Component {
 								{this.state.pizzerias.map(pizzeria => {
 									return (
 										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
-											<h1>{pizzeria.name}</h1>
-											<p>{pizzeria.contactInfo.address.street}</p>
-											<p>{pizzeria.contactInfo.address.postcode}</p>
-											<p>{pizzeria.contactInfo.phone}</p>
-											<p>{pizzeria.contactInfo.website}</p>
-										</Tab.Pane>
+											<h1> {pizzeria.name}</h1>
+											<p> < MdHome /> {pizzeria.contactInfo.address.street}</p>
+											<p> < MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
+											<p> < MdPhone /> {pizzeria.contactInfo.phone}</p>
+											<a href={"http://" + pizzeria.contactInfo.website} target="_blank" > < MdWeb /> {pizzeria.contactInfo.website}</a>										</Tab.Pane>
 									);
 								})}
 							</Tab.Content>
