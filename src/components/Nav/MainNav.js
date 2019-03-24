@@ -107,7 +107,7 @@ class MainNav extends React.Component {
 							<IconCnt>
 								<Icon icon={dashboard} />
 							</IconCnt>
-							<Text>Dashboard</Text>
+							<Text>Strona główna</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/user-panel">
@@ -115,7 +115,7 @@ class MainNav extends React.Component {
 							<IconCnt>
 								<Icon icon={user} />
 							</IconCnt>
-							<Text>User Panel</Text>
+							<Text>Twój profil</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/pizzerias">
@@ -131,7 +131,7 @@ class MainNav extends React.Component {
 							<IconCnt>
 								<Icon icon={pizza} />
 							</IconCnt>
-							<Text>Create Pizza</Text>
+							<Text>Skomponuj pizzę</Text>
 						</NavLink>
 					</Nav>
 					<Nav
@@ -145,7 +145,7 @@ class MainNav extends React.Component {
 								<Icon icon={shoppingCart} />
 							</IconCnt>
 							<Text style={!isPizzaSubmitted ? textDisabled : null}>
-								Make Order
+								Złóż zamówienie
 							</Text>
 						</NavLink>
 					</Nav>
@@ -162,7 +162,7 @@ class MainNav extends React.Component {
 								<Icon icon={creditCardAlt} />
 							</IconCnt>
 							<Text style={!isPizzaSubmitted ? textDisabled : null}>
-								Summary the order
+								Podsumowanie zamówienia
 							</Text>
 						</NavLink>
 					</Nav>
