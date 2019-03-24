@@ -106,14 +106,12 @@ class PizzeriaList extends Component {
 								{" "}
 								{this.state.pizzerias.map(pizzeria => {
 									return (
-
-										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
-											<h1> {pizzeria.name}</h1>
-											<p> < MdHome /> {pizzeria.contactInfo.address.street}</p>
-											<p> < MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
-											<p> < MdPhone /> {pizzeria.contactInfo.phone}</p>
-											<a href={"http://" + pizzeria.contactInfo.website} target="_blank" > < MdWeb /> {pizzeria.contactInfo.website}</a>										</Tab.Pane>
-
+									   <Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
+									       <h1>{pizzeria.name}</h1>
+									       <p>< MdHome /> {pizzeria.contactInfo.address.street}</p>
+									       <p>< MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
+									       <p>< MdPhone /> {pizzeria.contactInfo.phone}</p>
+									       <p>< MdWeb /> <a href={"http://" + pizzeria.contactInfo.website} target="_blank" > {pizzeria.contactInfo.website}</a>  </p>                                     </Tab.Pane>
 									);
 								})}
 							</Tab.Content>
