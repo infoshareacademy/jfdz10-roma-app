@@ -72,15 +72,16 @@ class PizzeriaList extends Component {
 				<Tab.Container
 					id="list-group-tabs-example list-group-tabs-pizzerias"
 					defaultActiveKey="#link1"
+					
 				>
-					<Row
+					<Row 
 						style={{ display: "flex", justifyContent: "center", width: "100%" }}
 					>
 						<Col sm={4}>
-							<ListGroup>
+							<ListGroup className="Pizzerias--list">
 								{this.state.pizzerias.map(pizzeria => {
 									return (
-										<ListGroup.Item
+										<ListGroup.Item 
 											className
 											key={pizzeria.id}
 											action
@@ -105,12 +106,14 @@ class PizzeriaList extends Component {
 								{" "}
 								{this.state.pizzerias.map(pizzeria => {
 									return (
+
 										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
 											<h1> {pizzeria.name}</h1>
 											<p> < MdHome /> {pizzeria.contactInfo.address.street}</p>
 											<p> < MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
 											<p> < MdPhone /> {pizzeria.contactInfo.phone}</p>
 											<a href={"http://" + pizzeria.contactInfo.website} target="_blank" > < MdWeb /> {pizzeria.contactInfo.website}</a>										</Tab.Pane>
+
 									);
 								})}
 							</Tab.Content>
