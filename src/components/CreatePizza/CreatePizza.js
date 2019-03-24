@@ -56,6 +56,7 @@ class CreatePizza extends Component {
 		this.setState({
 			isPizzaSubmitted: true
 		});
+		this.props.submitPizza();
 	};
 
 	cancelIngredients = () => {
@@ -66,6 +67,7 @@ class CreatePizza extends Component {
 			ingredients: selectedIngredients
 		});
 		window.localStorage.clear();
+		this.props.submitPizza();
 	};
 
 	render() {

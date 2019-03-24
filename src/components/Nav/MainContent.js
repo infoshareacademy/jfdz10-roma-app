@@ -7,18 +7,21 @@ import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
 
-
 const Content = styled.div`
 	width: 100%;
 	height: 100vh;
 	background: #e2e2e2;
 `;
 
-const MainContent = () => {
+const MainContent = props => {
+	const { submitPizza } = props;
 	return (
 		<Content>
-			<Route path="/dashboard" component={Dashboard}/>
-			<Route path="/create-pizza" component={CreatePizza} />
+			<Route exact path="/" component={Dashboard} />
+			<Route
+				path="/create-pizza"
+				render={props => <CreatePizza submitPizza={submitPizza} />}
+			/>
 			<Route path="/pizzerias" component={Pizzerias}/>
 			<Route path="/user-panel" component={UserPanel} />
 			<Route path="/make-order" component={PizzeriaList} />
