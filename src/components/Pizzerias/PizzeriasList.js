@@ -152,7 +152,7 @@ class PizzeriasList extends Component {
                                                         {pizzeria.contactInfo.address.city}
                                                     </p>
                                                     <p>Kontakt: {pizzeria.contactInfo.phone}</p>
-                                                    <a href={"http://" + pizzeria.contactInfo.website}>{pizzeria.contactInfo.website}</a>
+                                                    <a target="_blank" href={"http://" + pizzeria.contactInfo.website}>{pizzeria.contactInfo.website}</a>
                                                 </div>
                                                 <div className="pizzeriasList__map">
                                                 </div>
