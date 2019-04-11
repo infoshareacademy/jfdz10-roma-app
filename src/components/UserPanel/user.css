@@ -37,6 +37,10 @@
     justify-content: center;
 }
 
+.user__container__left {
+    cursor: default;
+}
+
 .user__avatar {
     width: 30%;
     border-radius: 50%;
@@ -63,6 +67,7 @@
     width: 100%;
 }
 .user__button {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;

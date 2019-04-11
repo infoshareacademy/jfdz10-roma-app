@@ -9,9 +9,7 @@ import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
-import {cutlery} from 'react-icons-kit/fa/cutlery'
-
-
+import { cutlery } from "react-icons-kit/fa/cutlery";
 
 const Navigation = styled.div`
 	background: #303641;
@@ -63,16 +61,35 @@ const NavLink = styled(Link)`
 	}
 `;
 
+const styles = {
+	navDisabled: {
+		backgroundColor: "#343743"
+	},
+	iconDisable: {
+		color: "#a0a0a0"
+	},
+	textDisabled: {
+		color: "#c4c4c4"
+	}
+};
+
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
 	state = { selectedPath: "" };
 
 	onItemSelection = arg => {
-		this.setState({ selectedPath: window.location.pathname });
+		if (arg.id !== null) {
+			this.setState({ selectedPath: window.location.pathname });
+		}
 	};
 
 	render() {
+		const isPizzaSubmitted = JSON.parse(
+			localStorage.getItem("isPizzaSubmitted")
+		);
+		const { navDisabled, iconDisable, textDisabled } = styles;
+
 		return (
 			<Navigation>
 				<SideNav
@@ -81,16 +98,16 @@ class MainNav extends React.Component {
 					onItemSelection={this.onItemSelection}
 				>
 					<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
-						<NavLink to="/dashboard" style={{ margin: "auto" }}>
+						<NavLink to="/" style={{ margin: "auto" }}>
 							<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
 						</NavLink>
 					</Nav>
 					<Nav id="/dashboard">
-						<NavLink to="/dashboard">
+						<NavLink to="">
 							<IconCnt>
 								<Icon icon={dashboard} />
 							</IconCnt>
-							<Text>Dashboard</Text>
+							<Text>Strona główna</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/user-panel">
@@ -98,7 +115,7 @@ class MainNav extends React.Component {
 							<IconCnt>
 								<Icon icon={user} />
 							</IconCnt>
-							<Text>User Panel</Text>
+							<Text>Twój profil</Text>
 						</NavLink>
 					</Nav>
 					<Nav id="/pizzerias">
@@ -114,23 +131,39 @@ class MainNav extends React.Component {
 							<IconCnt>
 								<Icon icon={pizza} />
 							</IconCnt>
-							<Text>Create Pizza</Text>
+							<Text>Skomponuj pizzę</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="/make-order">
-						<NavLink to="/make-order">
-							<IconCnt>
+					<Nav
+						id={isPizzaSubmitted ? "/make-order" : false}
+						style={!isPizzaSubmitted ? navDisabled : null}
+					>
+						<NavLink
+							to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						>
+							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
 								<Icon icon={shoppingCart} />
 							</IconCnt>
-							<Text>Make Order</Text>
+							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+								Złóż zamówienie
+							</Text>
 						</NavLink>
 					</Nav>
-					<Nav id="/summary-order">
-						<NavLink to="/summary-order">
-							<IconCnt>
+					<Nav
+						id={isPizzaSubmitted ? "/summary-order" : false}
+						style={!isPizzaSubmitted ? navDisabled : null}
+					>
+						<NavLink
+							to={
+								isPizzaSubmitted ? "/summary-order" : window.location.pathname
+							}
+						>
+							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
 								<Icon icon={creditCardAlt} />
 							</IconCnt>
-							<Text>Summary the order</Text>
+							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+								Podsumowanie zamówienia
+							</Text>
 						</NavLink>
 					</Nav>
 				</SideNav>

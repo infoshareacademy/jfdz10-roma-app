@@ -36,3 +36,11 @@
     height: 100%;
     margin-top: 2rem;
 }
+
+.pizzerias-filter-input:focus { 
+    border: 2px dotted #cc3333;
+  }
+
+.pizzerias-filter-input:focus { 
+    outline: 0; 
+    }
