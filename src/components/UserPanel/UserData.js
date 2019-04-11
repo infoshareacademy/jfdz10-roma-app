@@ -56,10 +56,10 @@ class Nickname extends React.Component {
                             <input type="text" value={this.state.phone} onChange={this.editPhone}></input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
                 <div className="buttons__container">
-                    <div className="button" onClick={this.editUserData}>
+                    <div className="user__button" onClick={this.editUserData}>
                         <span>Edytuj Profil</span>
                     </div>
-                    <div className="button">
+                    <div className="user__button">
                         <span>Dodaj pizzerię</span>
                     </div>
                 </div>        
