@@ -7,6 +7,10 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import "./styles.css";
 import { withStyles } from "@material-ui/core/styles";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const styles = theme => ({
 	RightPane: {
@@ -38,6 +42,15 @@ const styles = theme => ({
 			backgroundColor: "#a5182e",
 			boxShadow: "none"
 		}
+	},
+	success: {
+		backgroundColor: "#33ab4e"
+	},
+	close: {
+		padding: theme.spacing.unit / 2,
+		"&:focus": {
+			outline: "none"
+		}
 	}
 });
 
@@ -48,7 +61,9 @@ function searchFor(term) {
 }
 
 class PizzeriasList extends Component {
-	state = {};
+	state = {
+		isSnackbarOpen: false
+	};
 
 	componentDidMount() {
 		fetch("pizzerias.json")
@@ -64,6 +79,18 @@ class PizzeriasList extends Component {
 		this.setState({
 			data: this.parseData(data)
 		});
+	};
+
+	handleClickFavBtn = () => {
+		this.setState({ isSnackbarOpen: true });
+	};
+
+	handleCloseSnackbar = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		this.setState({ isSnackbarOpen: false });
 	};
 
 	render() {
@@ -87,6 +114,8 @@ class PizzeriasList extends Component {
 	}
 
 	selectFavPizzeria = pizzeria => {
+		this.handleClickFavBtn();
+
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
 			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
@@ -250,6 +279,33 @@ class PizzeriasList extends Component {
 						</Row>
 					</Tab.Container>
 				</Container>
+				<Snackbar
+					anchorOrigin={{
+						vertical: "bottom",
+						horizontal: "left"
+					}}
+					open={this.state.isSnackbarOpen}
+					autoHideDuration={40000}
+					onClose={this.handleCloseSnackbar}
+				>
+					<SnackbarContent
+						className={classes.success}
+						message={
+							<span style={{ fontSize: "1.1rem" }}>Dodano do ulubionych!</span>
+						}
+						action={[
+							<IconButton
+								key="close"
+								aria-label="Close"
+								color="inherit"
+								className={classes.close}
+								onClick={this.handleCloseSnackbar}
+							>
+								<CloseIcon />
+							</IconButton>
+						]}
+					/>
+				</Snackbar>
 			</div>
 		);
 	}
