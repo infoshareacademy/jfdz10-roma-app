@@ -5,8 +5,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { withStyles } from "@material-ui/core/styles";
 import "./styles.css";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
 	RightPane: {
@@ -25,10 +25,6 @@ const styles = theme => ({
 		color: "white",
 		textDecoration: "none",
 		backgroundColor: "#cc3333",
-		"&:active": {
-			color: "black",
-			backgroundColor: "black"
-		},
 		"&:hover": {
 			color: "white",
 			textDecoration: "none",
@@ -241,6 +237,7 @@ class PizzeriasList extends Component {
 													<Button
 														onClick={() => this.selectFavPizzeria(pizzeria)}
 														className={classes.favButton}
+														variant="link"
 													>
 														Dodaj do ulubionych
 													</Button>
