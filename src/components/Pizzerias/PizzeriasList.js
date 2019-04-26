@@ -285,7 +285,7 @@ class PizzeriasList extends Component {
 						horizontal: "left"
 					}}
 					open={this.state.isSnackbarOpen}
-					autoHideDuration={40000}
+					autoHideDuration={4000}
 					onClose={this.handleCloseSnackbar}
 				>
 					<SnackbarContent
