@@ -10,6 +10,8 @@ import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
 import { cutlery } from "react-icons-kit/fa/cutlery";
+import { withStyles } from "@material-ui/core/styles";
+import { MdMenu } from "react-icons/md";
 
 const Navigation = styled.div`
 	background: #303641;
@@ -63,7 +65,10 @@ const NavLink = styled(Link)`
 
 const styles = {
 	navDisabled: {
-		backgroundColor: "#343743"
+		backgroundColor: "#343743",
+		"&:hover": {
+			backgroundColor: "#343743"
+		}
 	},
 	iconDisable: {
 		color: "#a0a0a0"
@@ -88,7 +93,7 @@ class MainNav extends React.Component {
 		const isPizzaSubmitted = JSON.parse(
 			localStorage.getItem("isPizzaSubmitted")
 		);
-		const { navDisabled, iconDisable, textDisabled } = styles;
+		const { classes } = this.props;
 
 		return (
 			<Navigation>
@@ -136,32 +141,36 @@ class MainNav extends React.Component {
 					</Nav>
 					<Nav
 						id={isPizzaSubmitted ? "/make-order" : false}
-						style={!isPizzaSubmitted ? navDisabled : null}
+						className={!isPizzaSubmitted ? classes.navDisabled : null}
 					>
 						<NavLink
 							to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
 						>
-							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
+							<IconCnt
+								className={!isPizzaSubmitted ? classes.iconDisable : null}
+							>
 								<Icon icon={shoppingCart} />
 							</IconCnt>
-							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+							<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
 								Złóż zamówienie
 							</Text>
 						</NavLink>
 					</Nav>
 					<Nav
 						id={isPizzaSubmitted ? "/summary-order" : false}
-						style={!isPizzaSubmitted ? navDisabled : null}
+						className={!isPizzaSubmitted ? classes.navDisabled : null}
 					>
 						<NavLink
 							to={
 								isPizzaSubmitted ? "/summary-order" : window.location.pathname
 							}
 						>
-							<IconCnt style={!isPizzaSubmitted ? iconDisable : null}>
+							<IconCnt
+								className={!isPizzaSubmitted ? classes.iconDisable : null}
+							>
 								<Icon icon={creditCardAlt} />
 							</IconCnt>
-							<Text style={!isPizzaSubmitted ? textDisabled : null}>
+							<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
 								Podsumowanie zamówienia
 							</Text>
 						</NavLink>
@@ -172,4 +181,4 @@ class MainNav extends React.Component {
 	}
 }
 
-export default MainNav;
+export default withStyles(styles)(MainNav);
