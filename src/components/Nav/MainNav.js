@@ -72,7 +72,8 @@ const styles = theme => ({
 			position: "fixed",
 			top: 10,
 			left: 10,
-			fontSize: 40,
+			fontSize: 50,
+			zIndex: 1500,
 			color: "black"
 		}
 	},
@@ -128,7 +129,11 @@ class MainNav extends React.Component {
 
 		return (
 			<Fragment>
-				<MdMenu className={classes.menuBtn} onClick={this.handleOpenNav} />
+				<MdMenu
+					className={classes.menuBtn}
+					style={isNavOpen ? { color: "white" } : { color: "black" }}
+					onClick={this.handleOpenNav}
+				/>
 				<Navigation
 					className={classNames(
 						classes.navigation,
