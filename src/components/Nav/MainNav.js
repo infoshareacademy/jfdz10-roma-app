@@ -12,6 +12,7 @@ import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
 import { cutlery } from "react-icons-kit/fa/cutlery";
 import { withStyles } from "@material-ui/core/styles";
 import { MdMenu } from "react-icons/md";
+import classNames from "classnames";
 
 const Navigation = styled.div`
 	background: #303641;
@@ -65,7 +66,9 @@ const NavLink = styled(Link)`
 
 const styles = theme => ({
 	menuBtn: {
+		display: "none",
 		[theme.breakpoints.down("xs")]: {
+			display: "block",
 			position: "fixed",
 			top: 10,
 			left: 10,
@@ -78,9 +81,14 @@ const styles = theme => ({
 		[theme.breakpoints.down("xs")]: {
 			position: "fixed",
 			zIndex: 1000,
-			top: 0,
-			transform: "translateX(-100%)"
+			top: 0
 		}
+	},
+	openedNav: {
+		transform: "translateX(0%)"
+	},
+	closedNav: {
+		transform: "translateX(-100%)"
 	},
 	navDisabled: {
 		backgroundColor: "#343743",
@@ -99,7 +107,7 @@ const styles = theme => ({
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
-	state = { selectedPath: "" };
+	state = { selectedPath: "", isNavOpen: null };
 
 	onItemSelection = arg => {
 		if (arg.id !== null) {
@@ -107,16 +115,26 @@ class MainNav extends React.Component {
 		}
 	};
 
+	handleOpenNav = () => {
+		this.setState({ isNavOpen: !this.state.isNavOpen });
+	};
+
 	render() {
 		const isPizzaSubmitted = JSON.parse(
 			localStorage.getItem("isPizzaSubmitted")
 		);
 		const { classes } = this.props;
+		const { isNavOpen } = this.state;
 
 		return (
 			<Fragment>
-				<MdMenu className={classes.menuBtn} />
-				<Navigation className={classes.navigation}>
+				<MdMenu className={classes.menuBtn} onClick={this.handleOpenNav} />
+				<Navigation
+					className={classNames(
+						classes.navigation,
+						isNavOpen ? classes.openedNav : classes.closedNav
+					)}
+				>
 					<SideNav
 						defaultSelectedPath={window.location.pathname}
 						theme={theme}
