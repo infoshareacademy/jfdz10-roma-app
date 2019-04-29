@@ -1,16 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import "./styles.css";
 import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { FaHeart } from "react-icons/fa";
+import Nav from "react-bootstrap/Nav";
 
 const styles = theme => ({
 	RightPane: {
@@ -19,29 +20,13 @@ const styles = theme => ({
 		borderRadius: "5px",
 		padding: "15px"
 	},
-	favButton: {
-		width: 170,
-		height: 38,
-		margin: "0 auto",
-		padding: ".4rem .5rem",
-		fontSize: "1.1rem",
-		border: "none",
-		color: "white",
-		textDecoration: "none",
-		backgroundColor: "#cc3333",
-		"&:hover": {
-			color: "white",
-			textDecoration: "none",
-			backgroundColor: "#a5182e"
-		},
-		"&:visited": {
-			textDecoration: "none"
-		},
-		"&:focus": {
-			textDecoration: "none",
-			backgroundColor: "#a5182e",
-			boxShadow: "none"
-		}
+	FavIconEnabled: {
+		float: "right",
+		color: "#cc1a37"
+	},
+	FavIconDisabled: {
+		float: "right",
+		color: "#919191"
 	},
 	success: {
 		backgroundColor: "#33ab4e"
@@ -50,6 +35,23 @@ const styles = theme => ({
 		padding: theme.spacing.unit / 2,
 		"&:focus": {
 			outline: "none"
+		}
+	},
+	item: {
+		display: "flex",
+		justifyContent: "space-between",
+		alignItems: "center",
+		paddingLeft: 0,
+		paddingTop: 0,
+		paddingBottom: 0
+	},
+	link: {
+		display: "inline-block",
+		color: "inherit",
+		width: "100%",
+		padding: "12px 15px",
+		"&:hover": {
+			color: "inherit"
 		}
 	}
 });
@@ -205,14 +207,28 @@ class PizzeriasList extends Component {
 										.filter(searchFor(this.state.term))
 										.map(pizzeria => {
 											return (
-												<ListGroup.Item
-													className="pizzerias__list__item"
-													key={pizzeria.id}
-													action
-													href={`#${pizzeria.id}`}
-												>
-													{pizzeria.name}
-												</ListGroup.Item>
+												<div className="pizzerias__list__item">
+													<ListGroup.Item
+														key={pizzeria.id}
+														action
+														className={classes.item}
+													>
+														<Nav.Link
+															eventKey={`#${pizzeria.id}`}
+															className={classes.link}
+														>
+															<span>{pizzeria.name}</span>
+														</Nav.Link>
+														<FaHeart
+															onClick={() => this.selectFavPizzeria(pizzeria)}
+															className={
+																this.favIconMarked(pizzeria)
+																	? classes.FavIconEnabled
+																	: classes.FavIconDisabled
+															}
+														/>
+													</ListGroup.Item>
+												</div>
 											);
 										})}
 								</ListGroup>
@@ -263,13 +279,6 @@ class PizzeriasList extends Component {
 													<h6>&nbsp;&nbsp;Lista składników</h6>
 													<li>Własna</li>
 													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<Button
-														onClick={() => this.selectFavPizzeria(pizzeria)}
-														className={classes.favButton}
-														variant="link"
-													>
-														Dodaj do ulubionych
-													</Button>
 												</div>
 											</Tab.Pane>
 										);
