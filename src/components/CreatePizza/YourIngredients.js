@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "./ListScrollbar.css";
+import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import "./create-pizza-button.css";
 import ListGroup from "react-bootstrap/ListGroup";

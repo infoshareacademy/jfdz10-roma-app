@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "./styles.css";
 import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
@@ -12,13 +11,17 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
+import classNames from "classnames";
+import "./styles.css";
+import "../SharedComponents/ListScrollbar.css";
 
 const styles = theme => ({
 	RightPane: {
 		background: "white",
 		border: "1px solid lightgray",
 		borderRadius: "5px",
-		padding: "15px"
+		padding: "12px",
+		overflowY: "auto"
 	},
 	FavIconEnabled: {
 		float: "right",
@@ -78,6 +81,7 @@ class PizzeriasList extends Component {
 	}
 
 	getData = data => {
+		console.log(data);
 		this.setState({
 			data: this.parseData(data)
 		});
@@ -186,7 +190,7 @@ class PizzeriasList extends Component {
 					style={{
 						display: "flex",
 						height: "80vh",
-						alignItems: "center",
+						alignItems: "top",
 						padding: "1rem"
 					}}
 				>
@@ -198,7 +202,8 @@ class PizzeriasList extends Component {
 							style={{
 								display: "flex",
 								justifyContent: "center",
-								width: "100%"
+								width: "100%",
+								maxHeight: "510px"
 							}}
 						>
 							<Col sm={3}>
@@ -213,7 +218,8 @@ class PizzeriasList extends Component {
 												>
 													<ListGroup.Item action className={classes.item}>
 														<Nav.Link
-															eventKey={`#${pizzeria.id}`}
+															// eventKey={`#${pizzeria.id}`}
+															href={`#${pizzeria.id}`}
 															className={classes.link}
 														>
 															<span>{pizzeria.name}</span>
@@ -232,7 +238,10 @@ class PizzeriasList extends Component {
 										})}
 								</ListGroup>
 							</Col>
-							<Col sm={8} className={classes.RightPane}>
+							<Col
+								sm={8}
+								className={classNames(classes.RightPane, "list-scrollbar")}
+							>
 								<Tab.Content>
 									{pizzerias.map(pizzeria => {
 										return (

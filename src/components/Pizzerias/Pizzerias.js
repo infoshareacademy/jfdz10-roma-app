@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import PizzeriasList from './PizzeriasList'
-import "../CreatePizza/ListScrollbar.css";
+import PizzeriasList from "./PizzeriasList";
+import "../SharedComponents/ListScrollbar.css";
 import "../CreatePizza/containers.css";
 import "./styles.css";
-
 
 class Pizzerias extends Component {
 	state = {
