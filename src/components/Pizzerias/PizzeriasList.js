@@ -207,12 +207,11 @@ class PizzeriasList extends Component {
 										.filter(searchFor(this.state.term))
 										.map(pizzeria => {
 											return (
-												<div className="pizzerias__list__item">
-													<ListGroup.Item
-														key={pizzeria.id}
-														action
-														className={classes.item}
-													>
+												<div
+													key={pizzeria.id}
+													className="pizzerias__list__item"
+												>
+													<ListGroup.Item action className={classes.item}>
 														<Nav.Link
 															eventKey={`#${pizzeria.id}`}
 															className={classes.link}
