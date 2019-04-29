@@ -86,10 +86,14 @@ const styles = theme => ({
 		}
 	},
 	openedNav: {
-		transform: "translateX(0%)"
+		[theme.breakpoints.down("xs")]: {
+			transform: "translateX(0%)"
+		}
 	},
 	closedNav: {
-		transform: "translateX(-100%)"
+		[theme.breakpoints.down("xs")]: {
+			transform: "translateX(-100%)"
+		}
 	},
 	navDisabled: {
 		backgroundColor: "#343743",
@@ -102,6 +106,11 @@ const styles = theme => ({
 	},
 	textDisabled: {
 		color: "#c4c4c4"
+	},
+	logo: {
+		[theme.breakpoints.down("xs")]: {
+			marginLeft: 35
+		}
 	}
 });
 
@@ -147,7 +156,11 @@ class MainNav extends React.Component {
 					>
 						<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
 							<NavLink to="/" style={{ margin: "auto" }}>
-								<ReactSVG src="logo.svg" svgStyle={{ width: 90, height: 50 }} />
+								<ReactSVG
+									src="logo.svg"
+									svgStyle={{ width: 90, height: 50 }}
+									className={classes.logo}
+								/>
 							</NavLink>
 						</Nav>
 						<Nav id="/dashboard">
