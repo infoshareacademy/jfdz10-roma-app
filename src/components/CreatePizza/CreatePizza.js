@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "./create-pizza-button.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +8,38 @@ import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
 import Alert from "react-bootstrap/Alert";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+	favButton: {
+		width: 170,
+		height: 55,
+		margin: "0 auto",
+		padding: ".4rem .5rem",
+		fontSize: "1.5rem",
+		border: "none",
+		color: "white",
+		textDecoration: "none",
+		backgroundColor: "#cc3333",
+		"&:active": {
+			color: "black",
+			backgroundColor: "black"
+		},
+		"&:hover": {
+			color: "white",
+			textDecoration: "none",
+			backgroundColor: "#a5182e"
+		},
+		"&:visited": {
+			textDecoration: "none"
+		},
+		"&:focus": {
+			textDecoration: "none",
+			backgroundColor: "#a5182e",
+			boxShadow: "none"
+		}
+	}
+});
 
 const getFromLocalStorage = item => {
 	return JSON.parse(window.localStorage.getItem(item));
@@ -72,6 +103,7 @@ class CreatePizza extends Component {
 
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
+		const { classes } = this.props;
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				{isPizzaSubmitted && (
@@ -106,7 +138,8 @@ class CreatePizza extends Component {
 						) : (
 							<Button
 								size="lg"
-								className="custom-button create-pizza-button"
+								// className="custom-button create-pizza-button"
+								className={classes.favButton}
 								onClick={this.handleChangeCreatePizza}
 								variant="link"
 							>
@@ -130,4 +163,4 @@ class CreatePizza extends Component {
 	}
 }
 
-export default CreatePizza;
+export default withStyles(styles)(CreatePizza);
