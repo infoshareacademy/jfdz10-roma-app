@@ -67,7 +67,7 @@ const NavLink = styled(Link)`
 const styles = theme => ({
 	menuBtn: {
 		display: "none",
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			display: "block",
 			position: "fixed",
 			top: 10,
@@ -79,19 +79,19 @@ const styles = theme => ({
 	},
 	navigation: {
 		transition: "all .5s ease",
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			position: "fixed",
 			zIndex: 1000,
 			top: 0
 		}
 	},
 	openedNav: {
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			transform: "translateX(0%)"
 		}
 	},
 	closedNav: {
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			transform: "translateX(-100%)"
 		}
 	},
@@ -108,7 +108,7 @@ const styles = theme => ({
 		color: "#c4c4c4"
 	},
 	logo: {
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			marginLeft: 35
 		}
 	}
