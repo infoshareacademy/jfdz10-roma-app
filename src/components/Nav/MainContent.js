@@ -20,12 +20,15 @@ const MainContent = props => {
 			<Route exact path="/" component={Dashboard} />
 			<Route
 				path="/create-pizza"
-				render={props => <CreatePizza submitPizza={submitPizza} />}
+				render={() => <CreatePizza submitPizza={submitPizza} />}
 			/>
-			<Route path="/pizzerias" component={Pizzerias}/>
+			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
 			<Route path="/user-panel" component={UserPanel} />
 			<Route path="/make-order" component={PizzeriaList} />
-			<Route path="/summary-order" component={() => <h1>Summary the order</h1>} />
+			<Route
+				path="/summary-order"
+				component={() => <h1>Summary the order</h1>}
+			/>
 		</Content>
 	);
 };

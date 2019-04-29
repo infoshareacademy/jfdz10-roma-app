@@ -67,28 +67,27 @@ function searchFor(term) {
 
 class PizzeriasList extends Component {
 	state = {
-		isSnackbarOpen: false
+		data: [],
+		isSnackbarOpen: false,
+		pizzeriaLocation: "#1"
 	};
 
 	componentDidMount() {
 		fetch("pizzerias.json")
 			.then(res => res.json())
-			.then(this.getData);
+			.then(data => {
+				this.setState({ data });
+				const currentPizzeria = this.props.location.hash;
+				const defaultPizzeria = this.state.pizzeriaLocation;
+				if (currentPizzeria !== defaultPizzeria) {
+					this.setState({ pizzeriaLocation: currentPizzeria });
+				}
+			})
+			.catch(error => console.log(error.message));
 	}
-
-	parseData(data) {
-		return data;
-	}
-
-	getData = data => {
-		console.log(data);
-		this.setState({
-			data: this.parseData(data)
-		});
-	};
 
 	handleClickFavBtn = () => {
-		this.setState({ isSnackbarOpen: true });
+		this.setState({ ...this.state, isSnackbarOpen: true });
 	};
 
 	handleCloseSnackbar = (event, reason) => {
@@ -96,7 +95,7 @@ class PizzeriasList extends Component {
 			return;
 		}
 
-		this.setState({ isSnackbarOpen: false });
+		this.setState({ ...this.state, isSnackbarOpen: false });
 	};
 
 	render() {
@@ -110,7 +109,8 @@ class PizzeriasList extends Component {
 		super(props);
 		this.state = {
 			data: this.data,
-			term: ""
+			term: "",
+			pizzeriaLocation: "#1"
 		};
 		this.searchHandler = this.searchHandler.bind(this);
 	}
@@ -146,7 +146,13 @@ class PizzeriasList extends Component {
 		}
 	};
 
+	changeLocation = id => {
+		this.setState({ pizzeriaLocation: `#${id}` });
+	};
+
 	renderData(pizzerias, classes) {
+		const location = this.state.pizzeriaLocation;
+
 		return (
 			<div
 				style={{ display: "flex", flexFlow: "column", alignItems: "center" }}
@@ -196,7 +202,9 @@ class PizzeriasList extends Component {
 				>
 					<Tab.Container
 						id="list-group-tabs-example list-group-tabs-pizzerias"
-						defaultActiveKey="#link1"
+						// defaultActiveKey={location}
+						activeKey={location}
+						onSelect={prop => console.log(prop)}
 					>
 						<Row
 							style={{
@@ -218,9 +226,9 @@ class PizzeriasList extends Component {
 												>
 													<ListGroup.Item action className={classes.item}>
 														<Nav.Link
-															// eventKey={`#${pizzeria.id}`}
 															href={`#${pizzeria.id}`}
 															className={classes.link}
+															onClick={() => this.changeLocation(pizzeria.id)}
 														>
 															<span>{pizzeria.name}</span>
 														</Nav.Link>

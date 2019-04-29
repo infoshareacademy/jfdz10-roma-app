@@ -16,7 +16,7 @@ class Pizzerias extends Component {
 	render() {
 		return (
 			<div className="user__container">
-				<PizzeriasList />
+				<PizzeriasList {...this.props} />
 			</div>
 		);
 	}
