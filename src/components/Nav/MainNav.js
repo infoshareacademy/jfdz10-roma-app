@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { SideNav, Nav as BaseNav } from "react-sidenav";
 import styled from "styled-components";
 import ReactSVG from "react-svg";
 import { Icon as BaseIcon } from "react-icons-kit";
@@ -32,17 +31,6 @@ const IconCnt = styled.div`
 	align-items: center;
 `;
 
-const Nav = styled(BaseNav)`
-	flex-direction: column;
-	padding: 0;
-`;
-
-const theme = {
-	selectionColor: "#FFF",
-	hoverBgColor: "#a5182e",
-	selectionBgColor: "#cc3333"
-};
-
 const Text = styled.div`
 	font-size: 0.72em;
 	text-transform: uppercase;
@@ -53,13 +41,17 @@ const Text = styled.div`
 
 const NavLink = styled(Link)`
 	box-sizing: border-box;
+	flex-direction: column;
+	display: flex;
+	padding: 0;
 	color: inherit;
 	text-decoration: none;
 	width: 100%;
-	height: 100%;
 	padding: 8px 12px;
+	transition: all 0.3s ease;
 	&:hover {
-		color: inherit;
+		color: #fff;
+		background-color: #a5182e;
 		text-decoration: none;
 	}
 `;
@@ -95,6 +87,10 @@ const styles = theme => ({
 			transform: "translateX(-100%)"
 		}
 	},
+	navItemSelected: {
+		backgroundColor: "#cc3333",
+		color: "#FFF"
+	},
 	navDisabled: {
 		backgroundColor: "#343743",
 		"&:hover": {
@@ -108,6 +104,7 @@ const styles = theme => ({
 		color: "#c4c4c4"
 	},
 	logo: {
+		marginLeft: 10,
 		[theme.breakpoints.down("sm")]: {
 			marginLeft: 35
 		}
@@ -119,20 +116,23 @@ const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 class MainNav extends React.Component {
 	state = { selectedPath: "", isNavOpen: null };
 
-	onItemSelection = arg => {
-		if (arg.id !== null) {
-			this.setState({ selectedPath: window.location.pathname });
-		}
+	onNavItemSelect = () => {
+		this.setState({ selectedPath: window.location.pathname });
 	};
 
 	handleOpenNav = () => {
 		this.setState({ isNavOpen: !this.state.isNavOpen });
 	};
 
+	componentDidMount() {
+		this.setState({ selectedPath: window.location.pathname });
+	}
+
 	shouldComponentUpdate() {
+		console.log("update");
 		if (this.state.selectedPath !== window.location.pathname) {
+			console.log("update");
 			this.setState({ selectedPath: window.location.pathname });
-			// this.onItemSelection(window.location.pathname);
 		}
 		return true;
 	}
@@ -143,6 +143,8 @@ class MainNav extends React.Component {
 		);
 		const { classes } = this.props;
 		const { isNavOpen } = this.state;
+		const path = this.state.selectedPath;
+		console.log(path);
 		return (
 			<Fragment>
 				<MdMenu
@@ -156,95 +158,89 @@ class MainNav extends React.Component {
 						isNavOpen ? classes.openedNav : classes.closedNav
 					)}
 				>
-					<SideNav
-						path={window.location.pathname}
-						// selectedPath={window.location.pathname}
-						defaultSelectedPath={window.location.pathname}
-						theme={theme}
-						// onItemSelection={this.onItemSelection}
+					<NavLink
+						to="/"
+						style={{ margin: "auto", background: "#303641", margin: "0 10px" }}
+						onClick={this.onNavItemSelect}
 					>
-						<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
-							<NavLink to="/" style={{ margin: "auto" }}>
-								<ReactSVG
-									src="logo.svg"
-									svgStyle={{ width: 90, height: 50 }}
-									className={classes.logo}
-								/>
-							</NavLink>
-						</Nav>
-						<Nav id="/dashboard">
-							<NavLink to="">
-								<IconCnt>
-									<Icon icon={dashboard} />
-								</IconCnt>
-								<Text>Strona główna</Text>
-							</NavLink>
-						</Nav>
-						<Nav id="/user-panel">
-							<NavLink to="/user-panel">
-								<IconCnt>
-									<Icon icon={user} />
-								</IconCnt>
-								<Text>Twój profil</Text>
-							</NavLink>
-						</Nav>
-						<Nav id="/pizzerias">
-							<NavLink to="/pizzerias">
-								<IconCnt>
-									<Icon icon={cutlery} />
-								</IconCnt>
-								<Text>Pizzerie</Text>
-							</NavLink>
-						</Nav>
-						<Nav id="/create-pizza">
-							<NavLink to="/create-pizza">
-								<IconCnt>
-									<Icon icon={pizza} />
-								</IconCnt>
-								<Text>Skomponuj pizzę</Text>
-							</NavLink>
-						</Nav>
-						<Nav
-							id={isPizzaSubmitted ? "/make-order" : false}
-							className={!isPizzaSubmitted ? classes.navDisabled : null}
-						>
-							<NavLink
-								to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
-							>
-								<IconCnt
-									className={!isPizzaSubmitted ? classes.iconDisable : null}
-								>
-									<Icon icon={shoppingCart} />
-								</IconCnt>
-								<Text
-									className={!isPizzaSubmitted ? classes.textDisabled : null}
-								>
-									Złóż zamówienie
-								</Text>
-							</NavLink>
-						</Nav>
-						<Nav
-							id={isPizzaSubmitted ? "/summary-order" : false}
-							className={!isPizzaSubmitted ? classes.navDisabled : null}
-						>
-							<NavLink
-								to={
-									isPizzaSubmitted ? "/summary-order" : window.location.pathname
-								}
-							>
-								<IconCnt
-									className={!isPizzaSubmitted ? classes.iconDisable : null}
-								>
-									<Icon icon={creditCardAlt} />
-								</IconCnt>
-								<Text
-									className={!isPizzaSubmitted ? classes.textDisabled : null}
-								>
-									Podsumowanie zamówienia
-								</Text>
-							</NavLink>
-						</Nav>
-					</SideNav>
+						<ReactSVG
+							src="logo.svg"
+							svgStyle={{ width: 90, height: 50 }}
+							className={classes.logo}
+						/>
+					</NavLink>
+					<NavLink
+						to=""
+						onClick={this.onNavItemSelect}
+						className={path === "/" ? classes.navItemSelected : null}
+					>
+						<IconCnt>
+							<Icon icon={dashboard} />
+						</IconCnt>
+						<Text>Strona główna</Text>
+					</NavLink>
+					<NavLink
+						to="/user-panel"
+						className={path === "/user-panel" ? classes.navItemSelected : null}
+						onClick={this.onNavItemSelect}
+					>
+						<IconCnt>
+							<Icon icon={user} />
+						</IconCnt>
+						<Text>Twój profil</Text>
+					</NavLink>
+					<NavLink
+						to="/pizzerias"
+						onClick={this.onNavItemSelect}
+						className={path === "/pizzerias" ? classes.navItemSelected : null}
+					>
+						<IconCnt>
+							<Icon icon={cutlery} />
+						</IconCnt>
+						<Text>Pizzerie</Text>
+					</NavLink>
+					<NavLink
+						to="/create-pizza"
+						onClick={this.onNavItemSelect}
+						className={
+							path === "/create-pizza" ? classes.navItemSelected : null
+						}
+					>
+						<IconCnt>
+							<Icon icon={pizza} />
+						</IconCnt>
+						<Text>Skomponuj pizzę</Text>
+					</NavLink>
+					<NavLink
+						to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						className={classNames(
+							path === "/make-order" ? classes.navItemSelected : null,
+							!isPizzaSubmitted ? classes.navDisabled : null
+						)}
+						onClick={this.onNavItemSelect}
+					>
+						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+							<Icon icon={shoppingCart} />
+						</IconCnt>
+						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+							Złóż zamówienie
+						</Text>
+					</NavLink>
+					<NavLink
+						to={isPizzaSubmitted ? "/summary-order" : window.location.pathname}
+						className={classNames(
+							path === "/summary-order" ? classes.navItemSelected : null,
+							!isPizzaSubmitted ? classes.navDisabled : null
+						)}
+						onClick={this.onNavItemSelect}
+					>
+						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+							<Icon icon={creditCardAlt} />
+						</IconCnt>
+						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+							Podsumowanie zamówienia
+						</Text>
+					</NavLink>
 				</Navigation>
 			</Fragment>
 		);
