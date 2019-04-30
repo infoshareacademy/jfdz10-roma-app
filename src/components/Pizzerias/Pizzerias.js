@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PizzeriasList from "./PizzeriasList";
-import "../SharedComponents/ListScrollbar.css";
 import "../CreatePizza/containers.css";
 import "./pizzerias.css";
 

@@ -11,9 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
-import classNames from "classnames";
 import "./pizzerias.css";
-import "../SharedComponents/ListScrollbar.css";
 
 const styles = theme => ({
 	RightPane: {
@@ -21,7 +19,7 @@ const styles = theme => ({
 		border: "1px solid lightgray",
 		borderRadius: "5px",
 		padding: "12px",
-		overflowY: "auto"
+		overflowY: "hidden"
 	},
 	FavIconEnabled: {
 		float: "right",
@@ -75,7 +73,7 @@ class PizzeriasList extends Component {
 	componentDidMount() {
 		fetch("pizzas.json")
 			.then(res => res.json())
-			.then(pizzas => this.setState({ pizzas }))
+			.then(pizzas => this.setState({ pizzas }));
 		fetch("pizzerias.json")
 			.then(res => res.json())
 			.then(data => {
@@ -249,10 +247,7 @@ class PizzeriasList extends Component {
 										})}
 								</ListGroup>
 							</Col>
-							<Col
-								sm={8}
-								className={classNames(classes.RightPane, "list-scrollbar")}
-							>
+							<Col sm={8} className={classes.RightPane}>
 								<Tab.Content>
 									{pizzerias.map(pizzeria => {
 										return (
@@ -284,12 +279,17 @@ class PizzeriasList extends Component {
 													<h1>Menu:</h1>
 													<div className="pizzeriasList__column__right__pizzas">
 														{this.state.pizzas.map(pizza => {
-															return <p key={Math.random()}>
-																<input type="checkbox"/> {pizza.pizzaName} ({pizza.price} zł)
-															</p>
+															return (
+																<p key={Math.random()}>
+																	<input type="checkbox" /> {pizza.pizzaName} (
+																	{pizza.price} zł)
+																</p>
+															);
 														})}
 													</div>
-													<div className="pizzeriasList__column__right__button">Zamów</div>
+													<div className="pizzeriasList__column__right__button">
+														Zamów
+													</div>
 												</div>
 											</Tab.Pane>
 										);
