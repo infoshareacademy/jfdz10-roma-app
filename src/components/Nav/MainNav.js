@@ -129,9 +129,7 @@ class MainNav extends React.Component {
 	}
 
 	shouldComponentUpdate() {
-		console.log("update");
 		if (this.state.selectedPath !== window.location.pathname) {
-			console.log("update");
 			this.setState({ selectedPath: window.location.pathname });
 		}
 		return true;
@@ -144,7 +142,6 @@ class MainNav extends React.Component {
 		const { classes } = this.props;
 		const { isNavOpen } = this.state;
 		const path = this.state.selectedPath;
-		console.log(path);
 		return (
 			<Fragment>
 				<MdMenu
