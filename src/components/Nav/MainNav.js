@@ -129,13 +129,20 @@ class MainNav extends React.Component {
 		this.setState({ isNavOpen: !this.state.isNavOpen });
 	};
 
+	shouldComponentUpdate() {
+		if (this.state.selectedPath !== window.location.pathname) {
+			this.setState({ selectedPath: window.location.pathname });
+			// this.onItemSelection(window.location.pathname);
+		}
+		return true;
+	}
+
 	render() {
 		const isPizzaSubmitted = JSON.parse(
 			localStorage.getItem("isPizzaSubmitted")
 		);
 		const { classes } = this.props;
 		const { isNavOpen } = this.state;
-
 		return (
 			<Fragment>
 				<MdMenu
@@ -150,9 +157,11 @@ class MainNav extends React.Component {
 					)}
 				>
 					<SideNav
+						path={window.location.pathname}
+						// selectedPath={window.location.pathname}
 						defaultSelectedPath={window.location.pathname}
 						theme={theme}
-						onItemSelection={this.onItemSelection}
+						// onItemSelection={this.onItemSelection}
 					>
 						<Nav id="logo" style={{ background: "#303641", margin: "0 10px" }}>
 							<NavLink to="/" style={{ margin: "auto" }}>

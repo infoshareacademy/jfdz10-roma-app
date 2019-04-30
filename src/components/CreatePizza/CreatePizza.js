@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,6 +9,7 @@ import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
 import Alert from "react-bootstrap/Alert";
 import { withStyles } from "@material-ui/core/styles";
+import { Redirect } from "react-router";
 
 const styles = theme => ({
 	favButton: {
@@ -88,6 +89,8 @@ class CreatePizza extends Component {
 			isPizzaSubmitted: true
 		});
 		this.props.submitPizza();
+		// browserHistory.push("/make-order");
+		this.props.history.push("/make-order");
 	};
 
 	cancelIngredients = () => {
@@ -107,19 +110,21 @@ class CreatePizza extends Component {
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				{isPizzaSubmitted && (
-					<Alert
-						variant="success"
-						style={{
-							margin: "1rem 0",
-							position: "absolute",
-							width: "100%",
-							top: "0px",
-							left: "0px"
-						}}
-					>
-						<Alert.Heading>Potwierdziłeś wybrane składniki.</Alert.Heading>
-						Przejdź do następnego kroku i złóż zamówienie.
-					</Alert>
+					<Fragment>
+						<Alert
+							variant="success"
+							style={{
+								margin: "1rem 0",
+								position: "absolute",
+								width: "100%",
+								top: "0px",
+								left: "0px"
+							}}
+						>
+							<Alert.Heading>Potwierdziłeś wybrane składniki.</Alert.Heading>
+							Przejdź do następnego kroku i złóż zamówienie.
+						</Alert>
+					</Fragment>
 				)}
 				<Row className="h-100">
 					<Col
