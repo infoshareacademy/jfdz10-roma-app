@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./ListScrollbar.css";
+import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import { ListContainer, ListWrapper } from "./containers";
 
