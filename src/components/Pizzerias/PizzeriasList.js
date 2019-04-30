@@ -204,7 +204,7 @@ class PizzeriasList extends Component {
 						id="list-group-tabs-example list-group-tabs-pizzerias"
 						// defaultActiveKey={location}
 						activeKey={location}
-						onSelect={prop => console.log(prop)}
+						onSelect={() => null}
 					>
 						<Row
 							style={{
