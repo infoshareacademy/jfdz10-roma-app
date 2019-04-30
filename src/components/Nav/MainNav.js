@@ -180,7 +180,7 @@ class MainNav extends React.Component {
 							</NavLink>
 						</Nav>
 						<Nav id="/pizzerias">
-							<NavLink to="/pizzerias">
+							<NavLink to="/pizzerias#1">
 								<IconCnt>
 									<Icon icon={cutlery} />
 								</IconCnt>
