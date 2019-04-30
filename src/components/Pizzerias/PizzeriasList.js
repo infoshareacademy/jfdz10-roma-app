@@ -282,11 +282,14 @@ class PizzeriasList extends Component {
 												</div>
 												<div className="pizzeriasList__column__right">
 													<h1>Menu:</h1>
-													{this.state.pizzas.map(pizza => {
-														return <p key={Math.random()}>
-															<input type="checkbox"/> {pizza.pizzaName} ({pizza.price} zł)
-														</p>
-													})}
+													<div className="pizzeriasList__column__right__pizzas">
+														{this.state.pizzas.map(pizza => {
+															return <p key={Math.random()}>
+																<input type="checkbox"/> {pizza.pizzaName} ({pizza.price} zł)
+															</p>
+														})}
+													</div>
+													<div className="pizzeriasList__column__right__button">Zamów</div>
 												</div>
 											</Tab.Pane>
 										);
