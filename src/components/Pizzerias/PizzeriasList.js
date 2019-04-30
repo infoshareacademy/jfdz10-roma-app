@@ -12,7 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
 import classNames from "classnames";
-import "./styles.css";
+import "./pizzerias.css";
 import "../SharedComponents/ListScrollbar.css";
 
 const styles = theme => ({
@@ -73,6 +73,9 @@ class PizzeriasList extends Component {
 	};
 
 	componentDidMount() {
+		fetch("pizzas.json")
+			.then(res => res.json())
+			.then(pizzas => this.setState({ pizzas }))
 		fetch("pizzerias.json")
 			.then(res => res.json())
 			.then(data => {
@@ -270,31 +273,20 @@ class PizzeriasList extends Component {
 														<p>Kontakt: {pizzeria.contactInfo.phone}</p>
 														<a
 															target="_blank"
+															rel="noopener noreferrer"
 															href={"http://" + pizzeria.contactInfo.website}
 														>
 															{pizzeria.contactInfo.website}
 														</a>
 													</div>
-													<div className="pizzeriasList__map" />
 												</div>
 												<div className="pizzeriasList__column__right">
 													<h1>Menu:</h1>
-													<li>Margherita</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Neapolitana</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Capriciosa</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Salami</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Wegetariańska</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Sycylijska</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Bella</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
-													<li>Własna</li>
-													<h6>&nbsp;&nbsp;Lista składników</h6>
+													{this.state.pizzas.map(pizza => {
+														return <p key={Math.random()}>
+															<input type="checkbox"/> {pizza.pizzaName} ({pizza.price} zł)
+														</p>
+													})}
 												</div>
 											</Tab.Pane>
 										);
