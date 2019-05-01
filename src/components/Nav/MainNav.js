@@ -157,7 +157,7 @@ class MainNav extends React.Component {
 				>
 					<NavLink
 						to="/"
-						style={{ margin: "auto", background: "#303641", margin: "0 10px" }}
+						style={{ background: "#303641", margin: "0 10px" }}
 						onClick={this.onNavItemSelect}
 					>
 						<ReactSVG

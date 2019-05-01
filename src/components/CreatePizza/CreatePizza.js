@@ -9,7 +9,6 @@ import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
 import Alert from "react-bootstrap/Alert";
 import { withStyles } from "@material-ui/core/styles";
-import { Redirect } from "react-router";
 
 const styles = theme => ({
 	favButton: {
