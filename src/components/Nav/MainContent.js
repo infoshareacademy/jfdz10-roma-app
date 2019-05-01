@@ -20,7 +20,7 @@ const MainContent = props => {
 			<Route exact path="/" component={Dashboard} />
 			<Route
 				path="/create-pizza"
-				render={() => <CreatePizza submitPizza={submitPizza} />}
+				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
 			/>
 			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
 			<Route path="/user-panel" component={UserPanel} />

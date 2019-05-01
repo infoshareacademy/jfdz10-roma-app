@@ -80,7 +80,7 @@ const YourIngredients = ({
 						}
 						disabled={isPizzaSubmitted ? true : false}
 					>
-						Zatwierdź pizzę
+						Złóż zamówienie
 					</Button>
 				</OverlayTrigger>
 				<Button
