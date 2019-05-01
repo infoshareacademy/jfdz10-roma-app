@@ -63,6 +63,12 @@ class CreatePizza extends Component {
 	};
 
 	chooseIngredient = ingredient => {
+		const ingredients = this.state.ingredients.find(
+			element => element.name === ingredient.name
+		);
+		if (ingredients) {
+			return;
+		}
 		this.setState({ ingredients: [...this.state.ingredients, ingredient] });
 	};
 
