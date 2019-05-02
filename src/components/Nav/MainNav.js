@@ -187,7 +187,7 @@ class MainNav extends React.Component {
 						<Text>Twój profil</Text>
 					</NavLink>
 					<NavLink
-						to="/pizzerias"
+						to="/pizzerias#1"
 						onClick={this.onNavItemSelect}
 						className={path === "/pizzerias" ? classes.navItemSelected : null}
 					>
