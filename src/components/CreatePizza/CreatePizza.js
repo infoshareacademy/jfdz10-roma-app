@@ -7,8 +7,8 @@ import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
-import Alert from "react-bootstrap/Alert";
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
 	favButton: {
@@ -94,7 +94,6 @@ class CreatePizza extends Component {
 			isPizzaSubmitted: true
 		});
 		this.props.submitPizza();
-		// browserHistory.push("/make-order");
 		this.props.history.push("/make-order");
 	};
 
@@ -113,62 +112,75 @@ class CreatePizza extends Component {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
 		const { classes } = this.props;
 		return (
-			<Container className="h-100" style={{ position: "relative" }}>
+			<Fragment>
 				{isPizzaSubmitted && (
 					<Fragment>
-						<Alert
+						<div
 							variant="success"
 							style={{
-								margin: "1rem 0",
-								position: "absolute",
+								position: "fixed",
 								width: "100%",
-								top: "0px",
-								left: "0px"
+								height: "100vh",
+								backgroundColor: "rgba(209,241,218,0.6)",
+								zIndex: 1000
 							}}
 						>
-							<Alert.Heading>Potwierdziłeś wybrane składniki.</Alert.Heading>
-							Przejdź do następnego kroku i złóż zamówienie.
-						</Alert>
+							<Paper
+								style={{
+									position: "absolute",
+									top: "50%",
+									left: "50%",
+									transform: "translate(-50%, -50%)",
+									textAlign: "center",
+									padding: "25px 50px"
+								}}
+							>
+								<h1>Potwierdziłeś wybrane składniki.</h1>
+								<h2>Przejdź do następnego kroku i złóż zamówienie.</h2>
+							</Paper>
+						</div>
 					</Fragment>
 				)}
-				<Row className="h-100">
-					<Col
-						lg={6}
-						className="d-flex justify-content-center align-items-center"
-					>
-						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<YourIngredients
-								ingredients={this.state.ingredients}
-								removeIngredient={this.removeIngredient}
-								clearIngredients={this.clearIngredients}
-								submitIngredients={this.submitIngredients}
-								isPizzaSubmitted={isPizzaSubmitted}
-								cancelIngredients={this.cancelIngredients}
-							/>
-						) : (
-							<Button
-								size="lg"
-								// className="custom-button create-pizza-button"
-								className={classes.favButton}
-								onClick={this.handleChangeCreatePizza}
-								variant="link"
-							>
-								Stwórz pizzę
-							</Button>
-						)}
-					</Col>
-					<Col className="d-flex justify-content-center align-items-center">
-						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<IngredientsList
-								chooseIngredient={this.chooseIngredient}
-								isPizzaSubmitted={isPizzaSubmitted}
-							/>
-						) : (
-							<PreviousOrders />
-						)}
-					</Col>
-				</Row>
-			</Container>
+				<Container className="h-100" style={{ position: "relative" }}>
+					<Row className="h-100">
+						<Col
+							lg={6}
+							className="d-flex justify-content-center align-items-center"
+						>
+							{this.state.isCreatePizza || isPizzaSubmitted ? (
+								<YourIngredients
+									ingredients={this.state.ingredients}
+									removeIngredient={this.removeIngredient}
+									clearIngredients={this.clearIngredients}
+									submitIngredients={this.submitIngredients}
+									isPizzaSubmitted={isPizzaSubmitted}
+									cancelIngredients={this.cancelIngredients}
+								/>
+							) : (
+								<Button
+									size="lg"
+									// className="custom-button create-pizza-button"
+									className={classes.favButton}
+									onClick={this.handleChangeCreatePizza}
+									variant="link"
+								>
+									Stwórz pizzę
+								</Button>
+							)}
+						</Col>
+						<Col className="d-flex justify-content-center align-items-center">
+							{this.state.isCreatePizza || isPizzaSubmitted ? (
+								<IngredientsList
+									chooseIngredient={this.chooseIngredient}
+									isPizzaSubmitted={isPizzaSubmitted}
+								/>
+							) : (
+								<PreviousOrders />
+							)}
+						</Col>
+					</Row>
+				</Container>
+			</Fragment>
 		);
 	}
 }
