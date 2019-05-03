@@ -15,6 +15,7 @@ const Content = styled.div`
 
 const MainContent = props => {
 	const { submitPizza } = props;
+
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
@@ -24,7 +25,12 @@ const MainContent = props => {
 			/>
 			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
 			<Route path="/user-panel" component={UserPanel} />
-			<Route path="/make-order" component={PizzeriaList} />
+			<Route
+				path="/make-order"
+				component={props => (
+					<PizzeriaList {...props} submitPizza={submitPizza} />
+				)}
+			/>
 			<Route
 				path="/summary-order"
 				component={() => <h1>Summary the order</h1>}

@@ -7,8 +7,8 @@ import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
-import Alert from "react-bootstrap/Alert";
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
 	favButton: {
@@ -94,7 +94,6 @@ class CreatePizza extends Component {
 			isPizzaSubmitted: true
 		});
 		this.props.submitPizza();
-		// browserHistory.push("/make-order");
 		this.props.history.push("/make-order");
 	};
 
@@ -126,19 +125,19 @@ class CreatePizza extends Component {
 								zIndex: 1000
 							}}
 						>
-							<div
+							<Paper
 								style={{
 									position: "absolute",
 									top: "50%",
 									left: "50%",
 									transform: "translate(-50%, -50%)",
-									width: "100%",
-									textAlign: "center"
+									textAlign: "center",
+									padding: "25px 50px"
 								}}
 							>
 								<h1>Potwierdziłeś wybrane składniki.</h1>
 								<h2>Przejdź do następnego kroku i złóż zamówienie.</h2>
-							</div>
+							</Paper>
 						</div>
 					</Fragment>
 				)}
