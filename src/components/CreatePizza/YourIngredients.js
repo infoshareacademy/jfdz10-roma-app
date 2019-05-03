@@ -85,13 +85,9 @@ const YourIngredients = ({
 				</OverlayTrigger>
 				<Button
 					className="d-inline custom-button btn-secondary"
-					onClick={
-						isPizzaSubmitted
-							? () => cancelIngredients()
-							: () => clearIngredients()
-					}
+					onClick={clearIngredients}
 				>
-					{isPizzaSubmitted ? "Anuluj" : "Wyczyść"}
+					Wyczyść
 				</Button>
 			</div>
 		</ListContainer>

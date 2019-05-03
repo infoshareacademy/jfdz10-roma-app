@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 import "./styles.css";
-import { FaHeart } from "react-icons/fa";
+import "../../CreatePizza/create-pizza-button.css";
 import { MdHome } from "react-icons/md";
 import { MdLocalPostOffice } from "react-icons/md";
 import { MdPhone } from "react-icons/md";
 import { MdWeb } from "react-icons/md";
-
 
 const styles = {
 	RightPane: {
@@ -39,63 +40,43 @@ class PizzeriaList extends Component {
 			.then(pizzerias => this.setState({ pizzerias }));
 	}
 
-	selectFavPizzeria = pizzeria => {
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
-			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
-				favPizzerias.push(pizzeria);
-				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
-			} else {
-				const removedFavPizzeria = favPizzerias.filter(
-					fav => fav.name !== pizzeria.name
-				);
-				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
-			}
-		} else {
-			const favPizzeria = [pizzeria];
-			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
-		}
-	};
-
-	favIconMarked = pizzeria => {
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
-			return favPizzerias.some(fav => fav.name === pizzeria.name);
-		}
+	cancelIngredients = () => {
+		window.localStorage.clear();
+		this.props.submitPizza();
+		this.props.history.push("/create-pizza");
 	};
 
 	render() {
+		const { submitPizza } = this.props;
+
 		return (
 			<Container
 				style={{ display: "flex", height: "100%", alignItems: "center" }}
 			>
+				<Button
+					className="d-inline custom-button btn-secondary"
+					onClick={this.cancelIngredients}
+				>
+					{"Anuluj"}
+				</Button>
 				<Tab.Container
 					id="list-group-tabs-example list-group-tabs-pizzerias"
 					defaultActiveKey="#link1"
-					
 				>
-					<Row 
+					<Row
 						style={{ display: "flex", justifyContent: "center", width: "100%" }}
 					>
 						<Col sm={4}>
 							<ListGroup className="Pizzerias--list">
 								{this.state.pizzerias.map(pizzeria => {
 									return (
-										<ListGroup.Item 
+										<ListGroup.Item
 											className
 											key={pizzeria.id}
 											action
 											href={`#${pizzeria.id}`}
 										>
 											{pizzeria.name}
-											<FaHeart
-												onClick={() => this.selectFavPizzeria(pizzeria)}
-												style={
-													this.favIconMarked(pizzeria)
-														? styles.FavIconEnabled
-														: styles.FavIconDisabled
-												}
-											/>
 										</ListGroup.Item>
 									);
 								})}
@@ -106,12 +87,35 @@ class PizzeriaList extends Component {
 								{" "}
 								{this.state.pizzerias.map(pizzeria => {
 									return (
-									   <Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
-									       <h1>{pizzeria.name}</h1>
-									       <p>< MdHome /> {pizzeria.contactInfo.address.street}</p>
-									       <p>< MdLocalPostOffice /> {pizzeria.contactInfo.address.postcode}</p>
-									       <p>< MdPhone /> {pizzeria.contactInfo.phone}</p>
-									       <p>< MdWeb /> <a href={"http://" + pizzeria.contactInfo.website} target="_blank" rel="noopener noreferrer"> {pizzeria.contactInfo.website}</a></p>                                     </Tab.Pane>
+										<Tab.Pane key={pizzeria.id} eventKey={`#${pizzeria.id}`}>
+											       <h1>{pizzeria.name}</h1>
+											       
+											<p>
+												<MdHome /> {pizzeria.contactInfo.address.street}
+											</p>
+											       
+											<p>
+												<MdLocalPostOffice />{" "}
+												{pizzeria.contactInfo.address.postcode}
+											</p>
+											       
+											<p>
+												<MdPhone /> {pizzeria.contactInfo.phone}
+											</p>
+											       
+											<p>
+												<MdWeb />{" "}
+												<a
+													href={"http://" + pizzeria.contactInfo.website}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													{" "}
+													{pizzeria.contactInfo.website}
+												</a>
+											</p>
+											                                     
+										</Tab.Pane>
 									);
 								})}
 							</Tab.Content>
