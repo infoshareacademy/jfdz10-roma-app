@@ -1,9 +1,9 @@
 import React from "react";
 
-const LineChart = require("react-chartjs").Line;
+const BarChart = require("react-chartjs").Bar;
 
 
-class Chart extends React.Component {
+class Chart1 extends React.Component {
     
     render() {
         const chartData ={
@@ -41,8 +41,8 @@ class Chart extends React.Component {
                 },
             ]
         };
-    return <LineChart className="chart" data={chartData} width="400px" height="200px"/>
+    return <BarChart className="chart" data={chartData} />
  }
 }
 
-export default Chart;
+export default Chart1;

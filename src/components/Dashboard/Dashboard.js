@@ -1,52 +1,41 @@
 import React from "react";
-import Chart from "../Dashboard/Chart";
 import RegisterButton from "./RegisterButton";
-import LogInButton from "./ButtonLogin";
 import CreateYourPizzaCard from "./CreateYourPizzaCard";
-import GoToPizzeriasCard from "./GoToPizzeriasCard";
-
+import Chart1 from "./Chart";
+import Chart2 from "./Chart2";
 
 
 class Dashboard extends React.Component {
     render() {
         return (
-        <div className="dashboard">
-                <div className="jumbotron-fluid text-center" style={{"backgroundImage": "url(/img/background.jpg)", "backgroundSize": "100% 100%"}}>
-
-                    <div className="row">
-                        <div className="col-md-6 d-flex justify-content-center justify-content-sm-center align-items-center">
-                            <h1 className="display-2 d-flex justify-content-start text-danger" >PIZZERIUM</h1>   
-                        </div>
-                        <div className="col-md-6 d-flex justify-content-center">
-                            <a href="#"role="button"><RegisterButton/></a>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-6 d-flex justify-content-center align-items-center">
-                            <p className="lead d-flex justify-content-start">ZJEDZ SWOJĄ WYMARZONĄ PIZZĘ</p>  
-                        </div>
-                        <div className="col-md-6 d-flex justify-content-center">
-                            <a href="#" role="button"><LogInButton/></a>
-                        </div>
-                    </div>
+        <div className="dashboard" style={{"backgroundImage": "url(/img/background.jpg)", "backgroundSize": "100% 100%"}}>
+                
+                <div className="jumbotron-fluid text-center">
+                    <h1 className="display-3" style={{"textShadow":"4px 4px 2px rgba(150, 150, 150, 1)"}}>PIZZERIUM!</h1>
+                    <p className="lead">Aplikacja, które pomoże ci znaleźć twoją wymarzoną pizzę</p>
+                    <a href="#" role="button"><RegisterButton/></a>
                 </div>
 
             <div className="container">
 
                 <div className="row">
                     <div className="col-md-6 d-flex justify-content-center" style={{"padding": "1rem"}}>
-                        <CreateYourPizzaCard/>
+                        <CreateYourPizzaCard />
                     </div>
-                    <div className="col-md-6 d-flex justify-content-center" style={{"padding": "1rem"}}>
-                        <GoToPizzeriasCard/>
+                    <div className="col-md-6" style={{"height":"30rem"}}>Nasze statystyki:
+                        <div className="row">
+                            <div className="col-md-12" style={{"height":"15rem", "padding":"2rem"}}>
+                                <Chart1 />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12" style={{"height":"15rem", "padding":"2rem"}}>
+                                <Chart2 />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-12">
-                        <Chart />
-                    </div>
-                </div>
             </div>
         </div>        
         )
