@@ -8,6 +8,7 @@ import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
+import { userPlus } from 'react-icons-kit/fa/userPlus';
 import { cutlery } from "react-icons-kit/fa/cutlery";
 import { withStyles } from "@material-ui/core/styles";
 import { MdMenu } from "react-icons/md";
@@ -237,6 +238,16 @@ class MainNav extends React.Component {
 						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
 							Podsumowanie zamówienia
 						</Text>
+					</NavLink>
+					<NavLink
+						to="/sign-in"
+						onClick={this.onNavItemSelect}
+						className={path === "/sign-in" ? classes.navItemSelected : null}
+					>
+						<IconCnt>
+							<Icon icon={userPlus} />
+						</IconCnt>
+						<Text>Zaloguj się</Text>
 					</NavLink>
 				</Navigation>
 			</Fragment>
