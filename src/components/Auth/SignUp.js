@@ -69,11 +69,11 @@ class SignUp extends React.Component {
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input id="email" name="email" autoComplete="email" autoFocus value={this.state.email} onChange={this.handleChange} />
+                            <Input id="email__sign-up" name="email" autoComplete="email" autoFocus value={this.state.email} onChange={this.handleChange} />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Hasło</InputLabel>
-                            <Input name="password" type="password" id="password" autoComplete="current-password" value={this.state.password} onChange={this.handleChange} />
+                            <Input name="password" type="password" id="password__sign-up" autoComplete="current-password" value={this.state.password} onChange={this.handleChange} />
                         </FormControl>
                         <Button
                             type="submit"
