@@ -11,7 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebase from "firebase";
-// import { Redirect } from 'react-router';
 
 const styles = theme => ({
     main: {
@@ -40,6 +39,7 @@ class SignIn extends Component {
         email: '',
         password: '',
     };
+    
     handleChange = (event) => {
         this.setState({
             [event.currentTarget.name]: event.target.value,

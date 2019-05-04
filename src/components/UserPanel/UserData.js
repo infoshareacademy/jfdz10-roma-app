@@ -1,22 +1,32 @@
 import React from 'react';
+import firebase from 'firebase'
 
 class Nickname extends React.Component {
     state = {
+        user: null,
+        isChecked: false,
         registered: "",
-        nickname: "",
         email: "",
-        address: "",
-        phone: "",
+        address: JSON.parse(localStorage.getItem('userAddress')),
+        phone: JSON.parse(localStorage.getItem('userPhone')),
         showInput: false,
     }
     componentDidMount(){
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({nickname: value.nickname, registered: value.registered}))
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode} ${value.address.city}`, phone: value.phone}))
+        firebase.auth().onAuthStateChanged(user =>
+            this.setState({
+                user,
+                registered: user.metadata.creationTime,
+                email: user.email,
+                isChecked: true
+            })
+        )
+
+        if (!this.state.address || !this.state.phone) { 
+                this.editUserData()
+                setTimeout(alert('Uzupełnij profil'), 5000)    
+        }
     }
+
     editUserData = () => {
         const doInputsShow = this.state.showInput;
         this.setState( { 
@@ -29,27 +39,30 @@ class Nickname extends React.Component {
             inputs.forEach( input => input.classList.remove("unvisible"));
         }
     }
-    editEmail = (e) => { this.setState({ email: e.target.value }) }
-    editAddress = (e) => { this.setState({ address: e.target.value }) }
-    editPhone = (e) => { this.setState({ phone: e.target.value }) }
+
+    editAddress = (e) => { 
+        this.setState({ address: e.target.value }) 
+        localStorage.setItem('userAddress', JSON.stringify(this.state.address))
+    }
+
+    editPhoneNum = (e) => { 
+        this.setState({ phone: e.target.value }) 
+        localStorage.setItem('userPhone', JSON.stringify(this.state.phone))
+    }
 
     render (){
         return(
             <>
                 <span>Data dołączenia: {this.state.registered}</span>
-                <h2><span role="img" aria-label="user">👤</span> Login: {this.state.nickname}</h2> 
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
                     <h4>e-mail: {this.state.email}</h4>
-                        <div className="change__data__container unvisible">
-                            <input type="email" value={this.state.email} onChange={this.editEmail}></input><button onClick={this.editUserData}>Zatwierdź</button>    
-                        </div>
                     <h4>adres: {this.state.address}</h4>
                         <div className="change__data__container unvisible">
                             <input type="text" value={this.state.address} onChange={this.editAddress}></input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
                     <h4>telefon: {this.state.phone} </h4>   
                         <div className="change__data__container unvisible">
-                            <input type="text" value={this.state.phone} onChange={this.editPhone}></input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            <input type="text" value={this.state.phone} onChange={this.editPhoneNum}></input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
                 <div className="buttons__container">
                     <div className="button" onClick={this.editUserData}>
