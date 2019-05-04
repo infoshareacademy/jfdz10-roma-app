@@ -47,8 +47,6 @@ class PizzeriaList extends Component {
 	};
 
 	render() {
-		const { submitPizza } = this.props;
-
 		return (
 			<Container
 				style={{ display: "flex", height: "100%", alignItems: "center" }}
