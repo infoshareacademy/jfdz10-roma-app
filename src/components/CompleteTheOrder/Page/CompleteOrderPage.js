@@ -6,12 +6,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { withStyles } from "@material-ui/core/styles";
 
 import CustomPizzaHeader from "./CustomPizzaHeader/CustomPizzaHeader";
-// import AvailablePizzerias from "./AvailablePizzerias/AvailablePizzerias";
+import AvailablePizzerias from "./AvailablePizzerias/AvailablePizzerias";
 
 const styles = theme => ({
 	container: {
 		width: "100%",
-		height: "100%",
 		display: "flex",
 		flexDirection: "column",
 		padding: 20
@@ -46,7 +45,7 @@ class CompleteOrderPage extends Component {
 
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
-				<Row className="h-100">
+				<Row>
 					<div className={classes.container}>
 						<h3 className={classes.title}>Wybrana pizza:</h3>
 						<ListGroup>
@@ -61,7 +60,7 @@ class CompleteOrderPage extends Component {
 							{"Anuluj"}
 						</Button>
 					</div>
-					<div>{/* <AvailablePizzerias /> */}</div>
+					<AvailablePizzerias />
 				</Row>
 			</Container>
 		);

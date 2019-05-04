@@ -14,6 +14,7 @@ var config = {
 	messagingSenderId: "978059724629"
 };
 firebase.initializeApp(config);
+export const db = firebase.database();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
