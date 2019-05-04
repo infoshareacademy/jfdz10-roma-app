@@ -14,21 +14,25 @@ const Content = styled.div`
 `;
 
 const MainContent = props => {
-	const { submitPizza } = props;
+	const { submitPizza, isPizzaSubmitted } = props;
 
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
+			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
+			<Route path="/user-panel" component={UserPanel} />
 			<Route
 				path="/create-pizza"
 				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
 			/>
-			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
-			<Route path="/user-panel" component={UserPanel} />
 			<Route
 				path="/make-order"
 				component={props => (
-					<CompleteOrderPage {...props} submitPizza={submitPizza} />
+					<CompleteOrderPage
+						{...props}
+						isCustomPizzaSubmitted={isPizzaSubmitted}
+						submitPizza={submitPizza}
+					/>
 				)}
 			/>
 			<Route

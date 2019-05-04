@@ -29,7 +29,10 @@ class App extends React.Component {
 			<BrowserRouter>
 				<AppContainer>
 					<MainNav isPizzaSubmitted={isPizzaSubmitted} />
-					<MainContent submitPizza={this.handleSubmitPizza} />
+					<MainContent
+						submitPizza={this.handleSubmitPizza}
+						isPizzaSubmitted={isPizzaSubmitted}
+					/>
 				</AppContainer>
 			</BrowserRouter>
 		);
