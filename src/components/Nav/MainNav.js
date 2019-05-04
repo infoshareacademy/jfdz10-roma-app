@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import firebase from 'firebase'
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactSVG from "react-svg";
@@ -115,7 +116,12 @@ const styles = theme => ({
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
-	state = { selectedPath: "", isNavOpen: null };
+	state = {
+		user: null,
+		isChecked: false,
+		selectedPath: "", 
+		isNavOpen: null 
+	}
 
 	onNavItemSelect = () => {
 		this.setState({ selectedPath: window.location.pathname });
@@ -127,6 +133,11 @@ class MainNav extends React.Component {
 
 	componentDidMount() {
 		this.setState({ selectedPath: window.location.pathname });
+		firebase.auth().onAuthStateChanged(user =>
+            this.setState({
+                user,
+                isChecked: true
+            }))
 	}
 
 	shouldComponentUpdate() {
@@ -178,39 +189,49 @@ class MainNav extends React.Component {
 						<Text>Strona główna</Text>
 					</NavLink>
 					<NavLink
-						to="/user-panel"
-						className={path === "/user-panel" ? classes.navItemSelected : null}
+						to={this.state.user ? "/user-panel" : "/sign-in"}
+						className={classNames(
+							path === "/user-panel" ? classes.navItemSelected : null,
+							!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={user} />
 						</IconCnt>
-						<Text>Twój profil</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>Twój profil</Text>
 					</NavLink>
 					<NavLink
-						to="/pizzerias#1"
+						to={this.state.user ? "/pizzerias#1" : "/sign-in"}
+						className={classNames(
+							path === "/pizzerias" ? classes.navItemSelected : null,
+							!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
-						className={path === "/pizzerias" ? classes.navItemSelected : null}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={cutlery} />
 						</IconCnt>
-						<Text>Pizzerie</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>Pizzerie</Text>
 					</NavLink>
 					<NavLink
-						to="/create-pizza"
+						to={this.state.user ? "/create-pizza" : "/sign-in"}
+						className={classNames(
+							path === "/create-pizza" ? classes.navItemSelected : null,
+							!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
-						className={
-							path === "/create-pizza" ? classes.navItemSelected : null
-						}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={pizza} />
 						</IconCnt>
-						<Text>Skomponuj pizzę</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Skomponuj pizzę
+						</Text>
 					</NavLink>
 					<NavLink
-						to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						to={!this.state.user ? "/sign-in"
+							: isPizzaSubmitted ? "/make-order" : window.location.pathname}
 						className={classNames(
 							path === "/make-order" ? classes.navItemSelected : null,
 							!isPizzaSubmitted ? classes.navDisabled : null
@@ -225,7 +246,8 @@ class MainNav extends React.Component {
 						</Text>
 					</NavLink>
 					<NavLink
-						to={isPizzaSubmitted ? "/summary-order" : window.location.pathname}
+						to={!this.state.user ? "/sign-in"
+							: isPizzaSubmitted ? "/summary-order" : window.location.pathname}
 						className={classNames(
 							path === "/summary-order" ? classes.navItemSelected : null,
 							!isPizzaSubmitted ? classes.navDisabled : null
