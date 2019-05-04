@@ -47,7 +47,17 @@ class AvailablePizzerias extends Component {
 
 	render() {
 		const { classes } = this.props;
-		const { pizzerias = [] } = this.state;
+		const { pizzerias = [], ingredients = [] } = this.state;
+
+		const list = pizzerias.filter(pizzeria => {
+			return ingredients.every(ingredient => {
+				return pizzeria.availableIngredients.some(
+					element => element.name === ingredient.name
+				);
+			});
+		});
+		console.log(list);
+
 		return (
 			<div className={classes.container}>
 				{pizzerias.map(pizzeria => (
