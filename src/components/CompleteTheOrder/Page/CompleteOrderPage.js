@@ -26,7 +26,9 @@ const getFromLocalStorage = item => {
 
 class CompleteOrderPage extends Component {
 	state = {
-		ingredients: []
+		ingredients: [],
+		isPizzeriaSelected: false,
+		selectedPizzeria: {}
 	};
 
 	componentDidMount() {
@@ -39,10 +41,18 @@ class CompleteOrderPage extends Component {
 		this.props.history.push("/create-pizza");
 	};
 
+	handleChoosePizzeria = pizzeria => {
+		this.setState({
+			...this.state,
+			isPizzeriaSelected: true,
+			selectedPizzeria: pizzeria
+		});
+	};
+
 	render() {
 		const { classes, isCustomPizzaSubmitted } = this.props;
-		const { ingredients } = this.state;
-
+		const { ingredients, selectedPizzeria, isPizzeriaSelected } = this.state;
+		console.log(selectedPizzeria);
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				<Row>
@@ -60,7 +70,11 @@ class CompleteOrderPage extends Component {
 							{"Anuluj"}
 						</Button>
 					</div>
-					<AvailablePizzerias isCustomPizza={isCustomPizzaSubmitted} />
+					<AvailablePizzerias
+						isCustomPizza={isCustomPizzaSubmitted}
+						choosePizzeria={this.handleChoosePizzeria}
+						isPizzeriaSelected={isPizzeriaSelected}
+					/>
 				</Row>
 			</Container>
 		);

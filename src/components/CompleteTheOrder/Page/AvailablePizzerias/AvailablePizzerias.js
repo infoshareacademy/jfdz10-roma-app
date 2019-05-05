@@ -1,24 +1,16 @@
 import React, { Component } from "react";
-import { Paper } from "@material-ui/core";
 import { db } from "../../../../index";
 import { withStyles } from "@material-ui/core/styles";
 
 import { ListWrapper } from "../../../SharedComponents/containers";
+import PizzeriaListRow from "./PizzeriaListRow/PizzeriaListRow";
 
 const styles = theme => ({
 	wrapper: {
 		width: "100%"
 	},
 	list: {
-		padding: "0 20px 20px 20px"
-	},
-	pizzeriaWrapper: {
-		display: "flex",
-		padding: 15,
-		marginBottom: 10
-	},
-	contactInfo: {
-		width: "50%"
+		padding: "0 20px 0px 20px"
 	}
 });
 
@@ -45,10 +37,20 @@ class AvailablePizzerias extends Component {
 					pizzerias
 				});
 			});
+		console.log("hello");
 	}
 
+	selectPizzeria = pizzeria => {
+		this.props.choosePizzeria(pizzeria);
+	};
+
 	render() {
-		const { classes, isCustomPizza } = this.props;
+		const {
+			classes,
+			isCustomPizza,
+			choosePizzeria,
+			isPizzeriaSelected
+		} = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
 		const list = pizzerias.filter(pizzeria => {
@@ -58,21 +60,6 @@ class AvailablePizzerias extends Component {
 				);
 			});
 		});
-
-		const price = availableIngredients => {
-			const selected = [availableIngredients[0]];
-			ingredients.forEach(ingredient => {
-				const found = availableIngredients.find(
-					element => element.name === ingredient.name
-				);
-				selected.push(found);
-			});
-			let price = selected.reduce((acc, next) => {
-				return acc + next.price;
-			}, 0);
-
-			return price;
-		};
 
 		return (
 			<div className={classes.wrapper}>
@@ -84,23 +71,12 @@ class AvailablePizzerias extends Component {
 						</h4>
 					) : (
 						list.map(pizzeria => (
-							<Paper className={classes.pizzeriaWrapper} key={pizzeria.id}>
-								<div className={classes.contactInfo}>
-									<h4>{pizzeria.name}</h4>
-									<p>
-										ul. {pizzeria.contactInfo.address.street},{" "}
-										{pizzeria.contactInfo.address.city},{" "}
-										{pizzeria.contactInfo.address.postcode}
-									</p>
-									<p>Tel. {pizzeria.contactInfo.phone}</p>
-								</div>
-								<div className={classes.contactInfo}>
-									<p>
-										Wartość zamówienia:{" "}
-										<span>{price(pizzeria.availableIngredients)} zł</span>
-									</p>
-								</div>
-							</Paper>
+							<PizzeriaListRow
+								key={pizzeria.id}
+								pizzeria={pizzeria}
+								selectPizzeria={this.selectPizzeria}
+								ingredients={ingredients}
+							/>
 						))
 					)}
 				</ListWrapper>
