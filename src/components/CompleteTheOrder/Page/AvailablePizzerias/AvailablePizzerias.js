@@ -58,19 +58,25 @@ class AvailablePizzerias extends Component {
 
 		return (
 			<ListWrapper className={classes.wrapper}>
-				{list.map(pizzeria => (
-					<Paper className={classes.pizzeriaWrapper}>
-						<div className={classes.contactInfo}>
-							<h4>{pizzeria.name}</h4>
-							<p>
-								ul. {pizzeria.contactInfo.address.street},{" "}
-								{pizzeria.contactInfo.address.city},{" "}
-								{pizzeria.contactInfo.address.postcode}
-							</p>
-							<p>Tel. {pizzeria.contactInfo.phone}</p>
-						</div>
-					</Paper>
-				))}
+				{list.length === 0 ? (
+					<h3 style={{ textAlign: "center" }}>
+						Nie znaleziono żadnej pizzeri, która mogłaby zrobić taką pizzę{" "}
+					</h3>
+				) : (
+					list.map(pizzeria => (
+						<Paper className={classes.pizzeriaWrapper}>
+							<div className={classes.contactInfo}>
+								<h4>{pizzeria.name}</h4>
+								<p>
+									ul. {pizzeria.contactInfo.address.street},{" "}
+									{pizzeria.contactInfo.address.city},{" "}
+									{pizzeria.contactInfo.address.postcode}
+								</p>
+								<p>Tel. {pizzeria.contactInfo.phone}</p>
+							</div>
+						</Paper>
+					))
+				)}
 			</ListWrapper>
 		);
 	}
