@@ -48,7 +48,7 @@ class AvailablePizzerias extends Component {
 	}
 
 	render() {
-		const { classes } = this.props;
+		const { classes, isCustomPizza } = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
 		const list = pizzerias.filter(pizzeria => {
@@ -58,6 +58,21 @@ class AvailablePizzerias extends Component {
 				);
 			});
 		});
+
+		const price = availableIngredients => {
+			const selected = [availableIngredients[0]];
+			ingredients.forEach(ingredient => {
+				const found = availableIngredients.find(
+					element => element.name === ingredient.name
+				);
+				selected.push(found);
+			});
+			let price = selected.reduce((acc, next) => {
+				return acc + next.price;
+			}, 0);
+
+			return price;
+		};
 
 		return (
 			<div className={classes.wrapper}>
@@ -69,7 +84,7 @@ class AvailablePizzerias extends Component {
 						</h4>
 					) : (
 						list.map(pizzeria => (
-							<Paper className={classes.pizzeriaWrapper}>
+							<Paper className={classes.pizzeriaWrapper} key={pizzeria.id}>
 								<div className={classes.contactInfo}>
 									<h4>{pizzeria.name}</h4>
 									<p>
@@ -78,6 +93,12 @@ class AvailablePizzerias extends Component {
 										{pizzeria.contactInfo.address.postcode}
 									</p>
 									<p>Tel. {pizzeria.contactInfo.phone}</p>
+								</div>
+								<div className={classes.contactInfo}>
+									<p>
+										Wartość zamówienia:{" "}
+										<span>{price(pizzeria.availableIngredients)} zł</span>
+									</p>
 								</div>
 							</Paper>
 						))

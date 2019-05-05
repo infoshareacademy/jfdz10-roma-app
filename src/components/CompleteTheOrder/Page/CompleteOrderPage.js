@@ -60,7 +60,7 @@ class CompleteOrderPage extends Component {
 							{"Anuluj"}
 						</Button>
 					</div>
-					<AvailablePizzerias />
+					<AvailablePizzerias isCustomPizza={isCustomPizzaSubmitted} />
 				</Row>
 			</Container>
 		);
