@@ -7,7 +7,10 @@ import { ListWrapper } from "../../../SharedComponents/containers";
 
 const styles = theme => ({
 	wrapper: {
-		paddingTop: 20
+		width: "100%"
+	},
+	list: {
+		padding: "0 20px 20px 20px"
 	},
 	pizzeriaWrapper: {
 		display: "flex",
@@ -57,27 +60,30 @@ class AvailablePizzerias extends Component {
 		});
 
 		return (
-			<ListWrapper className={classes.wrapper}>
-				{list.length === 0 ? (
-					<h3 style={{ textAlign: "center" }}>
-						Nie znaleziono żadnej pizzeri, która mogłaby zrobić taką pizzę{" "}
-					</h3>
-				) : (
-					list.map(pizzeria => (
-						<Paper className={classes.pizzeriaWrapper}>
-							<div className={classes.contactInfo}>
-								<h4>{pizzeria.name}</h4>
-								<p>
-									ul. {pizzeria.contactInfo.address.street},{" "}
-									{pizzeria.contactInfo.address.city},{" "}
-									{pizzeria.contactInfo.address.postcode}
-								</p>
-								<p>Tel. {pizzeria.contactInfo.phone}</p>
-							</div>
-						</Paper>
-					))
-				)}
-			</ListWrapper>
+			<div className={classes.wrapper}>
+				<h3 style={{ paddingLeft: 20 }}>Dostępne pizzerie:</h3>
+				<ListWrapper className={classes.list}>
+					{list.length === 0 ? (
+						<h4 style={{ textAlign: "center" }}>
+							Nie znaleziono żadnej pizzeri, która mogłaby zrobić taką pizzę...
+						</h4>
+					) : (
+						list.map(pizzeria => (
+							<Paper className={classes.pizzeriaWrapper}>
+								<div className={classes.contactInfo}>
+									<h4>{pizzeria.name}</h4>
+									<p>
+										ul. {pizzeria.contactInfo.address.street},{" "}
+										{pizzeria.contactInfo.address.city},{" "}
+										{pizzeria.contactInfo.address.postcode}
+									</p>
+									<p>Tel. {pizzeria.contactInfo.phone}</p>
+								</div>
+							</Paper>
+						))
+					)}
+				</ListWrapper>
+			</div>
 		);
 	}
 }
