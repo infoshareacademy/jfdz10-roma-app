@@ -19,7 +19,8 @@ const PizzeriaListRow = props => {
 		pizzeria,
 		selectPizzeria,
 		ingredients,
-		isPizzeriaSelected
+		isPizzeriaSelected,
+		unselectPizzeria
 	} = props;
 
 	const price = availableIngredients => {
@@ -53,7 +54,9 @@ const PizzeriaListRow = props => {
 					Wartość zamówienia:{" "}
 					<span>{price(pizzeria.availableIngredients)} zł</span>
 				</p>
-				{!isPizzeriaSelected && (
+				{isPizzeriaSelected ? (
+					<button onClick={unselectPizzeria}>Cofnij wybór</button>
+				) : (
 					<button onClick={() => selectPizzeria(pizzeria)}>
 						Wybierz tą pizzerię
 					</button>

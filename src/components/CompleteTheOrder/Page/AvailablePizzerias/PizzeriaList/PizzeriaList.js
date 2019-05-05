@@ -8,7 +8,8 @@ const PizzeriaList = props => {
 		selectPizzeria,
 		ingredients,
 		isPizzeriaSelected,
-		selectedPizzeria
+		selectedPizzeria,
+		unselectPizzeria
 	} = props;
 
 	return isPizzeriaSelected ? (
@@ -16,6 +17,7 @@ const PizzeriaList = props => {
 			pizzeria={selectedPizzeria}
 			ingredients={ingredients}
 			isPizzeriaSelected={isPizzeriaSelected}
+			unselectPizzeria={unselectPizzeria}
 		/>
 	) : pizzerias.length === 0 ? (
 		<h4 style={{ textAlign: "center" }}>

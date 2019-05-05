@@ -49,7 +49,8 @@ class AvailablePizzerias extends Component {
 			classes,
 			isCustomPizza,
 			isPizzeriaSelected,
-			selectedPizzeria
+			selectedPizzeria,
+			unselectPizzeria
 		} = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
@@ -71,6 +72,7 @@ class AvailablePizzerias extends Component {
 						ingredients={ingredients}
 						isPizzeriaSelected={isPizzeriaSelected}
 						selectedPizzeria={selectedPizzeria}
+						unselectPizzeria={unselectPizzeria}
 					/>
 				</ListWrapper>
 			</div>

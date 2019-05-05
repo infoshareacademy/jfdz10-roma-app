@@ -55,6 +55,15 @@ class CompleteOrderPage extends Component {
 		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
 	};
 
+	handleUnselectPizzeria = () => {
+		this.setState({
+			...this.state,
+			isPizzeriaSelected: false,
+			selectedPizzeria: {}
+		});
+		window.localStorage.removeItem("selectedPizzeria");
+	};
+
 	render() {
 		const { classes, isCustomPizzaSubmitted } = this.props;
 		const { ingredients, selectedPizzeria, isPizzeriaSelected } = this.state;
@@ -81,6 +90,7 @@ class CompleteOrderPage extends Component {
 						choosePizzeria={this.handleChoosePizzeria}
 						isPizzeriaSelected={isPizzeriaSelected}
 						selectedPizzeria={selectedPizzeria}
+						unselectPizzeria={this.handleUnselectPizzeria}
 					/>
 				</Row>
 			</Container>
