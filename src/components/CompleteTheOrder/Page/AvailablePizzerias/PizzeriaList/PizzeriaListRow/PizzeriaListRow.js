@@ -14,7 +14,13 @@ const styles = theme => ({
 });
 
 const PizzeriaListRow = props => {
-	const { classes, pizzeria, selectPizzeria, ingredients } = props;
+	const {
+		classes,
+		pizzeria,
+		selectPizzeria,
+		ingredients,
+		isPizzeriaSelected
+	} = props;
 
 	const price = availableIngredients => {
 		const selected = [availableIngredients[0]];
@@ -47,9 +53,11 @@ const PizzeriaListRow = props => {
 					Wartość zamówienia:{" "}
 					<span>{price(pizzeria.availableIngredients)} zł</span>
 				</p>
-				<button onClick={() => selectPizzeria(pizzeria)}>
-					Wybierz tą pizzerię
-				</button>
+				{!isPizzeriaSelected && (
+					<button onClick={() => selectPizzeria(pizzeria)}>
+						Wybierz tą pizzerię
+					</button>
+				)}
 			</div>
 		</Paper>
 	);

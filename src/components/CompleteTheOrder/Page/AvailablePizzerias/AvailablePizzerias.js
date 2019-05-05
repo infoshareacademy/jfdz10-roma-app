@@ -48,7 +48,6 @@ class AvailablePizzerias extends Component {
 		const {
 			classes,
 			isCustomPizza,
-			choosePizzeria,
 			isPizzeriaSelected,
 			selectedPizzeria
 		} = this.props;
@@ -66,15 +65,13 @@ class AvailablePizzerias extends Component {
 			<div className={classes.wrapper}>
 				<h3 style={{ paddingLeft: 20 }}>Dostępne pizzerie:</h3>
 				<ListWrapper className={classes.list}>
-					{isPizzeriaSelected ? (
-						<Paper>{selectedPizzeria.name}</Paper>
-					) : (
-						<PizzeriaList
-							pizzerias={list}
-							selectPizzeria={this.selectPizzeria}
-							ingredients={ingredients}
-						/>
-					)}
+					<PizzeriaList
+						pizzerias={list}
+						selectPizzeria={this.selectPizzeria}
+						ingredients={ingredients}
+						isPizzeriaSelected={isPizzeriaSelected}
+						selectedPizzeria={selectedPizzeria}
+					/>
 				</ListWrapper>
 			</div>
 		);
