@@ -3,12 +3,11 @@ import { Paper } from "@material-ui/core";
 import { db } from "../../../../index";
 import { withStyles } from "@material-ui/core/styles";
 
+import { ListWrapper } from "../../../SharedComponents/containers";
+
 const styles = theme => ({
-	container: {
-		width: "100%",
-		display: "flex",
-		flexDirection: "column",
-		padding: 20
+	wrapper: {
+		paddingTop: 20
 	},
 	pizzeriaWrapper: {
 		display: "flex",
@@ -56,11 +55,10 @@ class AvailablePizzerias extends Component {
 				);
 			});
 		});
-		console.log(list);
 
 		return (
-			<div className={classes.container}>
-				{pizzerias.map(pizzeria => (
+			<ListWrapper className={classes.wrapper}>
+				{list.map(pizzeria => (
 					<Paper className={classes.pizzeriaWrapper}>
 						<div className={classes.contactInfo}>
 							<h4>{pizzeria.name}</h4>
@@ -73,7 +71,7 @@ class AvailablePizzerias extends Component {
 						</div>
 					</Paper>
 				))}
-			</div>
+			</ListWrapper>
 		);
 	}
 }
