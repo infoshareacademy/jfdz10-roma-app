@@ -52,7 +52,7 @@ class CompleteOrderPage extends Component {
 	render() {
 		const { classes, isCustomPizzaSubmitted } = this.props;
 		const { ingredients, selectedPizzeria, isPizzeriaSelected } = this.state;
-		console.log(selectedPizzeria);
+
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				<Row>
@@ -74,6 +74,7 @@ class CompleteOrderPage extends Component {
 						isCustomPizza={isCustomPizzaSubmitted}
 						choosePizzeria={this.handleChoosePizzeria}
 						isPizzeriaSelected={isPizzeriaSelected}
+						selectedPizzeria={selectedPizzeria}
 					/>
 				</Row>
 			</Container>

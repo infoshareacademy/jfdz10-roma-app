@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { db } from "../../../../index";
+import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 import { ListWrapper } from "../../../SharedComponents/containers";
-import PizzeriaListRow from "./PizzeriaListRow/PizzeriaListRow";
+import PizzeriaList from "./PizzeriaList/PizzeriaList";
 
 const styles = theme => ({
 	wrapper: {
@@ -37,7 +38,6 @@ class AvailablePizzerias extends Component {
 					pizzerias
 				});
 			});
-		console.log("hello");
 	}
 
 	selectPizzeria = pizzeria => {
@@ -49,7 +49,8 @@ class AvailablePizzerias extends Component {
 			classes,
 			isCustomPizza,
 			choosePizzeria,
-			isPizzeriaSelected
+			isPizzeriaSelected,
+			selectedPizzeria
 		} = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
@@ -65,19 +66,14 @@ class AvailablePizzerias extends Component {
 			<div className={classes.wrapper}>
 				<h3 style={{ paddingLeft: 20 }}>Dostępne pizzerie:</h3>
 				<ListWrapper className={classes.list}>
-					{list.length === 0 ? (
-						<h4 style={{ textAlign: "center" }}>
-							Nie znaleziono żadnej pizzeri, która mogłaby zrobić taką pizzę...
-						</h4>
+					{isPizzeriaSelected ? (
+						<Paper>{selectedPizzeria.name}</Paper>
 					) : (
-						list.map(pizzeria => (
-							<PizzeriaListRow
-								key={pizzeria.id}
-								pizzeria={pizzeria}
-								selectPizzeria={this.selectPizzeria}
-								ingredients={ingredients}
-							/>
-						))
+						<PizzeriaList
+							pizzerias={list}
+							selectPizzeria={this.selectPizzeria}
+							ingredients={ingredients}
+						/>
 					)}
 				</ListWrapper>
 			</div>
