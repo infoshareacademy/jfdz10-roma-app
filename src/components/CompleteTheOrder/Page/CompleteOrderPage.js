@@ -32,7 +32,12 @@ class CompleteOrderPage extends Component {
 	};
 
 	componentDidMount() {
-		this.setState({ ingredients: getFromLocalStorage("ingredients") });
+		this.setState({
+			...this.state,
+			isPizzeriaSelected: !!getFromLocalStorage("selectedPizzeria"),
+			selectedPizzeria: getFromLocalStorage("selectedPizzeria"),
+			ingredients: getFromLocalStorage("ingredients")
+		});
 	}
 
 	cancelIngredients = () => {
@@ -47,6 +52,7 @@ class CompleteOrderPage extends Component {
 			isPizzeriaSelected: true,
 			selectedPizzeria: pizzeria
 		});
+		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
 	};
 
 	render() {
