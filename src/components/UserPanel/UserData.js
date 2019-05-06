@@ -54,6 +54,7 @@ class Nickname extends React.Component {
         if (this.state.user) { 
             this.setState({ 
                 user: {
+                    ...this.state.user,
                     street: e.target.value 
                 }
             }, () => {
@@ -68,6 +69,7 @@ class Nickname extends React.Component {
         if (this.state.user) { 
             this.setState({ 
                 user: {
+                    ...this.state.user,
                     phone: e.target.value 
                 }
             }, () => {
@@ -78,8 +80,8 @@ class Nickname extends React.Component {
         }
     }
 
-    render (){
-        return(
+    render () {
+        return (
             <>
                 <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
@@ -109,7 +111,6 @@ class Nickname extends React.Component {
                     </div>
                 </div>        
             </>
-
         )
     }
 }

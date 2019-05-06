@@ -33,6 +33,11 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         color: 'white'
     },
+    remind: {
+        marginTop: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: 'blue'
+    }
 });
 
 class SignIn extends Component {
@@ -67,7 +72,7 @@ class SignIn extends Component {
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Zaloguj się
-                        </Typography>
+                    </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email</InputLabel>
@@ -86,6 +91,9 @@ class SignIn extends Component {
                         >
                             Zaloguj
                         </Button>
+                        <Typography className={classes.remind}>
+                            Nie pamiętam hasła.
+                        </Typography>
                     </form>
                 </Paper>
             </main>

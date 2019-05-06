@@ -12,3 +12,7 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.sign-in__remind {
+    padding-top: 2rem;
+}
