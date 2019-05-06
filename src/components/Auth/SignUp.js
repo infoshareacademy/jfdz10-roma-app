@@ -15,7 +15,7 @@ import firebase from 'firebase';
 const styles = theme => ({
     main: {
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 400
+            width: 500
         },
     },
     paper: {
@@ -52,8 +52,25 @@ class SignUp extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        const {
+            email,
+            name,
+            street,
+            city,
+            phone
+        } = this.state
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => { alert('Registered') })
+            .then(value => { 
+                firebase.database().ref(`users/${value.user.uid}`)
+                    .set({
+                        email,
+                        name,
+                        street,
+                        city,
+                        phone,
+                        uid: value.user.uid
+                    })
+                alert('Registered') })
             .catch(error => { alert(error.message) })
     };
 
