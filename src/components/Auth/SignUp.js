@@ -96,7 +96,6 @@ class SignUp extends React.Component {
                             <Input 
                                 id="name" 
                                 name="name" 
-                                autoFocus 
                                 value={this.state.name} 
                                 onChange={this.handleChange} 
                             />
@@ -108,7 +107,6 @@ class SignUp extends React.Component {
                             <Input 
                                 id="street" 
                                 name="street" 
-                                autoFocus 
                                 value={this.state.street} 
                                 onChange={this.handleChange} 
                             />
@@ -120,7 +118,6 @@ class SignUp extends React.Component {
                             <Input 
                                 id="city" 
                                 name="city" 
-                                autoFocus 
                                 value={this.state.city} 
                                 onChange={this.handleChange} 
                             />
@@ -131,8 +128,7 @@ class SignUp extends React.Component {
                             </InputLabel>
                             <Input 
                                 id="phone" 
-                                name="phone" 
-                                autoFocus 
+                                name="phone"
                                 value={this.state.phone} 
                                 onChange={this.handleChange} 
                             />
@@ -143,8 +139,7 @@ class SignUp extends React.Component {
                             </InputLabel>
                             <Input 
                                 id="email__sign-up" 
-                                name="email" 
-                                autoFocus 
+                                name="email"
                                 value={this.state.email} 
                                 onChange={this.handleChange} 
                             />
