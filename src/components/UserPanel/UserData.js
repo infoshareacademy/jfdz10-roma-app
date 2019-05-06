@@ -9,6 +9,7 @@ class Nickname extends React.Component {
         authIsChecked: false,
         showInput: false,
     }
+
     componentDidMount(){
         firebase.auth().onAuthStateChanged(user =>
             this.setState({
@@ -50,13 +51,31 @@ class Nickname extends React.Component {
     }
 
     editAddress = (e) => { 
-        this.setState({ address: e.target.value }) 
-        localStorage.setItem('userAddress', JSON.stringify(this.state.address))
+        if (this.state.user) { 
+            this.setState({ 
+                user: {
+                    street: e.target.value 
+                }
+            }, () => {
+            firebase.database()
+                .ref(`users/${this.state.authUserId}`)
+                .update({ street: this.state.user.street })
+            }) 
+        }
     }
 
     editPhoneNum = (e) => { 
-        this.setState({ phone: e.target.value }) 
-        localStorage.setItem('userPhone', JSON.stringify(this.state.phone))
+        if (this.state.user) { 
+            this.setState({ 
+                user: {
+                    phone: e.target.value 
+                }
+            }, () => {
+                firebase.database()
+                .ref(`users/${this.state.authUserId}`)
+                .update({ phone: this.state.user.phone })
+            })    
+        }
     }
 
     render (){
@@ -67,11 +86,19 @@ class Nickname extends React.Component {
                     <h4>e-mail: {this.state.authUserEmail}</h4>
                     <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
                         <div className="change__data__container unvisible">
-                            <input type="text" value={this.state.address} onChange={this.editAddress}></input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            <input 
+                                type="text" 
+                                value={ this.state.user ? this.state.user.street : '' } 
+                                onChange={this.editAddress}>
+                            </input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
                     <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
                         <div className="change__data__container unvisible">
-                            <input type="text" value={this.state.phone} onChange={this.editPhoneNum}></input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            <input 
+                                type="text" 
+                                value={ this.state.user ? this.state.user.phone : '' } 
+                                onChange={this.editPhoneNum}>
+                            </input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
                 <div className="buttons__container">
                     <div className="button" onClick={this.editUserData}>
