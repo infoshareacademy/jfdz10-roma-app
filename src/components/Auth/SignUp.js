@@ -37,7 +37,11 @@ const styles = theme => ({
 class SignUp extends React.Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        name: '',
+        street: '',
+        city: '',
+        phone: ''
     };
     
     handleChange = (event) => {
@@ -55,6 +59,7 @@ class SignUp extends React.Component {
 
     render() {
         const { classes } = this.props;
+        console.log(this.state)
 
         return (
             <main className={classes.main}>
@@ -67,6 +72,22 @@ class SignUp extends React.Component {
                         Zarejestruj się
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="text">Imię i nazwisko</InputLabel>
+                            <Input id="name" name="name" autoComplete="Imię i nazwisko" autoFocus value={this.state.name} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="text">Adres</InputLabel>
+                            <Input id="address" name="address" autoComplete="Ulica i numer domu" autoFocus value={this.state.address} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="text">Miasto</InputLabel>
+                            <Input id="city" name="city" autoComplete="Miasto" autoFocus value={this.state.city} onChange={this.handleChange} />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="text">Telefon</InputLabel>
+                            <Input id="phone" name="phone" autoComplete="Telefon kontaktowy" autoFocus value={this.state.phone} onChange={this.handleChange} />
+                        </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email</InputLabel>
                             <Input id="email__sign-up" name="email" autoComplete="email" autoFocus value={this.state.email} onChange={this.handleChange} />

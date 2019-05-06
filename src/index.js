@@ -21,7 +21,10 @@ const theme = createMuiTheme({
 	palette: {
 		primary: { main: "rgb(255, 211, 131)" },
 		secondary: { main: "rgb(255, 60, 0)" }
-	}
+	},
+	typography: {
+		useNextVariants: true,
+	},
 });
 
 ReactDOM.render(
