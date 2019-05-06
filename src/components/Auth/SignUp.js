@@ -144,7 +144,6 @@ class SignUp extends React.Component {
                             <Input 
                                 id="email__sign-up" 
                                 name="email" 
-                                autoComplete="email" 
                                 autoFocus 
                                 value={this.state.email} 
                                 onChange={this.handleChange} 
@@ -158,7 +157,6 @@ class SignUp extends React.Component {
                                 name="password" 
                                 type="password" 
                                 id="password__sign-up" 
-                                autoComplete="current-password" 
                                 value={this.state.password} 
                                 onChange={this.handleChange} 
                             />
