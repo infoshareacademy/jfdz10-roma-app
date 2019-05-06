@@ -13,33 +13,35 @@ class User extends React.Component {
     }
 
     componentDidMount(){
-        firebase.auth().onAuthStateChanged(user =>
-            this.setState({
-                authUser: user,
-                authUserId: user.uid,
-                authUserEmail: user.email,
-                authUserRegistered: user.metadata.creationTime,
-                authIsChecked: true,
-            }),
-        )
-        const databaseRef = firebase.database().ref('users')
-        databaseRef.once('value')
-            .then(snapshot => {
-                const snapshotVal = snapshot.val() || {};
-                const findUser = Object.keys(snapshotVal)
-                    .map(key => ({
-                        id: key,
-                        ...snapshotVal[key]
-                    }))
-                    .filter(user => {
-                        return user.id === this.state.authUserId
+        if (this.state.user){
+            firebase.auth().onAuthStateChanged(user =>
+                this.setState({
+                    authUser: user,
+                    authUserId: user.uid,
+                    authUserEmail: user.email,
+                    authUserRegistered: user.metadata.creationTime,
+                    authIsChecked: true,
+                }),
+            )
+            const databaseRef = firebase.database().ref('users')
+            databaseRef.once('value')
+                .then(snapshot => {
+                    const snapshotVal = snapshot.val() || {};
+                    const findUser = Object.keys(snapshotVal)
+                        .map(key => ({
+                            id: key,
+                            ...snapshotVal[key]
+                        }))
+                        .filter(user => {
+                            return user.id === this.state.authUserId
+                        })
+                    const user = findUser[0]
+                    this.setState({ 
+                        user, 
+                        userFirstName: user.name.split(' ')[0] 
                     })
-                const user = findUser[0]
-                this.setState({ 
-                    user, 
-                    userFirstName: user.name.split(' ')[0] 
                 })
-            })
+        }
     }
 
     render (){
