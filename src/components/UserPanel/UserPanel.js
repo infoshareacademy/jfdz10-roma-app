@@ -8,12 +8,6 @@ import './user.css';
 
 class User extends React.Component {
     
-    componentDidMount(){
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({name: value.name}))
-    }
-    
     render (){
         return(
             <div className="user__container">

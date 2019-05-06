@@ -3,28 +3,32 @@ import firebase from 'firebase'
 
 class Nickname extends React.Component {
     state = {
-        user: null,
-        isChecked: false,
-        registered: "",
-        email: "",
-        address: JSON.parse(localStorage.getItem('userAddress')),
-        phone: JSON.parse(localStorage.getItem('userPhone')),
+        authUser: null,
+        authUserRegistered: '',
+        authUserEmail: '',
+        authIsChecked: false,
         showInput: false,
     }
     componentDidMount(){
         firebase.auth().onAuthStateChanged(user =>
             this.setState({
-                user,
-                registered: user.metadata.creationTime,
-                email: user.email,
-                isChecked: true
-            })
+                authUser: user,
+                authUserId: user.uid,
+                authUserEmail: user.email,
+                authUserRegistered: user.metadata.creationTime,
+                authIsChecked: true,
+            }),
         )
-
-        if (!this.state.address || !this.state.phone) { 
-                this.editUserData()
-                setTimeout(alert('Uzupełnij profil'), 5000)    
-        }
+        const databaseRef = firebase.database().ref('users')
+        databaseRef.once('value')
+            .then(snapshot => {
+                const snapshotVal = snapshot.val() || {};
+                const user = Object.keys(snapshotVal)
+                console.log(user)
+                // this.setState({ 
+                    // user
+                // })
+            })
     }
 
     editUserData = () => {
@@ -53,9 +57,10 @@ class Nickname extends React.Component {
     render (){
         return(
             <>
-                <span>Data dołączenia: {this.state.registered}</span>
+                {console.log(this.state.authUser)}
+                <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
-                    <h4>e-mail: {this.state.email}</h4>
+                    <h4>e-mail: {this.state.authUserEmail}</h4>
                     <h4>adres: {this.state.address}</h4>
                         <div className="change__data__container unvisible">
                             <input type="text" value={this.state.address} onChange={this.editAddress}></input><button onClick={this.editUserData}>Zatwierdź</button>    

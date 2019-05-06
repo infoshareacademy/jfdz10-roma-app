@@ -80,7 +80,6 @@ class SignUp extends React.Component {
         return (
             <main className={classes.main}>
 
-                {console.log(this.state)}
                 <CssBaseline />
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>
