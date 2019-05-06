@@ -23,11 +23,19 @@ class Nickname extends React.Component {
         databaseRef.once('value')
             .then(snapshot => {
                 const snapshotVal = snapshot.val() || {};
-                const user = Object.keys(snapshotVal)
+                const findUser = Object.keys(snapshotVal)
+                    .map(key => ({
+                        id: key,
+                        ...snapshotVal[key]
+                    }))
+                    .filter(user => {
+                        return user.id === this.state.authUserId
+                    })
+                const user = findUser[0]
                 console.log(user)
-                // this.setState({ 
-                    // user
-                // })
+                this.setState({ 
+                    user
+                })
             })
     }
 
@@ -57,7 +65,7 @@ class Nickname extends React.Component {
     render (){
         return(
             <>
-                {console.log(this.state.authUser)}
+                {console.log(this.state.authUserId)}
                 <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
                     <h4>e-mail: {this.state.authUserEmail}</h4>
