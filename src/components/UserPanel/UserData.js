@@ -32,10 +32,7 @@ class Nickname extends React.Component {
                         return user.id === this.state.authUserId
                     })
                 const user = findUser[0]
-                console.log(user)
-                this.setState({ 
-                    user
-                })
+                this.setState({ user })
             })
     }
 
@@ -65,15 +62,14 @@ class Nickname extends React.Component {
     render (){
         return(
             <>
-                {console.log(this.state.authUserId)}
                 <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
                     <h4>e-mail: {this.state.authUserEmail}</h4>
-                    <h4>adres: {this.state.address}</h4>
+                    <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
                         <div className="change__data__container unvisible">
                             <input type="text" value={this.state.address} onChange={this.editAddress}></input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
-                    <h4>telefon: {this.state.phone} </h4>   
+                    <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
                         <div className="change__data__container unvisible">
                             <input type="text" value={this.state.phone} onChange={this.editPhoneNum}></input><button onClick={this.editUserData}>Zatwierdź</button>    
                         </div>
