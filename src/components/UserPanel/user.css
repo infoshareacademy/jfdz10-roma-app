@@ -57,8 +57,19 @@
 }
 
 .change__data__container button {
-    width: 20%;
+    width: 3rem;
     height: 100%;
+    background: rgb(255, 255, 255);
+    border: 1px solid lightgrey;
+    border-radius: 0 5px 5px 0;
+}
+
+.change__data__container input {
+    border: 1px solid lightgrey;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    padding: .2em 1rem;
+    width: 60%;
 }
 
 .buttons__container {

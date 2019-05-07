@@ -95,7 +95,11 @@ class Nickname extends React.Component {
                                 type="text" 
                                 value={ this.state.user ? this.state.user.street : '' } 
                                 onChange={this.editAddress}>
-                            </input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            </input><button onClick={this.editUserData}>
+                                <span role="img" aria-label="phone">
+                                    💾
+                                </span>
+                            </button>    
                         </div>
                     <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
                         <div className="change__data__container unvisible">
@@ -103,7 +107,11 @@ class Nickname extends React.Component {
                                 type="text" 
                                 value={ this.state.user ? this.state.user.phone : '' } 
                                 onChange={this.editPhoneNum}>
-                            </input><button onClick={this.editUserData}>Zatwierdź</button>    
+                           </input><button onClick={this.editUserData}>
+                                <span role="img" aria-label="phone">
+                                    💾
+                                </span>
+                            </button>     
                         </div>
                 <div className="buttons__container">
                     <div className="button" onClick={this.editUserData}>

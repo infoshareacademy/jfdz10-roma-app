@@ -1,4 +1,5 @@
 import React from 'react';
+import  { Redirect } from 'react-router-dom'
 import firebase from 'firebase'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -20,10 +21,15 @@ class DeleteUser extends React.Component {
         this.setState({ open: false });
     };
 
+    signOut = () => {
+		firebase.auth().signOut();
+		return <Redirect to='/dashboard' />
+    };
+
     deleteAccount = () => {
         var user = firebase.auth().currentUser;
         user.delete()
-            .then(() => firebase.auth().signOut())
+            .then(this.signOut)
             .then(this.handleClose)
             .catch(error => alert(error))
     }
