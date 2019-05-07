@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import firebase from 'firebase'
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactSVG from "react-svg";
@@ -8,10 +9,13 @@ import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
+import { userPlus } from 'react-icons-kit/fa/userPlus';
+import { userTimes } from 'react-icons-kit/fa/userTimes';
 import { cutlery } from "react-icons-kit/fa/cutlery";
 import { withStyles } from "@material-ui/core/styles";
 import { MdMenu } from "react-icons/md";
 import classNames from "classnames";
+import  { Redirect } from 'react-router-dom'
 
 const Navigation = styled.div`
 	background: #303641;
@@ -114,7 +118,12 @@ const styles = theme => ({
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
 class MainNav extends React.Component {
-	state = { selectedPath: "", isNavOpen: null };
+	state = {
+		user: null,
+		isChecked: false,
+		selectedPath: "", 
+		isNavOpen: null 
+	}
 
 	onNavItemSelect = () => {
 		this.setState({ selectedPath: window.location.pathname });
@@ -126,6 +135,11 @@ class MainNav extends React.Component {
 
 	componentDidMount() {
 		this.setState({ selectedPath: window.location.pathname });
+		firebase.auth().onAuthStateChanged(user =>
+            this.setState({
+                user,
+                isChecked: true
+            }))
 	}
 
 	shouldComponentUpdate() {
@@ -134,6 +148,11 @@ class MainNav extends React.Component {
 		}
 		return true;
 	}
+
+	signOut = () => {
+		firebase.auth().signOut();
+		return <Redirect to='/dashboard' />
+    };
 
 	render() {
 		const isPizzaSubmitted = JSON.parse(
@@ -146,7 +165,9 @@ class MainNav extends React.Component {
 			<Fragment>
 				<MdMenu
 					className={classes.menuBtn}
-					style={isNavOpen ? { color: "white" } : { color: "black" }}
+					style={isNavOpen 
+						? { color: "white" } 
+						: { color: "black" }}
 					onClick={this.handleOpenNav}
 				/>
 				<Navigation
@@ -174,70 +195,133 @@ class MainNav extends React.Component {
 						<IconCnt>
 							<Icon icon={dashboard} />
 						</IconCnt>
-						<Text>Strona główna</Text>
+						<Text>
+							Strona główna
+						</Text>
 					</NavLink>
 					<NavLink
-						to="/user-panel"
-						className={path === "/user-panel" ? classes.navItemSelected : null}
+						to={this.state.user ? "/user-panel" : "/sign-in"}
+						className={classNames(
+							path === "/user-panel" ? classes.navItemSelected : null,
+								!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={user} />
 						</IconCnt>
-						<Text>Twój profil</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Twój profil
+						</Text>
 					</NavLink>
 					<NavLink
-						to="/pizzerias#1"
+						to={this.state.user ? "/pizzerias#1" : "/sign-in"}
+						className={classNames(
+							path === "/pizzerias" 
+								? classes.navItemSelected : null,
+								!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
-						className={path === "/pizzerias" ? classes.navItemSelected : null}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={cutlery} />
 						</IconCnt>
-						<Text>Pizzerie</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Pizzerie
+						</Text>
 					</NavLink>
 					<NavLink
-						to="/create-pizza"
+						to={this.state.user ? "/create-pizza" : "/sign-in"}
+						className={classNames(
+							path === "/create-pizza" ? classes.navItemSelected : null,
+							!this.state.user ? classes.navDisabled : null
+							)}
 						onClick={this.onNavItemSelect}
-						className={
-							path === "/create-pizza" ? classes.navItemSelected : null
-						}
 					>
-						<IconCnt>
+						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={pizza} />
 						</IconCnt>
-						<Text>Skomponuj pizzę</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Skomponuj pizzę
+						</Text>
 					</NavLink>
 					<NavLink
-						to={isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						to={!this.state.user 
+							? "/sign-in" : isPizzaSubmitted 
+								? "/make-order" : window.location.pathname
+						}
 						className={classNames(
 							path === "/make-order" ? classes.navItemSelected : null,
-							!isPizzaSubmitted ? classes.navDisabled : null
+							!this.state.user 
+								? classes.navDisabled : !isPizzaSubmitted 
+									? classes.navDisabled : null
 						)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+						<IconCnt className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.iconDisable : null 
+						}>
 							<Icon icon={shoppingCart} />
 						</IconCnt>
-						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+						<Text className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.textDisabled : null
+						}>
 							Złóż zamówienie
 						</Text>
 					</NavLink>
 					<NavLink
-						to={isPizzaSubmitted ? "/summary-order" : window.location.pathname}
+						to={!this.state.user 
+							? "/sign-in" : isPizzaSubmitted 
+								? "/summary-order" : window.location.pathname
+						}
 						className={classNames(
 							path === "/summary-order" ? classes.navItemSelected : null,
-							!isPizzaSubmitted ? classes.navDisabled : null
+							!this.state.user 
+								? classes.navDisabled : !isPizzaSubmitted 
+									? classes.navDisabled : null
 						)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+						<IconCnt className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.iconDisable : null
+						}>
 							<Icon icon={creditCardAlt} />
 						</IconCnt>
-						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+						<Text className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.textDisabled : null
+						}>
 							Podsumowanie zamówienia
 						</Text>
 					</NavLink>
+					{!this.state.user ? 
+						(
+							<NavLink
+								to="/sign-in"
+								onClick={this.onNavItemSelect}
+								className={path === "/sign-in" ? classes.navItemSelected : null}
+							>
+								<IconCnt>
+									<Icon icon={userPlus} />
+								</IconCnt>
+								<Text>Zaloguj się</Text>
+							</NavLink>
+						) : (
+							<NavLink
+								to="/"
+								onClick={this.signOut}
+								className={path === "dashboard" ? classes.navItemSelected : null}
+							>
+								<IconCnt>
+										<Icon icon={userTimes} />
+								</IconCnt>
+								<Text>Wyloguj się</Text>
+							</NavLink>
+						)
+					}
 				</Navigation>
 			</Fragment>
 		);
