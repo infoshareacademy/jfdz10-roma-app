@@ -12,15 +12,17 @@ class Nickname extends React.Component {
     }
 
     componentDidMount(){
-        firebase.auth().onAuthStateChanged(user =>
-            this.setState({
-                authUser: user,
-                authUserId: user.uid,
-                authUserEmail: user.email,
-                authUserRegistered: user.metadata.creationTime,
-                authIsChecked: true,
-            }),
-        )
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    authUser: user,
+                    authUserId: user.uid,
+                    authUserEmail: user.email,
+                    authUserRegistered: user.metadata.creationTime,
+                    authIsChecked: true,
+                })
+            }
+        })
         const databaseRef = firebase.database().ref('users')
         databaseRef.once('value')
             .then(snapshot => {
