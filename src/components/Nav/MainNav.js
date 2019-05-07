@@ -165,7 +165,9 @@ class MainNav extends React.Component {
 			<Fragment>
 				<MdMenu
 					className={classes.menuBtn}
-					style={isNavOpen ? { color: "white" } : { color: "black" }}
+					style={isNavOpen 
+						? { color: "white" } 
+						: { color: "black" }}
 					onClick={this.handleOpenNav}
 				/>
 				<Navigation
@@ -193,33 +195,40 @@ class MainNav extends React.Component {
 						<IconCnt>
 							<Icon icon={dashboard} />
 						</IconCnt>
-						<Text>Strona główna</Text>
+						<Text>
+							Strona główna
+						</Text>
 					</NavLink>
 					<NavLink
 						to={this.state.user ? "/user-panel" : "/sign-in"}
 						className={classNames(
 							path === "/user-panel" ? classes.navItemSelected : null,
-							!this.state.user ? classes.navDisabled : null
+								!this.state.user ? classes.navDisabled : null
 							)}
 						onClick={this.onNavItemSelect}
 					>
 						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={user} />
 						</IconCnt>
-						<Text className={!this.state.user ? classes.textDisabled : null}>Twój profil</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Twój profil
+						</Text>
 					</NavLink>
 					<NavLink
 						to={this.state.user ? "/pizzerias#1" : "/sign-in"}
 						className={classNames(
-							path === "/pizzerias" ? classes.navItemSelected : null,
-							!this.state.user ? classes.navDisabled : null
+							path === "/pizzerias" 
+								? classes.navItemSelected : null,
+								!this.state.user ? classes.navDisabled : null
 							)}
 						onClick={this.onNavItemSelect}
 					>
 						<IconCnt className={!this.state.user ? classes.iconDisable : null}>
 							<Icon icon={cutlery} />
 						</IconCnt>
-						<Text className={!this.state.user ? classes.textDisabled : null}>Pizzerie</Text>
+						<Text className={!this.state.user ? classes.textDisabled : null}>
+							Pizzerie
+						</Text>
 					</NavLink>
 					<NavLink
 						to={this.state.user ? "/create-pizza" : "/sign-in"}
@@ -237,34 +246,54 @@ class MainNav extends React.Component {
 						</Text>
 					</NavLink>
 					<NavLink
-						to={!this.state.user ? "/sign-in"
-							: isPizzaSubmitted ? "/make-order" : window.location.pathname}
+						to={!this.state.user 
+							? "/sign-in" : isPizzaSubmitted 
+								? "/make-order" : window.location.pathname
+						}
 						className={classNames(
 							path === "/make-order" ? classes.navItemSelected : null,
-							!isPizzaSubmitted ? classes.navDisabled : null
+							!this.state.user 
+								? classes.navDisabled : !isPizzaSubmitted 
+									? classes.navDisabled : null
 						)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+						<IconCnt className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.iconDisable : null 
+						}>
 							<Icon icon={shoppingCart} />
 						</IconCnt>
-						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+						<Text className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.textDisabled : null
+						}>
 							Złóż zamówienie
 						</Text>
 					</NavLink>
 					<NavLink
-						to={!this.state.user ? "/sign-in"
-							: isPizzaSubmitted ? "/summary-order" : window.location.pathname}
+						to={!this.state.user 
+							? "/sign-in" : isPizzaSubmitted 
+								? "/summary-order" : window.location.pathname
+						}
 						className={classNames(
 							path === "/summary-order" ? classes.navItemSelected : null,
-							!isPizzaSubmitted ? classes.navDisabled : null
+							!this.state.user 
+								? classes.navDisabled : !isPizzaSubmitted 
+									? classes.navDisabled : null
 						)}
 						onClick={this.onNavItemSelect}
 					>
-						<IconCnt className={!isPizzaSubmitted ? classes.iconDisable : null}>
+						<IconCnt className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.iconDisable : null
+						}>
 							<Icon icon={creditCardAlt} />
 						</IconCnt>
-						<Text className={!isPizzaSubmitted ? classes.textDisabled : null}>
+						<Text className={!this.state.user 
+							? classes.textDisabled : !isPizzaSubmitted 
+								? classes.textDisabled : null
+						}>
 							Podsumowanie zamówienia
 						</Text>
 					</NavLink>
