@@ -24,6 +24,7 @@ class DeleteUser extends React.Component {
         var user = firebase.auth().currentUser;
         user.delete()
             .then(() => firebase.auth().signOut())
+            .then(this.handleClose)
             .catch(error => alert(error))
     }
     
@@ -49,7 +50,7 @@ class DeleteUser extends React.Component {
                         <Button onClick={this.handleClose} color="secondary">
                             Nie
                         </Button>
-                        <Button onClick={this.deleteAccount} color="secondary" autoFocus>
+                        <Button onClick={this.deleteAccount} color="secondary">
                             Tak
                         </Button>
                     </DialogActions>
