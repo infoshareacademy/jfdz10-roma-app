@@ -1,6 +1,5 @@
 * {
     margin: 0;
-    overflow: hidden;
 }
 
 .user__container {
@@ -11,6 +10,7 @@
     background-position: center;
     display: flex;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .user__container h2 {
