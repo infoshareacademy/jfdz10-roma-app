@@ -45,7 +45,6 @@ class User extends React.Component {
         return(
             <div className="user__container">
                 <div className="user__container__left">
-                    {console.log(this.state.user)}
                     <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.user ? this.state.userFirstName : 'w Pizzerium'}</h1>
                     <Avatar />
                     <UserData />

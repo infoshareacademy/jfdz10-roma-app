@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase'
+import DeleteUser from './DeleteUser'
 
 class Nickname extends React.Component {
     state = {
@@ -106,9 +107,7 @@ class Nickname extends React.Component {
                     <div className="button" onClick={this.editUserData}>
                         <span>Edytuj Profil</span>
                     </div>
-                    <div className="button">
-                        <span>Dodaj pizzerię</span>
-                    </div>
+                    <DeleteUser />
                 </div>        
             </>
         )
