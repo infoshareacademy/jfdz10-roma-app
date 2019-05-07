@@ -12,7 +12,7 @@ class Nickname extends React.Component {
     }
 
     componentDidMount(){
-        firebase.auth().onAuthStateChanged(user => {
+        const ref = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({
                     authUser: user,
@@ -22,22 +22,30 @@ class Nickname extends React.Component {
                     authIsChecked: true,
                 })
             }
-        })
-        const databaseRef = firebase.database().ref('users')
-        databaseRef.once('value')
-            .then(snapshot => {
-                const snapshotVal = snapshot.val() || {};
-                const findUser = Object.keys(snapshotVal)
-                    .map(key => ({
-                        id: key,
-                        ...snapshotVal[key]
-                    }))
-                    .filter(user => {
-                        return user.id === this.state.authUserId
+            const databaseRef = firebase.database().ref('users')
+            databaseRef.once('value')
+                .then(snapshot => {
+                    const snapshotVal = snapshot.val() || {};
+                    const findUser = Object.keys(snapshotVal)
+                        .map(key => ({
+                            id: key,
+                            ...snapshotVal[key]
+                        }))
+                        .filter(user => {
+                            return user.id === this.state.authUserId
+                        })
+                    const user = findUser[0]
+                    this.setState({ 
+                        user, 
+                        userFirstName: user.name.split(' ')[0] 
                     })
-                const user = findUser[0]
-                this.setState({ user })
-            })
+                })
+        })
+        this.setState({ ref })
+    }
+
+    componentWillUnmount(){
+        this.state.ref && this.state.ref()
     }
 
     editUserData = () => {

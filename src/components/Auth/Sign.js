@@ -7,11 +7,17 @@ import './sign.css'
 class Sign extends React.Component {
     componentDidMount() {
 		this.setState({ selectedPath: window.location.pathname });
-		firebase.auth().onAuthStateChanged(user =>
+		const ref = firebase.auth().onAuthStateChanged(user =>
             this.setState({
                 user,
                 isChecked: true
-            }))
+            })
+        )
+        this.setState({ ref })
+    }
+
+    componentWillUnmount(){
+        this.state.ref && this.state.ref()
     }
     
     render() { 
