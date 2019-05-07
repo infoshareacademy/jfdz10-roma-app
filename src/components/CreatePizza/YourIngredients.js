@@ -7,7 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ListContainer, ListWrapper } from "./containers";
+import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 
 const getFromLocalStorage = item => {
 	return JSON.parse(window.localStorage.getItem(item));
