@@ -36,7 +36,8 @@ const styles = theme => ({
     remind: {
         marginTop: theme.spacing.unit * 2,
         textAlign: 'center',
-        color: 'blue'
+        color: 'rgb(130, 181, 201)',
+        cursor: 'pointer'
     }
 });
 
@@ -61,6 +62,17 @@ class SignIn extends Component {
             .catch(error => { alert(error.message) })
     };
 
+    resetPassword = () => {
+        var auth = firebase.auth();
+        var emailAddress = this.state.email;
+
+        this.state.email 
+            ? auth.sendPasswordResetEmail(emailAddress)
+                .then(() => alert('Wysłano link do zmiany hasła.'))
+                .catch(error => alert(error))
+            : alert('Wpisz email.')
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -76,11 +88,20 @@ class SignIn extends Component {
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleChange} />
+                            <Input 
+                                id="email" 
+                                name="email" 
+                                onChange={this.handleChange} 
+                            />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Hasło</InputLabel>
-                            <Input name="password" type="password" id="password" autoComplete="current-password" onChange={this.handleChange} />
+                            <Input
+                                name="password" 
+                                type="password" 
+                                id="password"
+                                onChange={this.handleChange} 
+                            />
                         </FormControl>
                         <Button
                             type="submit"
@@ -91,7 +112,10 @@ class SignIn extends Component {
                         >
                             Zaloguj
                         </Button>
-                        <Typography className={classes.remind}>
+                        <Typography 
+                            className={classes.remind}
+                            onClick={this.resetPassword}
+                        >
                             Nie pamiętam hasła.
                         </Typography>
                     </form>
