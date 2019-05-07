@@ -16,6 +16,7 @@ var config = {
 	messagingSenderId: "978059724629"
 };
 firebase.initializeApp(config);
+export const db = firebase.database();
 
 const theme = createMuiTheme({
 	palette: {
