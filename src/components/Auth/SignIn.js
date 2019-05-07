@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Redirect } from 'react-router-dom'
 import firebase from "firebase";
 
 const styles = theme => ({
@@ -45,8 +46,21 @@ class SignIn extends Component {
     state = {
         email: '',
         password: '',
+        redirect: false
     };
-    
+
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/user-panel'/>
+        }
+    }
+
     handleChange = (event) => {
         this.setState({
             [event.currentTarget.name]: event.target.value,
@@ -56,9 +70,7 @@ class SignIn extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => {
-                alert('Logged in');
-            })
+            .then(this.setRedirect)
             .catch(error => { alert(error.message) })
     };
 
@@ -103,6 +115,7 @@ class SignIn extends Component {
                                 onChange={this.handleChange} 
                             />
                         </FormControl>
+                        {this.renderRedirect()}
                         <Button
                             type="submit"
                             fullWidth

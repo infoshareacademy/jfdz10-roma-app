@@ -15,6 +15,7 @@ import { cutlery } from "react-icons-kit/fa/cutlery";
 import { withStyles } from "@material-ui/core/styles";
 import { MdMenu } from "react-icons/md";
 import classNames from "classnames";
+import  { Redirect } from 'react-router-dom'
 
 const Navigation = styled.div`
 	background: #303641;
@@ -150,7 +151,7 @@ class MainNav extends React.Component {
 
 	signOut = () => {
 		firebase.auth().signOut();
-		window.location.reload();
+		return <Redirect to='/dashboard' />
     };
 
 	render() {
@@ -281,7 +282,7 @@ class MainNav extends React.Component {
 							</NavLink>
 						) : (
 							<NavLink
-								to="/dashboard"
+								to="/"
 								onClick={this.signOut}
 								className={path === "dashboard" ? classes.navItemSelected : null}
 							>
