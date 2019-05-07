@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class DeleteUser extends React.Component {
     state = {
         open: false,
+        redirect: false
     };
 
     handleClickOpen = () => {
@@ -21,9 +22,21 @@ class DeleteUser extends React.Component {
         this.setState({ open: false });
     };
 
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
+    }
+
     signOut = () => {
-		firebase.auth().signOut();
-		return <Redirect to='/dashboard' />
+		firebase.auth().signOut()
+		    .then(this.setRedirect)
     };
 
     deleteAccount = () => {
@@ -56,6 +69,7 @@ class DeleteUser extends React.Component {
                         <Button onClick={this.handleClose} color="secondary">
                             Nie
                         </Button>
+                        {this.renderRedirect()}
                         <Button onClick={this.deleteAccount} color="secondary">
                             Tak
                         </Button>
