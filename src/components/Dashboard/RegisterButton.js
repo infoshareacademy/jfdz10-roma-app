@@ -5,7 +5,7 @@ class RegisterButton extends React.Component {
         return <button 
         type="button" 
         className="btn btn-outline-danger btn-lg btn-lg shadow p-3 mb-5 rounded" 
-        style={{"width": "20rem", "marginTop":"1.5rem"}}>
+        style={{"width": "15rem", "marginTop":"1.5rem", "marginRight": "1rem"}}>
             Zarejestruj się
         </button>
     }

@@ -3,6 +3,7 @@ import RegisterButton from "./RegisterButton";
 import CreateYourPizzaCard from "./CreateYourPizzaCard";
 import Chart1 from "./Chart";
 import Chart2 from "./Chart2";
+import LogInButton from "./ButtonLogin";
 
 
 class Dashboard extends React.Component {
@@ -14,6 +15,7 @@ class Dashboard extends React.Component {
                     <h1 className="display-3" style={{"textShadow":"4px 4px 2px rgba(150, 150, 150, 1)"}}>PIZZERIUM!</h1>
                     <p className="lead">Aplikacja, które pomoże ci znaleźć twoją wymarzoną pizzę</p>
                     <a href="#" role="button"><RegisterButton/></a>
+                    <a href="#" role="button"><LogInButton /></a>
                 </div>
 
             <div className="container">
