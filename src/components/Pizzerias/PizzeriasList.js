@@ -65,6 +65,7 @@ function searchFor(term) {
 
 class PizzeriasList extends Component {
 	state = {
+		pizzas: [],
 		data: [],
 		isSnackbarOpen: false,
 		pizzeriaLocation: "#1"

@@ -4,6 +4,8 @@ import App from "./App";
 import "./components/styles.css";
 import firebase from "firebase";
 import * as serviceWorker from "./serviceWorker";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { BrowserRouter as Router } from "react-router-dom";
 
 var config = {
 	apiKey: "AIzaSyD7yz7cO_zErgoHDdBF-kV6BqfScEWAa2s",
@@ -14,7 +16,25 @@ var config = {
 	messagingSenderId: "978059724629"
 };
 firebase.initializeApp(config);
+export const db = firebase.database();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const theme = createMuiTheme({
+	palette: {
+		primary: { main: "rgb(255, 211, 131)" },
+		secondary: { main: "rgb(255, 60, 0)" }
+	},
+	typography: {
+		useNextVariants: true,
+	},
+});
+
+ReactDOM.render(
+	<Router>
+		<MuiThemeProvider theme={theme}>
+			<App />
+		</MuiThemeProvider>
+	</Router>,
+	document.getElementById("root")
+);
 
 serviceWorker.unregister();

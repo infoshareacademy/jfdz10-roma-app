@@ -1,22 +1,53 @@
 import React from 'react';
+import firebase from 'firebase'
+import DeleteUser from './DeleteUser'
 
 class Nickname extends React.Component {
     state = {
-        registered: "",
-        nickname: "",
-        email: "",
-        address: "",
-        phone: "",
+        authUser: null,
+        authUserRegistered: '',
+        authUserEmail: '',
+        authIsChecked: false,
         showInput: false,
     }
+
     componentDidMount(){
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({nickname: value.nickname, registered: value.registered}))
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({ email: value.email, address: `${value.address.street} ${value.address.postcode} ${value.address.city}`, phone: value.phone}))
+        const ref = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    authUser: user,
+                    authUserId: user.uid,
+                    authUserEmail: user.email,
+                    authUserRegistered: user.metadata.creationTime,
+                    authIsChecked: true,
+                })
+            }
+            const databaseRef = firebase.database().ref('users')
+            databaseRef.once('value')
+                .then(snapshot => {
+                    const snapshotVal = snapshot.val() || {};
+                    const findUser = Object.keys(snapshotVal)
+                        .map(key => ({
+                            id: key,
+                            ...snapshotVal[key]
+                        }))
+                        .filter(user => {
+                            return user.id === this.state.authUserId
+                        })
+                    const user = findUser[0]
+                    this.setState({ 
+                        user, 
+                        userFirstName: user.name.split(' ')[0] 
+                    })
+                })
+        })
+        this.setState({ ref })
     }
+
+    componentWillUnmount(){
+        this.state.ref && this.state.ref()
+    }
+
     editUserData = () => {
         const doInputsShow = this.state.showInput;
         this.setState( { 
@@ -29,38 +60,74 @@ class Nickname extends React.Component {
             inputs.forEach( input => input.classList.remove("unvisible"));
         }
     }
-    editEmail = (e) => { this.setState({ email: e.target.value }) }
-    editAddress = (e) => { this.setState({ address: e.target.value }) }
-    editPhone = (e) => { this.setState({ phone: e.target.value }) }
 
-    render (){
-        return(
+    editAddress = (e) => { 
+        if (this.state.user) { 
+            this.setState({ 
+                user: {
+                    ...this.state.user,
+                    street: e.target.value 
+                }
+            }, () => {
+            firebase.database()
+                .ref(`users/${this.state.authUserId}`)
+                .update({ street: this.state.user.street })
+            }) 
+        }
+    }
+
+    editPhoneNum = (e) => { 
+        if (this.state.user) { 
+            this.setState({ 
+                user: {
+                    ...this.state.user,
+                    phone: e.target.value 
+                }
+            }, () => {
+                firebase.database()
+                .ref(`users/${this.state.authUserId}`)
+                .update({ phone: this.state.user.phone })
+            })    
+        }
+    }
+
+    render () {
+        return (
             <>
-                <span>Data dołączenia: {this.state.registered}</span>
-                <h2><span role="img" aria-label="user">👤</span> Login: {this.state.nickname}</h2> 
+                <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
-                    <h4>e-mail: {this.state.email}</h4>
+                    <h4>e-mail: {this.state.authUserEmail}</h4>
+                    <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
                         <div className="change__data__container unvisible">
-                            <input type="email" value={this.state.email} onChange={this.editEmail}></input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            <input 
+                                type="text" 
+                                value={ this.state.user ? this.state.user.street : '' } 
+                                onChange={this.editAddress}>
+                            </input><button onClick={this.editUserData}>
+                                <span role="img" aria-label="phone">
+                                    💾
+                                </span>
+                            </button>    
                         </div>
-                    <h4>adres: {this.state.address}</h4>
+                    <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
                         <div className="change__data__container unvisible">
-                            <input type="text" value={this.state.address} onChange={this.editAddress}></input><button onClick={this.editUserData}>Zatwierdź</button>    
-                        </div>
-                    <h4>telefon: {this.state.phone} </h4>   
-                        <div className="change__data__container unvisible">
-                            <input type="text" value={this.state.phone} onChange={this.editPhone}></input><button onClick={this.editUserData}>Zatwierdź</button>    
+                            <input 
+                                type="text" 
+                                value={ this.state.user ? this.state.user.phone : '' } 
+                                onChange={this.editPhoneNum}>
+                           </input><button onClick={this.editUserData}>
+                                <span role="img" aria-label="phone">
+                                    💾
+                                </span>
+                            </button>     
                         </div>
                 <div className="buttons__container">
                     <div className="button" onClick={this.editUserData}>
                         <span>Edytuj Profil</span>
                     </div>
-                    <div className="button">
-                        <span>Dodaj pizzerię</span>
-                    </div>
+                    <DeleteUser />
                 </div>        
             </>
-
         )
     }
 }

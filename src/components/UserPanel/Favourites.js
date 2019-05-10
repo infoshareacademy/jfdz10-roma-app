@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListContainer, ListWrapper } from "../CreatePizza/containers";
+import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 import { FaHeart } from "react-icons/fa";
 import "../SharedComponents/ListScrollbar.css";
 import "../CreatePizza/containers.css";

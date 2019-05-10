@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'firebase'
 import Avatar from './Avatar';
 import UserData from './UserData';
 import Favourites from './Favourites';
@@ -7,19 +8,51 @@ import './user.css';
 
 class User extends React.Component {
     state = {
-        name: "",
+        user: null
     }
+
     componentDidMount(){
-        fetch('user.json')
-            .then(response => response.json())
-            .then(value => this.setState({name: value.name}))
+        const ref = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({
+                    authUser: user,
+                    authUserId: user.uid,
+                    authUserEmail: user.email,
+                    authUserRegistered: user.metadata.creationTime,
+                    authIsChecked: true,
+                })
+            }
+            const databaseRef = firebase.database().ref('users')
+            databaseRef.once('value')
+                .then(snapshot => {
+                    const snapshotVal = snapshot.val() || {};
+                    const findUser = Object.keys(snapshotVal)
+                        .map(key => ({
+                            id: key,
+                            ...snapshotVal[key]
+                        }))
+                        .filter(user => {
+                            return user.id === this.state.authUserId
+                        })
+                    const user = findUser[0]
+                    this.setState({ 
+                        user, 
+                        userFirstName: user.name.split(' ')[0] 
+                    })
+                })
+        })
+        this.setState({ ref })
+    }
+
+    componentWillUnmount(){
+        this.state.ref && this.state.ref()
     }
     
     render (){
         return(
             <div className="user__container">
                 <div className="user__container__left">
-                    <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.name}!</h1>
+                    <h1 className="sayHello"><span role="img" aria-label="pizza">🍕</span> Witaj {this.state.user ? this.state.userFirstName : 'w Pizzerium'}</h1>
                     <Avatar />
                     <UserData />
                 </div>
