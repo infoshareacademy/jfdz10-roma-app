@@ -1,5 +1,5 @@
 import React from "react";
-import { db } from "../../index";
+//import { db } from "../../index";
 
 const BarChart = require("react-chartjs").Bar;
 
