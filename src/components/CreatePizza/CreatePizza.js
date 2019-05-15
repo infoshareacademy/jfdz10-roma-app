@@ -137,6 +137,12 @@ class CreatePizza extends Component {
 							>
 								<h1>Potwierdziłeś wybrane składniki.</h1>
 								<h2>Przejdź do następnego kroku i złóż zamówienie.</h2>
+								<Button
+									className="d-inline custom-button btn-secondary"
+									onClick={this.cancelIngredients}
+								>
+									{"Anuluj"}
+								</Button>
 							</Paper>
 						</div>
 					</Fragment>

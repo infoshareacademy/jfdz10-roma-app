@@ -47,7 +47,6 @@ class AvailablePizzerias extends Component {
 	render() {
 		const {
 			classes,
-			isCustomPizza,
 			isPizzeriaSelected,
 			selectedPizzeria,
 			unselectPizzeria
