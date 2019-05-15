@@ -68,6 +68,7 @@ class PizzeriasList extends Component {
 		pizzas: [],
 		data: [],
 		isSnackbarOpen: false,
+		snackbarMessage: "",
 		pizzeriaLocation: "#1"
 	};
 
@@ -88,8 +89,12 @@ class PizzeriasList extends Component {
 			.catch(error => console.log(error.message));
 	}
 
-	handleClickFavBtn = () => {
-		this.setState({ ...this.state, isSnackbarOpen: true });
+	handleClickFavBtn = message => {
+		this.setState({
+			...this.state,
+			isSnackbarOpen: true,
+			snackbarMessage: message
+		});
 	};
 
 	handleCloseSnackbar = (event, reason) => {
@@ -122,18 +127,18 @@ class PizzeriasList extends Component {
 	}
 
 	selectFavPizzeria = pizzeria => {
-		this.handleClickFavBtn();
-
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
 			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
 				favPizzerias.push(pizzeria);
 				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
+				this.handleClickFavBtn("Dodano do ulubionych");
 			} else {
 				const removedFavPizzeria = favPizzerias.filter(
 					fav => fav.name !== pizzeria.name
 				);
 				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
+				this.handleClickFavBtn("Usunięto z ulubionych");
 			}
 		} else {
 			const favPizzeria = [pizzeria];
@@ -154,6 +159,7 @@ class PizzeriasList extends Component {
 
 	renderData(pizzerias, classes) {
 		const location = this.state.pizzeriaLocation;
+		const { snackbarMessage } = this.state;
 
 		return (
 			<div
@@ -312,7 +318,7 @@ class PizzeriasList extends Component {
 					<SnackbarContent
 						className={classes.success}
 						message={
-							<span style={{ fontSize: "1.1rem" }}>Dodano do ulubionych!</span>
+							<span style={{ fontSize: "1.1rem" }}>{snackbarMessage}</span>
 						}
 						action={[
 							<IconButton
