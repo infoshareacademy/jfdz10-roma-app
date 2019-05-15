@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
 import "bootstrap/dist/css/bootstrap.css";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
@@ -13,8 +14,48 @@ import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 const styles = theme => ({
 	wrapper: {
 		height: "359.5px",
-		[theme.breakpoints.down("xs")]: {
-			height: "auto"
+		[theme.breakpoints.down("sm")]: {
+			height: 150,
+			padding: 0,
+			borderRadius: 0
+		}
+	},
+	listContainer: {
+		width: "440px",
+		maxHeight: "500px",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			justifyContent: "space-between",
+			height: "100%",
+			alignItems: "baseline"
+		}
+	},
+	header: {
+		width: "100%",
+		padding: "1rem 2rem",
+		[theme.breakpoints.down("sm")]: {
+			height: "auto",
+			padding: "1.5rem 2rem 0 4rem"
+		}
+	},
+	btnContainer: {
+		display: "flex",
+		justifyContent: "space-around",
+		width: "100%",
+		marginTop: "2rem",
+		[theme.breakpoints.down("sm")]: {
+			marginTop: "1rem"
+		}
+	},
+	btn: {
+		[theme.breakpoints.down("sm")]: {
+			fontSize: 16,
+			width: 140,
+			height: "auto",
+			margin: 0
 		}
 	}
 });
@@ -24,6 +65,7 @@ const getFromLocalStorage = item => {
 };
 
 const YourIngredients = ({
+	classes,
 	ingredients,
 	removeIngredient,
 	clearIngredients,
@@ -35,10 +77,11 @@ const YourIngredients = ({
 		getFromLocalStorage("ingredients").length > 0
 			? getFromLocalStorage("ingredients")
 			: ingredients;
+
 	return (
-		<ListContainer>
-			<h3 className="list-header">Twoje wybrane składniki: </h3>
-			<ListWrapper className="list-scrollbar" style={{ height: "359.5px" }}>
+		<div className={classes.listContainer}>
+			<h3 className={classes.header}>Twoje wybrane składniki: </h3>
+			<ListWrapper className={classes.wrapper}>
 				<ListGroup>
 					{chosenIngredients.map((element, id) => (
 						<ListGroup.Item action key={id}>
@@ -60,14 +103,7 @@ const YourIngredients = ({
 					))}
 				</ListGroup>
 			</ListWrapper>
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "space-around",
-					width: "100%",
-					marginTop: "2rem"
-				}}
-			>
+			<div className={classes.btnContainer}>
 				<OverlayTrigger
 					placement="top"
 					overlay={
@@ -81,6 +117,10 @@ const YourIngredients = ({
 				>
 					<Button
 						className="d-inline custom-button create-pizza-button"
+						className={classNames(
+							classes.btn,
+							"d-inline custom-button create-pizza-button"
+						)}
 						variant="link"
 						onClick={
 							!isPizzaSubmitted && ingredients.length !== 0
@@ -93,13 +133,16 @@ const YourIngredients = ({
 					</Button>
 				</OverlayTrigger>
 				<Button
-					className="d-inline custom-button btn-secondary"
+					className={classNames(
+						classes.btn,
+						"d-inline custom-button btn-secondary"
+					)}
 					onClick={clearIngredients}
 				>
 					Wyczyść
 				</Button>
 			</div>
-		</ListContainer>
+		</div>
 	);
 };
 

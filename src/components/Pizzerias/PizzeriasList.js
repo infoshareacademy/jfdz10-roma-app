@@ -74,15 +74,15 @@ class PizzeriasList extends Component {
 	componentDidMount() {
 		fetch("pizzas.json")
 			.then(res => res.json())
-			.then(pizzas => this.setState({ pizzas }));
+			.then(pizzas => this.setState({ ...this.state, pizzas }));
 		fetch("pizzerias.json")
 			.then(res => res.json())
 			.then(data => {
-				this.setState({ data });
+				this.setState({ ...this.state, data });
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria) {
-					this.setState({ pizzeriaLocation: currentPizzeria });
+					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
 			.catch(error => console.log(error.message));
@@ -101,10 +101,10 @@ class PizzeriasList extends Component {
 	};
 
 	render() {
-		const { data } = this.state;
+		const { data = [] } = this.state;
 		const { classes } = this.props;
 
-		return data ? this.renderData(data, classes) : this.renderLoading();
+		return data.length ? this.renderData(data, classes) : this.renderLoading();
 	}
 
 	constructor(props) {
@@ -118,7 +118,7 @@ class PizzeriasList extends Component {
 	}
 
 	searchHandler(event) {
-		this.setState({ term: event.target.value });
+		this.setState({ ...this.state, term: event.target.value });
 	}
 
 	selectFavPizzeria = pizzeria => {
@@ -149,7 +149,7 @@ class PizzeriasList extends Component {
 	};
 
 	changeLocation = id => {
-		this.setState({ pizzeriaLocation: `#${id}` });
+		this.setState({ ...this.state, pizzeriaLocation: `#${id}` });
 	};
 
 	renderData(pizzerias, classes) {

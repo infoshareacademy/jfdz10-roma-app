@@ -1,8 +1,23 @@
 import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListContainer, ListWrapper } from "../SharedComponents/containers";
+
+const styles = theme => ({
+	container: {
+		width: "460px",
+		maxHeight: "500px",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			height: "100%"
+		}
+	}
+});
 
 async function fetchIngredients() {
 	return await fetch("ingredients.json").then(res => res.json());
@@ -24,10 +39,22 @@ class IngredientsList extends Component {
 	}
 
 	render() {
+		const { classes } = this.props;
+
 		return (
-			<ListContainer>
-				<h3 className="list-header">Wybierz składniki</h3>
-				<ListWrapper className="list-scrollbar">
+			<div className={classes.container}>
+				<h3 className="list-header" style={{ paddingLeft: 0 }}>
+					Wybierz składniki
+				</h3>
+				<ListWrapper
+					className="list-scrollbar"
+					style={{
+						paddingLeft: 0,
+						paddingRight: 15,
+						borderRadius: 0,
+						height: "100%"
+					}}
+				>
 					<ListGroup>
 						{this.state.ingredients.map(element => (
 							<ListGroup.Item
@@ -49,9 +76,9 @@ class IngredientsList extends Component {
 						))}
 					</ListGroup>
 				</ListWrapper>
-			</ListContainer>
+			</div>
 		);
 	}
 }
 
-export default IngredientsList;
+export default withStyles(styles)(IngredientsList);

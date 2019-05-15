@@ -6,7 +6,7 @@ import { ListWrapper } from "../SharedComponents/containers";
 
 const styles = theme => ({
 	container: {
-		width: "460px",
+		width: "440px",
 		maxHeight: "500px",
 		display: "flex",
 		flexDirection: "column",

@@ -40,20 +40,36 @@ const styles = theme => ({
 		}
 	},
 	leftPane: {
+		width: "50%",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+		paddingLeft: 5,
+		paddingRight: 5,
+
 		[theme.breakpoints.down("sm")]: {
-			height: "25vh",
+			height: "auto",
 			alignItems: "flex-end"
 		}
 	},
 	rightPane: {
+		width: "50%",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+		paddingLeft: 0,
+		paddingRight: 10,
 		[theme.breakpoints.down("sm")]: {
 			height: "60vh"
+		}
+	},
+	row: {
+		display: "flex",
+		height: "100%",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			justifyContent: "center",
+			alignItems: "center"
 		}
 	}
 });
@@ -158,9 +174,9 @@ class CreatePizza extends Component {
 						</div>
 					</Fragment>
 				)}
-				<Container className="h-100" style={{ position: "relative" }}>
-					<Row className="h-100">
-						<Col lg={6} className={classes.leftPane}>
+				<div className="h-100" style={{ position: "relative", margin: "0" }}>
+					<div className={classes.row}>
+						<div className={classes.leftPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<YourIngredients
 									ingredients={this.state.ingredients}
@@ -180,8 +196,8 @@ class CreatePizza extends Component {
 									Stwórz pizzę
 								</Button>
 							)}
-						</Col>
-						<Col className={classes.rightPane}>
+						</div>
+						<div className={classes.rightPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<IngredientsList
 									chooseIngredient={this.chooseIngredient}
@@ -190,9 +206,9 @@ class CreatePizza extends Component {
 							) : (
 								<PreviousOrders />
 							)}
-						</Col>
-					</Row>
-				</Container>
+						</div>
+					</div>
+				</div>
 			</Fragment>
 		);
 	}
