@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { db } from "../../../../index";
+import { db } from "../../../../App";
 import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
