@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -72,18 +71,14 @@ class CompleteOrderPage extends Component {
 			<Container className="h-100" style={{ position: "relative" }}>
 				<Row>
 					<div className={classes.container}>
-						<h3 className={classes.title}>Wybrana pizza:</h3>
 						<ListGroup>
 							{isCustomPizzaSubmitted && (
-								<CustomPizzaHeader ingredients={ingredients} />
+								<CustomPizzaHeader
+									ingredients={ingredients}
+									cancelIngredients={this.cancelIngredients}
+								/>
 							)}
 						</ListGroup>
-						<Button
-							className="d-inline custom-button btn-secondary"
-							onClick={this.cancelIngredients}
-						>
-							{"Anuluj"}
-						</Button>
 					</div>
 					<AvailablePizzerias
 						isCustomPizza={isCustomPizzaSubmitted}
