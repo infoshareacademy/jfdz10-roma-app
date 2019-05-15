@@ -49,6 +49,7 @@ const styles = theme => ({
 
 		[theme.breakpoints.down("sm")]: {
 			height: "auto",
+			width: "100%",
 			alignItems: "flex-end"
 		}
 	},
@@ -60,7 +61,10 @@ const styles = theme => ({
 		paddingLeft: 0,
 		paddingRight: 10,
 		[theme.breakpoints.down("sm")]: {
-			height: "60vh"
+			height: "60vh",
+			margin: "0 15px",
+			width: "100%",
+			paddingLeft: 10
 		}
 	},
 	row: {
@@ -68,7 +72,7 @@ const styles = theme => ({
 		height: "100%",
 		[theme.breakpoints.down("sm")]: {
 			flexDirection: "column",
-			justifyContent: "center",
+			justifyContent: "space-evenly",
 			alignItems: "center"
 		}
 	}
