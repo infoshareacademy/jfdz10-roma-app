@@ -1,4 +1,5 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
@@ -9,6 +10,15 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 
+const styles = theme => ({
+	wrapper: {
+		height: "359.5px",
+		[theme.breakpoints.down("xs")]: {
+			height: "auto"
+		}
+	}
+});
+
 const getFromLocalStorage = item => {
 	return JSON.parse(window.localStorage.getItem(item));
 };
@@ -18,8 +28,7 @@ const YourIngredients = ({
 	removeIngredient,
 	clearIngredients,
 	submitIngredients,
-	isPizzaSubmitted,
-	cancelIngredients
+	isPizzaSubmitted
 }) => {
 	const chosenIngredients =
 		getFromLocalStorage("ingredients") !== null &&
@@ -94,4 +103,4 @@ const YourIngredients = ({
 	);
 };
 
-export default YourIngredients;
+export default withStyles(styles)(YourIngredients);

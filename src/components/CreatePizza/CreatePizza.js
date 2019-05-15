@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -7,7 +8,6 @@ import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
-import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
@@ -37,6 +37,23 @@ const styles = theme => ({
 			textDecoration: "none",
 			backgroundColor: "#a5182e",
 			boxShadow: "none"
+		}
+	},
+	leftPane: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			height: "25vh",
+			alignItems: "flex-end"
+		}
+	},
+	rightPane: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			height: "60vh"
 		}
 	}
 });
@@ -143,10 +160,7 @@ class CreatePizza extends Component {
 				)}
 				<Container className="h-100" style={{ position: "relative" }}>
 					<Row className="h-100">
-						<Col
-							lg={6}
-							className="d-flex justify-content-center align-items-center"
-						>
+						<Col lg={6} className={classes.leftPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<YourIngredients
 									ingredients={this.state.ingredients}
@@ -159,7 +173,6 @@ class CreatePizza extends Component {
 							) : (
 								<Button
 									size="lg"
-									// className="custom-button create-pizza-button"
 									className={classes.favButton}
 									onClick={this.handleChangeCreatePizza}
 									variant="link"
@@ -168,7 +181,7 @@ class CreatePizza extends Component {
 								</Button>
 							)}
 						</Col>
-						<Col className="d-flex justify-content-center align-items-center">
+						<Col className={classes.rightPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<IngredientsList
 									chooseIngredient={this.chooseIngredient}

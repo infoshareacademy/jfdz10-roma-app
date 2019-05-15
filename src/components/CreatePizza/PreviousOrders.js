@@ -1,7 +1,26 @@
 import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
-import { ListContainer, ListWrapper } from "../SharedComponents/containers";
+import { ListWrapper } from "../SharedComponents/containers";
+
+const styles = theme => ({
+	container: {
+		width: "460px",
+		maxHeight: "500px",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		[theme.breakpoints.down("sm")]: {
+			height: "100%"
+		}
+	},
+	header: {
+		width: "100%",
+		padding: "1rem 0"
+	}
+});
 
 async function fetchOrders() {
 	return await fetch("orders.json").then(res => res.json());
@@ -29,10 +48,19 @@ class PreviousOrders extends Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		return (
-			<ListContainer>
-				<h3 className="list-header">Twoje poprzednie zamówienia</h3>
-				<ListWrapper className="list-scrollbar">
+			<div className={classes.container}>
+				<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
+				<ListWrapper
+					style={{
+						paddingLeft: 0,
+						paddingRight: 15,
+						borderRadius: 0,
+						height: "100%"
+					}}
+					className="list-scrollbar"
+				>
 					<div className="list-group">
 						{this.state.orders.map(order => {
 							let allIngredients = "";
@@ -73,9 +101,9 @@ class PreviousOrders extends Component {
 						})}
 					</div>
 				</ListWrapper>
-			</ListContainer>
+			</div>
 		);
 	}
 }
 
-export default PreviousOrders;
+export default withStyles(styles)(PreviousOrders);
