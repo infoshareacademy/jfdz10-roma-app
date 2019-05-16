@@ -9,9 +9,10 @@
     width: 100%;
 }
 
-.sc-ifAKCX {
-    margin: 0 5%;
-    padding: 3% 0;
+.sc-ifAKCX, .cDUeoc { 
+/* favourites pizzerias container with header */
+    margin: 0 auto;
+    width: 80%;
 }
 
 .list-scrollbar {
