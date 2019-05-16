@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { db } from "../../../../index";
-import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 import { ListWrapper } from "../../../SharedComponents/containers";
@@ -47,7 +46,6 @@ class AvailablePizzerias extends Component {
 	render() {
 		const {
 			classes,
-			isCustomPizza,
 			isPizzeriaSelected,
 			selectedPizzeria,
 			unselectPizzeria
