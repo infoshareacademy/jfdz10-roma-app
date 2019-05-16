@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase'
+import './SayHello.css'
 
 class SayHello extends React.Component {
     state = {
@@ -13,7 +14,9 @@ class SayHello extends React.Component {
                     authUser: user,
                     authUserId: user.uid,
                     authUserEmail: user.email,
-                    authUserRegistered: user.metadata.creationTime,
+                    authUserRegistered: user.metadata.creationTime
+                        .replace(/GMT/gi,'')
+                        .substring(4, user.metadata.creationTime.length -13),
                     authIsChecked: true,
                 })
             }
@@ -45,10 +48,13 @@ class SayHello extends React.Component {
 
     render() { 
         return (
-            <h1 className="user__sayhello">
-                <span role="img" aria-label="pizza">🍕</span>&nbsp;
-                Witaj {this.state.user ? this.state.userFirstName : null}!
-            </h1>
+            <div className='user__sayhello__container'>
+                <h1>
+                    <span role="img" aria-label="pizza">🍕 </span>
+                    Witaj {this.state.user ? this.state.userFirstName : null}!
+                </h1>
+                <span>Data dołączenia: {this.state.authUserRegistered}</span>
+            </div>
         );
     }
 }

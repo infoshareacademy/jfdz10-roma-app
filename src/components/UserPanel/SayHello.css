@@ -1,0 +1,17 @@
+.user__sayhello__container {
+    background: #FFFFFF;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 5px;
+    margin: 3% 10%;
+    padding: 3% 0;
+}
+
+.user__sayhello__container h1 {
+    color: #cc3333; 
+    letter-spacing: 0.3rem;
+    text-shadow: 0 0 5px lightgrey;
+}
+
+.user__sayhello__container span {
+    color: rgb(177, 177, 177);
+}

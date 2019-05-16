@@ -94,7 +94,6 @@ class Nickname extends React.Component {
     render () {
         return (
             <>
-                <span>Data dołączenia: {this.state.authUserRegistered}</span>
                 <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
                     <h4>e-mail: {this.state.authUserEmail}</h4>
                     <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
