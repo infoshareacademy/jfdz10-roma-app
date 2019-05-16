@@ -6,14 +6,15 @@
     background-position: center;
     display: flex;
     flex-wrap: wrap;
+    overflow: auto;
 }
 
 .user__container__left, .user__container__right {
     cursor: default;
     display: flex;
-    text-align: center;
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
+    text-align: center;
     width: 50%;
 }
