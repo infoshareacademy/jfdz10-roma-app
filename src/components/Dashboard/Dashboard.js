@@ -13,7 +13,9 @@ class Dashboard extends React.Component {
         className="dashboard"
         style={{
           backgroundImage: "url(/img/background.jpg)",
-          backgroundSize: "100% 100%"
+          backgroundSize: "100% 100%",
+          height: "100%", 
+          overflow: "auto"
         }}
       >
         <div className="jumbotron-fluid text-center">
@@ -56,7 +58,7 @@ class Dashboard extends React.Component {
               <div className="row">
                 <div
                   className="col-md-12"
-                  style={{ height: "15rem", padding: "1rem" }}
+                  style={{ height: "15rem", padding: "1rem"}}
                 >
                   <h5>Sprzedane pizze:</h5>
                   <Chart2 />
