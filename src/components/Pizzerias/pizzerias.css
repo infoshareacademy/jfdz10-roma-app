@@ -1,0 +1,82 @@
+.list-group-item.active {
+    background: rgb(255, 60, 0);
+    border-color: rgb(255, 60, 0);
+}
+
+.user__container * {
+    overflow: hidden;
+}
+
+.pizzerias__list__item {
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+
+.pizzeriasList__columns__container {
+    height: 70vh;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.pizzeriasList__column__left {
+    float: left;
+    height: 100%;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    width: 50%;
+}
+
+    .pizzeriasList__column__left h1 {
+        color: #cc3333;
+        font-size: 2rem;
+        letter-spacing: 0.3rem;
+    }
+
+.pizzeriasList__data {
+    margin-top: 0rem;
+}
+
+.pizzeriasList__column__right {
+    height: 100%;
+    margin-top: 0rem;
+    padding-top: 2rem;
+    padding-left: 4vw;
+    padding-bottom: 4rem;
+    text-align: left;
+    width: 50%;
+}
+
+    .pizzeriasList__column__right h1 {
+        color: #cc3333;
+        font-size: 2rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .pizzeriasList__column__right__pizzas {
+        margin-top: 1rem;
+        max-height: 350px;
+        overflow-y: auto;
+    }
+
+    .pizzeriasList__column__right__button {
+        background: #cc3333;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+        letter-spacing: .2rem;
+        margin: 1.5rem auto;
+        padding: 0.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        width: 35%;
+    }
+
+.pizzerias-filter-input:focus {
+    border: 2px dotted #cc3333;
+}
+
+.pizzerias-filter-input:focus {
+    outline: 0;
+}

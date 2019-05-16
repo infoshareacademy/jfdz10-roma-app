@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import PizzeriasList from './PizzeriasList'
-import "../CreatePizza/ListScrollbar.css";
+import PizzeriasList from "./PizzeriasList";
 import "../CreatePizza/containers.css";
-import "./styles.css";
-
+import "./pizzerias.css";
 
 class Pizzerias extends Component {
 	state = {
@@ -17,7 +15,7 @@ class Pizzerias extends Component {
 	render() {
 		return (
 			<div className="user__container">
-				<PizzeriasList />
+				<PizzeriasList {...this.props} />
 			</div>
 		);
 	}

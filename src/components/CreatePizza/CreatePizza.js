@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "./create-pizza-button.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,7 +7,39 @@ import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
-import Alert from "react-bootstrap/Alert";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+
+const styles = theme => ({
+	favButton: {
+		width: 170,
+		height: 55,
+		margin: "0 auto",
+		padding: ".4rem .5rem",
+		fontSize: "1.5rem",
+		border: "none",
+		color: "white",
+		textDecoration: "none",
+		backgroundColor: "#cc3333",
+		"&:active": {
+			color: "black",
+			backgroundColor: "black"
+		},
+		"&:hover": {
+			color: "white",
+			textDecoration: "none",
+			backgroundColor: "#a5182e"
+		},
+		"&:visited": {
+			textDecoration: "none"
+		},
+		"&:focus": {
+			textDecoration: "none",
+			backgroundColor: "#a5182e",
+			boxShadow: "none"
+		}
+	}
+});
 
 const getFromLocalStorage = item => {
 	return JSON.parse(window.localStorage.getItem(item));
@@ -32,6 +63,12 @@ class CreatePizza extends Component {
 	};
 
 	chooseIngredient = ingredient => {
+		const ingredients = this.state.ingredients.find(
+			element => element.name === ingredient.name
+		);
+		if (ingredients) {
+			return;
+		}
 		this.setState({ ingredients: [...this.state.ingredients, ingredient] });
 	};
 
@@ -57,6 +94,7 @@ class CreatePizza extends Component {
 			isPizzaSubmitted: true
 		});
 		this.props.submitPizza();
+		this.props.history.push("/make-order");
 	};
 
 	cancelIngredients = () => {
@@ -72,62 +110,79 @@ class CreatePizza extends Component {
 
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
+		const { classes } = this.props;
 		return (
-			<Container className="h-100" style={{ position: "relative" }}>
+			<Fragment>
 				{isPizzaSubmitted && (
-					<Alert
-						variant="success"
-						style={{
-							margin: "1rem 0",
-							position: "absolute",
-							width: "100%",
-							top: "0px",
-							left: "0px"
-						}}
-					>
-						<Alert.Heading>Potwierdziłeś wybrane składniki.</Alert.Heading>
-						Przejdź do następnego kroku i złóż zamówienie.
-					</Alert>
-				)}
-				<Row className="h-100">
-					<Col
-						lg={6}
-						className="d-flex justify-content-center align-items-center"
-					>
-						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<YourIngredients
-								ingredients={this.state.ingredients}
-								removeIngredient={this.removeIngredient}
-								clearIngredients={this.clearIngredients}
-								submitIngredients={this.submitIngredients}
-								isPizzaSubmitted={isPizzaSubmitted}
-								cancelIngredients={this.cancelIngredients}
-							/>
-						) : (
-							<Button
-								size="lg"
-								className="custom-button create-pizza-button"
-								onClick={this.handleChangeCreatePizza}
-								variant="link"
+					<Fragment>
+						<div
+							variant="success"
+							style={{
+								position: "fixed",
+								width: "100%",
+								height: "100vh",
+								backgroundColor: "rgba(209,241,218,0.6)",
+								zIndex: 1000
+							}}
+						>
+							<Paper
+								style={{
+									position: "absolute",
+									top: "50%",
+									left: "50%",
+									transform: "translate(-50%, -50%)",
+									textAlign: "center",
+									padding: "25px 50px"
+								}}
 							>
-								Stwórz pizzę
-							</Button>
-						)}
-					</Col>
-					<Col className="d-flex justify-content-center align-items-center">
-						{this.state.isCreatePizza || isPizzaSubmitted ? (
-							<IngredientsList
-								chooseIngredient={this.chooseIngredient}
-								isPizzaSubmitted={isPizzaSubmitted}
-							/>
-						) : (
-							<PreviousOrders />
-						)}
-					</Col>
-				</Row>
-			</Container>
+								<h1>Potwierdziłeś wybrane składniki.</h1>
+								<h2>Przejdź do następnego kroku i złóż zamówienie.</h2>
+							</Paper>
+						</div>
+					</Fragment>
+				)}
+				<Container className="h-100" style={{ position: "relative" }}>
+					<Row className="h-100">
+						<Col
+							lg={6}
+							className="d-flex justify-content-center align-items-center"
+						>
+							{this.state.isCreatePizza || isPizzaSubmitted ? (
+								<YourIngredients
+									ingredients={this.state.ingredients}
+									removeIngredient={this.removeIngredient}
+									clearIngredients={this.clearIngredients}
+									submitIngredients={this.submitIngredients}
+									isPizzaSubmitted={isPizzaSubmitted}
+									cancelIngredients={this.cancelIngredients}
+								/>
+							) : (
+								<Button
+									size="lg"
+									// className="custom-button create-pizza-button"
+									className={classes.favButton}
+									onClick={this.handleChangeCreatePizza}
+									variant="link"
+								>
+									Stwórz pizzę
+								</Button>
+							)}
+						</Col>
+						<Col className="d-flex justify-content-center align-items-center">
+							{this.state.isCreatePizza || isPizzaSubmitted ? (
+								<IngredientsList
+									chooseIngredient={this.chooseIngredient}
+									isPizzaSubmitted={isPizzaSubmitted}
+								/>
+							) : (
+								<PreviousOrders />
+							)}
+						</Col>
+					</Row>
+				</Container>
+			</Fragment>
 		);
 	}
 }
 
-export default CreatePizza;
+export default withStyles(styles)(CreatePizza);

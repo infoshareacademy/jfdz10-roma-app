@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { ListContainer, ListWrapper } from "../CreatePizza/containers";
+import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 import { FaHeart } from "react-icons/fa";
-import "../CreatePizza/ListScrollbar.css";
+import "../SharedComponents/ListScrollbar.css";
 import "../CreatePizza/containers.css";
 
 const styles = {
@@ -17,7 +17,7 @@ const styles = {
 
 class Favourites extends Component {
 	state = {
-		pizzerias: JSON.parse(localStorage.getItem('favPizzeria'))
+		pizzerias: JSON.parse(localStorage.getItem("favPizzeria"))
 	};
 	selectFavPizzeria = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
@@ -35,8 +35,10 @@ class Favourites extends Component {
 			const favPizzeria = [pizzeria];
 			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
 		}
-		this.setState({pizzerias: JSON.parse(localStorage.getItem('favPizzeria'))})
-	}
+		this.setState({
+			pizzerias: JSON.parse(localStorage.getItem("favPizzeria"))
+		});
+	};
 	favIconMarked = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
@@ -46,40 +48,53 @@ class Favourites extends Component {
 	render() {
 		return (
 			<ListContainer>
-				<h3 className="list-header"><span role="img" aria-label="pizzeria">🏠 </span>Twoje ulubione pizzerie:</h3><br />
+				<h3 className="list-header">
+					<span role="img" aria-label="pizzeria">
+						🏠{" "}
+					</span>
+					Twoje ulubione pizzerie:
+				</h3>
+				<br />
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
-						{localStorage.getItem("favPizzeria") !== null ?
-							this.state.pizzerias.map((pizzeria, i) => {
-								return (
-									<div
-										key={pizzeria.id}
-										className="list-group-item list-group-item-action flex-column align-items-start"
-										style={{
-											overflowWrap: "break-word",
-											wordWrap: "break-word"
-										}}
-									>
-										<div className="d-flex w-100 justify-content-between">
-											<h5>
-												{this.state.pizzerias[i].name}
-											</h5>
-											<FaHeart
-												onClick={() => this.selectFavPizzeria(pizzeria)}
-												style={
-													this.favIconMarked(pizzeria)
-														? styles.FavIconEnabled
-														: styles.FavIconDisabled
-												}
-											/>
+						{localStorage.getItem("favPizzeria") !== null
+							? this.state.pizzerias.map((pizzeria, i) => {
+									return (
+										<div
+											key={pizzeria.id}
+											className="list-group-item list-group-item-action flex-column align-items-start"
+											style={{
+												overflowWrap: "break-word",
+												wordWrap: "break-word"
+											}}
+										>
+											<div className="d-flex w-100 justify-content-between">
+												<h5>{this.state.pizzerias[i].name}</h5>
+												<FaHeart
+													onClick={() => this.selectFavPizzeria(pizzeria)}
+													style={
+														this.favIconMarked(pizzeria)
+															? styles.FavIconEnabled
+															: styles.FavIconDisabled
+													}
+												/>
+											</div>
+											<span>
+												Kontakt: {this.state.pizzerias[i].contactInfo.phone}
+												&nbsp;&nbsp;&nbsp;
+												<a
+													href={
+														"http://" +
+														this.state.pizzerias[i].contactInfo.website
+													}
+												>
+													{this.state.pizzerias[i].contactInfo.website}
+												</a>
+											</span>
 										</div>
-										<span>Kontakt: {this.state.pizzerias[i].contactInfo.phone}&nbsp;&nbsp;&nbsp;
-											<a href={"http://" + this.state.pizzerias[i].contactInfo.website}>{this.state.pizzerias[i].contactInfo.website}</a>
-										</span>
-									</div>
-								);
-							}) : null
-						}
+									);
+							  })
+							: null}
 					</div>
 				</ListWrapper>
 			</ListContainer>

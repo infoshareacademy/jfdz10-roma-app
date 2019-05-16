@@ -1,13 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "./ListScrollbar.css";
+import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import "./create-pizza-button.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ListContainer, ListWrapper } from "./containers";
+import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 
 const getFromLocalStorage = item => {
 	return JSON.parse(window.localStorage.getItem(item));
@@ -80,18 +80,14 @@ const YourIngredients = ({
 						}
 						disabled={isPizzaSubmitted ? true : false}
 					>
-						Zatwierdź pizzę
+						Złóż zamówienie
 					</Button>
 				</OverlayTrigger>
 				<Button
 					className="d-inline custom-button btn-secondary"
-					onClick={
-						isPizzaSubmitted
-							? () => cancelIngredients()
-							: () => clearIngredients()
-					}
+					onClick={clearIngredients}
 				>
-					{isPizzaSubmitted ? "Anuluj" : "Wyczyść"}
+					Wyczyść
 				</Button>
 			</div>
 		</ListContainer>

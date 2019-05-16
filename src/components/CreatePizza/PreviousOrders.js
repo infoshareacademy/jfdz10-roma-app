@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./ListScrollbar.css";
+import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
-import { ListContainer, ListWrapper } from "./containers";
+import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 
 async function fetchOrders() {
 	return await fetch("orders.json").then(res => res.json());

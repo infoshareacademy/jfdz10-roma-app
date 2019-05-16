@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListContainer, ListWrapper } from "../SharedComponents/containers";
+import { ListContainer, ListWrapper } from "./containers";
 
 async function fetchIngredients() {
 	return await fetch("ingredients.json").then(res => res.json());
