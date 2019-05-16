@@ -1,17 +1,44 @@
+.user__userdata__container {
+    background: #FFFFFF;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 5px;
+    color: rgb(90, 90, 90);
+    margin: 1% 10%;
+    padding: 3%;
+}
+
+.user__userdata__container h2 {
+    color: #cc3333; 
+    letter-spacing: 0.3rem;
+    text-shadow: 0 0 5px lightgrey;
+}
+
+.user__userdata__container__data * {
+    line-height: 150%;
+}
+
+.user__userdata__container__data {
+    margin: 3% auto;
+    text-align: left;
+    width: 40%;
+}
+
 .change__data__container button {
-    width: 3rem;
+    width: 30%;
     height: 100%;
     background: rgb(255, 255, 255);
     border: 1px solid lightgrey;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 3px 3px 0;
+    padding: .2rem 0;
 }
 
 .change__data__container input {
     border: 1px solid lightgrey;
     border-right: none;
-    border-radius: 5px 0 0 5px;
-    padding: .2em 1rem;
-    width: 60%;
+    border-radius: 3px 0 0 3px;
+    margin-bottom: .1rem;
+    padding: .2rem .7rem;
+    width: 70%;
 }
 
 .unvisible {

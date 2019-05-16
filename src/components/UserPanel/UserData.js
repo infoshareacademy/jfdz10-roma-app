@@ -93,10 +93,14 @@ class Nickname extends React.Component {
 
     render () {
         return (
-            <>
-                <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
-                    <h4>e-mail: {this.state.authUserEmail}</h4>
-                    <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
+            <div className='user__userdata__container'>
+                <h2>
+                    <span role="img" aria-label="phone">📞 </span> 
+                    Kontakt: 
+                </h2>
+                <div className='user__userdata__container__data'>
+                    <h5>• e-mail: {this.state.authUserEmail}</h5>
+                    <h5>• adres: { this.state.user ? this.state.user.street : null }</h5>
                         <div className="change__data__container unvisible">
                             <input 
                                 type="text" 
@@ -108,25 +112,26 @@ class Nickname extends React.Component {
                                 </span>
                             </button>    
                         </div>
-                    <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
+                    <h5>• telefon: { this.state.user ? this.state.user.phone : null }</h5>   
                         <div className="change__data__container unvisible">
                             <input 
                                 type="text" 
                                 value={ this.state.user ? this.state.user.phone : '' } 
                                 onChange={this.editPhoneNum}>
-                           </input><button onClick={this.editUserData}>
+                            </input><button onClick={this.editUserData}>
                                 <span role="img" aria-label="phone">
                                     💾
                                 </span>
                             </button>     
                         </div>
+                </div>
                 <div>
                     <div onClick={this.editUserData}>
                         <span>Edytuj Profil</span>
                     </div>
                     <DeleteUser />
                 </div>        
-            </>
+            </div>
         )
     }
 }
