@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import './UserData.css'
 
 class DeleteUser extends React.Component {
     state = {
@@ -50,7 +51,7 @@ class DeleteUser extends React.Component {
     render() { 
         return (
             <>
-                <div onClick={this.handleClickOpen}>
+                <div className='user__userdata__container__button' onClick={this.handleClickOpen}>
                     <span>Usuń konto</span>
                 </div>
                 <Dialog

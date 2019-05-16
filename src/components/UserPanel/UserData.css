@@ -1,29 +1,29 @@
 .user__userdata__container {
     background: #FFFFFF;
     border: 1px solid rgb(220, 220, 220);
-    border-radius: 5px;
+    border-radius: 3px;
     color: rgb(90, 90, 90);
     margin: 1% 10%;
-    padding: 3%;
+    padding: 3% 0;
 }
 
-.user__userdata__container h2 {
-    color: #cc3333; 
-    letter-spacing: 0.3rem;
-    text-shadow: 0 0 5px lightgrey;
-}
+    .user__userdata__container h2 {
+        color: #cc3333; 
+        letter-spacing: 0.3rem;
+        text-shadow: 0 0 5px lightgrey;
+    }
 
-.user__userdata__container__data * {
-    line-height: 150%;
-}
+    .user__userdata__container__data * {
+        line-height: 150%;
+    }
 
-.user__userdata__container__data {
-    margin: 3% auto;
-    text-align: left;
-    width: 40%;
-}
+    .user__userdata__container__data {
+        margin: 3% auto;
+        text-align: left;
+        width: 40%;
+    }
 
-.change__data__container button {
+    .user__userdata__container__datainput button {
     width: 30%;
     height: 100%;
     background: rgb(255, 255, 255);
@@ -32,10 +32,10 @@
     padding: .2rem 0;
 }
 
-.change__data__container input {
+.user__userdata__container__datainput input {
     border: 1px solid lightgrey;
-    border-right: none;
     border-radius: 3px 0 0 3px;
+    border-right: none;
     margin-bottom: .1rem;
     padding: .2rem .7rem;
     width: 70%;
@@ -44,3 +44,25 @@
 .unvisible {
     display: none;
 }
+
+.user__userdata__container__buttons {
+    display: flex;
+    justify-content: center;
+}
+
+    .user__userdata__container__button {
+        background-color: #cc3333;
+        border-radius: 3px;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 2rem;
+        justify-content: center;
+        margin: 0 1rem;
+        width: 110px;
+    }
+
+    .user__userdata__container__button:hover {
+        background-color: #912525;
+    }
