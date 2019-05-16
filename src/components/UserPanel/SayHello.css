@@ -9,6 +9,7 @@
 
 .user__sayhello__container h1 {
     color: #cc3333; 
+    font-size: 3rem;
     letter-spacing: 0.3rem;
     text-shadow: 0 0 5px lightgrey;
 }

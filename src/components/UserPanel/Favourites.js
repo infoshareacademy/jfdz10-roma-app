@@ -50,12 +50,12 @@ class Favourites extends Component {
 	render() {
 		return (
 			<ListContainer>
-				<h4 className="user__favourites__header list-header">
+				<h2 className="user__favourites__header list-header">
 					<span role="img" aria-label="pizzeria">
 						🏠&nbsp;
 					</span>
-					Twoje ulubione pizzerie:
-				</h4>
+					Ulubione pizzerie:
+				</h2>
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
 						{localStorage.getItem("favPizzeria") !== null
