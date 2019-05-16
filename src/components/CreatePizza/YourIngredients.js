@@ -9,7 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { ListContainer, ListWrapper } from "../SharedComponents/containers";
+import { ListWrapper } from "../SharedComponents/containers";
 
 const styles = theme => ({
 	wrapper: {
@@ -116,7 +116,6 @@ const YourIngredients = ({
 					}
 				>
 					<Button
-						className="d-inline custom-button create-pizza-button"
 						className={classNames(
 							classes.btn,
 							"d-inline custom-button create-pizza-button"

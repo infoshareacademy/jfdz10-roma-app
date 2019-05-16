@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListContainer, ListWrapper } from "../SharedComponents/containers";
+import { ListWrapper } from "../SharedComponents/containers";
 
 const styles = theme => ({
 	container: {

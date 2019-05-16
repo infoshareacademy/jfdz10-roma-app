@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
