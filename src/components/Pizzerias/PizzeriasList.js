@@ -95,6 +95,7 @@ class PizzeriasList extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.user !== prevProps.user) {
+			console.log(this.props.user);
 			// this.fetchFavPizzerias();
 			this.setState({ ...this.state, user: this.props.user });
 		}
@@ -136,6 +137,7 @@ class PizzeriasList extends Component {
 
 	selectFavPizzeria = pizzeria => {
 		const { favPizzerias } = this.state;
+		const { user } = this.state;
 
 		const isAnyPizzeriaFavourite = favPizzerias && favPizzerias.length;
 		const isPizzeriaFavourite = favPizzerias.some(
@@ -143,12 +145,14 @@ class PizzeriasList extends Component {
 		);
 		if (isAnyPizzeriaFavourite) {
 			if (!isPizzeriaFavourite) {
+				const selectedPizzerias = [...favPizzerias, pizzeria];
 				this.setState({
 					...this.state,
-					favPizzerias: [...favPizzerias, pizzeria],
+					favPizzerias: selectedPizzerias,
 					isSnackbarOpen: true,
 					snackbarMessage: "Dodano do ulubionych"
 				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
 			}
 			if (isPizzeriaFavourite) {
 				const removedFavPizzerias = favPizzerias.filter(
@@ -160,14 +164,17 @@ class PizzeriasList extends Component {
 					isSnackbarOpen: true,
 					snackbarMessage: "Usunięto z ulubionych"
 				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...removedFavPizzerias });
 			}
 		} else {
+			const selectedPizzerias = [...favPizzerias, pizzeria];
 			this.setState({
 				...this.state,
-				favPizzerias: [...favPizzerias, pizzeria],
+				favPizzerias: selectedPizzerias,
 				isSnackbarOpen: true,
 				snackbarMessage: "Dodano do ulubionych"
 			});
+			db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
 		}
 	};
 

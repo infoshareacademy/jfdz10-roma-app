@@ -57,7 +57,6 @@ class App extends React.Component {
 
 	render() {
 		const { isPizzaSubmitted, user } = this.state;
-		console.log(this.state.user);
 		return (
 			<BrowserRouter>
 				<AppContainer>
