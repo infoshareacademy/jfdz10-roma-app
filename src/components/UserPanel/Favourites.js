@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
+import Loader from "react-loader-spinner";
 
 const styles = theme => ({
 	FavIconEnabled: {
@@ -26,6 +27,10 @@ const styles = theme => ({
 		"&:focus": {
 			outline: "none"
 		}
+	},
+	spinnerWrapper: {
+		display: "flex",
+		justifyContent: "center"
 	}
 });
 
@@ -33,7 +38,7 @@ class Favourites extends Component {
 	state = {
 		user: null,
 		favPizzerias: [],
-		isFetchFavPizzerias: false,
+		isFetchFinished: false,
 		isFetchInProgress: false,
 		isSnackbarOpen: false,
 		snackbarMessage: ""
@@ -44,7 +49,7 @@ class Favourites extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.user !== prevProps.user) {
+		if (this.state.user !== prevProps.user) {
 			this.fetchFavPizzerias();
 			this.setState({ ...this.state, user: this.props.user });
 		}
@@ -100,6 +105,7 @@ class Favourites extends Component {
 
 	fetchFavPizzerias = () => {
 		const { user } = this.props;
+		this.setState({ ...this.state, isFetchInProgress: true });
 		if (user) {
 			db.ref(`users/${user.uid}/favourites`)
 				.once("value")
@@ -108,7 +114,8 @@ class Favourites extends Component {
 					this.setState({
 						...this.state,
 						favPizzerias: favourites,
-						isFetchFavPizzerias: true
+						isFetchFinished: true,
+						isFetchInProgress: false
 					});
 				})
 				.catch(err => console.log(err.message));
@@ -131,9 +138,13 @@ class Favourites extends Component {
 	};
 
 	render() {
-		const { favPizzerias, snackbarMessage } = this.state;
+		const {
+			favPizzerias,
+			snackbarMessage,
+			isFetchFinished,
+			isFetchInProgress
+		} = this.state;
 		const { classes } = this.props;
-
 		return (
 			<ListContainer>
 				<h2 className="user__favourites__header list-header">
@@ -143,45 +154,53 @@ class Favourites extends Component {
 					Ulubione pizzerie:
 				</h2>
 				<ListWrapper className="list-scrollbar">
-					<div className="list-group">
-						{favPizzerias.map((pizzeria, i) => {
-							return (
-								<Fragment key={i}>
-									<div
-										key={pizzeria.id}
-										className="list-group-item list-group-item-action flex-column align-items-start"
-										style={{
-											overflowWrap: "break-word",
-											wordWrap: "break-word"
-										}}
-									>
-										<div className="d-flex w-100 justify-content-between">
-											<h5>{favPizzerias[i].name}</h5>
-											<FaHeart
-												onClick={() => this.selectFavPizzeria(pizzeria)}
-												className={
-													this.favIconMarked(pizzeria)
-														? classes.FavIconEnabled
-														: classes.FavIconDisabled
-												}
-											/>
+					{isFetchInProgress ? (
+						<Loader type="Oval" color="#039be5" width={120} height={120} />
+					) : isFetchFinished && !favPizzerias.length ? (
+						<div className="list-group-item user__favourites__pizzerias">
+							<img alt="pizzeria" src="img/user__pizzeria.jpg" />
+							<p>Nie dodałeś jeszcze ulubionych pizzerii.</p>
+						</div>
+					) : (
+						<div className="list-group">
+							{favPizzerias.map((pizzeria, i) => {
+								return (
+									<Fragment key={i}>
+										<div
+											key={pizzeria.id}
+											className="list-group-item list-group-item-action flex-column align-items-start"
+											style={{
+												overflowWrap: "break-word",
+												wordWrap: "break-word"
+											}}
+										>
+											<div className="d-flex w-100 justify-content-between">
+												<h5>{favPizzerias[i].name}</h5>
+												<FaHeart
+													onClick={() => this.selectFavPizzeria(pizzeria)}
+													className={
+														this.favIconMarked(pizzeria)
+															? classes.FavIconEnabled
+															: classes.FavIconDisabled
+													}
+												/>
+											</div>
+											<span>
+												Kontakt: {favPizzerias[i].contactInfo.phone}
+												&nbsp;&nbsp;&nbsp;
+												<a
+													href={"http://" + favPizzerias[i].contactInfo.website}
+												>
+													{favPizzerias[i].contactInfo.website}
+												</a>
+											</span>
 										</div>
-										<span>
-											Kontakt: {favPizzerias[i].contactInfo.phone}
-											&nbsp;&nbsp;&nbsp;
-											<a href={"http://" + favPizzerias[i].contactInfo.website}>
-												{favPizzerias[i].contactInfo.website}
-											</a>
-										</span>
-									</div>
-									{/* <div className="list-group-item user__favourites__pizzerias">
-										<img alt="pizzeria" src="img/user__pizzeria.jpg" />
-										<p>Nie dodałeś jeszcze ulubionych pizzerii.</p>
-									</div> */}
-								</Fragment>
-							);
-						})}
-					</div>
+									</Fragment>
+								);
+							})}
+						</div>
+					)}
+
 					<Snackbar
 						anchorOrigin={{
 							vertical: "bottom",
