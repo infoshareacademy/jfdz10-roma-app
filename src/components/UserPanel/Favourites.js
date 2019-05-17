@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 import { FaHeart } from "react-icons/fa";
-import "../SharedComponents/ListScrollbar.css";
-import "../CreatePizza/containers.css";
+import "./Favourites.css"
 
 const styles = {
 	FavIconEnabled: {
@@ -19,6 +18,7 @@ class Favourites extends Component {
 	state = {
 		pizzerias: JSON.parse(localStorage.getItem("favPizzeria"))
 	};
+
 	selectFavPizzeria = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
@@ -39,22 +39,23 @@ class Favourites extends Component {
 			pizzerias: JSON.parse(localStorage.getItem("favPizzeria"))
 		});
 	};
+
 	favIconMarked = pizzeria => {
 		if (localStorage.getItem("favPizzeria") !== null) {
 			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
 			return favPizzerias.some(fav => fav.name === pizzeria.name);
 		}
 	};
+
 	render() {
 		return (
 			<ListContainer>
-				<h3 className="list-header">
+				<h2 className="user__favourites__header list-header">
 					<span role="img" aria-label="pizzeria">
-						🏠{" "}
+						🏠&nbsp;
 					</span>
-					Twoje ulubione pizzerie:
-				</h3>
-				<br />
+					Ulubione pizzerie:
+				</h2>
 				<ListWrapper className="list-scrollbar">
 					<div className="list-group">
 						{localStorage.getItem("favPizzeria") !== null
@@ -94,7 +95,12 @@ class Favourites extends Component {
 										</div>
 									);
 							  })
-							: null}
+							: 
+							<div className="list-group-item user__favourites__pizzerias">
+								<img alt="pizzeria" src="img/user__pizzeria.jpg"/>
+								<p>Nie dodałeś jeszcze ulubionych pizzerii.</p>
+							</div>
+						}	
 					</div>
 				</ListWrapper>
 			</ListContainer>

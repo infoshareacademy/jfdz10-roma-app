@@ -53,7 +53,7 @@ class Nickname extends React.Component {
         this.setState( { 
             showInput: !doInputsShow 
         });
-        let inputs = document.querySelectorAll(".change__data__container");
+        let inputs = document.querySelectorAll(".user__userdata__container__datainput");
         if (this.state.showInput) {
             inputs.forEach( input => input.classList.add("unvisible"));
         } else {
@@ -76,6 +76,21 @@ class Nickname extends React.Component {
         }
     }
 
+    editCity = (e) => { 
+        if (this.state.user) { 
+            this.setState({ 
+                user: {
+                    ...this.state.user,
+                    city: e.target.value 
+                }
+            }, () => {
+            firebase.database()
+                .ref(`users/${this.state.authUserId}`)
+                .update({ city: this.state.user.city })
+            }) 
+        }
+    }
+
     editPhoneNum = (e) => { 
         if (this.state.user) { 
             this.setState({ 
@@ -93,12 +108,15 @@ class Nickname extends React.Component {
 
     render () {
         return (
-            <>
-                <span>Data dołączenia: {this.state.authUserRegistered}</span>
-                <h2><span role="img" aria-label="phone">📞</span> Kontakt: </h2>
-                    <h4>e-mail: {this.state.authUserEmail}</h4>
-                    <h4>adres: { this.state.user ? this.state.user.street : null }</h4>
-                        <div className="change__data__container unvisible">
+            <div className='user__userdata__container'>
+                <h2>
+                    <span role="img" aria-label="user">👤 </span> 
+                    Twoje dane: 
+                </h2>
+                <div className='user__userdata__container__data'>
+                    <h5>• e-mail: {this.state.authUserEmail}</h5>
+                    <h5>• ulica: { this.state.user ? this.state.user.street : null }</h5>
+                        <div className="user__userdata__container__datainput unvisible">
                             <input 
                                 type="text" 
                                 value={ this.state.user ? this.state.user.street : '' } 
@@ -109,25 +127,38 @@ class Nickname extends React.Component {
                                 </span>
                             </button>    
                         </div>
-                    <h4>telefon: { this.state.user ? this.state.user.phone : null }</h4>   
-                        <div className="change__data__container unvisible">
+                    <h5>• miasto: { this.state.user ? this.state.user.city : null }</h5>
+                        <div className="user__userdata__container__datainput unvisible">
+                            <input 
+                                type="text" 
+                                value={ this.state.user ? this.state.user.city : '' } 
+                                onChange={this.editCity}>
+                            </input><button onClick={this.editUserData}>
+                                <span role="img" aria-label="phone">
+                                    💾
+                                </span>
+                            </button>    
+                        </div>
+                    <h5>• telefon: { this.state.user ? this.state.user.phone : null }</h5>   
+                        <div className="user__userdata__container__datainput unvisible">
                             <input 
                                 type="text" 
                                 value={ this.state.user ? this.state.user.phone : '' } 
                                 onChange={this.editPhoneNum}>
-                           </input><button onClick={this.editUserData}>
+                            </input><button onClick={this.editUserData}>
                                 <span role="img" aria-label="phone">
                                     💾
                                 </span>
                             </button>     
                         </div>
-                <div className="buttons__container">
-                    <div className="button" onClick={this.editUserData}>
+                </div>
+                <div className='user__userdata__container__buttons'>
+                    <div className='user__userdata__container__button' onClick={this.editUserData}>
                         <span>Edytuj Profil</span>
                     </div>
                     <DeleteUser />
                 </div>        
-            </>
+            </div>
         )
     }
 }
