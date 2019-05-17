@@ -120,14 +120,6 @@ class PizzeriasList extends Component {
 		}
 	};
 
-	handleClickFavBtn = message => {
-		this.setState({
-			...this.state,
-			isSnackbarOpen: true,
-			snackbarMessage: message
-		});
-	};
-
 	handleCloseSnackbar = (event, reason) => {
 		if (reason === "clickaway") {
 			return;

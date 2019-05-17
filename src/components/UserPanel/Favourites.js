@@ -1,10 +1,15 @@
 import React, { Component, Fragment } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import { ListContainer, ListWrapper } from "../SharedComponents/containers";
 import { FaHeart } from "react-icons/fa";
 import "./Favourites.css";
 import { db } from "../../App";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 
-const styles = {
+const styles = theme => ({
 	FavIconEnabled: {
 		float: "right",
 		color: "#cc1a37"
@@ -12,15 +17,26 @@ const styles = {
 	FavIconDisabled: {
 		float: "right",
 		color: "#919191"
+	},
+	success: {
+		backgroundColor: "#33ab4e"
+	},
+	close: {
+		padding: theme.spacing.unit / 2,
+		"&:focus": {
+			outline: "none"
+		}
 	}
-};
+});
 
 class Favourites extends Component {
 	state = {
 		user: null,
 		favPizzerias: [],
 		isFetchFavPizzerias: false,
-		isFetchInProgress: false
+		isFetchInProgress: false,
+		isSnackbarOpen: false,
+		snackbarMessage: ""
 	};
 
 	componentDidMount() {
@@ -33,6 +49,54 @@ class Favourites extends Component {
 			this.setState({ ...this.state, user: this.props.user });
 		}
 	}
+
+	selectFavPizzeria = pizzeria => {
+		const { favPizzerias } = this.state;
+		const { user } = this.state;
+
+		const isAnyPizzeriaFavourite = favPizzerias && favPizzerias.length;
+		const isPizzeriaFavourite = favPizzerias.some(
+			fav => fav.name === pizzeria.name
+		);
+
+		if (!user) {
+			return;
+		}
+
+		if (isAnyPizzeriaFavourite) {
+			if (!isPizzeriaFavourite) {
+				const selectedPizzerias = [...favPizzerias, pizzeria];
+				this.setState({
+					...this.state,
+					favPizzerias: selectedPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Dodano do ulubionych"
+				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
+			}
+			if (isPizzeriaFavourite) {
+				const removedFavPizzerias = favPizzerias.filter(
+					fav => fav.name !== pizzeria.name
+				);
+				this.setState({
+					...this.state,
+					favPizzerias: removedFavPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Usunięto z ulubionych"
+				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...removedFavPizzerias });
+			}
+		} else {
+			const selectedPizzerias = [...favPizzerias, pizzeria];
+			this.setState({
+				...this.state,
+				favPizzerias: selectedPizzerias,
+				isSnackbarOpen: true,
+				snackbarMessage: "Dodano do ulubionych"
+			});
+			db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
+		}
+	};
 
 	fetchFavPizzerias = () => {
 		const { user } = this.props;
@@ -58,8 +122,17 @@ class Favourites extends Component {
 		}
 	};
 
+	handleCloseSnackbar = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		this.setState({ ...this.state, isSnackbarOpen: false });
+	};
+
 	render() {
-		const { favPizzerias } = this.state;
+		const { favPizzerias, snackbarMessage } = this.state;
+		const { classes } = this.props;
 
 		return (
 			<ListContainer>
@@ -73,7 +146,7 @@ class Favourites extends Component {
 					<div className="list-group">
 						{favPizzerias.map((pizzeria, i) => {
 							return (
-								<Fragment>
+								<Fragment key={i}>
 									<div
 										key={pizzeria.id}
 										className="list-group-item list-group-item-action flex-column align-items-start"
@@ -86,10 +159,10 @@ class Favourites extends Component {
 											<h5>{favPizzerias[i].name}</h5>
 											<FaHeart
 												onClick={() => this.selectFavPizzeria(pizzeria)}
-												style={
+												className={
 													this.favIconMarked(pizzeria)
-														? styles.FavIconEnabled
-														: styles.FavIconDisabled
+														? classes.FavIconEnabled
+														: classes.FavIconDisabled
 												}
 											/>
 										</div>
@@ -109,10 +182,37 @@ class Favourites extends Component {
 							);
 						})}
 					</div>
+					<Snackbar
+						anchorOrigin={{
+							vertical: "bottom",
+							horizontal: "left"
+						}}
+						open={this.state.isSnackbarOpen}
+						autoHideDuration={4000}
+						onClose={this.handleCloseSnackbar}
+					>
+						<SnackbarContent
+							className={classes.success}
+							message={
+								<span style={{ fontSize: "1.1rem" }}>{snackbarMessage}</span>
+							}
+							action={[
+								<IconButton
+									key="close"
+									aria-label="Close"
+									color="inherit"
+									className={classes.close}
+									onClick={this.handleCloseSnackbar}
+								>
+									<CloseIcon />
+								</IconButton>
+							]}
+						/>
+					</Snackbar>
 				</ListWrapper>
 			</ListContainer>
 		);
 	}
 }
 
-export default Favourites;
+export default withStyles(styles)(Favourites);

@@ -17,7 +17,7 @@ class Pizzerias extends Component {
 
 		return (
 			<div className="pizzerias__container">
-				<PizzeriasList {...this.props} />
+				<PizzeriasList user={user} {...this.props} />
 			</div>
 		);
 	}
