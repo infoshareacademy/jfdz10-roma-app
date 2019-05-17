@@ -95,25 +95,23 @@ class PizzeriasList extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.user !== prevProps.user) {
-			console.log(this.props.user);
-			// this.fetchFavPizzerias();
+			this.fetchFavPizzerias();
 			this.setState({ ...this.state, user: this.props.user });
 		}
 	}
 
-	// fetchFavPizzerias = () => {
-	// 	const { user } = this.props;
-	// 	if (user) {
-	// 		db.ref(`users/${user.uid}/favPizzerias`)
-	// 			.once("value")
-	// 			.then(snapshot => {
-	// 				const data = snapshot.val() || [];
-	// 				console.log(data);
-	// 				this.setState({ ...this.state, favPizzerias: data });
-	// 			})
-	// 			.catch(err => console.log(err.message));
-	// 	}
-	// };
+	fetchFavPizzerias = () => {
+		const { user } = this.props;
+		if (user) {
+			db.ref(`users/${user.uid}/favourites`)
+				.once("value")
+				.then(snapshot => {
+					const favourites = snapshot.val() || [];
+					this.setState({ ...this.state, favPizzerias: favourites });
+				})
+				.catch(err => console.log(err.message));
+		}
+	};
 
 	handleClickFavBtn = message => {
 		this.setState({
