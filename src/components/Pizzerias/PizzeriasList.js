@@ -69,6 +69,7 @@ class PizzeriasList extends Component {
 		user: null,
 		pizzas: [],
 		favPizzerias: [],
+		isFetchFavPizzerias: false,
 		pizzerias: [],
 		isSnackbarOpen: false,
 		snackbarMessage: "",
@@ -91,6 +92,8 @@ class PizzeriasList extends Component {
 				}
 			})
 			.catch(error => console.log(error.message));
+
+		this.fetchFavPizzerias();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -107,7 +110,11 @@ class PizzeriasList extends Component {
 				.once("value")
 				.then(snapshot => {
 					const favourites = snapshot.val() || [];
-					this.setState({ ...this.state, favPizzerias: favourites });
+					this.setState({
+						...this.state,
+						favPizzerias: favourites,
+						isFetchFavPizzerias: true
+					});
 				})
 				.catch(err => console.log(err.message));
 		}
@@ -141,6 +148,11 @@ class PizzeriasList extends Component {
 		const isPizzeriaFavourite = favPizzerias.some(
 			fav => fav.name === pizzeria.name
 		);
+
+		if (!user) {
+			return;
+		}
+
 		if (isAnyPizzeriaFavourite) {
 			if (!isPizzeriaFavourite) {
 				const selectedPizzerias = [...favPizzerias, pizzeria];
@@ -189,7 +201,7 @@ class PizzeriasList extends Component {
 
 	render() {
 		const location = this.state.pizzeriaLocation;
-		const { snackbarMessage, pizzerias } = this.state;
+		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
 		const { classes } = this.props;
 		return (
 			<div
@@ -240,7 +252,6 @@ class PizzeriasList extends Component {
 				>
 					<Tab.Container
 						id="list-group-tabs-example list-group-tabs-pizzerias"
-						// defaultActiveKey={location}
 						activeKey={location}
 						onSelect={() => null}
 					>
@@ -270,14 +281,16 @@ class PizzeriasList extends Component {
 														>
 															<span>{pizzeria.name}</span>
 														</Nav.Link>
-														<FaHeart
-															onClick={() => this.selectFavPizzeria(pizzeria)}
-															className={
-																this.favIconMarked(pizzeria)
-																	? classes.FavIconEnabled
-																	: classes.FavIconDisabled
-															}
-														/>
+														{isFetchFavPizzerias && (
+															<FaHeart
+																onClick={() => this.selectFavPizzeria(pizzeria)}
+																className={
+																	this.favIconMarked(pizzeria)
+																		? classes.FavIconEnabled
+																		: classes.FavIconDisabled
+																}
+															/>
+														)}
 													</ListGroup.Item>
 												</div>
 											);
