@@ -3,8 +3,14 @@
     border-color: rgb(255, 60, 0);
 }
 
-.user__container * {
-    overflow: hidden;
+.pizzerias__container {
+    background: url('/img/background.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
 }
 
 .pizzerias__list__item {
