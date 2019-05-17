@@ -97,7 +97,7 @@ class PizzeriasList extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.user !== prevProps.user) {
+		if (this.state.user !== prevProps.user) {
 			this.fetchFavPizzerias();
 			this.setState({ ...this.state, user: this.props.user });
 		}

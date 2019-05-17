@@ -24,7 +24,7 @@ const MainContent = props => {
 				path="/pizzerias"
 				render={props => <Pizzerias user={user} {...props} />}
 			/>
-			<Route path="/user-panel" component={UserPanel} />
+			<Route path="/user-panel" render={() => <UserPanel user={user} />} />
 			<Route
 				path="/create-pizza"
 				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
