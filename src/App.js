@@ -56,7 +56,7 @@ class App extends React.Component {
 	};
 
 	render() {
-		const { isPizzaSubmitted } = this.state;
+		const { isPizzaSubmitted, user } = this.state;
 		console.log(this.state.user);
 		return (
 			<BrowserRouter>
@@ -65,6 +65,7 @@ class App extends React.Component {
 					<MainContent
 						submitPizza={this.handleSubmitPizza}
 						isPizzaSubmitted={isPizzaSubmitted}
+						user={user}
 					/>
 				</AppContainer>
 			</BrowserRouter>

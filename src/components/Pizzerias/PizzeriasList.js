@@ -12,6 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
 import "./pizzerias.css";
+import { db } from "../../App";
 
 const styles = theme => ({
 	RightPane: {
@@ -65,29 +66,53 @@ function searchFor(term) {
 
 class PizzeriasList extends Component {
 	state = {
+		user: null,
 		pizzas: [],
-		data: [],
+		favPizzerias: [],
+		pizzerias: [],
 		isSnackbarOpen: false,
 		snackbarMessage: "",
-		pizzeriaLocation: "#1"
+		pizzeriaLocation: "#1",
+		term: ""
 	};
 
 	componentDidMount() {
 		fetch("pizzas.json")
 			.then(res => res.json())
-			.then(pizzas => this.setState({ pizzas }));
+			.then(pizzas => this.setState({ ...this.state, pizzas }));
 		fetch("pizzerias.json")
 			.then(res => res.json())
-			.then(data => {
-				this.setState({ data });
+			.then(pizzerias => {
+				this.setState({ ...this.state, pizzerias });
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria) {
-					this.setState({ pizzeriaLocation: currentPizzeria });
+					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
 			.catch(error => console.log(error.message));
 	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.user !== prevProps.user) {
+			// this.fetchFavPizzerias();
+			this.setState({ ...this.state, user: this.props.user });
+		}
+	}
+
+	// fetchFavPizzerias = () => {
+	// 	const { user } = this.props;
+	// 	if (user) {
+	// 		db.ref(`users/${user.uid}/favPizzerias`)
+	// 			.once("value")
+	// 			.then(snapshot => {
+	// 				const data = snapshot.val() || [];
+	// 				console.log(data);
+	// 				this.setState({ ...this.state, favPizzerias: data });
+	// 			})
+	// 			.catch(err => console.log(err.message));
+	// 	}
+	// };
 
 	handleClickFavBtn = message => {
 		this.setState({
@@ -105,62 +130,62 @@ class PizzeriasList extends Component {
 		this.setState({ ...this.state, isSnackbarOpen: false });
 	};
 
-	render() {
-		const { data } = this.state;
-		const { classes } = this.props;
-
-		return data ? this.renderData(data, classes) : this.renderLoading();
-	}
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: this.data,
-			term: "",
-			pizzeriaLocation: "#1"
-		};
-		this.searchHandler = this.searchHandler.bind(this);
-	}
-
-	searchHandler(event) {
-		this.setState({ term: event.target.value });
-	}
+	searchHandler = event => {
+		this.setState({ ...this.state, term: event.target.value });
+	};
 
 	selectFavPizzeria = pizzeria => {
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
-			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
-				favPizzerias.push(pizzeria);
-				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
-				this.handleClickFavBtn("Dodano do ulubionych");
-			} else {
-				const removedFavPizzeria = favPizzerias.filter(
+		const { favPizzerias } = this.state;
+
+		const isAnyPizzeriaFavourite = favPizzerias && favPizzerias.length;
+		const isPizzeriaFavourite = favPizzerias.some(
+			fav => fav.name === pizzeria.name
+		);
+		if (isAnyPizzeriaFavourite) {
+			if (!isPizzeriaFavourite) {
+				this.setState({
+					...this.state,
+					favPizzerias: [...favPizzerias, pizzeria],
+					isSnackbarOpen: true,
+					snackbarMessage: "Dodano do ulubionych"
+				});
+			}
+			if (isPizzeriaFavourite) {
+				const removedFavPizzerias = favPizzerias.filter(
 					fav => fav.name !== pizzeria.name
 				);
-				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
-				this.handleClickFavBtn("Usunięto z ulubionych");
+				this.setState({
+					...this.state,
+					favPizzerias: removedFavPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Usunięto z ulubionych"
+				});
 			}
 		} else {
-			const favPizzeria = [pizzeria];
-			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
+			this.setState({
+				...this.state,
+				favPizzerias: [...favPizzerias, pizzeria],
+				isSnackbarOpen: true,
+				snackbarMessage: "Dodano do ulubionych"
+			});
 		}
 	};
 
 	favIconMarked = pizzeria => {
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+		const { favPizzerias } = this.state;
+		if (favPizzerias.length) {
 			return favPizzerias.some(fav => fav.name === pizzeria.name);
 		}
 	};
 
 	changeLocation = id => {
-		this.setState({ pizzeriaLocation: `#${id}` });
+		this.setState({ ...this.state, pizzeriaLocation: `#${id}` });
 	};
 
-	renderData(pizzerias, classes) {
+	render() {
 		const location = this.state.pizzeriaLocation;
-		const { snackbarMessage } = this.state;
-
+		const { snackbarMessage, pizzerias } = this.state;
+		const { classes } = this.props;
 		return (
 			<div
 				style={{ display: "flex", flexFlow: "column", alignItems: "center" }}
@@ -335,10 +360,6 @@ class PizzeriasList extends Component {
 				</Snackbar>
 			</div>
 		);
-	}
-
-	renderLoading() {
-		return <div>Loading...</div>;
 	}
 }
 
