@@ -57,10 +57,10 @@ class CustomPizzaHeader extends Component {
 								<Button
 									className="d-inline custom-button btn-secondary"
 									style={{
-										width: 130,
+										width: 140,
 										height: 35,
-										fontSize: 16,
-										padding: "5px 10px",
+										fontSize: 14,
+										padding: "5px 7px",
 										margin: 0
 									}}
 									onClick={cancelIngredients}

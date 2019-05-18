@@ -92,10 +92,10 @@ const PizzeriaListRow = props => {
 								"d-inline custom-button btn-secondary"
 							)}
 							style={{
-								width: 130,
+								width: 140,
 								height: 35,
-								fontSize: 16,
-								padding: "5px 10px",
+								fontSize: 14,
+								padding: "5px 7px",
 								margin: 0
 							}}
 						>
@@ -104,10 +104,10 @@ const PizzeriaListRow = props => {
 						<Button
 							className="d-inline custom-button btn-secondary"
 							style={{
-								width: 130,
+								width: 140,
 								height: 35,
-								fontSize: 16,
-								padding: "5px 10px",
+								fontSize: 14,
+								padding: "5px 7px",
 								margin: 0,
 								marginLeft: 10
 							}}
@@ -117,9 +117,22 @@ const PizzeriaListRow = props => {
 						</Button>
 					</div>
 				) : (
-					<button onClick={() => selectPizzeria(pizzeria)}>
-						Wybierz tą pizzerię
-					</button>
+					<Button
+						className={classNames(
+							classes.favButton,
+							"d-inline custom-button btn-secondary"
+						)}
+						style={{
+							width: 140,
+							height: 35,
+							fontSize: 14,
+							padding: "5px 7px",
+							margin: 0
+						}}
+						onClick={() => selectPizzeria(pizzeria)}
+					>
+						{"Wybierz tą pizzerię"}
+					</Button>
 				)}
 			</div>
 		</Paper>
