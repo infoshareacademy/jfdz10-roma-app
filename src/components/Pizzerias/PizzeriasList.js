@@ -12,6 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
 import "./pizzerias.css";
+import { db } from "../../App";
 
 const styles = theme => ({
 	RightPane: {
@@ -65,10 +66,15 @@ function searchFor(term) {
 
 class PizzeriasList extends Component {
 	state = {
+		user: null,
 		pizzas: [],
-		data: [],
+		favPizzerias: [],
+		isFetchFavPizzerias: false,
+		pizzerias: [],
 		isSnackbarOpen: false,
-		pizzeriaLocation: "#1"
+		snackbarMessage: "",
+		pizzeriaLocation: "#1",
+		term: ""
 	};
 
 	componentDidMount() {
@@ -77,8 +83,8 @@ class PizzeriasList extends Component {
 			.then(pizzas => this.setState({ ...this.state, pizzas }));
 		fetch("pizzerias.json")
 			.then(res => res.json())
-			.then(data => {
-				this.setState({ ...this.state, data });
+			.then(pizzerias => {
+				this.setState({ ...this.state, pizzerias });
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria) {
@@ -86,10 +92,32 @@ class PizzeriasList extends Component {
 				}
 			})
 			.catch(error => console.log(error.message));
+
+		this.fetchFavPizzerias();
 	}
 
-	handleClickFavBtn = () => {
-		this.setState({ ...this.state, isSnackbarOpen: true });
+	componentDidUpdate(prevProps) {
+		if (this.state.user !== prevProps.user) {
+			this.fetchFavPizzerias();
+			this.setState({ ...this.state, user: this.props.user });
+		}
+	}
+
+	fetchFavPizzerias = () => {
+		const { user } = this.props;
+		if (user) {
+			db.ref(`users/${user.uid}/favourites`)
+				.once("value")
+				.then(snapshot => {
+					const favourites = snapshot.val() || [];
+					this.setState({
+						...this.state,
+						favPizzerias: favourites,
+						isFetchFavPizzerias: true
+					});
+				})
+				.catch(err => console.log(err.message));
+		}
 	};
 
 	handleCloseSnackbar = (event, reason) => {
@@ -100,50 +128,61 @@ class PizzeriasList extends Component {
 		this.setState({ ...this.state, isSnackbarOpen: false });
 	};
 
-	render() {
-		const { data = [] } = this.state;
-		const { classes } = this.props;
-
-		return data.length ? this.renderData(data, classes) : this.renderLoading();
-	}
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: this.data,
-			term: "",
-			pizzeriaLocation: "#1"
-		};
-		this.searchHandler = this.searchHandler.bind(this);
-	}
-
-	searchHandler(event) {
+	searchHandler = event => {
 		this.setState({ ...this.state, term: event.target.value });
-	}
+	};
 
 	selectFavPizzeria = pizzeria => {
-		this.handleClickFavBtn();
+		const { favPizzerias } = this.state;
+		const { user } = this.state;
 
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
-			if (!favPizzerias.some(fav => fav.name === pizzeria.name)) {
-				favPizzerias.push(pizzeria);
-				localStorage.setItem("favPizzeria", JSON.stringify(favPizzerias));
-			} else {
-				const removedFavPizzeria = favPizzerias.filter(
+		const isAnyPizzeriaFavourite = favPizzerias && favPizzerias.length;
+		const isPizzeriaFavourite = favPizzerias.some(
+			fav => fav.name === pizzeria.name
+		);
+
+		if (!user) {
+			return;
+		}
+
+		if (isAnyPizzeriaFavourite) {
+			if (!isPizzeriaFavourite) {
+				const selectedPizzerias = [...favPizzerias, pizzeria];
+				this.setState({
+					...this.state,
+					favPizzerias: selectedPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Dodano do ulubionych"
+				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
+			}
+			if (isPizzeriaFavourite) {
+				const removedFavPizzerias = favPizzerias.filter(
 					fav => fav.name !== pizzeria.name
 				);
-				localStorage.setItem("favPizzeria", JSON.stringify(removedFavPizzeria));
+				this.setState({
+					...this.state,
+					favPizzerias: removedFavPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Usunięto z ulubionych"
+				});
+				db.ref(`users/${user.uid}/favourites`).set({ ...removedFavPizzerias });
 			}
 		} else {
-			const favPizzeria = [pizzeria];
-			localStorage.setItem("favPizzeria", JSON.stringify(favPizzeria));
+			const selectedPizzerias = [...favPizzerias, pizzeria];
+			this.setState({
+				...this.state,
+				favPizzerias: selectedPizzerias,
+				isSnackbarOpen: true,
+				snackbarMessage: "Dodano do ulubionych"
+			});
+			db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
 		}
 	};
 
 	favIconMarked = pizzeria => {
-		if (localStorage.getItem("favPizzeria") !== null) {
-			let favPizzerias = JSON.parse(localStorage.getItem("favPizzeria"));
+		const { favPizzerias } = this.state;
+		if (favPizzerias.length) {
 			return favPizzerias.some(fav => fav.name === pizzeria.name);
 		}
 	};
@@ -152,9 +191,10 @@ class PizzeriasList extends Component {
 		this.setState({ ...this.state, pizzeriaLocation: `#${id}` });
 	};
 
-	renderData(pizzerias, classes) {
+	render() {
 		const location = this.state.pizzeriaLocation;
-
+		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
+		const { classes } = this.props;
 		return (
 			<div
 				style={{ display: "flex", flexFlow: "column", alignItems: "center" }}
@@ -204,7 +244,6 @@ class PizzeriasList extends Component {
 				>
 					<Tab.Container
 						id="list-group-tabs-example list-group-tabs-pizzerias"
-						// defaultActiveKey={location}
 						activeKey={location}
 						onSelect={() => null}
 					>
@@ -234,14 +273,16 @@ class PizzeriasList extends Component {
 														>
 															<span>{pizzeria.name}</span>
 														</Nav.Link>
-														<FaHeart
-															onClick={() => this.selectFavPizzeria(pizzeria)}
-															className={
-																this.favIconMarked(pizzeria)
-																	? classes.FavIconEnabled
-																	: classes.FavIconDisabled
-															}
-														/>
+														{isFetchFavPizzerias && (
+															<FaHeart
+																onClick={() => this.selectFavPizzeria(pizzeria)}
+																className={
+																	this.favIconMarked(pizzeria)
+																		? classes.FavIconEnabled
+																		: classes.FavIconDisabled
+																}
+															/>
+														)}
 													</ListGroup.Item>
 												</div>
 											);
@@ -312,7 +353,7 @@ class PizzeriasList extends Component {
 					<SnackbarContent
 						className={classes.success}
 						message={
-							<span style={{ fontSize: "1.1rem" }}>Dodano do ulubionych!</span>
+							<span style={{ fontSize: "1.1rem" }}>{snackbarMessage}</span>
 						}
 						action={[
 							<IconButton
@@ -329,10 +370,6 @@ class PizzeriasList extends Component {
 				</Snackbar>
 			</div>
 		);
-	}
-
-	renderLoading() {
-		return <div>Loading...</div>;
 	}
 }
 
