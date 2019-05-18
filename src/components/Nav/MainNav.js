@@ -200,7 +200,7 @@ class MainNav extends React.Component {
 						</Text>
 					</NavLink>
 					<NavLink
-						to={this.state.user ? "/user-panel" : "/sign-in"}
+						to={this.state.user ? "/user-panel" : "/"}
 						className={classNames(
 							path === "/user-panel" ? classes.navItemSelected : null,
 								!this.state.user ? classes.navDisabled : null
@@ -215,7 +215,7 @@ class MainNav extends React.Component {
 						</Text>
 					</NavLink>
 					<NavLink
-						to={this.state.user ? "/pizzerias#1" : "/sign-in"}
+						to={this.state.user ? "/pizzerias#1" : "/"}
 						className={classNames(
 							path === "/pizzerias" 
 								? classes.navItemSelected : null,
@@ -231,7 +231,7 @@ class MainNav extends React.Component {
 						</Text>
 					</NavLink>
 					<NavLink
-						to={this.state.user ? "/create-pizza" : "/sign-in"}
+						to={this.state.user ? "/create-pizza" : "/"}
 						className={classNames(
 							path === "/create-pizza" ? classes.navItemSelected : null,
 							!this.state.user ? classes.navDisabled : null
@@ -247,7 +247,7 @@ class MainNav extends React.Component {
 					</NavLink>
 					<NavLink
 						to={!this.state.user 
-							? "/sign-in" : isPizzaSubmitted 
+							? "/" : isPizzaSubmitted 
 								? "/make-order" : window.location.pathname
 						}
 						className={classNames(
@@ -273,7 +273,7 @@ class MainNav extends React.Component {
 					</NavLink>
 					<NavLink
 						to={!this.state.user 
-							? "/sign-in" : isPizzaSubmitted 
+							? "/" : isPizzaSubmitted 
 								? "/summary-order" : window.location.pathname
 						}
 						className={classNames(
@@ -297,19 +297,8 @@ class MainNav extends React.Component {
 							Podsumowanie zamówienia
 						</Text>
 					</NavLink>
-					{!this.state.user ? 
+					{this.state.user ? 
 						(
-							<NavLink
-								to="/sign-in"
-								onClick={this.onNavItemSelect}
-								className={path === "/sign-in" ? classes.navItemSelected : null}
-							>
-								<IconCnt>
-									<Icon icon={userPlus} />
-								</IconCnt>
-								<Text>Zaloguj się</Text>
-							</NavLink>
-						) : (
 							<NavLink
 								to="/"
 								onClick={this.signOut}
@@ -321,6 +310,7 @@ class MainNav extends React.Component {
 								<Text>Wyloguj się</Text>
 							</NavLink>
 						)
+						: null
 					}
 				</Navigation>
 			</Fragment>
