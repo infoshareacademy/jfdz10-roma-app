@@ -10,8 +10,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Redirect } from 'react-router-dom'
 import firebase from "firebase";
+import { Redirect } from 'react-router-dom';
+import SignUp from './SignUp';
+
+import './sign.css'
 
 const styles = theme => ({
     main: {
@@ -34,11 +37,12 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         color: 'white'
     },
-    remind: {
+    typography: {
         marginTop: theme.spacing.unit * 2,
         textAlign: 'center',
-        color: 'rgb(130, 181, 201)',
-        cursor: 'pointer'
+        color: 'grey',
+        cursor: 'pointer',
+        fontSize: '1.1rem'
     }
 });
 
@@ -46,7 +50,8 @@ class SignIn extends Component {
     state = {
         email: '',
         password: '',
-        redirect: false
+        redirect: false,
+        userHasAccount: true
     };
 
     setRedirect = () => {
@@ -85,56 +90,72 @@ class SignIn extends Component {
             : alert('Wpisz email.')
     }
 
+    showRegisterPanel = () => {
+        this.setState({
+            userHasAccount: false
+        })
+    }
+
     render() {
         const { classes } = this.props;
         return (
-            <main className={classes.main}>
-                <CssBaseline />
-                <Paper className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Zaloguj się
-                    </Typography>
-                    <form className={classes.form} onSubmit={this.handleSubmit}>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input 
-                                id="email" 
-                                name="email" 
-                                onChange={this.handleChange} 
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Hasło</InputLabel>
-                            <Input
-                                name="password" 
-                                type="password" 
-                                id="password"
-                                onChange={this.handleChange} 
-                            />
-                        </FormControl>
-                        {this.renderRedirect()}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Zaloguj
-                        </Button>
-                        <Typography 
-                            className={classes.remind}
-                            onClick={this.resetPassword}
-                        >
-                            Nie pamiętam hasła.
+            this.state.userHasAccount ?
+            (
+                <main className={classes.main}>
+                    <CssBaseline />
+                    <Paper className={classes.paper}>
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Zaloguj się
                         </Typography>
-                    </form>
-                </Paper>
-            </main>
-        );
+                        <form className={classes.form} onSubmit={this.handleSubmit}>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="email">Email</InputLabel>
+                                <Input 
+                                    id="email" 
+                                    name="email" 
+                                    onChange={this.handleChange} 
+                                />
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="password">Hasło</InputLabel>
+                                <Input
+                                    name="password" 
+                                    type="password" 
+                                    id="password"
+                                    onChange={this.handleChange} 
+                                />
+                            </FormControl>
+                            {this.renderRedirect()}
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Zaloguj
+                            </Button>
+                            <Typography 
+                                className={classes.typography}
+                                onClick={this.resetPassword}
+                            >
+                                Nie pamiętam hasła.
+                            </Typography>
+                            <Typography 
+                                className={classes.typography}
+                                onClick={this.showRegisterPanel}
+                            >
+                                Nie masz konta? Zarejestruj się!
+                            </Typography>
+                        </form>
+                    </Paper>
+                </main>
+            ) 
+            : <SignUp />
+        )
     }
 }
 

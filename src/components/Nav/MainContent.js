@@ -6,7 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
-import Sign from "../Auth/Sign"
+import SignIn from "../Auth/SignIn"
 
 const Content = styled.div`
 	width: 100%;
@@ -42,7 +42,7 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/sign-in"
-				component={Sign}
+				component={SignIn}
 			/>
 		</Content>
 	);
