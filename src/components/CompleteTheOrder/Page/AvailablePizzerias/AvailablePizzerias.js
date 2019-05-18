@@ -44,12 +44,18 @@ class AvailablePizzerias extends Component {
 		this.props.choosePizzeria(pizzeria);
 	};
 
+	submitSelectedPizzeria = () => {
+		this.props.handleSubmitSelectedPizzeria();
+		this.props.history.push("/summary-order");
+	};
+
 	render() {
 		const {
 			classes,
 			isPizzeriaSelected,
 			selectedPizzeria,
-			unselectPizzeria
+			unselectPizzeria,
+			handleSubmitSelectedPizzeria
 		} = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
@@ -63,10 +69,7 @@ class AvailablePizzerias extends Component {
 
 		return (
 			<div className={classes.wrapper}>
-				<h3
-				>
-					Dostępne pizzerie:
-				</h3>
+				<h3>Dostępne pizzerie:</h3>
 				<ListWrapper className={classes.list}>
 					<PizzeriaList
 						pizzerias={list}
@@ -75,6 +78,7 @@ class AvailablePizzerias extends Component {
 						isPizzeriaSelected={isPizzeriaSelected}
 						selectedPizzeria={selectedPizzeria}
 						unselectPizzeria={unselectPizzeria}
+						submitSelectedPizzeria={this.submitSelectedPizzeria}
 					/>
 				</ListWrapper>
 			</div>

@@ -49,7 +49,8 @@ const PizzeriaListRow = props => {
 		selectPizzeria,
 		ingredients,
 		isPizzeriaSelected,
-		unselectPizzeria
+		unselectPizzeria,
+		submitSelectedPizzeria
 	} = props;
 
 	const price = availableIngredients => {
@@ -97,6 +98,7 @@ const PizzeriaListRow = props => {
 								margin: 0
 							}}
 							variant="link"
+							onClick={submitSelectedPizzeria}
 						>
 							{"Zamów tutaj"}
 						</Button>

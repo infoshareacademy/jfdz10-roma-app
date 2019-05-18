@@ -28,7 +28,8 @@ class App extends React.Component {
 		isPizzaSubmitted: window.localStorage.isPizzaSubmitted
 			? JSON.parse(window.localStorage.isPizzaSubmitted)
 			: false,
-		user: null
+		user: null,
+		isPizzeriaSubmitted: false
 	};
 
 	componentDidMount() {
@@ -55,6 +56,13 @@ class App extends React.Component {
 		});
 	};
 
+	handleSubmitSelectedPizzeria = () => {
+		this.setState({
+			...this.state,
+			isPizzeriaSubmitted: !this.state.isPizzeriaSubmitted
+		});
+	};
+
 	render() {
 		const { isPizzaSubmitted, user } = this.state;
 		return (
@@ -65,6 +73,7 @@ class App extends React.Component {
 						submitPizza={this.handleSubmitPizza}
 						isPizzaSubmitted={isPizzaSubmitted}
 						user={user}
+						handleSubmitSelectedPizzeria={this.handleSubmitSelectedPizzeria}
 					/>
 				</AppContainer>
 			</BrowserRouter>

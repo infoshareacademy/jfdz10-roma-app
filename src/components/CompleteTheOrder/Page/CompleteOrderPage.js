@@ -64,9 +64,13 @@ class CompleteOrderPage extends Component {
 	};
 
 	render() {
-		const { classes, isCustomPizzaSubmitted } = this.props;
+		const {
+			classes,
+			isCustomPizzaSubmitted,
+			history,
+			handleSubmitSelectedPizzeria
+		} = this.props;
 		const { ingredients, selectedPizzeria, isPizzeriaSelected } = this.state;
-
 		return (
 			<Container className="h-100" style={{ position: "relative" }}>
 				<Row>
@@ -81,11 +85,13 @@ class CompleteOrderPage extends Component {
 							)}
 						</ListGroup>
 						<AvailablePizzerias
+							history={history}
 							isCustomPizza={isCustomPizzaSubmitted}
 							choosePizzeria={this.handleChoosePizzeria}
 							isPizzeriaSelected={isPizzeriaSelected}
 							selectedPizzeria={selectedPizzeria}
 							unselectPizzeria={this.handleUnselectPizzeria}
+							handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
 						/>
 					</div>
 				</Row>
