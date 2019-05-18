@@ -1,12 +1,13 @@
-import React from "react";
-import RegisterButton from "./RegisterButton";
+import React, { Component } from "react";
+import ButtonRegister from "./ButtonRegister";
 import CreateYourPizzaCard from "./CreateYourPizzaCard";
 import Chart1 from "./Chart";
 import Chart2 from "./Chart2";
 import LogInButton from "./ButtonLogin";
+
 import "./styles.css";
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   render() {
     return (
       <div
@@ -29,12 +30,8 @@ class Dashboard extends React.Component {
           <p className="lead" style={{ letterSpacing: "0.3rem" }}>
             Aplikacja, która pomoże ci znaleźć twoją wymarzoną pizzę
           </p>
-          <a href="/sign-in" role="button">
-            <RegisterButton />
-          </a>
-          <a href="/sign-in" role="button">
-            <LogInButton />
-          </a>
+          <LogInButton />
+          <ButtonRegister />
         </div>
 
         <div className="container">

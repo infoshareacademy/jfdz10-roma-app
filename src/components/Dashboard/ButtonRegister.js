@@ -1,10 +1,10 @@
 import React, { Fragment, Component } from "react";
-import SignIn from '../Auth/SignIn'
 import Dialog from '@material-ui/core/Dialog';
+import SignUp from '../Auth/SignUp'
 
 import "./styles.css"
 
-class LogInButton extends Component {
+class RegisterButton extends Component {
     state = {
         open: false,
         redirect: false
@@ -22,13 +22,14 @@ class LogInButton extends Component {
         return (
             <Fragment>
                 <button 
-                    id="btn-login"
+                    id="btn-register"
                     type="button" 
-                    className="btn btn-outline-danger btn-lg btn-lg shadow p-3 mb-5 rounded"
-                    style={{ "width": "15rem", "margin": "1rem" }}
+                    className="btn btn-outline-danger btn-lg btn-lg shadow p-3 mb-5 rounded" 
+                    style={{"width": "15rem", "margin": "1rem"}}
                     onClick={ this.handleClickOpen }
+
                 >
-                    Zaloguj się
+                    Zarejestruj się
                 </button>
                 <Dialog
                     open={this.state.open}
@@ -36,11 +37,11 @@ class LogInButton extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <SignIn />
+                    <SignUp />
                 </Dialog>
             </Fragment>
         )
     }
 }
 
-export default LogInButton;
+export default RegisterButton;
