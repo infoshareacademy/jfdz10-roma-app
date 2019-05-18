@@ -1,12 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import ButtonRegister from "./ButtonRegister";
 import CreateYourPizzaCard from "./CreateYourPizzaCard";
 import Chart1 from "./Chart";
 import Chart2 from "./Chart2";
 import LogInButton from "./ButtonLogin";
+
 import "./styles.css";
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   render() {
     return (
       <div

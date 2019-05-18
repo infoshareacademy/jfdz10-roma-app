@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment, Component } from "react";
 import Dialog from '@material-ui/core/Dialog';
 import SignUp from '../Auth/SignUp'
 
 import "./styles.css"
 
-class RegisterButton extends React.Component {
+class RegisterButton extends Component {
     state = {
         open: false,
         redirect: false
@@ -20,7 +20,7 @@ class RegisterButton extends React.Component {
 
     render() {
         return (
-            <>
+            <Fragment>
                 <button 
                     id="btn-register"
                     type="button" 
@@ -29,7 +29,7 @@ class RegisterButton extends React.Component {
                     onClick={ this.handleClickOpen }
 
                 >
-                        Zarejestruj się
+                    Zarejestruj się
                 </button>
                 <Dialog
                     open={this.state.open}
@@ -39,7 +39,7 @@ class RegisterButton extends React.Component {
                 >
                     <SignUp />
                 </Dialog>
-            </>
+            </Fragment>
         )
     }
 }

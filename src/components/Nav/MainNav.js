@@ -1,21 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import firebase from 'firebase'
-import { Link } from "react-router-dom";
+import classNames from "classnames";
 import styled from "styled-components";
 import ReactSVG from "react-svg";
+import { Link } from "react-router-dom";
 import { Icon as BaseIcon } from "react-icons-kit";
 import { dashboard } from "react-icons-kit/fa/dashboard";
 import { user } from "react-icons-kit/fa/user";
 import { chart_7_8 as pizza } from "react-icons-kit/ikons/chart_7_8";
 import { shoppingCart } from "react-icons-kit/fa/shoppingCart";
 import { creditCardAlt } from "react-icons-kit/fa/creditCardAlt";
-import { userPlus } from 'react-icons-kit/fa/userPlus';
 import { userTimes } from 'react-icons-kit/fa/userTimes';
 import { cutlery } from "react-icons-kit/fa/cutlery";
 import { withStyles } from "@material-ui/core/styles";
 import { MdMenu } from "react-icons/md";
-import classNames from "classnames";
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const Navigation = styled.div`
 	background: #303641;
@@ -117,7 +116,7 @@ const styles = theme => ({
 
 const Icon = props => <BaseIcon size={32} icon={props.icon} />;
 
-class MainNav extends React.Component {
+class MainNav extends Component {
 	state = {
 		user: null,
 		isChecked: false,

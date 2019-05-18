@@ -6,7 +6,6 @@ import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
-import SignIn from "../Auth/SignIn"
 
 const Content = styled.div`
 	width: 100%;
@@ -39,10 +38,6 @@ const MainContent = props => {
 			<Route
 				path="/summary-order"
 				component={() => <h1>Summary the order</h1>}
-			/>
-			<Route
-				path="/sign-in"
-				component={SignIn}
 			/>
 		</Content>
 	);

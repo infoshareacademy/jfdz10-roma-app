@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment, Component } from "react";
 import SignIn from '../Auth/SignIn'
 import Dialog from '@material-ui/core/Dialog';
 
 import "./styles.css"
 
-class LogInButton extends React.Component {
+class LogInButton extends Component {
     state = {
         open: false,
         redirect: false
@@ -20,7 +20,7 @@ class LogInButton extends React.Component {
 
     render() {
         return (
-            <>
+            <Fragment>
                 <button 
                     id="btn-login"
                     type="button" 
@@ -38,7 +38,7 @@ class LogInButton extends React.Component {
                 >
                     <SignIn />
                 </Dialog>
-            </>
+            </Fragment>
         )
     }
 }
