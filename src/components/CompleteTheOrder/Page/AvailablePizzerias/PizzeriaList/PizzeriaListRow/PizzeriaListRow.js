@@ -64,8 +64,8 @@ const PizzeriaListRow = props => {
 		let price = selected.reduce((acc, next) => {
 			return acc + next.price;
 		}, 0);
-
-		return price;
+		const priceWithDecimal = Number.parseFloat(price).toFixed(2);
+		return priceWithDecimal;
 	};
 
 	return (
@@ -80,10 +80,12 @@ const PizzeriaListRow = props => {
 				<p>Tel. {pizzeria.contactInfo.phone}</p>
 			</div>
 			<div className={classes.contactInfo}>
-				<p>
+				<h5>
 					Wartość zamówienia:{" "}
-					<span>{price(pizzeria.availableIngredients)} zł</span>
-				</p>
+					<span style={{ fontWeight: "bold" }}>
+						{price(pizzeria.availableIngredients)} zł
+					</span>
+				</h5>
 				{isPizzeriaSelected ? (
 					<div>
 						<Button
