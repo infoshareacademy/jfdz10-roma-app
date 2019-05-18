@@ -79,14 +79,14 @@ class CompleteOrderPage extends Component {
 								/>
 							)}
 						</ListGroup>
+						<AvailablePizzerias
+							isCustomPizza={isCustomPizzaSubmitted}
+							choosePizzeria={this.handleChoosePizzeria}
+							isPizzeriaSelected={isPizzeriaSelected}
+							selectedPizzeria={selectedPizzeria}
+							unselectPizzeria={this.handleUnselectPizzeria}
+						/>
 					</div>
-					<AvailablePizzerias
-						isCustomPizza={isCustomPizzaSubmitted}
-						choosePizzeria={this.handleChoosePizzeria}
-						isPizzeriaSelected={isPizzeriaSelected}
-						selectedPizzeria={selectedPizzeria}
-						unselectPizzeria={this.handleUnselectPizzeria}
-					/>
 				</Row>
 			</Container>
 		);

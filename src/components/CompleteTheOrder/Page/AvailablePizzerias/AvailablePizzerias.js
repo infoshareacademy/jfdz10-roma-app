@@ -11,7 +11,9 @@ const styles = theme => ({
 		width: "100%"
 	},
 	list: {
-		padding: "0 20px 0px 20px"
+		padding: 0,
+		paddingRight: 10,
+		borderRadius: 0
 	}
 });
 
@@ -63,7 +65,11 @@ class AvailablePizzerias extends Component {
 
 		return (
 			<div className={classes.wrapper}>
-				<h3 style={{ paddingLeft: 20 }}>Dostępne pizzerie:</h3>
+				<h3
+				// style={{ paddingLeft: 20 }
+				>
+					Dostępne pizzerie:
+				</h3>
 				<ListWrapper className={classes.list}>
 					<PizzeriaList
 						pizzerias={list}
