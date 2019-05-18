@@ -76,6 +76,7 @@ class CompleteOrderPage extends Component {
 								<CustomPizzaHeader
 									ingredients={ingredients}
 									cancelIngredients={this.cancelIngredients}
+									isPizzeriaSelected={isPizzeriaSelected}
 								/>
 							)}
 						</ListGroup>

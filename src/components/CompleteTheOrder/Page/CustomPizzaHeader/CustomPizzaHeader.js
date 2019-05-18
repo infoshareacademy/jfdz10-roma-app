@@ -17,7 +17,12 @@ const styles = theme => ({
 class CustomPizzaHeader extends Component {
 	state = {};
 	render() {
-		const { classes, ingredients, cancelIngredients } = this.props;
+		const {
+			classes,
+			ingredients,
+			cancelIngredients,
+			isPizzeriaSelected
+		} = this.props;
 		let allIngredients = "";
 
 		return (
@@ -48,19 +53,21 @@ class CustomPizzaHeader extends Component {
 							</h5>
 						</div>
 						<div className={classes.rightPane}>
-							<Button
-								className="d-inline custom-button btn-secondary"
-								style={{
-									width: 130,
-									height: 35,
-									fontSize: 16,
-									padding: "5px 10px",
-									margin: 0
-								}}
-								onClick={cancelIngredients}
-							>
-								{"Anuluj pizzę"}
-							</Button>
+							{!isPizzeriaSelected && (
+								<Button
+									className="d-inline custom-button btn-secondary"
+									style={{
+										width: 130,
+										height: 35,
+										fontSize: 16,
+										padding: "5px 10px",
+										margin: 0
+									}}
+									onClick={cancelIngredients}
+								>
+									{"Anuluj pizzę"}
+								</Button>
+							)}
 						</div>
 					</div>
 				</div>

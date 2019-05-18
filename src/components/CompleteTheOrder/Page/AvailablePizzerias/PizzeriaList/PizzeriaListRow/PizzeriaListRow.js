@@ -1,6 +1,8 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import Button from "react-bootstrap/Button";
+import classNames from "classnames";
 
 const styles = theme => ({
 	pizzeriaWrapper: {
@@ -10,6 +12,34 @@ const styles = theme => ({
 	},
 	contactInfo: {
 		width: "50%"
+	},
+	favButton: {
+		width: 170,
+		height: 55,
+		margin: "0 auto",
+		padding: ".4rem .5rem",
+		fontSize: "1.5rem",
+		border: "none",
+		color: "white",
+		textDecoration: "none",
+		backgroundColor: "#cc3333",
+		"&:active": {
+			color: "black",
+			backgroundColor: "black"
+		},
+		"&:hover": {
+			color: "white",
+			textDecoration: "none",
+			backgroundColor: "#a5182e"
+		},
+		"&:visited": {
+			textDecoration: "none"
+		},
+		"&:focus": {
+			textDecoration: "none",
+			backgroundColor: "#a5182e",
+			boxShadow: "none"
+		}
 	}
 });
 
@@ -55,7 +85,37 @@ const PizzeriaListRow = props => {
 					<span>{price(pizzeria.availableIngredients)} zł</span>
 				</p>
 				{isPizzeriaSelected ? (
-					<button onClick={unselectPizzeria}>Cofnij wybór</button>
+					<div>
+						<Button
+							className={classNames(
+								classes.favButton,
+								"d-inline custom-button btn-secondary"
+							)}
+							style={{
+								width: 130,
+								height: 35,
+								fontSize: 16,
+								padding: "5px 10px",
+								margin: 0
+							}}
+						>
+							{"Zamów tutaj"}
+						</Button>
+						<Button
+							className="d-inline custom-button btn-secondary"
+							style={{
+								width: 130,
+								height: 35,
+								fontSize: 16,
+								padding: "5px 10px",
+								margin: 0,
+								marginLeft: 10
+							}}
+							onClick={unselectPizzeria}
+						>
+							{"Cofnij wybór"}
+						</Button>
+					</div>
 				) : (
 					<button onClick={() => selectPizzeria(pizzeria)}>
 						Wybierz tą pizzerię

@@ -64,7 +64,6 @@ class AvailablePizzerias extends Component {
 		return (
 			<div className={classes.wrapper}>
 				<h3
-				// style={{ paddingLeft: 20 }
 				>
 					Dostępne pizzerie:
 				</h3>
