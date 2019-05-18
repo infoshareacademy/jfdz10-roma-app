@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import IngredientsList from "./IngredientsList";
 import YourIngredients from "./YourIngredients";
 import PreviousOrders from "./PreviousOrders";
-import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
@@ -37,6 +34,43 @@ const styles = theme => ({
 			textDecoration: "none",
 			backgroundColor: "#a5182e",
 			boxShadow: "none"
+		}
+	},
+	leftPane: {
+		width: "50%",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		paddingLeft: 5,
+		paddingRight: 5,
+
+		[theme.breakpoints.down("sm")]: {
+			height: "auto",
+			width: "100%",
+			alignItems: "flex-end"
+		}
+	},
+	rightPane: {
+		width: "50%",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		paddingLeft: 0,
+		paddingRight: 10,
+		[theme.breakpoints.down("sm")]: {
+			height: "60vh",
+			margin: "0 15px",
+			width: "100%",
+			paddingLeft: 10
+		}
+	},
+	row: {
+		display: "flex",
+		height: "100%",
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			justifyContent: "space-evenly",
+			alignItems: "center"
 		}
 	}
 });
@@ -147,12 +181,9 @@ class CreatePizza extends Component {
 						</div>
 					</Fragment>
 				)}
-				<Container className="h-100" style={{ position: "relative" }}>
-					<Row className="h-100">
-						<Col
-							lg={6}
-							className="d-flex justify-content-center align-items-center"
-						>
+				<div className="h-100" style={{ position: "relative", margin: "0" }}>
+					<div className={classes.row}>
+						<div className={classes.leftPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<YourIngredients
 									ingredients={this.state.ingredients}
@@ -165,7 +196,6 @@ class CreatePizza extends Component {
 							) : (
 								<Button
 									size="lg"
-									// className="custom-button create-pizza-button"
 									className={classes.favButton}
 									onClick={this.handleChangeCreatePizza}
 									variant="link"
@@ -173,8 +203,8 @@ class CreatePizza extends Component {
 									Stwórz pizzę
 								</Button>
 							)}
-						</Col>
-						<Col className="d-flex justify-content-center align-items-center">
+						</div>
+						<div className={classes.rightPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
 								<IngredientsList
 									chooseIngredient={this.chooseIngredient}
@@ -183,9 +213,9 @@ class CreatePizza extends Component {
 							) : (
 								<PreviousOrders />
 							)}
-						</Col>
-					</Row>
-				</Container>
+						</div>
+					</div>
+				</div>
 			</Fragment>
 		);
 	}

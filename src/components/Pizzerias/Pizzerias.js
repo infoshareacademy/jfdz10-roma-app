@@ -13,9 +13,11 @@ class Pizzerias extends Component {
 			.then(pizzerias => this.setState({ pizzerias }));
 	}
 	render() {
+		const { user } = this.props;
+
 		return (
-			<div className="user__container">
-				<PizzeriasList {...this.props} />
+			<div className="pizzerias__container">
+				<PizzeriasList user={user} {...this.props} />
 			</div>
 		);
 	}

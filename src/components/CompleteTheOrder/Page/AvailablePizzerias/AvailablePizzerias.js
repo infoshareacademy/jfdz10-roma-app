@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { db } from "../../../../index";
-import { Paper } from "@material-ui/core";
+import { db } from "../../../../App";
 import { withStyles } from "@material-ui/core/styles";
-
 import { ListWrapper } from "../../../SharedComponents/containers";
 import PizzeriaList from "./PizzeriaList/PizzeriaList";
 

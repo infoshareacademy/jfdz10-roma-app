@@ -6,6 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
+import Sign from "../Auth/Sign";
 
 const Content = styled.div`
 	width: 100%;
@@ -14,13 +15,16 @@ const Content = styled.div`
 `;
 
 const MainContent = props => {
-	const { submitPizza, isPizzaSubmitted } = props;
+	const { submitPizza, isPizzaSubmitted, user } = props;
 
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
-			<Route path="/pizzerias" render={props => <Pizzerias {...props} />} />
-			<Route path="/user-panel" component={UserPanel} />
+			<Route
+				path="/pizzerias"
+				render={props => <Pizzerias user={user} {...props} />}
+			/>
+			<Route path="/user-panel" render={() => <UserPanel user={user} />} />
 			<Route
 				path="/create-pizza"
 				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
@@ -39,6 +43,7 @@ const MainContent = props => {
 				path="/summary-order"
 				component={() => <h1>Summary the order</h1>}
 			/>
+			<Route path="/sign-in" component={Sign} />
 		</Content>
 	);
 };
