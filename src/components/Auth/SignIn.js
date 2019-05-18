@@ -20,10 +20,9 @@ const styles = theme => ({
     main: {
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
             width: 400
-        },
+        }
     },
     paper: {
-        marginTop: theme.spacing.unit,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -148,7 +147,7 @@ class SignIn extends Component {
                                 className={classes.typography}
                                 onClick={this.showRegisterPanel}
                             >
-                                Nie masz konta? Zarejestruj się!
+                                Załóż konto!
                             </Typography>
                         </form>
                     </Paper>
