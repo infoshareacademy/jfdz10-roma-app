@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { db } from "../../../../index";
+import { db } from "../../../../App";
 import { withStyles } from "@material-ui/core/styles";
 import { ListWrapper } from "../../../SharedComponents/containers";
 import PizzeriaList from "./PizzeriaList/PizzeriaList";
