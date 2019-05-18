@@ -2,7 +2,6 @@ import React from "react";
 import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
-import classNames from "classnames";
 
 const styles = theme => ({
 	pizzeriaWrapper: {
@@ -89,10 +88,7 @@ const PizzeriaListRow = props => {
 				{isPizzeriaSelected ? (
 					<div>
 						<Button
-							className={classNames(
-								classes.favButton,
-								"d-inline custom-button btn-secondary"
-							)}
+							className={classes.favButton}
 							style={{
 								width: 140,
 								height: 35,
@@ -100,6 +96,7 @@ const PizzeriaListRow = props => {
 								padding: "5px 7px",
 								margin: 0
 							}}
+							variant="link"
 						>
 							{"Zamów tutaj"}
 						</Button>
@@ -120,10 +117,7 @@ const PizzeriaListRow = props => {
 					</div>
 				) : (
 					<Button
-						className={classNames(
-							classes.favButton,
-							"d-inline custom-button btn-secondary"
-						)}
+						className={classes.favButton}
 						style={{
 							width: 140,
 							height: 35,
@@ -131,6 +125,7 @@ const PizzeriaListRow = props => {
 							padding: "5px 7px",
 							margin: 0
 						}}
+						variant="link"
 						onClick={() => selectPizzeria(pizzeria)}
 					>
 						{"Wybierz tą pizzerię"}

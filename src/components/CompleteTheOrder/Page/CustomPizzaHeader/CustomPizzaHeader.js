@@ -63,6 +63,7 @@ class CustomPizzaHeader extends Component {
 										padding: "5px 7px",
 										margin: 0
 									}}
+									variant="link"
 									onClick={cancelIngredients}
 								>
 									{"Anuluj pizzę"}
