@@ -10,7 +10,10 @@ const styles = theme => ({
 	list: {
 		padding: 0,
 		paddingRight: 10,
-		borderRadius: 0
+		borderRadius: 0,
+		[theme.breakpoints.down("sm")]: {
+			height: "62vh"
+		}
 	}
 });
 

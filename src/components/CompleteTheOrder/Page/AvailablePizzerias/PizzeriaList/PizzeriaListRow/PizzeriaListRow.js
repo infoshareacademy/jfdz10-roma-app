@@ -2,6 +2,7 @@ import React from "react";
 import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
+import classNames from "classnames";
 
 const styles = theme => ({
 	pizzeriaWrapper: {
@@ -12,16 +13,21 @@ const styles = theme => ({
 	contactInfo: {
 		width: "50%"
 	},
-	favButton: {
-		width: 170,
-		height: 55,
-		margin: "0 auto",
-		padding: ".4rem .5rem",
-		fontSize: "1.5rem",
+	button: {
+		width: 140,
+		height: 35,
+		fontSize: 14,
+		padding: "5px 7px",
+		margin: 0,
 		border: "none",
 		color: "white",
 		textDecoration: "none",
 		backgroundColor: "#cc3333",
+		[theme.breakpoints.down("sm")]: {
+			width: "auto",
+			maxWidth: 140,
+			height: "auto"
+		},
 		"&:active": {
 			color: "black",
 			backgroundColor: "black"
@@ -38,6 +44,17 @@ const styles = theme => ({
 			textDecoration: "none",
 			backgroundColor: "#a5182e",
 			boxShadow: "none"
+		}
+	},
+	cancelBtn: {
+		backgroundColor: "#6c757d",
+		marginLeft: 15,
+		"&:hover": {
+			backgroundColor: "#5a6268"
+		},
+		[theme.breakpoints.down("sm")]: {
+			marginLeft: 0,
+			marginTop: 5
 		}
 	}
 });
@@ -89,29 +106,14 @@ const PizzeriaListRow = props => {
 				{isPizzeriaSelected ? (
 					<div>
 						<Button
-							className={classes.favButton}
-							style={{
-								width: 140,
-								height: 35,
-								fontSize: 14,
-								padding: "5px 7px",
-								margin: 0
-							}}
+							className={classes.button}
 							variant="link"
 							onClick={submitSelectedPizzeria}
 						>
 							{"Zamów tutaj"}
 						</Button>
 						<Button
-							className="d-inline custom-button btn-secondary"
-							style={{
-								width: 140,
-								height: 35,
-								fontSize: 14,
-								padding: "5px 7px",
-								margin: 0,
-								marginLeft: 10
-							}}
+							className={classNames(classes.button, classes.cancelBtn)}
 							onClick={unselectPizzeria}
 						>
 							{"Cofnij wybór"}
@@ -119,18 +121,11 @@ const PizzeriaListRow = props => {
 					</div>
 				) : (
 					<Button
-						className={classes.favButton}
-						style={{
-							width: 140,
-							height: 35,
-							fontSize: 14,
-							padding: "5px 7px",
-							margin: 0
-						}}
+						className={classes.button}
 						variant="link"
 						onClick={() => selectPizzeria(pizzeria)}
 					>
-						{"Wybierz tą pizzerię"}
+						{"Wybierz pizzerię"}
 					</Button>
 				)}
 			</div>

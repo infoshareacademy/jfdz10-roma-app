@@ -72,6 +72,17 @@ const styles = theme => ({
 			justifyContent: "space-evenly",
 			alignItems: "center"
 		}
+	},
+	successPaper: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		textAlign: "center",
+		padding: "15px 15px",
+		[theme.breakpoints.down("sm")]: {
+			width: "100%"
+		}
 	}
 });
 
@@ -156,16 +167,7 @@ class CreatePizza extends Component {
 					zIndex: 1000
 				}}
 			>
-				<Paper
-					style={{
-						position: "absolute",
-						top: "50%",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-						textAlign: "center",
-						padding: "15px 15px"
-					}}
-				>
+				<Paper className={classes.successPaper}>
 					<h2>Potwierdziłeś wybrane składniki!</h2>
 					<h3>Przejdź do następnego kroku i wybierz pizzerię.</h3>
 					<Button

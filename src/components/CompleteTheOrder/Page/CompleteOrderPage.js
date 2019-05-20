@@ -16,10 +16,29 @@ const styles = theme => ({
 		width: "100%",
 		display: "flex",
 		flexDirection: "column",
-		padding: 20
+		padding: 20,
+		[theme.breakpoints.down("sm")]: {
+			paddingTop: 50
+		}
 	},
 	title: {
 		width: "100%"
+	},
+	listGroup: {
+		[theme.breakpoints.down("sm")]: {
+			height: "21vh"
+		}
+	},
+	succesPaper: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)",
+		textAlign: "center",
+		padding: "15px 15px",
+		[theme.breakpoints.down("sm")]: {
+			width: "100%"
+		}
 	}
 });
 
@@ -117,16 +136,7 @@ class CompleteOrderPage extends Component {
 					zIndex: 1000
 				}}
 			>
-				<Paper
-					style={{
-						position: "absolute",
-						top: "50%",
-						left: "50%",
-						transform: "translate(-50%, -50%)",
-						textAlign: "center",
-						padding: "15px 15px"
-					}}
-				>
+				<Paper className={classes.succesPaper}>
 					<h2>Wybrałeś pizzerię!</h2>
 					<h3>Przejdź do następnego kroku i złóż zamówienie.</h3>
 					<Button
@@ -147,7 +157,7 @@ class CompleteOrderPage extends Component {
 			<Container className="h-100" style={{ position: "relative" }}>
 				<Row>
 					<div className={classes.container}>
-						<ListGroup>
+						<ListGroup className={classes.listGroup}>
 							{isCustomPizzaSubmitted && (
 								<CustomPizzaHeader
 									ingredients={ingredients}
