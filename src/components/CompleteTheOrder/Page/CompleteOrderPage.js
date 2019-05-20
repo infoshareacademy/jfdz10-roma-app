@@ -5,6 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
 import Paper from "@material-ui/core/Paper";
+import { db } from "../../../App";
 
 import CustomPizzaHeader from "./CustomPizzaHeader/CustomPizzaHeader";
 import AvailablePizzerias from "./AvailablePizzerias/AvailablePizzerias";
@@ -29,16 +30,26 @@ class CompleteOrderPage extends Component {
 	state = {
 		ingredients: [],
 		isPizzeriaSelected: false,
-		selectedPizzeria: {}
+		selectedPizzeria: {},
+		pizzerias: [],
+		loading: false
 	};
 
 	componentDidMount() {
-		this.setState({
-			...this.state,
-			isPizzeriaSelected: !!getFromLocalStorage("selectedPizzeria"),
-			selectedPizzeria: getFromLocalStorage("selectedPizzeria"),
-			ingredients: getFromLocalStorage("ingredients")
-		});
+		this.setState({ ...this.state, loading: true });
+		db.ref("pizzerias")
+			.once("value")
+			.then(snapshot => {
+				const pizzerias = snapshot.val();
+				this.setState({
+					...this.state,
+					isPizzeriaSelected: !!getFromLocalStorage("selectedPizzeria"),
+					selectedPizzeria: getFromLocalStorage("selectedPizzeria"),
+					ingredients: getFromLocalStorage("ingredients"),
+					loading: false,
+					pizzerias
+				});
+			});
 	}
 
 	cancelIngredients = () => {
@@ -65,6 +76,11 @@ class CompleteOrderPage extends Component {
 		window.localStorage.removeItem("selectedPizzeria");
 	};
 
+	submitSelectedPizzeria = () => {
+		this.props.handleSubmitSelectedPizzeria();
+		this.props.history.push("/summary-order");
+	};
+
 	render() {
 		const {
 			classes,
@@ -73,7 +89,12 @@ class CompleteOrderPage extends Component {
 			handleSubmitSelectedPizzeria,
 			isPizzeriaSubmitted
 		} = this.props;
-		const { ingredients, selectedPizzeria, isPizzeriaSelected } = this.state;
+		const {
+			ingredients,
+			selectedPizzeria,
+			isPizzeriaSelected,
+			pizzerias
+		} = this.state;
 		return isPizzeriaSubmitted ? (
 			<div
 				variant="success"
@@ -132,6 +153,9 @@ class CompleteOrderPage extends Component {
 							selectedPizzeria={selectedPizzeria}
 							unselectPizzeria={this.handleUnselectPizzeria}
 							handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+							ingredients={ingredients}
+							pizzerias={pizzerias}
+							submitSelectedPizzeria={this.submitSelectedPizzeria}
 						/>
 					</div>
 				</Row>
