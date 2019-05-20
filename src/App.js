@@ -23,13 +23,17 @@ const AppContainer = styled.div`
 	width: 100%;
 `;
 
+const getFromLocalStorage = item => {
+	return JSON.parse(window.localStorage.getItem(item));
+};
+
 class App extends React.Component {
 	state = {
 		isPizzaSubmitted: window.localStorage.isPizzaSubmitted
 			? JSON.parse(window.localStorage.isPizzaSubmitted)
 			: false,
 		user: null,
-		isPizzeriaSubmitted: false
+		isPizzeriaSubmitted: getFromLocalStorage("selectedPizzeria") ? true : false
 	};
 
 	componentDidMount() {

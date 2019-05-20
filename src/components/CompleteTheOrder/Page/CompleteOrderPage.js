@@ -49,8 +49,10 @@ const getFromLocalStorage = item => {
 class CompleteOrderPage extends Component {
 	state = {
 		ingredients: [],
-		isPizzeriaSelected: false,
-		selectedPizzeria: {},
+		isPizzeriaSelected: getFromLocalStorage("selectedPizzeria") ? true : false,
+		selectedPizzeria: getFromLocalStorage("selectedPizzeria")
+			? getFromLocalStorage("selectedPizzeria")
+			: {},
 		pizzerias: [],
 		isFetchInProgress: true
 	};
