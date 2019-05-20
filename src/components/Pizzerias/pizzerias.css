@@ -79,6 +79,20 @@
     }
 }
 
+@media (max-width: 767px){
+    .col-sm-3 {
+        flex: 100%;
+        max-width: 100%;
+        margin: 5% 0;
+        padding: 0;
+    }
+    .col-sm-8 {
+        flex: 100%;
+        max-width: 100%;
+        margin: 5% 0;
+    }
+}
+
 @media (max-width: 575px){
     .PizzeriasList-RightPane-10, .col-sm-8 {
         margin: 2rem 0;
