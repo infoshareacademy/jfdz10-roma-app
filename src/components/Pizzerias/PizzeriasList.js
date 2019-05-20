@@ -192,8 +192,9 @@ class PizzeriasList extends Component {
 					onSubmit={e => e.preventDefault()}
 					style={{
 						display: "flex",
+						flexFlow: "column",
+						paddingTop: "2rem",
 						width: "100%",
-						flexFlow: "column"
 					}}
 				>
 					<label
