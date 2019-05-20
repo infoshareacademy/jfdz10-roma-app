@@ -11,16 +11,15 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { FaHeart } from "react-icons/fa";
 import Nav from "react-bootstrap/Nav";
-import "./pizzerias.css";
 import { db } from "../../App";
+
+import "./pizzerias.css";
 
 const styles = theme => ({
 	RightPane: {
 		background: "white",
 		border: "1px solid lightgray",
 		borderRadius: "5px",
-		padding: "12px",
-		overflowY: "hidden"
 	},
 	FavIconEnabled: {
 		float: "right",
@@ -33,22 +32,14 @@ const styles = theme => ({
 	success: {
 		backgroundColor: "#33ab4e"
 	},
-	close: {
-		padding: theme.spacing.unit / 2,
-		"&:focus": {
-			outline: "none"
-		}
-	},
 	item: {
 		display: "flex",
-		justifyContent: "space-between",
 		alignItems: "center",
 		paddingLeft: 0,
 		paddingTop: 0,
-		paddingBottom: 0
+		paddingBottom: 0,
 	},
 	link: {
-		display: "inline-block",
 		color: "inherit",
 		width: "100%",
 		padding: "12px 15px",
@@ -196,28 +187,27 @@ class PizzeriasList extends Component {
 		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
 		const { classes } = this.props;
 		return (
-			<div
-				style={{ display: "flex", flexFlow: "column", alignItems: "center" }}
-			>
+			<div>
 				<form
 					onSubmit={e => e.preventDefault()}
 					style={{
 						display: "flex",
-						width: "100vw",
 						flexFlow: "column",
-						height: "18vh",
-						margin: "4px",
-						borderRadius: "1px"
+						paddingTop: "2rem",
+						width: "100%",
 					}}
 				>
 					<label
-						style={{ fontSize: "1.7rem", textAlign: "center", padding: "3px" }}
+						style={{ 
+							fontSize: "1.7rem", 
+							textAlign: "center", 
+							padding: "3px" 
+						}}
 					>
 						WYSZUKAJ PIZZERIĘ:
 						<br />
 						<input
 							className="pizzerias-filter-input"
-							style={{}}
 							type="text"
 							onChange={this.searchHandler}
 						/>
@@ -227,21 +217,15 @@ class PizzeriasList extends Component {
 							background: "#f1cd7c",
 							width: "100%",
 							textAlign: "center",
-							padding: "4px"
+							padding: "4px",
+							marginBottom: "2%"
 						}}
 					>
 						Zacznij wpisywać nazwę pizzerii
 					</span>
 				</form>
 
-				<Container
-					style={{
-						display: "flex",
-						height: "80vh",
-						alignItems: "top",
-						padding: "1rem"
-					}}
-				>
+				<Container>
 					<Tab.Container
 						id="list-group-tabs-example list-group-tabs-pizzerias"
 						activeKey={location}
@@ -252,7 +236,7 @@ class PizzeriasList extends Component {
 								display: "flex",
 								justifyContent: "center",
 								width: "100%",
-								maxHeight: "510px"
+								maxHeight: "500px"
 							}}
 						>
 							<Col sm={3}>
@@ -299,15 +283,15 @@ class PizzeriasList extends Component {
 												className="pizzeriasList__columns__container"
 											>
 												<div className="pizzeriasList__column__left">
-													<div className="pizzeriasList__data">
+													<div>
 														<h1>{pizzeria.name}</h1>
 														<p>
-															Adres: {pizzeria.contactInfo.address.street},
+															{pizzeria.contactInfo.address.street},
 															<br />
 															{pizzeria.contactInfo.address.postcode}&nbsp;
 															{pizzeria.contactInfo.address.city}
 														</p>
-														<p>Kontakt: {pizzeria.contactInfo.phone}</p>
+														<p>{pizzeria.contactInfo.phone}</p>
 														<a
 															target="_blank"
 															rel="noopener noreferrer"
