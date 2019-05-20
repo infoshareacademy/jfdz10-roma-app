@@ -286,12 +286,12 @@ class PizzeriasList extends Component {
 													<div>
 														<h1>{pizzeria.name}</h1>
 														<p>
-															Adres: {pizzeria.contactInfo.address.street},
+															{pizzeria.contactInfo.address.street},
 															<br />
 															{pizzeria.contactInfo.address.postcode}&nbsp;
 															{pizzeria.contactInfo.address.city}
 														</p>
-														<p>Kontakt: {pizzeria.contactInfo.phone}</p>
+														<p>{pizzeria.contactInfo.phone}</p>
 														<a
 															target="_blank"
 															rel="noopener noreferrer"
