@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
 import Paper from "@material-ui/core/Paper";
 import { db } from "../../../App";
+import Loader from "react-loader-spinner";
 
 import CustomPizzaHeader from "./CustomPizzaHeader/CustomPizzaHeader";
 import AvailablePizzerias from "./AvailablePizzerias/AvailablePizzerias";
@@ -32,24 +33,33 @@ class CompleteOrderPage extends Component {
 		isPizzeriaSelected: false,
 		selectedPizzeria: {},
 		pizzerias: [],
-		loading: false
+		isFetchInProgress: true
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
-		this.setState({ ...this.state, loading: true });
+		this._isMounted = true;
+
 		db.ref("pizzerias")
 			.once("value")
 			.then(snapshot => {
-				const pizzerias = snapshot.val();
-				this.setState({
-					...this.state,
-					isPizzeriaSelected: !!getFromLocalStorage("selectedPizzeria"),
-					selectedPizzeria: getFromLocalStorage("selectedPizzeria"),
-					ingredients: getFromLocalStorage("ingredients"),
-					loading: false,
-					pizzerias
-				});
+				if (this._isMounted) {
+					const pizzerias = snapshot.val();
+					this.setState({
+						...this.state,
+						isPizzeriaSelected: !!getFromLocalStorage("selectedPizzeria"),
+						selectedPizzeria: getFromLocalStorage("selectedPizzeria"),
+						ingredients: getFromLocalStorage("ingredients"),
+						isFetchInProgress: false,
+						pizzerias
+					});
+				}
 			});
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	cancelIngredients = () => {
@@ -93,7 +103,8 @@ class CompleteOrderPage extends Component {
 			ingredients,
 			selectedPizzeria,
 			isPizzeriaSelected,
-			pizzerias
+			pizzerias,
+			isFetchInProgress
 		} = this.state;
 		return isPizzeriaSubmitted ? (
 			<div
@@ -145,18 +156,24 @@ class CompleteOrderPage extends Component {
 								/>
 							)}
 						</ListGroup>
-						<AvailablePizzerias
-							history={history}
-							isCustomPizza={isCustomPizzaSubmitted}
-							choosePizzeria={this.handleChoosePizzeria}
-							isPizzeriaSelected={isPizzeriaSelected}
-							selectedPizzeria={selectedPizzeria}
-							unselectPizzeria={this.handleUnselectPizzeria}
-							handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
-							ingredients={ingredients}
-							pizzerias={pizzerias}
-							submitSelectedPizzeria={this.submitSelectedPizzeria}
-						/>
+						{isFetchInProgress ? (
+							<div style={{ display: "flex", justifyContent: "center" }}>
+								<Loader type="Oval" color="#039be5" width={120} height={120} />
+							</div>
+						) : (
+							<AvailablePizzerias
+								history={history}
+								isCustomPizza={isCustomPizzaSubmitted}
+								choosePizzeria={this.handleChoosePizzeria}
+								isPizzeriaSelected={isPizzeriaSelected}
+								selectedPizzeria={selectedPizzeria}
+								unselectPizzeria={this.handleUnselectPizzeria}
+								handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+								ingredients={ingredients}
+								pizzerias={pizzerias}
+								submitSelectedPizzeria={this.submitSelectedPizzeria}
+							/>
+						)}
 					</div>
 				</Row>
 			</Container>
