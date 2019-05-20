@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PizzeriasList from "./PizzeriasList";
-import "../CreatePizza/containers.css";
 import "./pizzerias.css";
 
 class Pizzerias extends Component {
