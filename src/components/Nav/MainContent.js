@@ -19,7 +19,8 @@ const MainContent = props => {
 		submitPizza,
 		isPizzaSubmitted,
 		user,
-		handleSubmitSelectedPizzeria
+		handleSubmitSelectedPizzeria,
+		isPizzeriaSubmitted
 	} = props;
 
 	return (
@@ -42,6 +43,7 @@ const MainContent = props => {
 						isCustomPizzaSubmitted={isPizzaSubmitted}
 						submitPizza={submitPizza}
 						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+						isPizzeriaSubmitted={isPizzeriaSubmitted}
 					/>
 				)}
 			/>

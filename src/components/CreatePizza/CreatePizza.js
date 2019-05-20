@@ -145,42 +145,45 @@ class CreatePizza extends Component {
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
 		const { classes } = this.props;
-		return (
+		return isPizzaSubmitted ? (
+			<div
+				variant="success"
+				style={{
+					position: "fixed",
+					width: "100%",
+					height: "100vh",
+					backgroundColor: "rgba(209,241,218,0.6)",
+					zIndex: 1000
+				}}
+			>
+				<Paper
+					style={{
+						position: "absolute",
+						top: "50%",
+						left: "50%",
+						transform: "translate(-50%, -50%)",
+						textAlign: "center",
+						padding: "15px 15px"
+					}}
+				>
+					<h2>Potwierdziłeś wybrane składniki!</h2>
+					<h3>Przejdź do następnego kroku i wybierz pizzerię.</h3>
+					<Button
+						className="d-inline custom-button btn-secondary"
+						style={{
+							width: 130,
+							height: 35,
+							fontSize: 14,
+							padding: "5px 7px"
+						}}
+						onClick={this.cancelIngredients}
+					>
+						{"Anuluj"}
+					</Button>
+				</Paper>
+			</div>
+		) : (
 			<Fragment>
-				{isPizzaSubmitted && (
-					<Fragment>
-						<div
-							variant="success"
-							style={{
-								position: "fixed",
-								width: "100%",
-								height: "100vh",
-								backgroundColor: "rgba(209,241,218,0.6)",
-								zIndex: 1000
-							}}
-						>
-							<Paper
-								style={{
-									position: "absolute",
-									top: "50%",
-									left: "50%",
-									transform: "translate(-50%, -50%)",
-									textAlign: "center",
-									padding: "25px 50px"
-								}}
-							>
-								<h1>Potwierdziłeś wybrane składniki.</h1>
-								<h2>Przejdź do następnego kroku i złóż zamówienie.</h2>
-								<Button
-									className="d-inline custom-button btn-secondary"
-									onClick={this.cancelIngredients}
-								>
-									{"Anuluj"}
-								</Button>
-							</Paper>
-						</div>
-					</Fragment>
-				)}
 				<div className="h-100" style={{ position: "relative", margin: "0" }}>
 					<div className={classes.row}>
 						<div className={classes.leftPane}>

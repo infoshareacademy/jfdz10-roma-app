@@ -54,8 +54,7 @@ class AvailablePizzerias extends Component {
 			classes,
 			isPizzeriaSelected,
 			selectedPizzeria,
-			unselectPizzeria,
-			handleSubmitSelectedPizzeria
+			unselectPizzeria
 		} = this.props;
 		const { pizzerias = [], ingredients = [] } = this.state;
 
