@@ -1,20 +1,24 @@
 import React from "react";
-//import { db } from "../../index";
+import { db } from "../../App";
+
 
 const BarChart = require("react-chartjs").Bar;
 
 class Chart1 extends React.Component {
-//   state = {};
+  state = {};
 
-//   componentDidMount() {
-//     db.ref("users")
-//       .once("value")
-//       .then(snapshot => {
-//         console.log(snapshot.val());
-//     
-//       });
-//   }
-  
+  // componentDidMount() {
+  //   db.ref("users")
+  //     .once("value")
+  //     .then(snapshot => {
+  //       console.log(snapshot.val());
+    
+  //     });
+//}
+
+  componentDidMount() {
+    
+}
 
   render() {
     const chartData = {
