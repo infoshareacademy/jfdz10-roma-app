@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from 'firebase';
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -68,24 +69,24 @@ class PizzeriasList extends Component {
 		term: ""
 	};
 
-	componentDidMount() {
-		fetch("pizzas.json")
-			.then(res => res.json())
-			.then(pizzas => this.setState({ ...this.state, pizzas }));
-		fetch("pizzerias.json")
-			.then(res => res.json())
-			.then(pizzerias => {
-				this.setState({ ...this.state, pizzerias });
+	componentDidMount(){
+        const databaseRef = firebase.database().ref('pizzerias')
+        databaseRef.once('value')
+            .then(snapshot => {
+				const snapshotVal = snapshot.val() || {};
+                this.setState({
+					pizzerias: snapshotVal,
+					pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
+				})
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria) {
 					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
-			.catch(error => console.log(error.message));
-
+			.catch(error => console.log(error.message))
 		this.fetchFavPizzerias();
-	}
+    }
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -188,6 +189,9 @@ class PizzeriasList extends Component {
 		const { classes } = this.props;
 		return (
 			<div>
+				{console.log(this.state.pizzerias)}
+				{console.log(this.state.pizzeriasPizzas)}
+
 				<form
 					onSubmit={e => e.preventDefault()}
 					style={{
