@@ -23,12 +23,17 @@ const AppContainer = styled.div`
 	width: 100%;
 `;
 
+const getFromLocalStorage = item => {
+	return JSON.parse(window.localStorage.getItem(item));
+};
+
 class App extends React.Component {
 	state = {
 		isPizzaSubmitted: window.localStorage.isPizzaSubmitted
 			? JSON.parse(window.localStorage.isPizzaSubmitted)
 			: false,
-		user: null
+		user: null,
+		isPizzeriaSubmitted: getFromLocalStorage("selectedPizzeria") ? true : false
 	};
 
 	componentDidMount() {
@@ -55,8 +60,15 @@ class App extends React.Component {
 		});
 	};
 
+	handleSubmitSelectedPizzeria = () => {
+		this.setState({
+			...this.state,
+			isPizzeriaSubmitted: !this.state.isPizzeriaSubmitted
+		});
+	};
+
 	render() {
-		const { isPizzaSubmitted, user } = this.state;
+		const { isPizzaSubmitted, user, isPizzeriaSubmitted } = this.state;
 		return (
 			<BrowserRouter>
 				<AppContainer>
@@ -65,6 +77,8 @@ class App extends React.Component {
 						submitPizza={this.handleSubmitPizza}
 						isPizzaSubmitted={isPizzaSubmitted}
 						user={user}
+						handleSubmitSelectedPizzeria={this.handleSubmitSelectedPizzeria}
+						isPizzeriaSubmitted={isPizzeriaSubmitted}
 					/>
 				</AppContainer>
 			</BrowserRouter>

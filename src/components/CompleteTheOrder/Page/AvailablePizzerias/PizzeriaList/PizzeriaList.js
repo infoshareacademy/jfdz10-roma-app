@@ -9,7 +9,8 @@ const PizzeriaList = props => {
 		ingredients,
 		isPizzeriaSelected,
 		selectedPizzeria,
-		unselectPizzeria
+		unselectPizzeria,
+		submitSelectedPizzeria
 	} = props;
 
 	return isPizzeriaSelected ? (
@@ -18,6 +19,7 @@ const PizzeriaList = props => {
 			ingredients={ingredients}
 			isPizzeriaSelected={isPizzeriaSelected}
 			unselectPizzeria={unselectPizzeria}
+			submitSelectedPizzeria={submitSelectedPizzeria}
 		/>
 	) : pizzerias.length === 0 ? (
 		<h4 style={{ textAlign: "center" }}>

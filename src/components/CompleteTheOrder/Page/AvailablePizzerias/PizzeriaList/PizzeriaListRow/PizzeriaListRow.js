@@ -1,6 +1,8 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import Button from "react-bootstrap/Button";
+import classNames from "classnames";
 
 const styles = theme => ({
 	pizzeriaWrapper: {
@@ -10,6 +12,50 @@ const styles = theme => ({
 	},
 	contactInfo: {
 		width: "50%"
+	},
+	button: {
+		width: 140,
+		height: 35,
+		fontSize: 14,
+		padding: "5px 7px",
+		margin: 0,
+		border: "none",
+		color: "white",
+		textDecoration: "none",
+		backgroundColor: "#cc3333",
+		[theme.breakpoints.down("sm")]: {
+			width: "auto",
+			maxWidth: 140,
+			height: "auto"
+		},
+		"&:active": {
+			color: "black",
+			backgroundColor: "black"
+		},
+		"&:hover": {
+			color: "white",
+			textDecoration: "none",
+			backgroundColor: "#a5182e"
+		},
+		"&:visited": {
+			textDecoration: "none"
+		},
+		"&:focus": {
+			textDecoration: "none",
+			backgroundColor: "#a5182e",
+			boxShadow: "none"
+		}
+	},
+	cancelBtn: {
+		backgroundColor: "#6c757d",
+		marginLeft: 15,
+		"&:hover": {
+			backgroundColor: "#5a6268"
+		},
+		[theme.breakpoints.down("sm")]: {
+			marginLeft: 0,
+			marginTop: 5
+		}
 	}
 });
 
@@ -20,7 +66,8 @@ const PizzeriaListRow = props => {
 		selectPizzeria,
 		ingredients,
 		isPizzeriaSelected,
-		unselectPizzeria
+		unselectPizzeria,
+		submitSelectedPizzeria
 	} = props;
 
 	const price = availableIngredients => {
@@ -34,8 +81,8 @@ const PizzeriaListRow = props => {
 		let price = selected.reduce((acc, next) => {
 			return acc + next.price;
 		}, 0);
-
-		return price;
+		const priceWithDecimal = Number.parseFloat(price).toFixed(2);
+		return priceWithDecimal;
 	};
 
 	return (
@@ -50,16 +97,36 @@ const PizzeriaListRow = props => {
 				<p>Tel. {pizzeria.contactInfo.phone}</p>
 			</div>
 			<div className={classes.contactInfo}>
-				<p>
+				<h5>
 					Wartość zamówienia:{" "}
-					<span>{price(pizzeria.availableIngredients)} zł</span>
-				</p>
+					<span style={{ fontWeight: "bold" }}>
+						{price(pizzeria.availableIngredients)} zł
+					</span>
+				</h5>
 				{isPizzeriaSelected ? (
-					<button onClick={unselectPizzeria}>Cofnij wybór</button>
+					<div>
+						<Button
+							className={classes.button}
+							variant="link"
+							onClick={submitSelectedPizzeria}
+						>
+							{"Zamów tutaj"}
+						</Button>
+						<Button
+							className={classNames(classes.button, classes.cancelBtn)}
+							onClick={unselectPizzeria}
+						>
+							{"Cofnij wybór"}
+						</Button>
+					</div>
 				) : (
-					<button onClick={() => selectPizzeria(pizzeria)}>
-						Wybierz tą pizzerię
-					</button>
+					<Button
+						className={classes.button}
+						variant="link"
+						onClick={() => selectPizzeria(pizzeria)}
+					>
+						{"Wybierz pizzerię"}
+					</Button>
 				)}
 			</div>
 		</Paper>

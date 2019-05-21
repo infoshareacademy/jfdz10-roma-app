@@ -76,7 +76,7 @@ const styles = theme => ({
 		transition: "all .5s ease",
 		[theme.breakpoints.down("sm")]: {
 			position: "fixed",
-			zIndex: 1000,
+			zIndex: 1100,
 			top: 0
 		}
 	},
