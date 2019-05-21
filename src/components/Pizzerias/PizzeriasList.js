@@ -66,7 +66,7 @@ class PizzeriasList extends Component {
 		isSnackbarOpen: false,
 		snackbarMessage: "",
 		pizzeriaLocation: "#1",
-		term: ""
+		term: "",
 	};
 
 	componentDidMount(){
@@ -84,7 +84,6 @@ class PizzeriasList extends Component {
 					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
-			.catch(error => console.log(error.message))
 		this.fetchFavPizzerias();
     }
 
@@ -189,9 +188,6 @@ class PizzeriasList extends Component {
 		const { classes } = this.props;
 		return (
 			<div>
-				{console.log(this.state.pizzerias)}
-				{console.log(this.state.pizzeriasPizzas)}
-
 				<form
 					onSubmit={e => e.preventDefault()}
 					style={{
@@ -308,14 +304,9 @@ class PizzeriasList extends Component {
 												<div className="pizzeriasList__column__right">
 													<h1>Menu:</h1>
 													<div className="pizzeriasList__column__right__pizzas">
-														{this.state.pizzas.map(pizza => {
-															return (
-																<p key={Math.random()}>
-																	<input type="checkbox" /> {pizza.pizzaName} (
-																	{pizza.price} zł)
-																</p>
-															);
-														})}
+														{
+															pizzeria.availablePizzas.map(availablePizza => console.log(availablePizza))
+														}
 													</div>
 													<div className="pizzeriasList__column__right__button">
 														Zamów
