@@ -305,13 +305,15 @@ class PizzeriasList extends Component {
 													<h1>Menu:</h1>
 													<div className="pizzeriasList__column__right__pizzas">
 														{
-															pizzeria.availablePizzas.map(availablePizza => {
+															pizzeria.availablePizzas.map(pizza => {
+																const pizzaObj = Object.values(pizza)[0]
 																return (
 																	<div key={Math.random()}>
-																		<h5>Pizza {availablePizza.name}</h5>
-																		<h6>
-																			Składniki: {availablePizza.ingredients}
-																		</h6>
+																		<h5>
+																			<input type="checkbox" />&nbsp;
+																			{pizzaObj.name}
+																		</h5>
+																		<h6>{pizzaObj.ingredients}</h6>
 																	</div>
 																)
 															})
