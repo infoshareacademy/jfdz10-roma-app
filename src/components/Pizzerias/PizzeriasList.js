@@ -311,7 +311,7 @@ class PizzeriasList extends Component {
 																	<div key={Math.random()}>
 																		<h5>
 																			<input type="checkbox" />&nbsp;
-																			{pizzaObj.name}
+																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
 																		</h5>
 																		<h6>{pizzaObj.ingredients}</h6>
 																	</div>
