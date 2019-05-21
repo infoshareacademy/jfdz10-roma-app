@@ -6,6 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
+import SummaryOrder from "../SummaryTheOrder/SummaryOrder";
 
 const Content = styled.div`
 	width: 100%;
@@ -48,7 +49,7 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/summary-order"
-				component={() => <h1>Summary the order</h1>}
+				component={props => <SummaryOrder {...props} />}
 			/>
 		</Content>
 	);

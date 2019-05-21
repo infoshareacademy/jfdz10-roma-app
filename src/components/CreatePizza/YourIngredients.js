@@ -21,7 +21,8 @@ const styles = theme => ({
 		}
 	},
 	listContainer: {
-		width: "440px",
+		naxWidth: "440px",
+		width: "100%",
 		maxHeight: "500px",
 		display: "flex",
 		flexDirection: "column",
