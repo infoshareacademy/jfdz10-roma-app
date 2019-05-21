@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
     main: {
@@ -43,6 +44,18 @@ class SignUp extends React.Component {
         phone: ''
     };
     
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to='/user-panel'/>
+        }
+    }
+
     handleChange = (event) => {
         this.setState({
             [event.currentTarget.name]: event.target.value
@@ -70,6 +83,7 @@ class SignUp extends React.Component {
                         uid: value.user.uid
                     })
                 alert('Registered') })
+            .then(this.setRedirect)
             .catch(error => { alert(error.message) })
     };
 
@@ -155,6 +169,7 @@ class SignUp extends React.Component {
                                 onChange={this.handleChange} 
                             />
                         </FormControl>
+                        {this.renderRedirect()}
                         <Button
                             type="submit"
                             fullWidth
