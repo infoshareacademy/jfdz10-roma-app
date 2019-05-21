@@ -33,6 +33,7 @@ class App extends React.Component {
 			? JSON.parse(window.localStorage.isPizzaSubmitted)
 			: false,
 		user: null,
+		userDatabase: null,
 		isPizzeriaSubmitted: getFromLocalStorage("selectedPizzeria") ? true : false
 	};
 
@@ -58,7 +59,6 @@ class App extends React.Component {
 		this.setState({
 			isPizzeriaSubmitted: false,
 			isPizzaSubmitted: bool
-			// isPizzaSubmitted: !this.state.isPizzaSubmitted
 		});
 	};
 
@@ -68,6 +68,10 @@ class App extends React.Component {
 			isPizzeriaSubmitted: !this.state.isPizzeriaSubmitted
 		});
 	};
+
+	setUserData = user => {
+		this.setState({ ...this.state, userDatabase: user})
+	}
 
 	render() {
 		const { isPizzaSubmitted, user, isPizzeriaSubmitted } = this.state;
@@ -81,6 +85,7 @@ class App extends React.Component {
 						user={user}
 						handleSubmitSelectedPizzeria={this.handleSubmitSelectedPizzeria}
 						isPizzeriaSubmitted={isPizzeriaSubmitted}
+						setUserData={this.setUserData}
 					/>
 				</AppContainer>
 			</BrowserRouter>

@@ -161,7 +161,6 @@ class MainNav extends Component {
 		const isPizzeriaSubmitted = JSON.parse(
 			localStorage.getItem("isPizzeriaSubmitted")
 		);
-		console.log(isPizzaSubmitted, isPizzeriaSubmitted);
 		const { classes } = this.props;
 		const { isNavOpen } = this.state;
 		const path = this.state.selectedPath;

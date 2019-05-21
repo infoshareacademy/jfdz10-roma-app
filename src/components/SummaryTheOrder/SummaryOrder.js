@@ -33,14 +33,20 @@ const getFromLocalStorage = item => {
 
 class SummaryOrder extends Component {
 	state = {
+		user: this.props.user,
 		pizzeria: getFromLocalStorage("selectedPizzeria"),
 		ingredients: getFromLocalStorage("ingredients")
 	};
 
+	componentDidUpdate(prevProps) {
+		if (this.state.user !== prevProps.user) {
+			this.setState({ ...this.state, user: this.props.user });
+		}
+	}
+
 	render() {
 		const { pizzeria, ingredients } = this.state;
 		const { classes } = this.props;
-		console.log(this.state);
 		return (
 			<Fragment>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
@@ -49,8 +55,12 @@ class SummaryOrder extends Component {
 						<h2>Wybrane składniki: </h2>
 						<div className={classes.ingredients}>
 							<ul>
-								{ingredients.map(el => {
-									return <li style={{ fontSize: 16 }}>{el.name}</li>;
+								{ingredients.map((el, i) => {
+									return (
+										<li key={i} style={{ fontSize: 16 }}>
+											{el.name}
+										</li>
+									);
 								})}
 							</ul>
 						</div>

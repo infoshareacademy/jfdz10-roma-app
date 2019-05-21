@@ -20,9 +20,9 @@ const MainContent = props => {
 		isPizzaSubmitted,
 		user,
 		handleSubmitSelectedPizzeria,
-		isPizzeriaSubmitted
+		isPizzeriaSubmitted,
+		setUserData
 	} = props;
-
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
@@ -30,7 +30,10 @@ const MainContent = props => {
 				path="/pizzerias"
 				render={props => <Pizzerias user={user} {...props} />}
 			/>
-			<Route path="/user-panel" render={() => <UserPanel user={user} />} />
+			<Route
+				path="/user-panel"
+				render={() => <UserPanel user={user} setUserData={setUserData} />}
+			/>
 			<Route
 				path="/create-pizza"
 				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
@@ -49,7 +52,7 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/summary-order"
-				component={props => <SummaryOrder {...props} />}
+				component={props => <SummaryOrder user={user} {...props} />}
 			/>
 		</Content>
 	);

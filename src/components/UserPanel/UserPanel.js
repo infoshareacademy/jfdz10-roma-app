@@ -8,13 +8,13 @@ import "./UserData.css";
 
 class User extends React.Component {
 	render() {
-		const { user } = this.props;
+		const { user, setUserData } = this.props;
 
 		return (
 			<div className="user__container">
 				<div className="user__container__left">
 					<SayHello />
-					<UserData />
+					<UserData setUserData={setUserData} />
 					<UserOrders />
 				</div>
 				<div className="user__container__right">
