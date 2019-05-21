@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from 'firebase';
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -65,27 +66,26 @@ class PizzeriasList extends Component {
 		isSnackbarOpen: false,
 		snackbarMessage: "",
 		pizzeriaLocation: "#1",
-		term: ""
+		term: "",
 	};
 
-	componentDidMount() {
-		fetch("pizzas.json")
-			.then(res => res.json())
-			.then(pizzas => this.setState({ ...this.state, pizzas }));
-		fetch("pizzerias.json")
-			.then(res => res.json())
-			.then(pizzerias => {
-				this.setState({ ...this.state, pizzerias });
+	componentDidMount(){
+        const databaseRef = firebase.database().ref('pizzerias')
+        databaseRef.once('value')
+            .then(snapshot => {
+				const snapshotVal = snapshot.val() || {};
+                this.setState({
+					pizzerias: snapshotVal,
+					pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
+				})
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria) {
 					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
-			.catch(error => console.log(error.message));
-
 		this.fetchFavPizzerias();
-	}
+    }
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -304,14 +304,20 @@ class PizzeriasList extends Component {
 												<div className="pizzeriasList__column__right">
 													<h1>Menu:</h1>
 													<div className="pizzeriasList__column__right__pizzas">
-														{this.state.pizzas.map(pizza => {
-															return (
-																<p key={Math.random()}>
-																	<input type="checkbox" /> {pizza.pizzaName} (
-																	{pizza.price} zł)
-																</p>
-															);
-														})}
+														{
+															pizzeria.availablePizzas.map(pizza => {
+																const pizzaObj = Object.values(pizza)[0]
+																return (
+																	<div key={Math.random()}>
+																		<h5>
+																			<input type="checkbox" />&nbsp;
+																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
+																		</h5>
+																		<h6>{pizzaObj.ingredients}</h6>
+																	</div>
+																)
+															})
+														}
 													</div>
 													<div className="pizzeriasList__column__right__button">
 														Zamów
