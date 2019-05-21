@@ -14,7 +14,13 @@ const Content = styled.div`
 `;
 
 const MainContent = props => {
-	const { submitPizza, isPizzaSubmitted, user } = props;
+	const {
+		submitPizza,
+		isPizzaSubmitted,
+		user,
+		handleSubmitSelectedPizzeria,
+		isPizzeriaSubmitted
+	} = props;
 
 	return (
 		<Content>
@@ -35,6 +41,8 @@ const MainContent = props => {
 						{...props}
 						isCustomPizzaSubmitted={isPizzaSubmitted}
 						submitPizza={submitPizza}
+						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+						isPizzeriaSubmitted={isPizzeriaSubmitted}
 					/>
 				)}
 			/>
