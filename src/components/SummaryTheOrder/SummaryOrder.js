@@ -42,6 +42,14 @@ class SummaryOrder extends Component {
 		return (
 			<div className={classes.wrapper}>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
+				<div className={classes.ingredientsWrapper}>
+					<h2>Wybrane składniki: </h2>
+					<Paper className={classes.ingredients}>
+						{ingredients.map(el => {
+							return el.name;
+						})}
+					</Paper>
+				</div>
 				<div className={classes.pizzeriaWrapper}>
 					<h2>Wybrana pizzeria: </h2>
 					<Paper className={classes.pizzeria}>

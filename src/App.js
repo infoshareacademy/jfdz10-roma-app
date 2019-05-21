@@ -54,9 +54,11 @@ class App extends React.Component {
 		this.state.ref && this.state.ref();
 	}
 
-	handleSubmitPizza = () => {
+	handleSubmitPizza = bool => {
 		this.setState({
-			isPizzaSubmitted: !this.state.isPizzaSubmitted
+			isPizzeriaSubmitted: false,
+			isPizzaSubmitted: bool
+			// isPizzaSubmitted: !this.state.isPizzaSubmitted
 		});
 	};
 

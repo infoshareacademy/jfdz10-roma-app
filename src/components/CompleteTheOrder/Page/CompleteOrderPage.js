@@ -105,11 +105,13 @@ class CompleteOrderPage extends Component {
 			selectedPizzeria: {}
 		});
 		window.localStorage.removeItem("selectedPizzeria");
+		window.localStorage.removeItem("isPizzeriaSubmitted");
 	};
 
 	submitSelectedPizzeria = () => {
 		this.props.handleSubmitSelectedPizzeria();
 		this.props.history.push("/summary-order");
+		window.localStorage.setItem("isPizzeriaSubmitted", JSON.stringify(true));
 	};
 
 	render() {

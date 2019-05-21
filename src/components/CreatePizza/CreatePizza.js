@@ -138,7 +138,7 @@ class CreatePizza extends Component {
 		this.setState({
 			isPizzaSubmitted: true
 		});
-		this.props.submitPizza();
+		this.props.submitPizza(true);
 		this.props.history.push("/make-order");
 	};
 
@@ -150,7 +150,7 @@ class CreatePizza extends Component {
 			ingredients: selectedIngredients
 		});
 		window.localStorage.clear();
-		this.props.submitPizza();
+		this.props.submitPizza(false);
 	};
 
 	render() {
