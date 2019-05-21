@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Button from "react-bootstrap/Button";
-import { Divider } from "@material-ui/core";
 
 const styles = theme => ({
 	wrapper: {
@@ -10,13 +8,17 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		width: "100%",
-		height: "100%"
+		marginTop: 15
 	},
 	header: {
 		width: "100%"
 	},
+	ingredientsWrapper: {
+		maxWidth: 250,
+		width: "100%"
+	},
 	pizzeriaWrapper: {
-		maxWidth: 400,
+		maxWidth: 250,
 		width: "100%"
 	},
 	pizzeria: {
@@ -40,30 +42,34 @@ class SummaryOrder extends Component {
 		const { classes } = this.props;
 		console.log(this.state);
 		return (
-			<div className={classes.wrapper}>
+			<Fragment>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
-				<div className={classes.ingredientsWrapper}>
-					<h2>Wybrane składniki: </h2>
-					<Paper className={classes.ingredients}>
-						{ingredients.map(el => {
-							return el.name;
-						})}
-					</Paper>
+				<div className={classes.wrapper}>
+					<div className={classes.ingredientsWrapper}>
+						<h2>Wybrane składniki: </h2>
+						<div className={classes.ingredients}>
+							<ul>
+								{ingredients.map(el => {
+									return <li style={{ fontSize: 16 }}>{el.name}</li>;
+								})}
+							</ul>
+						</div>
+					</div>
+					<div className={classes.pizzeriaWrapper}>
+						<h2>Wybrana pizzeria: </h2>
+						<Paper className={classes.pizzeria}>
+							<h2>{pizzeria.name}</h2>
+							<p>{pizzeria.contactInfo.address.street}</p>
+							<p>
+								{pizzeria.contactInfo.address.postcode}{" "}
+								{pizzeria.contactInfo.address.city}
+							</p>
+							<p>{pizzeria.contactInfo.phone}</p>
+							<p>{pizzeria.contactInfo.website}</p>
+						</Paper>
+					</div>
 				</div>
-				<div className={classes.pizzeriaWrapper}>
-					<h2>Wybrana pizzeria: </h2>
-					<Paper className={classes.pizzeria}>
-						<h2>{pizzeria.name}</h2>
-						<p>{pizzeria.contactInfo.address.street}</p>
-						<p>
-							{pizzeria.contactInfo.address.postcode}{" "}
-							{pizzeria.contactInfo.address.city}
-						</p>
-						<p>{pizzeria.contactInfo.phone}</p>
-						<p>{pizzeria.contactInfo.website}</p>
-					</Paper>
-				</div>
-			</div>
+			</Fragment>
 		);
 	}
 }
