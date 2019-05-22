@@ -52,6 +52,7 @@ const styles = theme => ({
 		}
 	},
 	btn: {
+		lineHeight: 1,
 		[theme.breakpoints.down("sm")]: {
 			fontSize: 16,
 			width: 140,

@@ -45,6 +45,12 @@ const styles = theme => ({
 	info: {
 		display: "block",
 		fontWeight: "bold"
+	},
+	priceContainer: {
+		maxWidth: 350,
+		width: "100%",
+		marginTop: 15,
+		textAlign: "center"
 	}
 });
 
@@ -116,6 +122,9 @@ class SummaryOrder extends Component {
 	render() {
 		const { pizzeria, ingredients, user } = this.state;
 		const { classes } = this.props;
+
+		const price = getFromLocalStorage("orderTotalPrice");
+
 		return (
 			<div className={classes.wrapper}>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
@@ -183,6 +192,14 @@ class SummaryOrder extends Component {
 							</Fragment>
 						)}
 					</Paper>
+				</div>
+				<div className={classes.priceContainer}>
+					<h3>
+						Wartość zamówienia:
+						<span style={{ display: "block", fontWeight: "bold" }}>
+							{price} zł
+						</span>
+					</h3>
 				</div>
 			</div>
 		);

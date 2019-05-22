@@ -108,10 +108,18 @@ class CompleteOrderPage extends Component {
 		window.localStorage.removeItem("isPizzeriaSubmitted");
 	};
 
-	submitSelectedPizzeria = () => {
+	submitSelectedPizzeria = price => {
 		this.props.handleSubmitSelectedPizzeria();
 		this.props.history.push("/summary-order");
 		window.localStorage.setItem("isPizzeriaSubmitted", JSON.stringify(true));
+		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
+	};
+
+	unSubmitSelectedPizzeria = () => {
+		window.localStorage.removeItem("selectedPizzeria");
+		window.localStorage.removeItem("isPizzeriaSubmitted");
+		window.localStorage.removeItem("orderTotalPrice");
+		this.props.handleSubmitSelectedPizzeria();
 	};
 
 	render() {
@@ -151,7 +159,7 @@ class CompleteOrderPage extends Component {
 							fontSize: 14,
 							padding: "5px 7px"
 						}}
-						onClick={handleSubmitSelectedPizzeria}
+						onClick={this.unSubmitSelectedPizzeria}
 					>
 						{"Anuluj pizzerię"}
 					</Button>
@@ -182,7 +190,6 @@ class CompleteOrderPage extends Component {
 								isPizzeriaSelected={isPizzeriaSelected}
 								selectedPizzeria={selectedPizzeria}
 								unselectPizzeria={this.handleUnselectPizzeria}
-								handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
 								ingredients={ingredients}
 								pizzerias={pizzerias}
 								submitSelectedPizzeria={this.submitSelectedPizzeria}
