@@ -151,6 +151,7 @@ class MainNav extends Component {
 
 	signOut = () => {
 		firebase.auth().signOut();
+		window.localStorage.clear();
 		return <Redirect to="/dashboard" />;
 	};
 

@@ -38,7 +38,6 @@ class Nickname extends React.Component {
 					user,
 					userFirstName: user.name.split(" ")[0]
 				});
-				// this.props.setUserData(user);
 			});
 		});
 		this.setState({ ref });

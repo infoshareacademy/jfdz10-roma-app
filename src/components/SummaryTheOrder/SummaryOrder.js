@@ -9,22 +9,42 @@ const styles = theme => ({
 		flexDirection: "column",
 		alignItems: "center",
 		width: "100%",
-		marginTop: 15
+		maxHeight: "100vh",
+		overflow: "auto"
 	},
 	header: {
-		width: "100%"
+		width: "100%",
+		marginBottom: 15
 	},
 	ingredientsWrapper: {
-		maxWidth: 250,
-		width: "100%"
+		maxWidth: 350,
+		width: "100%",
+		fontSize: 16
 	},
 	pizzeriaWrapper: {
-		maxWidth: 250,
-		width: "100%"
+		maxWidth: 350,
+		width: "100%",
+		marginTop: 15,
+		fontSize: 16
 	},
 	pizzeria: {
 		padding: 15,
 		textAlign: "center"
+	},
+	contactWrapper: {
+		maxWidth: 350,
+		width: "100%",
+		marginTop: 15,
+		fontSize: 16
+	},
+	contact: {
+		padding: 15,
+		textAlign: "center",
+		fontSize: 16
+	},
+	info: {
+		display: "block",
+		fontWeight: "bold"
 	}
 });
 
@@ -83,8 +103,8 @@ class SummaryOrder extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.state.user !== prevProps.user) {
-			this.setState({ ...this.state, user: this.props.user });
+		if (this.state.authUser !== prevProps.user) {
+			this.setState({ ...this.state, authUser: this.props.user });
 		}
 	}
 
@@ -94,51 +114,77 @@ class SummaryOrder extends Component {
 	}
 
 	render() {
-		const { pizzeria, ingredients, user, authUserEmail } = this.state;
+		const { pizzeria, ingredients, user } = this.state;
 		const { classes } = this.props;
 		return (
-			<Fragment>
+			<div className={classes.wrapper}>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
-				<div className={classes.wrapper}>
-					<div className={classes.ingredientsWrapper}>
-						<h2>Wybrane składniki: </h2>
-						<div className={classes.ingredients}>
-							<ul>
-								{ingredients.map((el, i) => {
-									return (
-										<li key={i} style={{ fontSize: 16 }}>
-											{el.name}
-										</li>
-									);
-								})}
-							</ul>
-						</div>
-					</div>
-					<div className={classes.pizzeriaWrapper}>
-						<h2>Wybrana pizzeria: </h2>
-						<Paper className={classes.pizzeria}>
-							<h2>{pizzeria.name}</h2>
-							<p>{pizzeria.contactInfo.address.street}</p>
-							<p>
-								{pizzeria.contactInfo.address.postcode}{" "}
-								{pizzeria.contactInfo.address.city}
-							</p>
-							<p>{pizzeria.contactInfo.phone}</p>
-							<p>{pizzeria.contactInfo.website}</p>
-						</Paper>
-					</div>
-					<div className={classes.contactWrapper}>
-						<Paper className={classes.contact}>
-							{user && (
-								<Fragment>
-									<p>email: {authUserEmail}</p>
-									<p>Adres dostawy: {user.street}</p>
-								</Fragment>
-							)}
-						</Paper>
+				<div className={classes.ingredientsWrapper}>
+					<h2>Wybrane składniki: </h2>
+					<div className={classes.ingredients}>
+						<ul>
+							{ingredients.map((el, i) => {
+								return (
+									<li key={i} style={{ fontSize: 16 }}>
+										{el.name}
+									</li>
+								);
+							})}
+						</ul>
 					</div>
 				</div>
-			</Fragment>
+				<div className={classes.pizzeriaWrapper}>
+					<h2>Wybrana pizzeria: </h2>
+					<Paper className={classes.pizzeria}>
+						<h2>{pizzeria.name}</h2>
+						<p>
+							Adres:
+							<span className={classes.info}>
+								{pizzeria.contactInfo.address.street},
+								{pizzeria.contactInfo.address.postcode}
+								{pizzeria.contactInfo.address.city}
+							</span>
+						</p>
+						<p>
+							telefon:
+							<span className={classes.info}>{pizzeria.contactInfo.phone}</span>
+						</p>
+						<p>
+							WWW:
+							<span className={classes.info}>
+								{pizzeria.contactInfo.website}
+							</span>
+						</p>
+					</Paper>
+				</div>
+				<div className={classes.contactWrapper}>
+					<h2>Dane kontaktowe: </h2>
+					<Paper className={classes.contact}>
+						{user && (
+							<Fragment>
+								<p>
+									Imię i nazwisko:
+									<span className={classes.info}>{user.name}</span>
+								</p>
+								<p>
+									email:
+									<span className={classes.info}>{user.email}</span>
+								</p>
+								<p>
+									telefon:
+									<span className={classes.info}>{user.phone}</span>
+								</p>
+								<p>
+									Adres dostawy:
+									<span className={classes.info}>
+										{user.street}, {user.city}
+									</span>
+								</p>
+							</Fragment>
+						)}
+					</Paper>
+				</div>
+			</div>
 		);
 	}
 }
