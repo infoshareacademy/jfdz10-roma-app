@@ -21,7 +21,8 @@ const MainContent = props => {
 		user,
 		handleSubmitSelectedPizzeria,
 		isPizzeriaSubmitted,
-		setUserData
+		setUserData,
+		userData
 	} = props;
 	return (
 		<Content>
@@ -52,7 +53,9 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/summary-order"
-				component={props => <SummaryOrder user={user} {...props} />}
+				component={props => (
+					<SummaryOrder user={user} userData={userData} {...props} />
+				)}
 			/>
 		</Content>
 	);

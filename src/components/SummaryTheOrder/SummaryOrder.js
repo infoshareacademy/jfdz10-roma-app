@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import firebase from "firebase";
 
 const styles = theme => ({
 	wrapper: {
@@ -35,8 +36,51 @@ class SummaryOrder extends Component {
 	state = {
 		user: this.props.user,
 		pizzeria: getFromLocalStorage("selectedPizzeria"),
-		ingredients: getFromLocalStorage("ingredients")
+		ingredients: getFromLocalStorage("ingredients"),
+		authUser: null,
+		authUserRegistered: "",
+		authUserEmail: "",
+		authIsChecked: false
 	};
+
+	_isMounted = false;
+
+	componentDidMount() {
+		this._isMounted = true;
+
+		const ref = firebase.auth().onAuthStateChanged(user => {
+			if (user && this._isMounted) {
+				this.setState({
+					...this.state,
+					authUser: user,
+					authUserId: user.uid,
+					authUserEmail: user.email,
+					authUserRegistered: user.metadata.creationTime,
+					authIsChecked: true
+				});
+			}
+			const databaseRef = firebase.database().ref("users");
+			databaseRef.once("value").then(snapshot => {
+				const snapshotVal = snapshot.val() || {};
+				const findUser = Object.keys(snapshotVal)
+					.map(key => ({
+						id: key,
+						...snapshotVal[key]
+					}))
+					.filter(user => {
+						return user.id === this.state.authUserId;
+					});
+				const user = findUser[0];
+				if (user && this._isMounted) {
+					this.setState({
+						user,
+						userFirstName: user.name.split(" ")[0]
+					});
+				}
+			});
+		});
+		this.setState({ ref });
+	}
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -44,8 +88,13 @@ class SummaryOrder extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.state.ref && this.state.ref();
+		this._isMounted = false;
+	}
+
 	render() {
-		const { pizzeria, ingredients } = this.state;
+		const { pizzeria, ingredients, user, authUserEmail } = this.state;
 		const { classes } = this.props;
 		return (
 			<Fragment>
@@ -76,6 +125,16 @@ class SummaryOrder extends Component {
 							</p>
 							<p>{pizzeria.contactInfo.phone}</p>
 							<p>{pizzeria.contactInfo.website}</p>
+						</Paper>
+					</div>
+					<div className={classes.contactWrapper}>
+						<Paper className={classes.contact}>
+							{user && (
+								<Fragment>
+									<p>email: {authUserEmail}</p>
+									<p>Adres dostawy: {user.street}</p>
+								</Fragment>
+							)}
 						</Paper>
 					</div>
 				</div>
