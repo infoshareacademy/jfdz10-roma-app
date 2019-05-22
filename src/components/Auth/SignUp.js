@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import firebase from 'firebase';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment'
 
 const styles = theme => ({
     main: {
@@ -69,7 +70,8 @@ class SignUp extends React.Component {
             name,
             street,
             city,
-            phone
+            phone,
+            weekDay
         } = this.state
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(value => { 
@@ -80,7 +82,8 @@ class SignUp extends React.Component {
                         street,
                         city,
                         phone,
-                        uid: value.user.uid
+                        uid: value.user.uid,
+                        weekDay: moment().format('dddd'),
                     })
                 alert('Registered') })
             .then(this.setRedirect)

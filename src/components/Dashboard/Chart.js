@@ -7,17 +7,16 @@ const BarChart = require("react-chartjs").Bar;
 class Chart1 extends React.Component {
   state = {};
 
-  // componentDidMount() {
-  //   db.ref("users")
-  //     .once("value")
-  //     .then(snapshot => {
-  //       console.log(snapshot.val());
-    
-  //     });
-//}
+
 
   componentDidMount() {
     
+    db.ref("users")
+      .once("value")
+      .then(snapshot => {
+        console.log(snapshot.val());
+    
+      });
 }
 
   render() {
