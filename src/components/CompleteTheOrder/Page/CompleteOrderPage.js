@@ -127,7 +127,6 @@ class CompleteOrderPage extends Component {
 			classes,
 			isCustomPizzaSubmitted,
 			history,
-			handleSubmitSelectedPizzeria,
 			isPizzeriaSubmitted
 		} = this.props;
 		const {
@@ -166,7 +165,12 @@ class CompleteOrderPage extends Component {
 				</Paper>
 			</div>
 		) : (
-			<Container className="h-100" style={{ position: "relative" }}>
+			<Container
+				className="h-100"
+				style={{
+					position: "relative"
+				}}
+			>
 				<Row>
 					<div className={classes.container}>
 						<ListGroup className={classes.listGroup}>

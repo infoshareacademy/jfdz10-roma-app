@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+// import d from "../../../public/img/background.jpg"
 import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
@@ -186,7 +187,15 @@ class CreatePizza extends Component {
 			</div>
 		) : (
 			<Fragment>
-				<div className="h-100" style={{ position: "relative", margin: "0" }}>
+				<div
+					className="h-100"
+					style={{
+						position: "relative",
+						margin: "0",
+						backgroundImage: "url(img/background.jpg)",
+						backgroundSize: "cover"
+					}}
+				>
 					<div className={classes.row}>
 						<div className={classes.leftPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (

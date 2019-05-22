@@ -12,6 +12,8 @@ const Content = styled.div`
 	width: 100%;
 	height: 100vh;
 	background: #e2e2e2;
+	background-image: url(img/background.jpg);
+	background-size: cover;
 `;
 
 const MainContent = props => {
