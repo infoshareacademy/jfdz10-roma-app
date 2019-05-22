@@ -70,8 +70,7 @@ class SignUp extends React.Component {
             name,
             street,
             city,
-            phone,
-            weekDay
+            phone
         } = this.state
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(value => { 
