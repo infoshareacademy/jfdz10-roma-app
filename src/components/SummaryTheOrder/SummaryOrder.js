@@ -159,6 +159,17 @@ class SummaryOrder extends Component {
 		this._isMounted = false;
 	}
 
+	cancelOrder = () => {
+		window.localStorage.removeItem("selectedPizzeria");
+		window.localStorage.removeItem("isPizzeriaSubmitted");
+		this.setState({
+			...this.state,
+			pizzeria: null
+		});
+		this.props.handleSubmitSelectedPizzeria();
+		this.props.history.push("/make-order");
+	};
+
 	render() {
 		const { pizzeria, ingredients, user } = this.state;
 		const { classes } = this.props;
@@ -243,12 +254,7 @@ class SummaryOrder extends Component {
 				</div>
 				<div className={classes.makeOrderContainer}>
 					<div className={classes.buttonsContainer}>
-						<Button
-							size="lg"
-							className={classes.favButton}
-							onClick={this.handleChangeCreatePizza}
-							variant="link"
-						>
+						<Button size="lg" className={classes.favButton} variant="link">
 							Zamów
 						</Button>
 						<Button
@@ -257,10 +263,9 @@ class SummaryOrder extends Component {
 							style={{
 								width: 145,
 								height: 45,
-								// fontSize: 14,
 								padding: "5px 7px"
 							}}
-							onClick={this.handleChangeCreatePizza}
+							onClick={this.cancelOrder}
 							variant="link"
 						>
 							Cofnij

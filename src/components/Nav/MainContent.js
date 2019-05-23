@@ -56,7 +56,12 @@ const MainContent = props => {
 			<Route
 				path="/summary-order"
 				component={props => (
-					<SummaryOrder user={user} userData={userData} {...props} />
+					<SummaryOrder
+						user={user}
+						userData={userData}
+						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+						{...props}
+					/>
 				)}
 			/>
 		</Content>
