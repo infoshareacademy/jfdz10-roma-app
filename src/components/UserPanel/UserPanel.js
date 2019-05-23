@@ -15,7 +15,7 @@ class User extends React.Component {
 				<div className="user__container__left">
 					<SayHello />
 					<UserData setUserData={setUserData} />
-					<UserOrders />
+					<UserOrders user={user} />
 				</div>
 				<div className="user__container__right">
 					<Favourites user={user} />
