@@ -29,12 +29,9 @@ componentDidMount() {
           backgroundSize: "100% 100%",
           height: "100%", 
           overflow: "auto",
-          display: "flex",
-          flexFlow: "column",
-          justifyContent: "center"
         }}
       >
-        <div className="jumbotron-fluid text-center">
+        <div className="jumbotron-fluid text-center" style={{paddingTop: "4rem"}}>
           <h1
             className="display-3"
             id="title"
