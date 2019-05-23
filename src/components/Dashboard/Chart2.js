@@ -1,4 +1,6 @@
 import React from "react";
+import { db } from "../../App";
+
 
 const PieChart = require("react-chartjs").Pie;
 
@@ -8,8 +10,15 @@ class Chart2 extends React.Component {
         super(props);
         this.state = {
             allSoldPizzas: 20,
-            customsPizzas: 15
+            customsPizzas: 0,
         }
+    }
+
+    componentDidMount() {
+        db.ref("customOrders").once("value").then(snapshot => {
+            const snapshotVal = snapshot.val() || {};
+                this.setState({customsPizzas: snapshotVal})
+        })
     }
     
     render() {
