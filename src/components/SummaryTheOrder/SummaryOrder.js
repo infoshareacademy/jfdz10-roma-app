@@ -173,15 +173,26 @@ class SummaryOrder extends Component {
 	sendOrder = () => {
 		const isCustomOrder = getFromLocalStorage("isCustomOrder");
 		const customOrderRef = firebase.database().ref("customOrders");
+		const { user, pizzeria, ingredients } = this.state;
 
-		if (isCustomOrder) {
-			customOrderRef.once("value").then(snapshot => {
-				const totalCustomOrders = snapshot.val();
-				customOrderRef.set(totalCustomOrders + 1).then(() => {
-					alert("zamówienie wysłane!");
-				});
+		firebase
+			.database()
+			.ref(`users/${user.uid}/orders`)
+			.push()
+			.set({
+				pizzeria,
+				ingredients
+			})
+			.then(() => {
+				if (isCustomOrder) {
+					customOrderRef.once("value").then(snapshot => {
+						const totalCustomOrders = snapshot.val();
+						customOrderRef.set(totalCustomOrders + 1).then(() => {
+							alert("zamówienie wysłane!");
+						});
+					});
+				}
 			});
-		}
 	};
 
 	render() {
