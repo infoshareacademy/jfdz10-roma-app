@@ -15,7 +15,10 @@ const styles = theme => ({
 	},
 	header: {
 		width: "100%",
-		marginBottom: 15
+		marginBottom: 15,
+		[theme.breakpoints.down("sm")]: {
+			textAlign: "center"
+		}
 	},
 	ingredientsWrapper: {
 		maxWidth: 350,

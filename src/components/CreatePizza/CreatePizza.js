@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-// import d from "../../../public/img/background.jpg"
 import { withStyles } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
