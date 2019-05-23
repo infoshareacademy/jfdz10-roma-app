@@ -22,7 +22,7 @@ class Chart1 extends React.Component {
 
     db.ref("users").once("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        var childData = childSnapshot.val().registerWeekDay;
+        const childData = childSnapshot.val().registerWeekDay;
         
         if (childData === "Monday"){
             currentComponent.setState((state) => {

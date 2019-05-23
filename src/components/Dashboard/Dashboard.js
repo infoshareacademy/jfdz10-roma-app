@@ -61,7 +61,7 @@ componentDidMount() {
                   className="col-md-12"
                   style={{ height: "15rem", padding: "1rem", display: "flex", alignItems: "center", flexDirection: "column"}}
                 >
-                  <h5>Nowi użytkownicy:</h5>
+                  <h5 style={{paddingBottom: "1rem"}}>Nowi użytkownicy:</h5>
                   <Chart1 />
                 </div>
               </div>
@@ -70,7 +70,7 @@ componentDidMount() {
                   className="col-md-12"
                   style={{ height: "15rem", padding: "1rem", display: "flex", alignItems: "center", flexDirection: "column"}}
                 >
-                  <h5>Sprzedane pizze:</h5>
+                  <h5 style={{paddingBottom: "1rem"}}>Sprzedane pizze:</h5>
                   <Chart2 />
                 </div>
               </div>
