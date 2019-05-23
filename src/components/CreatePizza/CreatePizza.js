@@ -136,6 +136,7 @@ class CreatePizza extends Component {
 			JSON.stringify(this.state.ingredients)
 		);
 		window.localStorage.setItem("isPizzaSubmitted", "true");
+		window.localStorage.setItem("isCustomOrder", "true");
 		this.setState({
 			isPizzaSubmitted: true
 		});

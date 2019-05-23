@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import firebase from "firebase";
+import Button from "react-bootstrap/Button";
 
 const styles = theme => ({
 	wrapper: {
@@ -51,6 +52,45 @@ const styles = theme => ({
 		width: "100%",
 		marginTop: 15,
 		textAlign: "center"
+	},
+	favButton: {
+		width: 140,
+		height: 45,
+		margin: "0 auto",
+		padding: ".4rem .5rem",
+		fontSize: "1.5rem",
+		border: "none",
+		color: "white",
+		textDecoration: "none",
+		backgroundColor: "#cc3333",
+		"&:active": {
+			color: "black",
+			backgroundColor: "black"
+		},
+		"&:hover": {
+			color: "white",
+			textDecoration: "none",
+			backgroundColor: "#a5182e"
+		},
+		"&:visited": {
+			textDecoration: "none"
+		},
+		"&:focus": {
+			textDecoration: "none",
+			backgroundColor: "#a5182e",
+			boxShadow: "none"
+		}
+	},
+	makeOrderContainer: {
+		maxWidth: 350,
+		width: "100%",
+		marginTop: 15,
+		paddingBottom: 30
+	},
+	buttonsContainer: {
+		display: "flex",
+		justifyContent: "space-between",
+		width: "100%"
 	}
 });
 
@@ -200,6 +240,32 @@ class SummaryOrder extends Component {
 							{price} zł
 						</span>
 					</h3>
+				</div>
+				<div className={classes.makeOrderContainer}>
+					<div className={classes.buttonsContainer}>
+						<Button
+							size="lg"
+							className={classes.favButton}
+							onClick={this.handleChangeCreatePizza}
+							variant="link"
+						>
+							Zamów
+						</Button>
+						<Button
+							size="lg"
+							className="d-inline custom-button btn-secondary"
+							style={{
+								width: 145,
+								height: 45,
+								// fontSize: 14,
+								padding: "5px 7px"
+							}}
+							onClick={this.handleChangeCreatePizza}
+							variant="link"
+						>
+							Cofnij
+						</Button>
+					</div>
 				</div>
 			</div>
 		);
