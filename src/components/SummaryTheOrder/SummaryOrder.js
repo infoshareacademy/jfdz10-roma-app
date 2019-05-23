@@ -189,6 +189,9 @@ class SummaryOrder extends Component {
 						const totalCustomOrders = snapshot.val();
 						customOrderRef.set(totalCustomOrders + 1).then(() => {
 							alert("zamówienie wysłane!");
+							this.props.history.push("/user-panel");
+							window.localStorage.clear();
+							this.props.makeOrder();
 						});
 					});
 				}

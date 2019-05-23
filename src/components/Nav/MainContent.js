@@ -24,7 +24,8 @@ const MainContent = props => {
 		handleSubmitSelectedPizzeria,
 		isPizzeriaSubmitted,
 		setUserData,
-		userData
+		userData,
+		makeOrder
 	} = props;
 	return (
 		<Content>
@@ -60,6 +61,7 @@ const MainContent = props => {
 						user={user}
 						userData={userData}
 						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+						makeOrder={makeOrder}
 						{...props}
 					/>
 				)}

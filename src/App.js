@@ -73,6 +73,14 @@ class App extends React.Component {
 		this.setState({ ...this.state, userDatabase: user });
 	};
 
+	makeOrder = () => {
+		this.setState({
+			...this.state,
+			isPizzaSubmitted: false,
+			isPizzeriaSubmitted: false
+		});
+	};
+
 	render() {
 		const {
 			isPizzaSubmitted,
@@ -92,6 +100,7 @@ class App extends React.Component {
 						isPizzeriaSubmitted={isPizzeriaSubmitted}
 						setUserData={this.setUserData}
 						userData={userDatabase}
+						makeOrder={this.makeOrder}
 					/>
 				</AppContainer>
 			</BrowserRouter>
