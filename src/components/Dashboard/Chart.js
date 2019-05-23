@@ -52,7 +52,7 @@ class Chart1 extends React.Component {
           currentComponent.setState((state) => {
           return {Sunday: state.Sunday + 1}
         })   
-        } else {return console.log('error')}
+        } else {return null}
       
       })
     })

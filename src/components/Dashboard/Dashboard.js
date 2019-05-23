@@ -4,10 +4,22 @@ import CreateYourPizzaCard from "./CreateYourPizzaCard";
 import Chart1 from "./Chart";
 import Chart2 from "./Chart2";
 import LogInButton from "./ButtonLogin";
+import firebase from "firebase";
 
 import "./styles.css";
 
 class Dashboard extends Component {
+  state = {
+    user: null
+};
+
+componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+        this.setState({
+            user
+        })
+    })
+}
   render() {
     return (
       <div
@@ -16,7 +28,10 @@ class Dashboard extends Component {
           backgroundImage: "url(/img/background.jpg)",
           backgroundSize: "100% 100%",
           height: "100%", 
-          overflow: "auto"
+          overflow: "auto",
+          display: "flex",
+          flexFlow: "column",
+          justifyContent: "center"
         }}
       >
         <div className="jumbotron-fluid text-center">
@@ -30,8 +45,9 @@ class Dashboard extends Component {
           <p className="lead" style={{ letterSpacing: "0.3rem" }}>
             Aplikacja, która pomoże ci znaleźć twoją wymarzoną pizzę
           </p>
-          <LogInButton />
-          <ButtonRegister />
+          {this.state.user ? <div style={{height: "3rem"}}></div> : <div><LogInButton />
+          <ButtonRegister /></div>}
+          
         </div>
 
         <div className="container">
