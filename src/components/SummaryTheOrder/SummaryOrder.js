@@ -170,6 +170,20 @@ class SummaryOrder extends Component {
 		this.props.history.push("/make-order");
 	};
 
+	sendOrder = () => {
+		const isCustomOrder = getFromLocalStorage("isCustomOrder");
+		const customOrderRef = firebase.database().ref("customOrders");
+
+		if (isCustomOrder) {
+			customOrderRef.once("value").then(snapshot => {
+				const totalCustomOrders = snapshot.val();
+				customOrderRef.set(totalCustomOrders + 1).then(() => {
+					alert("zamówienie wysłane!");
+				});
+			});
+		}
+	};
+
 	render() {
 		const { pizzeria, ingredients, user } = this.state;
 		const { classes } = this.props;
@@ -254,7 +268,12 @@ class SummaryOrder extends Component {
 				</div>
 				<div className={classes.makeOrderContainer}>
 					<div className={classes.buttonsContainer}>
-						<Button size="lg" className={classes.favButton} variant="link">
+						<Button
+							size="lg"
+							className={classes.favButton}
+							variant="link"
+							onClick={this.sendOrder}
+						>
 							Zamów
 						</Button>
 						<Button
