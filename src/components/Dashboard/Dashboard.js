@@ -46,7 +46,7 @@ class Dashboard extends Component {
               <div className="row">
                 <div
                   className="col-md-12"
-                  style={{ height: "15rem", padding: "1rem" }}
+                  style={{ height: "15rem", padding: "1rem", display: "flex", alignItems: "center", flexDirection: "column"}}
                 >
                   <h5>Nowi użytkownicy:</h5>
                   <Chart1 />
@@ -55,7 +55,7 @@ class Dashboard extends Component {
               <div className="row">
                 <div
                   className="col-md-12"
-                  style={{ height: "15rem", padding: "1rem"}}
+                  style={{ height: "15rem", padding: "1rem", display: "flex", alignItems: "center", flexDirection: "column"}}
                 >
                   <h5>Sprzedane pizze:</h5>
                   <Chart2 />
