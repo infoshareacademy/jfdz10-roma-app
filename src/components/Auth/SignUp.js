@@ -82,7 +82,7 @@ class SignUp extends React.Component {
                         city,
                         phone,
                         uid: value.user.uid,
-                        weekDay: moment().format('dddd'),
+                        registerWeekDay: moment().format('dddd'),
                     })
                 alert('Registered') })
             .then(this.setRedirect)
