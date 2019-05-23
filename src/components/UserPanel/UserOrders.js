@@ -4,37 +4,29 @@ import firebase from "firebase";
 
 class UserOrders extends React.Component {
 	state = {
-		user: this.props.user
+		user: this.props.user,
+		orders: []
 	};
-
-	componentDidMount() {
-		const { user } = this.state;
-		console.log(user);
-		if (user) {
-			firebase
-				.database()
-				.ref(`users/${user.uid}/orders`)
-				.once("value")
-				.then(snapshot => {
-					const orders = snapshot.val();
-					console.log(orders);
-				});
-		}
-	}
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
 			this.setState({ ...this.state, user: this.props.user });
 			const { user } = this.props;
-			console.log(user);
 			if (user) {
 				firebase
 					.database()
 					.ref(`users/${user.uid}/orders`)
 					.once("value")
 					.then(snapshot => {
-						const orders = snapshot.val();
-						console.log(orders);
+						const ordersObject = snapshot.val();
+						const ordersArray = Object.keys(ordersObject).map(key => ({
+							id: key,
+							...ordersObject[key]
+						}));
+						this.setState({
+							...this.state,
+							orders: ordersArray
+						});
 					});
 			}
 		}
