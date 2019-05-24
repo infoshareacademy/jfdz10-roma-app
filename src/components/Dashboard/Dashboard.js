@@ -14,12 +14,20 @@ class Dashboard extends Component {
 };
 
 componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    const ref = firebase.auth().onAuthStateChanged(user => {
         this.setState({
             user
         })
-    })
+    });
+    this.setState({
+      ref
+    });
 }
+
+componentWillUnmount() {
+  this.state.ref && this.state.ref();
+}
+
   render() {
     return (
       <div
