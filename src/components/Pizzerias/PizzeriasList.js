@@ -19,7 +19,7 @@ const styles = theme => ({
 	RightPane: {
 		background: "white",
 		border: "1px solid lightgray",
-		borderRadius: "5px",
+		borderRadius: "5px"
 	},
 	FavIconEnabled: {
 		float: "right",
@@ -37,7 +37,7 @@ const styles = theme => ({
 		alignItems: "center",
 		paddingLeft: 0,
 		paddingTop: 0,
-		paddingBottom: 0,
+		paddingBottom: 0
 	},
 	link: {
 		color: "inherit",
@@ -68,18 +68,28 @@ class PizzeriasList extends Component {
 		term: ""
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
+		this._isMounted = true;
+
 		fetch("pizzas.json")
 			.then(res => res.json())
-			.then(pizzas => this.setState({ ...this.state, pizzas }));
+			.then(pizzas => {
+				if (this._isMounted) {
+					this.setState({ ...this.state, pizzas });
+				}
+			});
 		fetch("pizzerias.json")
 			.then(res => res.json())
 			.then(pizzerias => {
-				this.setState({ ...this.state, pizzerias });
-				const currentPizzeria = this.props.location.hash;
-				const defaultPizzeria = this.state.pizzeriaLocation;
-				if (currentPizzeria !== defaultPizzeria) {
-					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
+				if (this._isMounted) {
+					this.setState({ ...this.state, pizzerias });
+					const currentPizzeria = this.props.location.hash;
+					const defaultPizzeria = this.state.pizzeriaLocation;
+					if (currentPizzeria !== defaultPizzeria) {
+						this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
+					}
 				}
 			})
 			.catch(error => console.log(error.message));
@@ -94,6 +104,10 @@ class PizzeriasList extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	fetchFavPizzerias = () => {
 		const { user } = this.props;
 		if (user) {
@@ -101,11 +115,13 @@ class PizzeriasList extends Component {
 				.once("value")
 				.then(snapshot => {
 					const favourites = snapshot.val() || [];
-					this.setState({
-						...this.state,
-						favPizzerias: favourites,
-						isFetchFavPizzerias: true
-					});
+					if (this._isMounted) {
+						this.setState({
+							...this.state,
+							favPizzerias: favourites,
+							isFetchFavPizzerias: true
+						});
+					}
 				})
 				.catch(err => console.log(err.message));
 		}
@@ -194,14 +210,14 @@ class PizzeriasList extends Component {
 						display: "flex",
 						flexFlow: "column",
 						paddingTop: "2rem",
-						width: "100%",
+						width: "100%"
 					}}
 				>
 					<label
-						style={{ 
-							fontSize: "1.7rem", 
-							textAlign: "center", 
-							padding: "3px" 
+						style={{
+							fontSize: "1.7rem",
+							textAlign: "center",
+							padding: "3px"
 						}}
 					>
 						WYSZUKAJ PIZZERIĘ:

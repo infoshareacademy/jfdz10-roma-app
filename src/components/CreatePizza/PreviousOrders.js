@@ -36,7 +36,10 @@ class PreviousOrders extends Component {
 		isFetchInProgress: true
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
+		this._isMounted = true;
 		this.fetchOrders();
 	}
 
@@ -64,21 +67,29 @@ class PreviousOrders extends Component {
 							id: key,
 							...ordersObject[key]
 						}));
+						if (this._isMounted) {
+							this.setState({
+								...this.state,
+								orders: ordersArray,
+								isFetchFinished: true,
+								isFetchInProgress: false
+							});
+						}
+					}
+					if (this._isMounted) {
 						this.setState({
 							...this.state,
-							orders: ordersArray,
 							isFetchFinished: true,
 							isFetchInProgress: false
 						});
 					}
-					this.setState({
-						...this.state,
-						isFetchFinished: true,
-						isFetchInProgress: false
-					});
 				});
 		}
 	};
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 
 	selectOrder = order => {
 		const pizzeria = order.pizzeria;
@@ -96,7 +107,7 @@ class PreviousOrders extends Component {
 
 	render() {
 		const { orders, isFetchInProgress } = this.state;
-		const { classes, selectPreviousOrder } = this.props;
+		const { classes } = this.props;
 		return isFetchInProgress ? (
 			<Loader type="Oval" color="#039be5" width={120} height={120} />
 		) : (
