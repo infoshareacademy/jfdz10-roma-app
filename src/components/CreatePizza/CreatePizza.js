@@ -156,7 +156,7 @@ class CreatePizza extends Component {
 
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
-		const { classes, user } = this.props;
+		const { classes, user, selectPreviousOrder } = this.props;
 		return isPizzaSubmitted ? (
 			<div
 				variant="success"
@@ -225,7 +225,10 @@ class CreatePizza extends Component {
 									isPizzaSubmitted={isPizzaSubmitted}
 								/>
 							) : (
-								<PreviousOrders user={user} />
+								<PreviousOrders
+									user={user}
+									selectPreviousOrder={selectPreviousOrder}
+								/>
 							)}
 						</div>
 					</div>

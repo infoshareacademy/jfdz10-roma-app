@@ -25,7 +25,8 @@ const MainContent = props => {
 		isPizzeriaSubmitted,
 		setUserData,
 		userData,
-		makeOrder
+		makeOrder,
+		selectPreviousOrder
 	} = props;
 	return (
 		<Content>
@@ -41,7 +42,12 @@ const MainContent = props => {
 			<Route
 				path="/create-pizza"
 				render={props => (
-					<CreatePizza submitPizza={submitPizza} user={user} {...props} />
+					<CreatePizza
+						submitPizza={submitPizza}
+						user={user}
+						{...props}
+						selectPreviousOrder={selectPreviousOrder}
+					/>
 				)}
 			/>
 			<Route

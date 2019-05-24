@@ -77,7 +77,7 @@ class PreviousOrders extends Component {
 
 	render() {
 		const { orders, isFetchInProgress } = this.state;
-		const { classes } = this.props;
+		const { classes, selectPreviousOrder } = this.props;
 		return isFetchInProgress ? (
 			<Loader type="Oval" color="#039be5" width={120} height={120} />
 		) : (
@@ -108,7 +108,7 @@ class PreviousOrders extends Component {
 										overflowWrap: "break-word",
 										wordWrap: "break-word"
 									}}
-									// onClick={() => console.log(order)}
+									onClick={() => selectPreviousOrder(order)}
 								>
 									<div className="d-flex w-100 justify-content-between">
 										<h5 className="mb-1">{order.pizzeria.name}</h5>
