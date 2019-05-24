@@ -21,7 +21,8 @@ const styles = theme => ({
 		}
 	},
 	listContainer: {
-		width: "440px",
+		naxWidth: "440px",
+		width: "100%",
 		maxHeight: "500px",
 		display: "flex",
 		flexDirection: "column",
@@ -51,6 +52,7 @@ const styles = theme => ({
 		}
 	},
 	btn: {
+		lineHeight: 1,
 		[theme.breakpoints.down("sm")]: {
 			fontSize: 16,
 			width: 140,

@@ -8,14 +8,14 @@ import "./UserData.css";
 
 class User extends React.Component {
 	render() {
-		const { user } = this.props;
+		const { user, setUserData } = this.props;
 
 		return (
 			<div className="user__container">
 				<div className="user__container__left">
 					<SayHello />
-					<UserData />
-					<UserOrders />
+					<UserData setUserData={setUserData} />
+					<UserOrders user={user} />
 				</div>
 				<div className="user__container__right">
 					<Favourites user={user} />

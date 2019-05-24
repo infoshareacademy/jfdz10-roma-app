@@ -44,14 +44,19 @@ class Favourites extends Component {
 		snackbarMessage: ""
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
+		this._isMounted = true;
 		this.fetchFavPizzerias();
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
 			this.fetchFavPizzerias();
-			this.setState({ ...this.state, user: this.props.user });
+			if (this._isMounted) {
+				this.setState({ ...this.state, user: this.props.user });
+			}
 		}
 	}
 
@@ -71,52 +76,66 @@ class Favourites extends Component {
 		if (isAnyPizzeriaFavourite) {
 			if (!isPizzeriaFavourite) {
 				const selectedPizzerias = [...favPizzerias, pizzeria];
-				this.setState({
-					...this.state,
-					favPizzerias: selectedPizzerias,
-					isSnackbarOpen: true,
-					snackbarMessage: "Dodano do ulubionych"
-				});
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						favPizzerias: selectedPizzerias,
+						isSnackbarOpen: true,
+						snackbarMessage: "Dodano do ulubionych"
+					});
+				}
 				db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
 			}
 			if (isPizzeriaFavourite) {
 				const removedFavPizzerias = favPizzerias.filter(
 					fav => fav.name !== pizzeria.name
 				);
-				this.setState({
-					...this.state,
-					favPizzerias: removedFavPizzerias,
-					isSnackbarOpen: true,
-					snackbarMessage: "Usunięto z ulubionych"
-				});
+				if (this._isMounted) {
+					this.setState({
+						...this.state,
+						favPizzerias: removedFavPizzerias,
+						isSnackbarOpen: true,
+						snackbarMessage: "Usunięto z ulubionych"
+					});
+				}
 				db.ref(`users/${user.uid}/favourites`).set({ ...removedFavPizzerias });
 			}
 		} else {
 			const selectedPizzerias = [...favPizzerias, pizzeria];
-			this.setState({
-				...this.state,
-				favPizzerias: selectedPizzerias,
-				isSnackbarOpen: true,
-				snackbarMessage: "Dodano do ulubionych"
-			});
+			if (this._isMounted) {
+				this.setState({
+					...this.state,
+					favPizzerias: selectedPizzerias,
+					isSnackbarOpen: true,
+					snackbarMessage: "Dodano do ulubionych"
+				});
+			}
 			db.ref(`users/${user.uid}/favourites`).set({ ...selectedPizzerias });
 		}
 	};
 
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	fetchFavPizzerias = () => {
 		const { user } = this.props;
-		this.setState({ ...this.state, isFetchInProgress: true });
+		if (this._isMounted) {
+			this.setState({ ...this.state, isFetchInProgress: true });
+		}
 		if (user) {
 			db.ref(`users/${user.uid}/favourites`)
 				.once("value")
 				.then(snapshot => {
 					const favourites = snapshot.val() || [];
-					this.setState({
-						...this.state,
-						favPizzerias: favourites,
-						isFetchFinished: true,
-						isFetchInProgress: false
-					});
+					if (this._isMounted) {
+						this.setState({
+							...this.state,
+							favPizzerias: favourites,
+							isFetchFinished: true,
+							isFetchInProgress: false
+						});
+					}
 				})
 				.catch(err => console.log(err.message));
 		}

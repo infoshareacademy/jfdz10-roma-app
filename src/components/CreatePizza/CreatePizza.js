@@ -135,10 +135,11 @@ class CreatePizza extends Component {
 			JSON.stringify(this.state.ingredients)
 		);
 		window.localStorage.setItem("isPizzaSubmitted", "true");
+		window.localStorage.setItem("isCustomOrder", "true");
 		this.setState({
 			isPizzaSubmitted: true
 		});
-		this.props.submitPizza();
+		this.props.submitPizza(true);
 		this.props.history.push("/make-order");
 	};
 
@@ -146,16 +147,16 @@ class CreatePizza extends Component {
 		const selectedIngredients = getFromLocalStorage("ingredients");
 		this.setState({
 			isPizzaSubmitted: false,
-			isCreatePizza: true,
+			isCreatePizza: false,
 			ingredients: selectedIngredients
 		});
 		window.localStorage.clear();
-		this.props.submitPizza();
+		this.props.submitPizza(false);
 	};
 
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
-		const { classes } = this.props;
+		const { classes, user, selectPreviousOrder, history } = this.props;
 		return isPizzaSubmitted ? (
 			<div
 				variant="success"
@@ -186,7 +187,15 @@ class CreatePizza extends Component {
 			</div>
 		) : (
 			<Fragment>
-				<div className="h-100" style={{ position: "relative", margin: "0" }}>
+				<div
+					className="h-100"
+					style={{
+						position: "relative",
+						margin: "0",
+						backgroundImage: "url(img/background.jpg)",
+						backgroundSize: "cover"
+					}}
+				>
 					<div className={classes.row}>
 						<div className={classes.leftPane}>
 							{this.state.isCreatePizza || isPizzaSubmitted ? (
@@ -216,7 +225,11 @@ class CreatePizza extends Component {
 									isPizzaSubmitted={isPizzaSubmitted}
 								/>
 							) : (
-								<PreviousOrders />
+								<PreviousOrders
+									user={user}
+									selectPreviousOrder={selectPreviousOrder}
+									history={history}
+								/>
 							)}
 						</div>
 					</div>

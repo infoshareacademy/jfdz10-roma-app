@@ -6,11 +6,25 @@ class Pizzerias extends Component {
 	state = {
 		pizzerias: []
 	};
+
+	_isMounted = false;
+
 	componentDidMount() {
+		this._isMounted = true;
+
 		fetch("pizzerias.json")
 			.then(resp => resp.json())
-			.then(pizzerias => this.setState({ pizzerias }));
+			.then(pizzerias => {
+				if (this._isMounted) {
+					this.setState({ pizzerias });
+				}
+			});
 	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	render() {
 		const { user } = this.props;
 

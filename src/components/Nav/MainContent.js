@@ -6,11 +6,14 @@ import Dashboard from "../Dashboard/Dashboard";
 import CreatePizza from "../CreatePizza/CreatePizza";
 import UserPanel from "../UserPanel/UserPanel";
 import Pizzerias from "../Pizzerias/Pizzerias";
+import SummaryOrder from "../SummaryTheOrder/SummaryOrder";
 
 const Content = styled.div`
 	width: 100%;
 	height: 100vh;
 	background: #e2e2e2;
+	background-image: url(img/background.jpg);
+	background-size: cover;
 `;
 
 const MainContent = props => {
@@ -19,9 +22,13 @@ const MainContent = props => {
 		isPizzaSubmitted,
 		user,
 		handleSubmitSelectedPizzeria,
-		isPizzeriaSubmitted
+		isPizzeriaSubmitted,
+		setUserData,
+		userData,
+		makeOrder,
+		selectPreviousOrder,
+		cancelOrder
 	} = props;
-
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
@@ -29,10 +36,20 @@ const MainContent = props => {
 				path="/pizzerias"
 				render={props => <Pizzerias user={user} {...props} />}
 			/>
-			<Route path="/user-panel" render={() => <UserPanel user={user} />} />
+			<Route
+				path="/user-panel"
+				render={() => <UserPanel user={user} setUserData={setUserData} />}
+			/>
 			<Route
 				path="/create-pizza"
-				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
+				render={props => (
+					<CreatePizza
+						submitPizza={submitPizza}
+						user={user}
+						selectPreviousOrder={selectPreviousOrder}
+						{...props}
+					/>
+				)}
 			/>
 			<Route
 				path="/make-order"
@@ -43,12 +60,21 @@ const MainContent = props => {
 						submitPizza={submitPizza}
 						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
 						isPizzeriaSubmitted={isPizzeriaSubmitted}
+						cancelOrder={cancelOrder}
 					/>
 				)}
 			/>
 			<Route
 				path="/summary-order"
-				component={() => <h1>Summary the order</h1>}
+				component={props => (
+					<SummaryOrder
+						user={user}
+						userData={userData}
+						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
+						makeOrder={makeOrder}
+						{...props}
+					/>
+				)}
 			/>
 		</Content>
 	);

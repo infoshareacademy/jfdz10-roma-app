@@ -42,7 +42,7 @@ class PizzeriaList extends Component {
 
 	cancelIngredients = () => {
 		window.localStorage.clear();
-		this.props.submitPizza();
+		this.props.submitPizza(false);
 		this.props.history.push("/create-pizza");
 	};
 

@@ -105,11 +105,27 @@ class CompleteOrderPage extends Component {
 			selectedPizzeria: {}
 		});
 		window.localStorage.removeItem("selectedPizzeria");
+		window.localStorage.removeItem("isPizzeriaSubmitted");
 	};
 
-	submitSelectedPizzeria = () => {
+	submitSelectedPizzeria = price => {
 		this.props.handleSubmitSelectedPizzeria();
 		this.props.history.push("/summary-order");
+		window.localStorage.setItem("isPizzeriaSubmitted", JSON.stringify(true));
+		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
+	};
+
+	unSubmitSelectedPizzeria = () => {
+		const isCustomOrder = getFromLocalStorage("isCustomOrder");
+		if (!isCustomOrder) {
+			this.props.cancelOrder();
+			this.props.history.push("/user-panel");
+			window.localStorage.clear();
+		}
+		window.localStorage.removeItem("selectedPizzeria");
+		window.localStorage.removeItem("isPizzeriaSubmitted");
+		window.localStorage.removeItem("orderTotalPrice");
+		this.props.handleSubmitSelectedPizzeria();
 	};
 
 	render() {
@@ -117,7 +133,6 @@ class CompleteOrderPage extends Component {
 			classes,
 			isCustomPizzaSubmitted,
 			history,
-			handleSubmitSelectedPizzeria,
 			isPizzeriaSubmitted
 		} = this.props;
 		const {
@@ -149,14 +164,19 @@ class CompleteOrderPage extends Component {
 							fontSize: 14,
 							padding: "5px 7px"
 						}}
-						onClick={handleSubmitSelectedPizzeria}
+						onClick={this.unSubmitSelectedPizzeria}
 					>
 						{"Anuluj pizzerię"}
 					</Button>
 				</Paper>
 			</div>
 		) : (
-			<Container className="h-100" style={{ position: "relative" }}>
+			<Container
+				className="h-100"
+				style={{
+					position: "relative"
+				}}
+			>
 				<Row>
 					<div className={classes.container}>
 						<ListGroup className={classes.listGroup}>
@@ -180,7 +200,6 @@ class CompleteOrderPage extends Component {
 								isPizzeriaSelected={isPizzeriaSelected}
 								selectedPizzeria={selectedPizzeria}
 								unselectPizzeria={this.handleUnselectPizzeria}
-								handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
 								ingredients={ingredients}
 								pizzerias={pizzerias}
 								submitSelectedPizzeria={this.submitSelectedPizzeria}
