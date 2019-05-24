@@ -1,20 +1,40 @@
 import React from "react";
+import { db } from "../../App";
+
 
 const PieChart = require("react-chartjs").Pie;
 
 
 class Chart2 extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            otherOrders: 0,
+            customsPizzas: 0,
+        }
+    }
+
+    componentDidMount() {
+        db.ref("customOrders").once("value").then(snapshot => {
+            const snapshotVal = snapshot.val() || {};
+                this.setState({customsPizzas: snapshotVal})
+        })
+        db.ref("otherOrders").once("value").then(snapshot => {
+            const snapshotVal = snapshot.val() || {};
+                this.setState({otherOrders: snapshotVal})
+        })
+    }
     
     render() {
         const chart2Data = [
             {
-                value: 300,
+                value: this.state.otherOrders,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
-                label: "Wszystkie pizze"
+                label: "Pizze z menu"
             },
             {
-                value: 100,
+                value: this.state.customsPizzas,
                 color: "#FDB45C",
                 highlight: "#FFC870",
                 label: "Pizze użytkowników"
