@@ -177,6 +177,7 @@ class SummaryOrder extends Component {
 		const isCustomOrder = getFromLocalStorage("isCustomOrder");
 		const customOrderRef = firebase.database().ref("customOrders");
 		const { user, pizzeria, ingredients } = this.state;
+		const price = getFromLocalStorage("orderTotalPrice");
 
 		firebase
 			.database()
@@ -184,7 +185,8 @@ class SummaryOrder extends Component {
 			.push()
 			.set({
 				pizzeria,
-				ingredients
+				ingredients,
+				price
 			})
 			.then(() => {
 				if (isCustomOrder) {

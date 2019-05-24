@@ -85,11 +85,23 @@ class App extends React.Component {
 		});
 	};
 
+	cancelOrder = () => {
+		this.setState({
+			...this.state,
+			isPizzaSubmitted: false,
+			isPizzeriaSubmitted: false,
+			previousOrder: null,
+			otherOrder: false
+		});
+	};
+
 	selectPreviousOrder = order => {
 		this.setState({
 			...this.state,
 			previousOrder: order,
-			otherOrder: true
+			otherOrder: true,
+			isPizzeriaSubmitted: true,
+			isPizzaSubmitted: true
 		});
 	};
 
@@ -114,6 +126,7 @@ class App extends React.Component {
 						userData={userDatabase}
 						makeOrder={this.makeOrder}
 						selectPreviousOrder={this.selectPreviousOrder}
+						cancelOrder={this.cancelOrder}
 					/>
 				</AppContainer>
 			</BrowserRouter>

@@ -71,8 +71,27 @@ class PreviousOrders extends Component {
 							isFetchInProgress: false
 						});
 					}
+					this.setState({
+						...this.state,
+						isFetchFinished: true,
+						isFetchInProgress: false
+					});
 				});
 		}
+	};
+
+	selectOrder = order => {
+		const pizzeria = order.pizzeria;
+		const price = order.price;
+		const ingredients = order.ingredients;
+		window.localStorage.setItem("isPizzaSubmitted", "true");
+		window.localStorage.setItem("isCustomOrder", "false");
+		window.localStorage.setItem("isPizzeriaSubmitted", "true");
+		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
+		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
+		window.localStorage.setItem("ingredients", JSON.stringify(ingredients));
+		this.props.history.push("/summary-order");
+		this.props.selectPreviousOrder(order);
 	};
 
 	render() {
@@ -108,7 +127,7 @@ class PreviousOrders extends Component {
 										overflowWrap: "break-word",
 										wordWrap: "break-word"
 									}}
-									onClick={() => selectPreviousOrder(order)}
+									onClick={() => this.selectOrder(order)}
 								>
 									<div className="d-flex w-100 justify-content-between">
 										<h5 className="mb-1">{order.pizzeria.name}</h5>
