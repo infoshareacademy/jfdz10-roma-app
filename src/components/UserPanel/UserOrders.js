@@ -8,9 +8,17 @@ class UserOrders extends React.Component {
 		orders: []
 	};
 
+	_isMounted = false;
+
+	componentDidMount() {
+		this._isMounted = true;
+	}
+
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
-			this.setState({ ...this.state, user: this.props.user });
+			if (this._isMounted) {
+				this.setState({ ...this.state, user: this.props.user });
+			}
 			const { user } = this.props;
 			if (user) {
 				firebase
@@ -23,13 +31,19 @@ class UserOrders extends React.Component {
 							id: key,
 							...ordersObject[key]
 						}));
-						this.setState({
-							...this.state,
-							orders: ordersArray
-						});
+						if (this._isMounted) {
+							this.setState({
+								...this.state,
+								orders: ordersArray
+							});
+						}
 					});
 			}
 		}
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	render() {
