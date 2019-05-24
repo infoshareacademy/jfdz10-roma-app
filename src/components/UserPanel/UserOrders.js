@@ -57,7 +57,15 @@ class UserOrders extends React.Component {
 					</span>
 					Historia zamówień:
 				</h2>
-				<span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
+				{this.state.orders === [] 
+				? <span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
+				: this.state.orders.map(order => {
+					return (
+					<li key={order.pizzeria.id}> 
+						{order.pizzeria.name} ({order.price} zł)
+					</li>
+					)
+				})}
 			</div>
 		);
 	}

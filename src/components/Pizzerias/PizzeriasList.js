@@ -72,25 +72,28 @@ class PizzeriasList extends Component {
   _isMounted = false;
           
 	componentDidMount(){
-        this._isMounted = true;
-        const databaseRef = firebase.database().ref('pizzerias')
-        databaseRef.once('value')
-            .then(snapshot => {
+    this._isMounted = true;
+    const databaseRef = firebase.database().ref('pizzerias')
+    databaseRef.once('value')
+      .then(snapshot => {
 				const snapshotVal = snapshot.val() || {};
-          if (this._isMounted) {
-                this.setState({
-					pizzerias: snapshotVal,
-					pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
-				})
-            }
+      	if (this._isMounted) {
+          this.setState({
+						pizzerias: snapshotVal,
+						pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
+					})
+				}
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria && this._isMounted) {
-					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
+					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria })
 				}
 			})
 		this.fetchFavPizzerias();
-    }
+		this.setState({
+			pizzasFromMenu: JSON.parse(localStorage.getItem('pizzasFromMenu')),
+		})
+  }
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -193,11 +196,14 @@ class PizzeriasList extends Component {
 		this.setState({ ...this.state, pizzeriaLocation: `#${id}` });
 	};
 
+	getProductsFromLS = () => {
+		return JSON.parse(localStorage.getItem('basketProducts'))
+	};
+
 	render() {
 		const location = this.state.pizzeriaLocation;
 		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
-		const { classes } = this.props;
-		const { setItemToLS } = this.props;
+		const { classes, setItemToLS } = this.props;
 		return (
 			<div>
 				<form
