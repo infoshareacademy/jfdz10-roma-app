@@ -12,6 +12,7 @@ class UserOrders extends React.Component {
 
 	componentDidMount() {
 		this._isMounted = true;
+		this.fetchOrders();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -19,28 +20,7 @@ class UserOrders extends React.Component {
 			if (this._isMounted) {
 				this.setState({ ...this.state, user: this.props.user });
 			}
-			const { user } = this.props;
-			if (user) {
-				firebase
-					.database()
-					.ref(`users/${user.uid}/orders`)
-					.once("value")
-					.then(snapshot => {
-						const ordersObject = snapshot.val();
-						if (ordersObject) {
-							const ordersArray = Object.keys(ordersObject).map(key => ({
-								id: key,
-								...ordersObject[key]
-							}));
-							if (this._isMounted) {
-								this.setState({
-									...this.state,
-									orders: ordersArray
-								});
-							}
-						}
-					});
-			}
+			this.fetchOrders();
 		}
 	}
 
@@ -48,6 +28,31 @@ class UserOrders extends React.Component {
 		this._isMounted = false;
 	}
 
+	fetchOrders = () => {
+		const { user } = this.props;
+		if (user) {
+			firebase
+				.database()
+				.ref(`users/${user.uid}/orders`)
+				.once("value")
+				.then(snapshot => {
+					const ordersObject = snapshot.val();
+					if (ordersObject) {
+						const ordersArray = Object.keys(ordersObject).map(key => ({
+							id: key,
+							...ordersObject[key]
+						}));
+						if (this._isMounted) {
+							this.setState({
+								...this.state,
+								orders: ordersArray
+							});
+						}
+					}
+				});
+		}
+	}
+	
 	render() {
 		return (
 			<div className="user__orders__container">
