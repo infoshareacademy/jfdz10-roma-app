@@ -4,6 +4,7 @@ import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import { ListWrapper } from "../SharedComponents/containers";
 import firebase from "firebase";
+import Loader from "react-loader-spinner";
 
 const styles = theme => ({
 	container: {
@@ -20,6 +21,10 @@ const styles = theme => ({
 	header: {
 		width: "100%",
 		padding: "1rem 0"
+	},
+	spinnerWrapper: {
+		display: "flex",
+		justifyContent: "center"
 	}
 });
 
@@ -43,6 +48,7 @@ class PreviousOrders extends Component {
 	fetchOrders = () => {
 		const { user } = this.props;
 		if (user) {
+			this.setState({ ...this.state, isFetchInProgress: true });
 			firebase
 				.database()
 				.ref(`users/${user.uid}/orders`)
@@ -56,7 +62,9 @@ class PreviousOrders extends Component {
 						}));
 						this.setState({
 							...this.state,
-							orders: ordersArray
+							orders: ordersArray,
+							isFetchFinished: true,
+							isFetchInProgress: false
 						});
 					}
 				});
@@ -64,9 +72,11 @@ class PreviousOrders extends Component {
 	};
 
 	render() {
-		const { orders } = this.state;
+		const { orders, isFetchInProgress } = this.state;
 		const { classes } = this.props;
-		return (
+		return isFetchInProgress ? (
+			<Loader type="Oval" color="#039be5" width={120} height={120} />
+		) : (
 			<div className={classes.container}>
 				{!orders.length ? (
 					<h3 className={classes.header}>Nie złożyłeś żadnego zamówienia!</h3>
