@@ -25,12 +25,28 @@ class Pizzerias extends Component {
 		this._isMounted = false;
 	}
 
+	setItemToLocalStorage = pizzaObj => {
+		if (localStorage.getItem("pizzasFromMenu") !== null) {
+		  let pizzasFromMenu = JSON.parse(localStorage.getItem("pizzasFromMenu"));
+		  if (!pizzasFromMenu.some(pizza => pizza.ingredients === pizzaObj.ingredients)) {
+			  pizzasFromMenu.push(pizzaObj);
+			  localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzasFromMenu));
+		  } 
+	  } else {
+		  const pizzasFromMenu = [pizzaObj];
+		  localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzasFromMenu));
+	  }
+	}
+
 	render() {
 		const { user } = this.props;
-
 		return (
 			<div className="pizzerias__container">
-				<PizzeriasList user={user} {...this.props} />
+				<PizzeriasList 
+					setItemToLS = {this.setItemToLocalStorage} 
+					user={user} 
+					{...this.props} 
+				/>
 			</div>
 		);
 	}

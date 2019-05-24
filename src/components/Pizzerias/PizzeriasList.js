@@ -197,6 +197,7 @@ class PizzeriasList extends Component {
 		const location = this.state.pizzeriaLocation;
 		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
 		const { classes } = this.props;
+		const { setItemToLS } = this.props;
 		return (
 			<div>
 				<form
@@ -321,7 +322,12 @@ class PizzeriasList extends Component {
 																return (
 																	<div key={Math.random()}>
 																		<h5>
-																			<input type="checkbox" />&nbsp;
+																			<input 
+																				type="checkbox" 
+																				id={pizzaObj.name}
+																				onClick={() => setItemToLS(pizzaObj)} 
+																			/>
+																			&nbsp;
 																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
 																		</h5>
 																		<h6>{pizzaObj.ingredients}</h6>
