@@ -197,8 +197,12 @@ class PizzeriasList extends Component {
 	};
 
 	getProductsFromLS = () => {
-		return JSON.parse(localStorage.getItem('basketProducts'))
+		return JSON.parse(localStorage.getItem('pizzasFromMenu'))
 	};
+
+	setItemToLocalStorage = pizzaObj => {
+		localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzaObj));
+	}
 
 	render() {
 		const location = this.state.pizzeriaLocation;
@@ -326,24 +330,28 @@ class PizzeriasList extends Component {
 															pizzeria.availablePizzas.map(pizza => {
 																const pizzaObj = Object.values(pizza)[0]
 																return (
-																	<div key={Math.random()}>
+																	<div 
+																		key={Math.random()}
+																		onMouseEnter={() => document.getElementById(pizzaObj.name).classList.add('showButton')}
+																		onMouseLeave={() => document.getElementById(pizzaObj.name).classList.remove('showButton')}
+																	>
 																		<h5>
-																			<input 
-																				type="checkbox" 
-																				id={pizzaObj.name}
-																				onClick={() => setItemToLS(pizzaObj)} 
-																			/>
 																			&nbsp;
 																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
 																		</h5>
 																		<h6>{pizzaObj.ingredients}</h6>
+																		<div 
+																			id={pizzaObj.name} 
+																			className="pizzeriasList__column__right__button unvisible"
+																			onClick={() => this.setItemToLocalStorage(pizzaObj)}
+																		>
+																			Zamów
+																		</div>
+																		<hr />
 																	</div>
 																)
 															})
 														}
-													</div>
-													<div className="pizzeriasList__column__right__button">
-														Zamów
 													</div>
 												</div>
 											</Tab.Pane>
