@@ -27,15 +27,17 @@ class UserOrders extends React.Component {
 					.once("value")
 					.then(snapshot => {
 						const ordersObject = snapshot.val();
-						const ordersArray = Object.keys(ordersObject).map(key => ({
-							id: key,
-							...ordersObject[key]
-						}));
-						if (this._isMounted) {
-							this.setState({
-								...this.state,
-								orders: ordersArray
-							});
+						if (ordersObject) {
+							const ordersArray = Object.keys(ordersObject).map(key => ({
+								id: key,
+								...ordersObject[key]
+							}));
+							if (this._isMounted) {
+								this.setState({
+									...this.state,
+									orders: ordersArray
+								});
+							}
 						}
 					});
 			}
