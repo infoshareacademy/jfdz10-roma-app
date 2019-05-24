@@ -23,18 +23,6 @@ const styles = theme => ({
 	}
 });
 
-async function fetchOrders() {
-	return await fetch("orders.json").then(res => res.json());
-}
-
-async function fetchIngredients() {
-	return await fetch("ingredients.json").then(res => res.json());
-}
-
-async function fetchPizzerias() {
-	return await fetch("pizzerias.json").then(res => res.json());
-}
-
 class PreviousOrders extends Component {
 	state = {
 		user: this.props.user,
@@ -61,25 +49,31 @@ class PreviousOrders extends Component {
 				.once("value")
 				.then(snapshot => {
 					const ordersObject = snapshot.val();
-					const ordersArray = Object.keys(ordersObject).map(key => ({
-						id: key,
-						...ordersObject[key]
-					}));
-					this.setState({
-						...this.state,
-						orders: ordersArray
-					});
+					if (ordersObject) {
+						const ordersArray = Object.keys(ordersObject).map(key => ({
+							id: key,
+							...ordersObject[key]
+						}));
+						this.setState({
+							...this.state,
+							orders: ordersArray
+						});
+					}
 				});
 		}
 	};
 
 	render() {
 		const { orders } = this.state;
-		const { classes, user } = this.props;
-		console.log(this.state);
+		const { classes } = this.props;
 		return (
 			<div className={classes.container}>
-				<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
+				{!orders.length ? (
+					<h3 className={classes.header}>Nie złożyłeś żadnego zamówienia!</h3>
+				) : (
+					<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
+				)}
+
 				<ListWrapper
 					style={{
 						paddingLeft: 0,
