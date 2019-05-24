@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import { ListWrapper } from "../SharedComponents/containers";
+import firebase from "firebase";
+import Loader from "react-loader-spinner";
 
 const styles = theme => ({
 	container: {
@@ -19,39 +21,103 @@ const styles = theme => ({
 	header: {
 		width: "100%",
 		padding: "1rem 0"
+	},
+	spinnerWrapper: {
+		display: "flex",
+		justifyContent: "center"
 	}
 });
 
-async function fetchOrders() {
-	return await fetch("orders.json").then(res => res.json());
-}
-
-async function fetchIngredients() {
-	return await fetch("ingredients.json").then(res => res.json());
-}
-
-async function fetchPizzerias() {
-	return await fetch("pizzerias.json").then(res => res.json());
-}
-
 class PreviousOrders extends Component {
 	state = {
+		user: this.props.user,
 		orders: [],
-		ingredients: [],
-		pizzerias: []
+		isFetchFinished: false,
+		isFetchInProgress: true
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
-		fetchOrders().then(orders => this.setState({ orders }));
-		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
-		fetchIngredients().then(ingredients => this.setState({ ingredients }));
+		this._isMounted = true;
+		this.fetchOrders();
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.state.user !== prevProps.user) {
+			this.setState({
+				...this.state,
+				user: this.props.user
+			});
+			this.fetchOrders();
+		}
+	}
+
+	fetchOrders = () => {
+		const { user } = this.props;
+		if (user) {
+			firebase
+				.database()
+				.ref(`users/${user.uid}/orders`)
+				.once("value")
+				.then(snapshot => {
+					const ordersObject = snapshot.val();
+					if (ordersObject) {
+						const ordersArray = Object.keys(ordersObject).map(key => ({
+							id: key,
+							...ordersObject[key]
+						}));
+						if (this._isMounted) {
+							this.setState({
+								...this.state,
+								orders: ordersArray,
+								isFetchFinished: true,
+								isFetchInProgress: false
+							});
+						}
+					}
+					if (this._isMounted) {
+						this.setState({
+							...this.state,
+							isFetchFinished: true,
+							isFetchInProgress: false
+						});
+					}
+				});
+		}
+	};
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
+	selectOrder = order => {
+		const pizzeria = order.pizzeria;
+		const price = order.price;
+		const ingredients = order.ingredients;
+		window.localStorage.setItem("isPizzaSubmitted", "true");
+		window.localStorage.setItem("isCustomOrder", "false");
+		window.localStorage.setItem("isPizzeriaSubmitted", "true");
+		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
+		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
+		window.localStorage.setItem("ingredients", JSON.stringify(ingredients));
+		this.props.history.push("/summary-order");
+		this.props.selectPreviousOrder(order);
+	};
+
 	render() {
+		const { orders, isFetchInProgress } = this.state;
 		const { classes } = this.props;
-		return (
+		return isFetchInProgress ? (
+			<Loader type="Oval" color="#039be5" width={120} height={120} />
+		) : (
 			<div className={classes.container}>
-				<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
+				{!orders.length ? (
+					<h3 className={classes.header}>Nie złożyłeś żadnego zamówienia!</h3>
+				) : (
+					<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
+				)}
+
 				<ListWrapper
 					style={{
 						paddingLeft: 0,
@@ -62,7 +128,7 @@ class PreviousOrders extends Component {
 					className="list-scrollbar"
 				>
 					<div className="list-group">
-						{this.state.orders.map(order => {
+						{orders.map(order => {
 							let allIngredients = "";
 							return (
 								<div
@@ -72,27 +138,17 @@ class PreviousOrders extends Component {
 										overflowWrap: "break-word",
 										wordWrap: "break-word"
 									}}
+									onClick={() => this.selectOrder(order)}
 								>
 									<div className="d-flex w-100 justify-content-between">
-										<h5 className="mb-1">
-											{this.state.pizzerias.length !== 0
-												? this.state.pizzerias.find(
-														pizzeria => pizzeria.id === order.pizzeriaId
-												  ).name
-												: "None"}
-										</h5>
+										<h5 className="mb-1">{order.pizzeria.name}</h5>
 									</div>
 									<p className="mb-1">
 										{order.ingredients.forEach(orderIngredient => {
 											if (allIngredients.length > 0) {
 												allIngredients += ", ";
 											}
-											allIngredients +=
-												this.state.ingredients.length !== 0
-													? this.state.ingredients.find(ingredient => {
-															return ingredient.id === orderIngredient;
-													  }).name
-													: "None";
+											allIngredients += orderIngredient.name;
 										})}
 										{allIngredients}
 									</p>

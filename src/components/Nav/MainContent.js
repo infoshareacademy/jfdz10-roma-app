@@ -25,7 +25,9 @@ const MainContent = props => {
 		isPizzeriaSubmitted,
 		setUserData,
 		userData,
-		makeOrder
+		makeOrder,
+		selectPreviousOrder,
+		cancelOrder
 	} = props;
 	return (
 		<Content>
@@ -40,7 +42,14 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/create-pizza"
-				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
+				render={props => (
+					<CreatePizza
+						submitPizza={submitPizza}
+						user={user}
+						selectPreviousOrder={selectPreviousOrder}
+						{...props}
+					/>
+				)}
 			/>
 			<Route
 				path="/make-order"
@@ -51,6 +60,7 @@ const MainContent = props => {
 						submitPizza={submitPizza}
 						handleSubmitSelectedPizzeria={handleSubmitSelectedPizzeria}
 						isPizzeriaSubmitted={isPizzeriaSubmitted}
+						cancelOrder={cancelOrder}
 					/>
 				)}
 			/>

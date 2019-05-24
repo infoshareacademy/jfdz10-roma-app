@@ -34,7 +34,9 @@ class App extends React.Component {
 			: false,
 		user: null,
 		userDatabase: null,
-		isPizzeriaSubmitted: getFromLocalStorage("selectedPizzeria") ? true : false
+		isPizzeriaSubmitted: getFromLocalStorage("selectedPizzeria") ? true : false,
+		previousOrder: null,
+		otherOrder: false
 	};
 
 	componentDidMount() {
@@ -77,7 +79,29 @@ class App extends React.Component {
 		this.setState({
 			...this.state,
 			isPizzaSubmitted: false,
-			isPizzeriaSubmitted: false
+			isPizzeriaSubmitted: false,
+			previousOrder: null,
+			otherOrder: false
+		});
+	};
+
+	cancelOrder = () => {
+		this.setState({
+			...this.state,
+			isPizzaSubmitted: false,
+			isPizzeriaSubmitted: false,
+			previousOrder: null,
+			otherOrder: false
+		});
+	};
+
+	selectPreviousOrder = order => {
+		this.setState({
+			...this.state,
+			previousOrder: order,
+			otherOrder: true,
+			isPizzeriaSubmitted: true,
+			isPizzaSubmitted: true
 		});
 	};
 
@@ -101,6 +125,8 @@ class App extends React.Component {
 						setUserData={this.setUserData}
 						userData={userDatabase}
 						makeOrder={this.makeOrder}
+						selectPreviousOrder={this.selectPreviousOrder}
+						cancelOrder={this.cancelOrder}
 					/>
 				</AppContainer>
 			</BrowserRouter>

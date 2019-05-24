@@ -11,9 +11,12 @@ class Nickname extends React.Component {
 		showInput: false
 	};
 
+	_isMounted = false;
+
 	componentDidMount() {
+		this._isMounted = true;
 		const ref = firebase.auth().onAuthStateChanged(user => {
-			if (user) {
+			if (user && this._isMounted) {
 				this.setState({
 					authUser: user,
 					authUserId: user.uid,
@@ -34,10 +37,12 @@ class Nickname extends React.Component {
 						return user.id === this.state.authUserId;
 					});
 				const user = findUser[0];
-				this.setState({
-					user,
-					userFirstName: user.name.split(" ")[0]
-				});
+				if (this._isMounted) {
+					this.setState({
+						user,
+						userFirstName: user.name.split(" ")[0]
+					});
+				}
 			});
 		});
 		this.setState({ ref });
@@ -45,6 +50,7 @@ class Nickname extends React.Component {
 
 	componentWillUnmount() {
 		this.state.ref && this.state.ref();
+		this._isMounted = false;
 	}
 
 	editUserData = () => {

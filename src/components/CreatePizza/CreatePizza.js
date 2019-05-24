@@ -147,7 +147,7 @@ class CreatePizza extends Component {
 		const selectedIngredients = getFromLocalStorage("ingredients");
 		this.setState({
 			isPizzaSubmitted: false,
-			isCreatePizza: true,
+			isCreatePizza: false,
 			ingredients: selectedIngredients
 		});
 		window.localStorage.clear();
@@ -156,7 +156,7 @@ class CreatePizza extends Component {
 
 	render() {
 		const isPizzaSubmitted = this.state.isPizzaSubmitted;
-		const { classes } = this.props;
+		const { classes, user, selectPreviousOrder, history } = this.props;
 		return isPizzaSubmitted ? (
 			<div
 				variant="success"
@@ -225,7 +225,11 @@ class CreatePizza extends Component {
 									isPizzaSubmitted={isPizzaSubmitted}
 								/>
 							) : (
-								<PreviousOrders />
+								<PreviousOrders
+									user={user}
+									selectPreviousOrder={selectPreviousOrder}
+									history={history}
+								/>
 							)}
 						</div>
 					</div>

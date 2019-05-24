@@ -116,6 +116,12 @@ class CompleteOrderPage extends Component {
 	};
 
 	unSubmitSelectedPizzeria = () => {
+		const isCustomOrder = getFromLocalStorage("isCustomOrder");
+		if (!isCustomOrder) {
+			this.props.cancelOrder();
+			this.props.history.push("/user-panel");
+			window.localStorage.clear();
+		}
 		window.localStorage.removeItem("selectedPizzeria");
 		window.localStorage.removeItem("isPizzeriaSubmitted");
 		window.localStorage.removeItem("orderTotalPrice");
