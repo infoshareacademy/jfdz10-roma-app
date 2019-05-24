@@ -40,7 +40,9 @@ const MainContent = props => {
 			/>
 			<Route
 				path="/create-pizza"
-				render={props => <CreatePizza {...props} submitPizza={submitPizza} />}
+				render={props => (
+					<CreatePizza submitPizza={submitPizza} user={user} {...props} />
+				)}
 			/>
 			<Route
 				path="/make-order"

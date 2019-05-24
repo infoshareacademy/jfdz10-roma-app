@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import "../SharedComponents/ListScrollbar.css";
 import "./containers.css";
 import { ListWrapper } from "../SharedComponents/containers";
+import firebase from "firebase";
 
 const styles = theme => ({
 	container: {
@@ -36,19 +37,46 @@ async function fetchPizzerias() {
 
 class PreviousOrders extends Component {
 	state = {
-		orders: [],
-		ingredients: [],
-		pizzerias: []
+		user: this.props.user,
+		orders: []
 	};
 
 	componentDidMount() {
-		fetchOrders().then(orders => this.setState({ orders }));
-		fetchPizzerias().then(pizzerias => this.setState({ pizzerias }));
-		fetchIngredients().then(ingredients => this.setState({ ingredients }));
+		this.fetchOrders();
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.state.user !== prevProps.user) {
+			this.setState({ ...this.state, user: this.props.user });
+			this.fetchOrders();
+		}
+	}
+
+	fetchOrders = () => {
+		const { user } = this.props;
+		if (user) {
+			firebase
+				.database()
+				.ref(`users/${user.uid}/orders`)
+				.once("value")
+				.then(snapshot => {
+					const ordersObject = snapshot.val();
+					const ordersArray = Object.keys(ordersObject).map(key => ({
+						id: key,
+						...ordersObject[key]
+					}));
+					this.setState({
+						...this.state,
+						orders: ordersArray
+					});
+				});
+		}
+	};
+
 	render() {
-		const { classes } = this.props;
+		const { orders } = this.state;
+		const { classes, user } = this.props;
+		console.log(this.state);
 		return (
 			<div className={classes.container}>
 				<h3 className={classes.header}>Twoje poprzednie zamówienia</h3>
@@ -62,7 +90,7 @@ class PreviousOrders extends Component {
 					className="list-scrollbar"
 				>
 					<div className="list-group">
-						{this.state.orders.map(order => {
+						{orders.map(order => {
 							let allIngredients = "";
 							return (
 								<div
@@ -74,25 +102,14 @@ class PreviousOrders extends Component {
 									}}
 								>
 									<div className="d-flex w-100 justify-content-between">
-										<h5 className="mb-1">
-											{this.state.pizzerias.length !== 0
-												? this.state.pizzerias.find(
-														pizzeria => pizzeria.id === order.pizzeriaId
-												  ).name
-												: "None"}
-										</h5>
+										<h5 className="mb-1">{order.pizzeria.name}</h5>
 									</div>
 									<p className="mb-1">
 										{order.ingredients.forEach(orderIngredient => {
 											if (allIngredients.length > 0) {
 												allIngredients += ", ";
 											}
-											allIngredients +=
-												this.state.ingredients.length !== 0
-													? this.state.ingredients.find(ingredient => {
-															return ingredient.id === orderIngredient;
-													  }).name
-													: "None";
+											allIngredients += orderIngredient.name;
 										})}
 										{allIngredients}
 									</p>
