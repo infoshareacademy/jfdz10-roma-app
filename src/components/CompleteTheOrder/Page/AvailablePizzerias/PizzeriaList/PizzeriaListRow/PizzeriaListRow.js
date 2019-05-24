@@ -108,7 +108,9 @@ const PizzeriaListRow = props => {
 						<Button
 							className={classes.button}
 							variant="link"
-							onClick={submitSelectedPizzeria}
+							onClick={() =>
+								submitSelectedPizzeria(price(pizzeria.availableIngredients))
+							}
 						>
 							{"Zamów tutaj"}
 						</Button>
