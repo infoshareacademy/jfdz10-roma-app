@@ -31,7 +31,9 @@ const styles = theme => ({
 class PreviousOrders extends Component {
 	state = {
 		user: this.props.user,
-		orders: []
+		orders: [],
+		isFetchFinished: false,
+		isFetchInProgress: true
 	};
 
 	componentDidMount() {
@@ -40,7 +42,10 @@ class PreviousOrders extends Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
-			this.setState({ ...this.state, user: this.props.user });
+			this.setState({
+				...this.state,
+				user: this.props.user
+			});
 			this.fetchOrders();
 		}
 	}
@@ -48,7 +53,6 @@ class PreviousOrders extends Component {
 	fetchOrders = () => {
 		const { user } = this.props;
 		if (user) {
-			this.setState({ ...this.state, isFetchInProgress: true });
 			firebase
 				.database()
 				.ref(`users/${user.uid}/orders`)
@@ -104,6 +108,7 @@ class PreviousOrders extends Component {
 										overflowWrap: "break-word",
 										wordWrap: "break-word"
 									}}
+									// onClick={() => console.log(order)}
 								>
 									<div className="d-flex w-100 justify-content-between">
 										<h5 className="mb-1">{order.pizzeria.name}</h5>
