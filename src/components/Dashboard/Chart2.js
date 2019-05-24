@@ -9,7 +9,7 @@ class Chart2 extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            allSoldPizzas: 20,
+            otherOrders: 0,
             customsPizzas: 0,
         }
     }
@@ -19,15 +19,19 @@ class Chart2 extends React.Component {
             const snapshotVal = snapshot.val() || {};
                 this.setState({customsPizzas: snapshotVal})
         })
+        db.ref("otherOrders").once("value").then(snapshot => {
+            const snapshotVal = snapshot.val() || {};
+                this.setState({otherOrders: snapshotVal})
+        })
     }
     
     render() {
         const chart2Data = [
             {
-                value: this.state.allSoldPizzas,
+                value: this.state.otherOrders,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
-                label: "Wszystkie pizze"
+                label: "Pizze z menu"
             },
             {
                 value: this.state.customsPizzas,
