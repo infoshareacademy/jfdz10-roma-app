@@ -27,56 +27,66 @@ class Pizzerias extends Component {
 	}
 
 	selectPizzaFromMenu = pizzaObj => {
-		const { pizzasFromMenu } = this.state
+		const { pizzasFromMenu } = this.state;
 
 		if (pizzasFromMenu) {
-			if (!pizzasFromMenu.some(pizza => pizza.ingredients === pizzaObj.ingredients)) {
+			if (
+				!pizzasFromMenu.some(
+					pizza => pizza.ingredients === pizzaObj.ingredients
+				)
+			) {
 				this.setState({
 					...this.state,
-					pizzasFromMenu: [
-						...this.state.pizzasFromMenu,
-						pizzaObj
-					]
-				})
+					pizzasFromMenu: [...this.state.pizzasFromMenu, pizzaObj]
+				});
 			} else {
-				const filteredPizzasFromMenu = pizzasFromMenu.filter(pizza => pizza.ingredients !== pizzaObj.ingredients)
+				const filteredPizzasFromMenu = pizzasFromMenu.filter(
+					pizza => pizza.ingredients !== pizzaObj.ingredients
+				);
 				this.setState({
 					...this.state,
 					pizzasFromMenu: filteredPizzasFromMenu
-				})
+				});
 			}
 		}
-	}
+	};
+
+	orderPizzas = pizzeria => {
+		const { pizzasFromMenu } = this.state;
+		const price = pizzasFromMenu.reduce((acc, next) => acc + next.price, 0);
+		window.localStorage.setItem(
+			"pizzasFromMenu",
+			JSON.stringify(pizzasFromMenu)
+		);
+		window.localStorage.setItem("isPizzaSubmitted", "true");
+		window.localStorage.setItem("isCustomOrder", "false");
+		window.localStorage.setItem("isPizzeriaSubmitted", "true");
+		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
+		window.localStorage.setItem("orderFromMenu", "true");
+
+		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
+		// window.localStorage.setItem("ingredients", JSON.stringify(ingredients)); MUST HAVE CHANGE
+		this.props.orderPizzasFromMenu();
+		this.props.history.push("/summary-order");
+	};
 
 	isPizzaChecked = pizzaObj => {
-		const { pizzasFromMenu } = this.state
-		return pizzasFromMenu.some(pizza => pizza.ingredients === pizzaObj.ingredients)
-	}
-
-	// setItemToLocalStorage = pizzaObj => {
-	// 	if (localStorage.getItem("pizzasFromMenu") !== null) {
-	// 	  let pizzasFromMenu = JSON.parse(localStorage.getItem("pizzasFromMenu"));
-	// 	  if (!pizzasFromMenu.some(pizza => pizza.ingredients === pizzaObj.ingredients)) {
-	// 		  pizzasFromMenu.push(pizzaObj);
-	// 		  localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzasFromMenu));
-	// 	  } else {
-	// 		  console.log(pizzasFromMenu)
-	// 	  }
-	//   } else {
-	// 	  const pizzasFromMenu = [pizzaObj];
-	// 	  localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzasFromMenu));
-	//   }
-	// }
+		const { pizzasFromMenu } = this.state;
+		return pizzasFromMenu.some(
+			pizza => pizza.ingredients === pizzaObj.ingredients
+		);
+	};
 
 	render() {
 		const { user } = this.props;
 		return (
 			<div className="pizzerias__container">
-				<PizzeriasList 
-					setItemToLS = {this.selectPizzaFromMenu} 
-					user={user} 
+				<PizzeriasList
+					setItemToLS={this.selectPizzaFromMenu}
+					user={user}
 					isPizzaChecked={this.isPizzaChecked}
-					{...this.props} 
+					orderPizzas={this.orderPizzas}
+					{...this.props}
 				/>
 			</div>
 		);

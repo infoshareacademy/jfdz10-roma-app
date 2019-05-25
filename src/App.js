@@ -105,6 +105,16 @@ class App extends React.Component {
 		});
 	};
 
+	orderPizzasFromMenu = () => {
+		this.setState({
+			...this.state,
+			isPizzaSubmitted: false,
+			isPizzeriaSubmitted: false,
+			previousOrder: null,
+			otherOrder: true
+		});
+	};
+
 	render() {
 		const {
 			isPizzaSubmitted,
@@ -127,6 +137,7 @@ class App extends React.Component {
 						makeOrder={this.makeOrder}
 						selectPreviousOrder={this.selectPreviousOrder}
 						cancelOrder={this.cancelOrder}
+						orderPizzasFromMenu={this.orderPizzasFromMenu}
 					/>
 				</AppContainer>
 			</BrowserRouter>

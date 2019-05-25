@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from 'firebase';
+import firebase from "firebase";
 import Container from "react-bootstrap/Container";
 import Tab from "react-bootstrap/Tab";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -66,31 +66,32 @@ class PizzeriasList extends Component {
 		isSnackbarOpen: false,
 		snackbarMessage: "",
 		pizzeriaLocation: "#1",
-		term: "",
+		term: ""
 	};
 
-  _isMounted = false;
-          
-	componentDidMount(){
-        this._isMounted = true;
-        const databaseRef = firebase.database().ref('pizzerias')
-        databaseRef.once('value')
-            .then(snapshot => {
-				const snapshotVal = snapshot.val() || {};
-          if (this._isMounted) {
-                this.setState({
+	_isMounted = false;
+
+	componentDidMount() {
+		this._isMounted = true;
+		const databaseRef = firebase.database().ref("pizzerias");
+		databaseRef.once("value").then(snapshot => {
+			const snapshotVal = snapshot.val() || {};
+			if (this._isMounted) {
+				this.setState({
 					pizzerias: snapshotVal,
-					pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
-				})
-            }
-				const currentPizzeria = this.props.location.hash;
-				const defaultPizzeria = this.state.pizzeriaLocation;
-				if (currentPizzeria !== defaultPizzeria && this._isMounted) {
-					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
-				}
-			})
+					pizzeriasPizzas: snapshotVal.map(
+						snapshotVal => snapshotVal.availablePizzas
+					)
+				});
+			}
+			const currentPizzeria = this.props.location.hash;
+			const defaultPizzeria = this.state.pizzeriaLocation;
+			if (currentPizzeria !== defaultPizzeria && this._isMounted) {
+				this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
+			}
+		});
 		this.fetchFavPizzerias();
-    }
+	}
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -316,28 +317,32 @@ class PizzeriasList extends Component {
 												<div className="pizzeriasList__column__right">
 													<h1>Menu:</h1>
 													<div className="pizzeriasList__column__right__pizzas">
-														{
-															pizzeria.availablePizzas.map(pizza => {
-																const pizzaObj = Object.values(pizza)[0]
-																return (
-																	<div key={Math.random()}>
-																		<h5>
-																			<input 
-																				type="checkbox" 
-																				id={pizzaObj.name}
-																				onChange={() => setItemToLS(pizzaObj)} 
-																				checked={this.props.isPizzaChecked(pizzaObj)}
-																			/>
-																			&nbsp;
-																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
-																		</h5>
-																		<h6>{pizzaObj.ingredients}</h6>
-																	</div>
-																)
-															})
-														}
+														{pizzeria.availablePizzas.map(pizza => {
+															const pizzaObj = Object.values(pizza)[0];
+															return (
+																<div key={Math.random()}>
+																	<h5>
+																		<input
+																			type="checkbox"
+																			id={pizzaObj.name}
+																			onChange={() => setItemToLS(pizzaObj)}
+																			checked={this.props.isPizzaChecked(
+																				pizzaObj
+																			)}
+																		/>
+																		&nbsp;
+																		{pizzaObj.name} ({pizzaObj.price.toFixed(2)}{" "}
+																		zł)
+																	</h5>
+																	<h6>{pizzaObj.ingredients}</h6>
+																</div>
+															);
+														})}
 													</div>
-													<div className="pizzeriasList__column__right__button">
+													<div
+														className="pizzeriasList__column__right__button"
+														onClick={() => this.props.orderPizzas(pizzeria)}
+													>
 														Zamów
 													</div>
 												</div>

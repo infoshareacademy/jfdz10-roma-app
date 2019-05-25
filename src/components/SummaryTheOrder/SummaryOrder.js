@@ -170,7 +170,13 @@ class SummaryOrder extends Component {
 			pizzeria: null
 		});
 		this.props.handleSubmitSelectedPizzeria();
-		this.props.history.push("/make-order");
+		const isOrderFromMenu = getFromLocalStorage("orderFromMenu");
+		if (isOrderFromMenu) {
+			this.props.history.push("/user-panel");
+			window.localStorage.clear();
+		} else {
+			this.props.history.push("/make-order");
+		}
 	};
 
 	sendOrder = () => {
@@ -219,24 +225,44 @@ class SummaryOrder extends Component {
 		const { classes } = this.props;
 
 		const price = getFromLocalStorage("orderTotalPrice");
+		const isOrderFromMenu = getFromLocalStorage("orderFromMenu");
+		const pizzasFromMenu = getFromLocalStorage("pizzasFromMenu");
 
 		return (
 			<div className={classes.wrapper}>
 				<h1 className={classes.header}>Podsumowanie zamówienia</h1>
-				<div className={classes.ingredientsWrapper}>
-					<h2>Wybrane składniki: </h2>
-					<div className={classes.ingredients}>
-						<ul>
-							{ingredients.map((el, i) => {
-								return (
-									<li key={i} style={{ fontSize: 16 }}>
-										{el.name}
-									</li>
-								);
-							})}
-						</ul>
+				{isOrderFromMenu ? (
+					<div className={classes.ingredientsWrapper}>
+						<h2>Wybrane pizze: </h2>
+						<div className={classes.ingredients}>
+							<ul>
+								{pizzasFromMenu.map((el, i) => {
+									return (
+										<li key={i} style={{ fontSize: 16 }}>
+											{el.name}
+										</li>
+									);
+								})}
+							</ul>
+						</div>
 					</div>
-				</div>
+				) : (
+					<div className={classes.ingredientsWrapper}>
+						<h2>Wybrane składniki: </h2>
+						<div className={classes.ingredients}>
+							<ul>
+								{ingredients.map((el, i) => {
+									return (
+										<li key={i} style={{ fontSize: 16 }}>
+											{el.name}
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					</div>
+				)}
+
 				<div className={classes.pizzeriaWrapper}>
 					<h2>Wybrana pizzeria: </h2>
 					<Paper className={classes.pizzeria}>
