@@ -72,28 +72,25 @@ class PizzeriasList extends Component {
   _isMounted = false;
           
 	componentDidMount(){
-    this._isMounted = true;
-    const databaseRef = firebase.database().ref('pizzerias')
-    databaseRef.once('value')
-      .then(snapshot => {
+        this._isMounted = true;
+        const databaseRef = firebase.database().ref('pizzerias')
+        databaseRef.once('value')
+            .then(snapshot => {
 				const snapshotVal = snapshot.val() || {};
-      	if (this._isMounted) {
-          this.setState({
-						pizzerias: snapshotVal,
-						pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
-					})
-				}
+          if (this._isMounted) {
+                this.setState({
+					pizzerias: snapshotVal,
+					pizzeriasPizzas: snapshotVal.map(snapshotVal => snapshotVal.availablePizzas)
+				})
+            }
 				const currentPizzeria = this.props.location.hash;
 				const defaultPizzeria = this.state.pizzeriaLocation;
 				if (currentPizzeria !== defaultPizzeria && this._isMounted) {
-					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria })
+					this.setState({ ...this.state, pizzeriaLocation: currentPizzeria });
 				}
 			})
 		this.fetchFavPizzerias();
-		this.setState({
-			pizzasFromMenu: JSON.parse(localStorage.getItem('pizzasFromMenu')),
-		})
-  }
+    }
 
 	componentDidUpdate(prevProps) {
 		if (this.state.user !== prevProps.user) {
@@ -196,18 +193,11 @@ class PizzeriasList extends Component {
 		this.setState({ ...this.state, pizzeriaLocation: `#${id}` });
 	};
 
-	getProductsFromLS = () => {
-		return JSON.parse(localStorage.getItem('pizzasFromMenu'))
-	};
-
-	setItemToLocalStorage = pizzaObj => {
-		localStorage.setItem("pizzasFromMenu", JSON.stringify(pizzaObj));
-	}
-
 	render() {
 		const location = this.state.pizzeriaLocation;
 		const { snackbarMessage, pizzerias, isFetchFavPizzerias } = this.state;
-		const { classes, setItemToLS } = this.props;
+		const { classes } = this.props;
+		const { setItemToLS } = this.props;
 		return (
 			<div>
 				<form
@@ -330,28 +320,25 @@ class PizzeriasList extends Component {
 															pizzeria.availablePizzas.map(pizza => {
 																const pizzaObj = Object.values(pizza)[0]
 																return (
-																	<div 
-																		key={Math.random()}
-																		onMouseEnter={() => document.getElementById(pizzaObj.name).classList.add('showButton')}
-																		onMouseLeave={() => document.getElementById(pizzaObj.name).classList.remove('showButton')}
-																	>
+																	<div key={Math.random()}>
 																		<h5>
+																			<input 
+																				type="checkbox" 
+																				id={pizzaObj.name}
+																				onChange={() => setItemToLS(pizzaObj)} 
+																				checked={this.props.isPizzaChecked(pizzaObj)}
+																			/>
 																			&nbsp;
 																			{pizzaObj.name} ({pizzaObj.price.toFixed(2)} zł)
 																		</h5>
 																		<h6>{pizzaObj.ingredients}</h6>
-																		<div 
-																			id={pizzaObj.name} 
-																			className="pizzeriasList__column__right__button unvisible"
-																			onClick={() => this.setItemToLocalStorage(pizzaObj)}
-																		>
-																			Zamów
-																		</div>
-																		<hr />
 																	</div>
 																)
 															})
 														}
+													</div>
+													<div className="pizzeriasList__column__right__button">
+														Zamów
 													</div>
 												</div>
 											</Tab.Pane>
