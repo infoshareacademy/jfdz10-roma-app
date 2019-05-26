@@ -125,12 +125,12 @@ class MainNav extends Component {
 	};
 
 	onNavItemSelect = () => {
-        this.setState({ 
-            selectedPath: window.location.pathname,
-            isNavOpen: !this.state.isNavOpen 
-        });
+		this.setState({
+			selectedPath: window.location.pathname,
+			isNavOpen: !this.state.isNavOpen
+		});
 	};
-	
+
 	handleOpenNav = () => {
 		this.setState({ isNavOpen: !this.state.isNavOpen });
 	};
@@ -155,6 +155,11 @@ class MainNav extends Component {
 	signOut = () => {
 		firebase.auth().signOut();
 		window.localStorage.clear();
+		this.setState({
+			...this.state,
+			selectedPath: "/",
+			user: null
+		});
 		return <Redirect to="/dashboard" />;
 	};
 
