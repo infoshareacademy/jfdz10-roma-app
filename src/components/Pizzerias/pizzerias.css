@@ -58,14 +58,13 @@
         background: #cc3333;
         border-radius: 3px;
         color: white;
-        font-size: .8rem;
+        font-size: 1rem;
         letter-spacing: .2rem;
-        margin: auto;
-        margin-bottom: 1rem;
-        padding: .3rem;
+        margin: 1rem auto;
+        padding: .4rem;
         text-align: center;
         text-transform: uppercase;        
-        width: 70px;
+        width: 90px;
     }
 
 .pizzerias-filter-input:focus {

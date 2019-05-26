@@ -335,6 +335,7 @@ class PizzeriasList extends Component {
 																		zł)
 																	</h5>
 																	<h6>{pizzaObj.ingredients}</h6>
+																	<hr />
 																</div>
 															);
 														})}

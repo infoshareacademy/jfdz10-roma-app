@@ -63,9 +63,7 @@ class Pizzerias extends Component {
 		window.localStorage.setItem("isPizzeriaSubmitted", "true");
 		window.localStorage.setItem("orderTotalPrice", JSON.stringify(price));
 		window.localStorage.setItem("orderFromMenu", "true");
-
 		window.localStorage.setItem("selectedPizzeria", JSON.stringify(pizzeria));
-		// window.localStorage.setItem("ingredients", JSON.stringify(ingredients)); MUST HAVE CHANGE
 		this.props.orderPizzasFromMenu();
 		this.props.history.push("/summary-order");
 	};
