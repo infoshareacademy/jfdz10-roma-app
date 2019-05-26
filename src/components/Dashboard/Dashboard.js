@@ -34,7 +34,7 @@ componentWillUnmount() {
         className="dashboard"
         style={{
           backgroundImage: "url(/img/background.jpg)",
-          backgroundSize: "100% 100%",
+          backgroundSize: "cover",
           height: "100%", 
           overflow: "auto",
         }}

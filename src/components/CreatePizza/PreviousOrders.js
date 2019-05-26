@@ -138,18 +138,18 @@ class PreviousOrders extends Component {
 										overflowWrap: "break-word",
 										wordWrap: "break-word"
 									}}
-									onClick={() => this.selectOrder(order)}
 								>
 									<div className="d-flex w-100 justify-content-between">
 										<h5 className="mb-1">{order.pizzeria.name}</h5>
 									</div>
 									<p className="mb-1">
-										{order.ingredients.forEach(orderIngredient => {
-											if (allIngredients.length > 0) {
-												allIngredients += ", ";
-											}
-											allIngredients += orderIngredient.name;
-										})}
+										{order.ingredients &&
+											order.ingredients.forEach(orderIngredient => {
+												if (allIngredients.length > 0) {
+													allIngredients += ", ";
+												}
+												allIngredients += orderIngredient.name;
+											})}
 										{allIngredients}
 									</p>
 								</div>

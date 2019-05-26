@@ -27,14 +27,21 @@ const MainContent = props => {
 		userData,
 		makeOrder,
 		selectPreviousOrder,
-		cancelOrder
+		cancelOrder,
+		orderPizzasFromMenu
 	} = props;
 	return (
 		<Content>
 			<Route exact path="/" component={Dashboard} />
 			<Route
 				path="/pizzerias"
-				render={props => <Pizzerias user={user} {...props} />}
+				render={props => (
+					<Pizzerias
+						user={user}
+						{...props}
+						orderPizzasFromMenu={orderPizzasFromMenu}
+					/>
+				)}
 			/>
 			<Route
 				path="/user-panel"

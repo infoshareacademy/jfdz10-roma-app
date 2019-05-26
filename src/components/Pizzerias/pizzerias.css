@@ -10,6 +10,7 @@
     height: 100%;
     justify-content: center;
     margin: 0 auto;
+    overflow-x: hidden;
     width: 100%;
 }
 
@@ -57,14 +58,13 @@
         background: #cc3333;
         border-radius: 3px;
         color: white;
-        cursor: pointer;
         font-size: 1rem;
         letter-spacing: .2rem;
-        margin: 1.5rem auto;
-        padding: 0.5rem;
+        margin: 1rem auto;
+        padding: .4rem;
         text-align: center;
-        text-transform: uppercase;
-        width: 35%;
+        text-transform: uppercase;        
+        width: 90px;
     }
 
 .pizzerias-filter-input:focus {
@@ -74,6 +74,15 @@
 .pizzerias-filter-input:focus {
     outline: 0;
 }
+
+.showButton {
+    cursor: pointer;
+    display: block;
+}
+
+    .showButton:hover {
+        background: #5a1616;
+    }
 
 @media (max-width: 990px){
     .pizzeriasList__column__left,

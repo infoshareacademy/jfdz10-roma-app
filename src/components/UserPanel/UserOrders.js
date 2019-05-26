@@ -12,6 +12,7 @@ class UserOrders extends React.Component {
 
 	componentDidMount() {
 		this._isMounted = true;
+		this.fetchOrders();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -19,34 +20,38 @@ class UserOrders extends React.Component {
 			if (this._isMounted) {
 				this.setState({ ...this.state, user: this.props.user });
 			}
-			const { user } = this.props;
-			if (user) {
-				firebase
-					.database()
-					.ref(`users/${user.uid}/orders`)
-					.once("value")
-					.then(snapshot => {
-						const ordersObject = snapshot.val();
-						if (ordersObject) {
-							const ordersArray = Object.keys(ordersObject).map(key => ({
-								id: key,
-								...ordersObject[key]
-							}));
-							if (this._isMounted) {
-								this.setState({
-									...this.state,
-									orders: ordersArray
-								});
-							}
-						}
-					});
-			}
+			this.fetchOrders();
 		}
 	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
+
+	fetchOrders = () => {
+		const { user } = this.props;
+		if (user) {
+			firebase
+				.database()
+				.ref(`users/${user.uid}/orders`)
+				.once("value")
+				.then(snapshot => {
+					const ordersObject = snapshot.val();
+					if (ordersObject) {
+						const ordersArray = Object.keys(ordersObject).map(key => ({
+							id: key,
+							...ordersObject[key]
+						}));
+						if (this._isMounted) {
+							this.setState({
+								...this.state,
+								orders: ordersArray
+							});
+						}
+					}
+				});
+		}
+	};
 
 	render() {
 		return (
@@ -57,7 +62,19 @@ class UserOrders extends React.Component {
 					</span>
 					Historia zamówień:
 				</h2>
-				<span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
+				{this.state.orders.length === 0 ? (
+					<span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
+				) : (
+					this.state.orders.map(order => {
+						return (
+							<li key={Math.random()}>
+								{order.pizzeria.name} ({order.price} zł)
+								<br />
+								Kontakt: {order.pizzeria.contactInfo.phone}
+							</li>
+						);
+					})
+				)}
 			</div>
 		);
 	}
