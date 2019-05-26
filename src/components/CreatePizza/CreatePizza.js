@@ -152,6 +152,7 @@ class CreatePizza extends Component {
 		});
 		window.localStorage.clear();
 		this.props.submitPizza(false);
+		this.props.history.push("/user-panel");
 	};
 
 	render() {

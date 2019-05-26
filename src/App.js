@@ -108,8 +108,8 @@ class App extends React.Component {
 	orderPizzasFromMenu = () => {
 		this.setState({
 			...this.state,
-			isPizzaSubmitted: false,
-			isPizzeriaSubmitted: false,
+			isPizzaSubmitted: true,
+			isPizzeriaSubmitted: true,
 			previousOrder: null,
 			otherOrder: true
 		});

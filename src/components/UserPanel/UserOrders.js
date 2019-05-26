@@ -51,8 +51,8 @@ class UserOrders extends React.Component {
 					}
 				});
 		}
-	}
-	
+	};
+
 	render() {
 		return (
 			<div className="user__orders__container">
@@ -62,17 +62,19 @@ class UserOrders extends React.Component {
 					</span>
 					Historia zamówień:
 				</h2>
-				{this.state.orders.length === 0 
-				? <span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
-				: this.state.orders.map(order => {
-					return (
-					<li key={order.pizzeria.id}> 
-						{order.pizzeria.name} ({order.price} zł)
-						<br/>
-						Kontakt: {order.pizzeria.contactInfo.phone}
-					</li>
-					)
-				})}
+				{this.state.orders.length === 0 ? (
+					<span>Nie złożyłeś jeszcze żadnego zamówienia.</span>
+				) : (
+					this.state.orders.map(order => {
+						return (
+							<li key={Math.random()}>
+								{order.pizzeria.name} ({order.price} zł)
+								<br />
+								Kontakt: {order.pizzeria.contactInfo.phone}
+							</li>
+						);
+					})
+				)}
 			</div>
 		);
 	}
